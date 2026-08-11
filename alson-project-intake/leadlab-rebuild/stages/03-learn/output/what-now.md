@@ -1,0 +1,32 @@
+# What Now
+
+## Result
+
+Intake accepted (100% quality). Brief ready: rebuild LeadLab Portal off SharePoint, same feature scope, restricted access, live before Sep 11, 2026.
+
+## Recommended Next Move
+
+Decide the platform. Everything else (access, hosting, build plan) depends on it. Compare options against the two hard facts: ~1 month to launch, and restricted participant-only access.
+
+## Actions
+
+| # | Action | Why | Type | Maps To |
+|---|---|---|---|---|
+| 1 | Shortlist 2-3 platforms (e.g., website builder, WordPress, custom code) against timeline and the AI-acceleration assumption | Platform decision blocks all build work | Decision (human) | Open question: platform choice |
+| 2 | Decide participant access approach (login, SSO, email-list gating) | Affects build effort and participant email data handling | Decision (human) | Open question: access design |
+| 3 | Confirm who maintains the portal after Sep 11 launch | No owner assigned for ongoing support | Decision (human) | Open question: ongoing ownership |
+| 4 | Decide video hosting dependency (keep YouTube or host on new platform) | Affects platform choice and storage | Decision (human) | Open question: dependency |
+
+## Open Questions
+
+- Which platform? (deferred, action 1)
+- How do participants log in? (deferred, action 2)
+- Is the Sep 11 date flexible? (not discussed)
+- Where will the portal be hosted, and is a domain name available? (partially discussed)
+
+## Audit Check
+
+- Every action maps to a Measure finding or brief open question: yes
+- First action executable without reinterpretation: yes (shortlist platforms)
+- Actions separated from decisions: yes (all four are human decisions; this handoff does not execute them)
+- Priority order clear: platform decision first
