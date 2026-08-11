@@ -40,8 +40,8 @@ The artifact-support request (ASR-01) arrived with no accepted baseline prescrip
 | Produced state | ASR-01 → disposition Create later on DEV-07; baseline dispositions for 104 catalog items; HND-02 |
 | Approval boundary | Project manager (requester) acceptance of the prescription; artifact creation actions execute only after DEC-01/DEC-02 decisions by IT Director |
 | Return trigger | Decision readiness reassessment of DEC-02 when the access handling record exists and its acceptance test passes |
-| Open items | DEC-01 (Blocked upstream), DEC-02 (Blocked), NEED-03 (privacy basis unconfirmed), governance gate pending |
-| State | Proposed |
+| Open items | DEC-01 (Blocked upstream), DEC-02 (Blocked), NEED-03 (privacy basis unconfirmed) |
+| State | Accepted (approver: requester, recorded 2026-08-11) |
 
 ## Outputs
 

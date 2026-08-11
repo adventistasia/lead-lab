@@ -2,9 +2,9 @@
 
 ## Current Position
 
-**Outcome:** Conditionally ready (quality passed; governance pending; all creation actions gated on upstream decisions)
+**Outcome:** Accepted (governance gate passed 2026-08-11 by requester as prescription approver; quality gate 97.4%). All creation actions remain gated on DEC-01.
 **Quality gate:** Passed (97.4%, no blocking failures, critical dimensions 13/13)
-**Recommended next move:** Approve the prescription, then return ASR-01 to decision readiness — DEC-02 reassessment is armed for when the access record exists.
+**Recommended next move:** Route to project-artifact-builder for provisional template builds; DEC-02 reassessment is armed for when the access record exists.
 **Confidence:** Medium-High
 
 Basis: Prescription covers all 104 catalog items and 8 essential records; the single ASR (access handling record) is prescribed as Create later within DEV-07, gated on DEC-01/DEC-02; existing records 1-6 need no work; audit passed at 97.4%.
