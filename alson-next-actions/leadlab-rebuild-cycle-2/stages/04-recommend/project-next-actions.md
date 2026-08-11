@@ -1,0 +1,193 @@
+# Project Next Actions
+LeadLab Portal Rebuild — Cycle 2
+
+## Recommended Direction
+
+Run the four evidence actions now (they are unchanged and still open from cycle 1), close the prescription governance gate, then decide the platform (DEC-01). Nothing else matters until these complete: DEC-01 gates all build work, the Sep 11, 2026 deadline is fixed, and no progress evidence exists since cycle 1.
+
+## Current Position
+
+**At risk (Medium confidence).** Objective, scope, governance, and registers are strong: accepted brief, named decision makers, 7 risks and 7 issues tracked, ASR-01 closed at prescription level. But delivery is blocked on DEC-01, no immediate action from cycle 1 shows any start evidence, and three completed runs (cycle 1, decision readiness, artifact prescription) all sit governance pending. Delay is now measurable: each day without DEC-01 shrinks the build window.
+
+---
+
+## Do Next
+
+### Immediate - 1. Compare platform options (ACT-01, carried from cycle 1)
+
+| Field | Value |
+|-------|-------|
+| Type | Action |
+| Owner | Requester |
+| Done when | A structured comparison of website builder vs WordPress vs custom code exists, covering timeline, cost, access support, customization, maintenance, YouTube embedding, and hosting/domain facts (NEED-01, NEED-04, NEED-06, NEED-07, NEED-08) |
+| Timing | Immediate |
+| Impact | Critical |
+| Urgency | Now |
+| Confidence | High |
+| Evidence | Evidence base O-4, O-10, O-14 (R-02 P x I 12), O-26, O-27, O-28 |
+| PMI basis | PMBOK Guide 8, Schedule Performance Domain (2.3) and Finance Performance Domain (2.4): the option must fit the ~1 month deadline and no-formal-budget constraint; cost and schedule estimates are prerequisites for the choice |
+| Dependencies | None |
+
+### Immediate - 2. Run a small AI-assisted build spike (ACT-02, carried from cycle 1)
+
+| Field | Value |
+|-------|-------|
+| Type | Action |
+| Owner | Requester |
+| Done when | A working proof-of-concept feature is built with AI assistance and its effort is assessed against the ~1 month timeline (NEED-02) |
+| Timing | Immediate |
+| Impact | Critical |
+| Urgency | Now |
+| Confidence | Medium |
+| Evidence | Evidence base O-15 (assumption, unproven), O-14 (R-01 P x I 12) |
+| PMI basis | PMBOK Guide 8, Risk Performance Domain (2.7): validates the unproven assumption that makes the custom-code option feasible before commitment; assumption analysis is a risk-response input |
+| Dependencies | None |
+
+### Immediate - 3. Confirm whether Sep 11, 2026 is a hard deadline (ACT-03, carried from cycle 1)
+
+| Field | Value |
+|-------|-------|
+| Type | Action |
+| Owner | Requester |
+| Done when | LeadLab Director answers whether the Sep 11, 2026 date is flexible and what fallback is acceptable (DEC-07) |
+| Timing | Immediate |
+| Impact | High |
+| Urgency | Now |
+| Confidence | High |
+| Evidence | Evidence base O-16 (D-06 "not discussed"), O-22 |
+| PMI basis | PMBOK Guide 8, Schedule Performance Domain (2.3): deadline determination is the basis for schedule realism and risk sizing |
+| Dependencies | None |
+
+### Immediate - 4. Confirm privacy rules for participant emails (ACT-04, carried from cycle 1)
+
+| Field | Value |
+|-------|-------|
+| Type | Action |
+| Owner | Requester |
+| Done when | IT Director confirms which privacy policy applies to participant email addresses on the new platform, or confirms none exists (NEED-03); answer recorded because DEV-07 content depends on it |
+| Timing | Immediate |
+| Impact | High |
+| Urgency | Now |
+| Confidence | Medium |
+| Evidence | Evidence base O-17 (ISS-04), O-31 (DEV-07 email-handling basis) |
+| PMI basis | PMI BA Guide, Section 8.3 (Identify and Analyze Product Risks): participant email handling is a known unknown with ambiguity risk; confirming the basis resolves it before the access design and DEV-07 depend on it |
+| Dependencies | None |
+
+### Immediate - 5. Close the prescription governance gate (ACT-07, new)
+
+| Field | Value |
+|-------|-------|
+| Type | Action |
+| Owner | Requester (prescription approver; role inferred, confirm in this step) |
+| Done when | Requester accepts the artifact prescription (or records qualified acceptance); ASR-01 is returned to decision readiness so DEC-02 reassessment is armed |
+| Timing | Immediate |
+| Impact | Medium |
+| Urgency | Now |
+| Confidence | High |
+| Evidence | Evidence base O-7 (prescription governance pending), O-13 (ASR-01 closed at prescription level) |
+| PMI basis | PMBOK Guide 8, Governance Performance Domain (2.1): approval authority must be confirmed and exercised for the control record (DEV-07) that DEC-02 requires |
+| Dependencies | None; runs in parallel with ACT-01..04 |
+
+### Immediate - 6. Decide the platform (DEC-01, ACT-05 carried)
+
+| Field | Value |
+|-------|-------|
+| Type | Decision |
+| Owner | Requester + IT Director; final OK LeadLab Director |
+| Done when | Platform chosen and recorded; LeadLab Director gives final OK |
+| Timing | Immediate (after ACT-01 and ACT-02) |
+| Impact | Critical |
+| Urgency | Now |
+| Confidence | Medium |
+| Evidence | Evidence base O-4, O-9, O-14 (R-02), decision register DEC-01 |
+| PMI basis | PMBOK Guide 8, Governance Performance Domain (2.1): decision-making model and escalation path defined; the choice gates the build |
+| Dependencies | ACT-01, ACT-02; IT Director confirms budget and domain (DEC-05) |
+
+### Current Phase - 7. Confirm post-launch maintenance owner (ACT-06, carried from cycle 1)
+
+| Field | Value |
+|-------|-------|
+| Type | Action |
+| Owner | Requester |
+| Done when | IT Director names who maintains the portal after Sep 11 and when support starts (DEC-06) |
+| Timing | Current phase |
+| Impact | Medium |
+| Urgency | Soon |
+| Confidence | Medium |
+| Evidence | Evidence base O-8 (D-03 open), issues log ISS-05 |
+| PMI basis | PMBOK Guide 8, Resources Performance Domain (2.6): ongoing resource ownership must be confirmed before go-live |
+| Dependencies | None; can run in parallel |
+
+---
+
+## Decisions Required
+
+| Decision | Decision Maker | Deadline | Current State |
+|----------|---------------|----------|---------------|
+| Platform selection (DEC-01) | Requester + IT Director; final OK LeadLab Director | Within days; before Sep 11 | Blocked on ACT-01, ACT-02; unchanged |
+| Access mechanism (DEC-02) | Requester + IT Director | Before build starts | Blocked on DEC-01; DEV-07 staged as its record (O-13) |
+| Budget, hosting, domain (DEC-05) | IT Director | Before DEC-01 finalization | Blocked on ACT-01 |
+| Maintenance owner (DEC-06) | IT Director | Before go-live | Needs confirmation |
+| Date flexibility (DEC-07) | LeadLab Director | Immediately | Needs confirmation |
+| Video hosting (DEC-03) | Requester | Before build completes | Conditionally ready: keep YouTube |
+| Content transition (DEC-04) | Requester + stakeholders | After go-live | Not yet due |
+| SharePoint decommission (DEC-08) | Requester + IT Director | After successful go-live | Not yet due |
+| Prescription acceptance | Requester (approver inferred) | Immediately | Open (ACT-07) |
+
+## Escalation
+
+| Matter | Escalate To | Reason | Suggested Action |
+|--------|-------------|--------|------------------|
+| No decision progress within 1 week of cycle 1 (trigger ~Aug 18) | LeadLab Director | Sep 11 deadline fixed; each week without DEC-01 shrinks the build window; R-01 and R-02 both high exposure (P x I 12) | Review deadline flexibility and force the decision session |
+
+## Stop or Defer
+
+| Work | Reason | Until |
+|------|--------|-------|
+| Build work | DEC-01 blocks all build; no build plan exists | Platform decided |
+| Content migration | Explicitly out of scope; existing content stays in place | After successful go-live |
+| Video hosting relocation | Current YouTube workflow works; no need at launch | After go-live, per storage/analytics growth |
+
+## Watch
+
+| Condition | Trigger | Action If Triggered |
+|-----------|---------|---------------------|
+| DEV-07 record creation | DEC-01 decided | Create participant access section; return to decision readiness for DEC-02 reassessment |
+| Governance response | Decision maker accepts any of the three pending runs | Close the gate; execute the accepted actions |
+| Timeline slip | Any evidence action slips past mid-August | Escalate per escalation table; re-plan around date flexibility answer |
+| Prescription acceptance | No response within days | Treat as escalation input; DEC-02 reassessment stays armed |
+
+## Evidence Gaps
+
+| Gap | Impact | What Would Help |
+|-----|--------|-----------------|
+| Platform options not compared | DEC-01 undecidable; build blocked | ACT-01 comparison |
+| AI-acceleration assumption unvalidated | Custom-code option feasibility unknown | ACT-02 spike |
+| Privacy rules unconfirmed | DEV-07 email basis and DEC-02 basis missing | ACT-04 confirmation |
+| No build schedule or milestones | Deadline risk unquantified after DEC-01 | Short build plan once platform chosen |
+| No test plan or acceptance criteria | Launch quality unverifiable | Test approach before go-live (quality lesson from closure report) |
+| Governance responses outstanding | All recommendation chains pending | Decision maker response to any run |
+
+## Referrals
+
+| Referral | Workspace | Trigger |
+|----------|-----------|---------|
+| Decision readiness re-run | `project-decision-readiness` | ACT-01 to ACT-04 complete, or decision maker requests review |
+| ASR-01 / DEV-07 return | `project-decision-readiness` | Prescription accepted (ACT-07); return arms DEC-02 reassessment |
+| Daily execution of immediate actions | `mits` | Requester ready to work today |
+
+## PMI Basis Summary
+
+| Recommendation | PMI Section | Application |
+|---------------|-------------|-------------|
+| ACT-01 platform comparison | PMBOK 8 Schedule (2.3), Finance (2.4) | Option must fit ~1 month deadline and no-budget constraint |
+| ACT-02 build spike | PMBOK 8 Risk (2.7) | Validates unproven assumption before commitment |
+| ACT-03 date confirmation | PMBOK 8 Schedule (2.3) | Deadline basis for schedule realism |
+| ACT-04 privacy confirmation | PMI BA Guide 8.3 | Resolves ambiguity risk in participant email handling |
+| ACT-07 prescription acceptance | PMBOK 8 Governance (2.1) | Confirms approval authority for the DEC-02 control record |
+| ACT-05 platform decision | PMBOK 8 Governance (2.1) | Decision model and escalation gate the build |
+| ACT-06 maintenance owner | PMBOK 8 Resources (2.6) | Confirms post-launch resource ownership |
+
+## Reassessment Trigger
+
+Re-run when ACT-01 to ACT-04 complete, when DEC-01 is decided, or within 1 week if no progress — whichever comes first.
