@@ -1,0 +1,33 @@
+# Artifact-Support Request
+
+**Run:** `projects/lead-lab/alson-decision-readiness/leadlab-rebuild-decisions/`
+**Date:** 2026-08-11
+
+## Requests
+
+### ASR-01: Participant access handling record for the new portal
+
+| Field | Detail |
+|-------|--------|
+| Decision ID | DEC-02 |
+| Decision statement | Choose participant access mechanism (SSO, login, email-list gating) |
+| Current readiness | Blocked |
+| Evidence need ID | NEED-05 |
+| Evidence need | Durable, maintained record of how participant access is granted on the new platform, including the basis for storing and using participant email addresses |
+| Readiness dimension | Control |
+| Required content | Access mechanism on the chosen platform; who grants access; the email-handling basis (which policy applies, or documented consent basis); update procedure per program |
+| Acceptance test | Decision readiness can verify the record exists, names the mechanism for the chosen platform, and states the email-handling basis; admins can operate access grants from it |
+| Needed by | Before DEC-02 finalization (build start) |
+| Owner or source | Requester (IT team) |
+| Persistence need | Maintained |
+| Existing records considered | `How to give Lead Lab participants access to the portal.docx` (SharePoint/Outlook-group specific; does not cover new platform or email privacy basis); no privacy policy or access register found in project evidence |
+| Referral rationale | Access management recurs every program, is operated by multiple admins, involves personal data (emails) warranting retention, and no existing artifact covers the new platform. Lighter mechanisms (one-time confirmation of privacy rules with the IT Director, NEED-03) resolve only part of the need; the recurring control requires a maintained record. |
+
+## Summary
+
+| Total requests | 1 |
+|----------------|---|
+| Destination workspace | project-artifact-prescription |
+| Expected return | artifact-support-handoff.md |
+
+Note: NEED-01, NEED-02, NEED-03, NEED-04, NEED-06, NEED-07, NEED-08 are resolved directly (comparison, validation, confirmations) and do not pass the artifact-referral test.

@@ -1,0 +1,54 @@
+# Decision Mandate
+
+## Run Mode
+
+First run.
+
+## Project Identification
+
+- Project name: LeadLab Portal Rebuild (lead-lab)
+- Sponsor: Stephen Salainti (original project); current sponsor not restated for the rebuild
+- Decision maker: Requester (IT team member) with IT Director agreement; LeadLab Director gives final OK
+- Intended users of the assessment: Requester and IT team, IT Director, LeadLab Director
+
+## Target Decision
+
+- Decision statement: Which platform should the LeadLab Portal be rebuilt on to replace SharePoint, within the same feature scope, restricted to participants, live before Sep 11, 2026?
+- Stakes: Platform choice determines build effort, access mechanism options, hosting, maintenance, and whether the Sep 11, 2026 deadline is met. It blocks all build work.
+- Consequences of not deciding: Build cannot start; portal risk of being late for the Sep 11-14, 2026 program; participants lose on-demand training access; SharePoint limitations continue.
+- Deadline or trigger: Before Sep 11, 2026 program start (~1 month); practical decision deadline is within days given build lead time.
+- Decision type: Solution (design, technology, architecture) with linked decisions on scope, access (security), investment, and delivery approach.
+
+## Scope
+
+- What is included: Platform selection; participant access mechanism; video hosting dependency; data handling of participant emails; hosting and domain; ongoing maintenance ownership; content transition timing; budget constraints.
+- What is excluded: Feature design beyond the current scope (no new features); detailed build plan; content migration execution; media production.
+- Project phase: Decision and planning (build not started).
+- Known methodology: AI-assisted development ("vibe coding") assumed; unproven.
+
+## Evidence
+
+- Sources provided or referenced:
+  - `request-brief.md` - `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` - accepted intake brief: summary, situation, risks, open questions
+  - `audit-findings.md` - `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/02-measure/output/audit-findings.md` - accepted intake audit: AI-acceleration assumption is highest risk
+  - `what-now.md` - `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/03-learn/output/what-now.md` - recommended next moves: platform first
+  - `run-manifest.md` - `projects/lead-lab/alson-project-intake/leadlab-rebuild/run-manifest.md` - intake clarification record
+  - `Project Charter.docx` - `projects/lead-lab/Old artifacts/` - closed-project charter: stakeholders, requirements, constraints, risks
+  - `Project Closure Report.docx` - `projects/lead-lab/Old artifacts/` - closed-project closure: performance, lessons, recommendations
+  - `How to add videos in the portal.docx` - `projects/lead-lab/Old artifacts/Procedures/` - current video workflow (YouTube embedding)
+  - `How to give Lead Lab participants access to the portal.docx` - `projects/lead-lab/Old artifacts/Procedures/` - current access workflow (Outlook group, email addresses)
+  - `LeadLab Portal - Process Part 1/2.webm` - `projects/lead-lab/Old artifacts/Procedures/` - video walkthroughs; not parseable, text procedures cover the same content
+- Additional sources expected: None.
+
+## Constraints
+
+- Regulatory obligations: Participant email addresses used for access; privacy rules not confirmed.
+- Contractual requirements: None identified.
+- Organisational standards: Restricted to LeadLab participants, not public; Microsoft 365 SSO currently used.
+- Known mandatory governance: Final OK from LeadLab Director; agreement with IT Director on who does the work.
+
+## Notes
+
+- The AI-acceleration assumption (custom build feasible in ~1 month) drives the platform decision and is unproven.
+- No formal budget; team resources and possibly a domain name available.
+- Content transition deferred; existing YouTube videos and SharePoint materials stay in place.
