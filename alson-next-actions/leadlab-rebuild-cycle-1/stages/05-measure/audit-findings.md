@@ -1,0 +1,65 @@
+# Audit Findings
+
+**Assessment:** Project Next Actions — LeadLab Portal Rebuild, Cycle 1
+**Date:** 2026-08-11
+**Quality gate:** Passed
+**Governance gate:** Not yet evaluated — tracked in Stage 06
+
+---
+
+## Acceptance Criteria Results
+
+| # | Criterion | Result | Explanation | Fix |
+|---|-----------|--------|-------------|-----|
+| 1 | Position stated | Pass | Opens with "At risk (Medium confidence)" and position paragraph before actions | - |
+| 2 | Recommendations present | Pass | 6 recommendations (ACT-01..06), within 3-7 limit | - |
+| 3 | Recommendations prioritized | Pass | Immediate band ordered by impact (Critical first); current-phase items after | - |
+| 4 | Owners assigned | Pass | Every action and the decision name an owner or decision maker | - |
+| 5 | Done-when conditions stated | Pass | Every action-type recommendation has a verifiable completion condition | - |
+| 6 | Evidence cited | Pass | Each recommendation cites evidence base O-numbers and decision readiness NEED/DEC IDs | - |
+| 7 | PMI basis cited | Pass | Every recommendation cites a specific PMI section with application explanation | - |
+| 8 | Confidence labeled | Pass | Confidence stated on every recommendation and overall position | - |
+| 9 | Timing bands assigned | Pass | Immediate, Immediate, Immediate, Immediate, Immediate, Current phase | - |
+| 10 | Smallest intervention | Pass | Comparisons, conversations, and a spike before any document; no unnecessary artifacts prescribed | - |
+| 11 | Decisions identified | Pass | Decisions Required table separates DEC-01..08 with decision makers and deadlines | - |
+| 12 | Escalations identified | Pass | Escalation section covers no-progress-in-1-week case to LeadLab Director | - |
+| 13 | Stops and deferrals identified | Pass | Stop/defer covers build, content migration, video hosting relocation | - |
+| 14 | Risks and watch items identified | Pass | Watch table: ASR-01 return, access design, timeline slip | - |
+| 15 | Evidence gaps noted | Pass | Gaps table lists all five open gaps with impact and helpful inputs | - |
+| 16 | Reassessment trigger stated | Pass | ACT-01..04 complete, DEC-01 decided, or 1 week without progress | - |
+| 17 | Standalone readability | Pass | Reads without reference files; upstream links included for depth | - |
+| 18 | Concise writing | Pass | Leads with the answer; no filler or repetition | - |
+| 19 | Evidence-light mode labeled | Pass | N/A — evidence-based mode stated in mandate | - |
+| 20 | Referrals documented | Pass | Referral table with workspace, trigger, and upstream linkage | - |
+
+## Quality Scores
+
+| Dimension | Score | Max | Notes |
+|-----------|-------|-----|-------|
+| Position clarity | 4 | 4 | Specific, evidence-based, actionable, with confidence and conditions |
+| Recommendation quality | 4 | 4 | Specific, prioritized, owners, timing, PMI basis, dependencies |
+| Evidence support | 4 | 4 | Full trace: O-number observations to NEED/DEC IDs to PMI sections |
+| PMI traceability | 4 | 4 | Section cited with application per recommendation |
+| Risk visibility | 3 | 4 | Material risks covered via upstream brief and watch items; option-specific risks pending comparison |
+| Actionability | 4 | 4 | Owner, timing, done-when, dependencies on every action |
+| Decision clarity | 4 | 4 | Decisions separated with decision maker, deadline, readiness state |
+| Conciseness | 4 | 4 | Answer first; every line adds information |
+| **Total** | **31** | **32** | |
+
+**Classification:** Action-ready
+
+## Critical Failures
+
+| Dimension | Score | Impact |
+|-----------|-------|--------|
+| None | - | Recommendation quality (4) and Evidence support (4) both pass the 2+ threshold |
+
+## Quality Gate Evaluation
+
+**Result:** Passed
+**Basis:** Quality 31/32 (96.9%) exceeds threshold (28+ for Action-ready); no blocking acceptance criteria failures; critical dimensions scored 4 and 4.
+
+## Governance Gate
+
+The decision maker is: Requester (IT team member), with IT Director for budget/domain and LeadLab Director for final OK on DEC-01.
+The governance gate is tracked in Stage 06. This stage does not evaluate it.
