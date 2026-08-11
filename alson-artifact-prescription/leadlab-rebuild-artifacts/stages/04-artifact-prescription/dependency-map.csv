@@ -1,0 +1,25 @@
+artifact_id,artifact_name,need,treatment,predecessor_id,predecessor_name,dependency_type,dependency_strength,input_status,notes
+PM-31,Milestone list,Essential,Create later,PM-08,Decision log (D-01),Depends,Hard,Partial,Requires DEC-01 platform decision; unblocks delivery control record and BA-34
+PM-23,Acceptance criteria,Essential,Create later,PM-48,Backlog,Depends,Hard,Available,Acceptance criteria per backlog item; carried in backlog; feeds DEV-08
+BA-19,Acceptance criteria,Essential,Create later,PM-48,Backlog,Depends,Hard,Available,Same entry as PM-23 (single source of truth)
+DEV-03,Software Architecture Description,Essential,Create later,PM-08,Decision log (D-01),Depends,Hard,Partial,Requires DEC-01; precedes DEV-06 DEV-07 DEV-08
+DEV-06,Security and Privacy Design,Essential,Create later,PM-08,Decision log (D-01),Depends,Hard,Partial,Requires DEC-01
+DEV-06,Security and Privacy Design,Essential,Create later,DEV-03,Software Architecture Description,Depends,Soft,Partial,Architecture informs access control design
+DEV-06,Security and Privacy Design,Essential,Create later,NEED-03,Privacy basis confirmation (ACT-04),Depends,Hard,Missing,Email-handling basis required content; upstream confirmation
+DEV-07,Deployment and Runtime Operations Plan,Essential,Create later,PM-08,Decision log (D-01),Depends,Hard,Partial,Requires DEC-01 platform decision
+DEV-07,Deployment and Runtime Operations Plan,Essential,Create later,PM-08,Decision log (D-02),Depends,Hard,Partial,Requires DEC-02 access mechanism; carries ASR-01 access handling record
+DEV-07,Deployment and Runtime Operations Plan,Essential,Create later,DEV-06,Security and Privacy Design,Depends,Soft,Partial,Email basis content shared; access record references design
+DEV-07,Deployment and Runtime Operations Plan,Essential,Create later,Old-access-procedure,How to give participants access.docx (Old artifacts),References,Soft,Available,Update basis for the new-platform procedure; reference not duplicate
+DEV-08,Test Strategy and Plan,Essential,Create later,PM-23,Acceptance criteria,Depends,Hard,Partial,Test cases built from acceptance criteria
+DEV-08,Test Strategy and Plan,Essential,Create later,PM-48,Backlog,Depends,Soft,Available,Feature scope for test coverage
+DEV-08,Test Strategy and Plan,Essential,Create later,DEV-03,Software Architecture Description,Depends,Soft,Partial,Architecture informs test levels
+DEV-10,Repository and Development Guide,Essential,Create later,PM-08,Decision log (D-01),Depends,Conditional,Partial,Only if DEC-01 selects custom code
+BA-34,Readiness assessment,Essential,Create later,DEV-07,Deployment and Runtime Operations Plan,Depends,Soft,Missing,Readiness check includes access operable from record
+BA-34,Readiness assessment,Essential,Create later,DEV-08,Test Strategy and Plan,Depends,Soft,Missing,Readiness includes test results
+BA-34,Readiness assessment,Essential,Create later,PM-48,Backlog (BL-10),Depends,Hard,Missing,Content load before launch readiness
+BA-34,Readiness assessment,Essential,Create later,DEC-06,Maintenance owner confirmation,Depends,Soft,Missing,Owner confirmation check at readiness
+PM-11,Closure report,Essential,Create later,BA-15,Transition planning,Depends,Soft,Missing,Closure follows post-launch transition; soft
+PM-11,Closure report,Essential,Create later,Go-live,Launch evidence,Depends,Soft,Missing,Closure after successful launch
+BA-15,Transition planning information,Essential,Create later,DEC-04,Content migration decision (decision log),Depends,Hard,Missing,Trigger post go-live per DEC-04 (not yet due)
+BA-15,Transition planning information,Essential,Create later,BA-34,Readiness assessment,Depends,Soft,Missing,Readiness informs transition state
+VALIDATION,Cycle validation: PASS - no hard-dependency cycles; every hard dependency reachable from D-01 (decision log), PM-48 backlog, or NEED-03 confirmation,,,None,None,None,None,Not applicable,Validation documented in register Dependency Notes

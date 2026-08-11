@@ -1,0 +1,175 @@
+# Source Inventory
+
+## Overview
+
+- Total sources found: 12 (plus 2 video files unreadable)
+- Sources read successfully: 12
+- Sources unreadable: 2 (`LeadLab Portal - Process Part 1.webm`, `Leadlab Portal - Process Part 2.webm` — video walkthroughs, no transcript; text procedures cover the same content)
+- Date inventoried: 2026-08-11
+
+## Source Entries
+
+### request-brief.md
+
+- **Location:** `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`
+- **Type:** Document (accepted intake brief)
+- **Role:** Authoritative project mandate: problem, scope, people, timing, constraints
+- **Origin:** Human-authored (conversation + closed-project artifacts), accepted at 100% quality
+- **Content summary:** Rebuild the LeadLab Portal on a new platform to replace SharePoint; same feature scope; restricted to participants; live before Sep 11, 2026; no formal budget; AI-assisted development assumed; 7 open risks.
+- **Completeness:** Current
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 1 | SharePoint limits customization; chosen only because custom build was infeasible in original timeline | Fact | request-brief.md, Situation | High |
+| 2 | Current portal: filter by category/date, search, downloadable materials, multi-device, M365 SSO, Outlook-group access | Fact | request-brief.md, Situation | High |
+| 3 | Scope: same features, no new features; content migration out of scope | Fact | request-brief.md, Request Details | High |
+| 4 | Deadline: ready before Sep 11, 2026; program runs Sep 11-14 | Fact | request-brief.md, Timing | High |
+| 5 | No formal budget; team resources and possibly a domain name available | Fact | request-brief.md, Constraints | High |
+| 6 | AI-assisted development ("vibe coding") assumed feasible; unproven | Assumption | request-brief.md, Constraints | Medium |
+| 7 | Final OK from LeadLab Director | Fact | request-brief.md, People | High |
+| 8 | Requester + team do the work; agreed with IT Director | Fact | request-brief.md, People | High |
+| 9 | Access mechanism, platform choice, privacy rules, maintenance owner all open | Fact | request-brief.md, Risks and Open Questions | High |
+
+### decision-readiness-register.md
+
+- **Location:** `projects/lead-lab/alson-decision-readiness/leadlab-rebuild-decisions/stages/04-readiness-assessment/decision-readiness-register.md`
+- **Type:** Document (assessment register)
+- **Role:** Eight decision assessments with evidence needs and referral classifications
+- **Origin:** AI-assisted pipeline output, passed quality 95.7%
+- **Content summary:** DEC-01 platform choice Blocked; DEC-02 access mechanism Blocked on DEC-01; NEED-05 referred as ASR-01; NEED-03 (privacy basis) direct confirmation; no decision ready today.
+- **Completeness:** Current
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 10 | DEC-01 platform choice blocked; options never compared | Fact | decision-readiness-register.md, DEC-01 | High |
+| 11 | DEC-02 access mechanism blocked on DEC-01 and unconfirmed privacy rules | Fact | decision-readiness-register.md, DEC-02 | High |
+| 12 | NEED-05 referred to artifact prescription as ASR-01 (durable access handling record) | Fact | decision-readiness-register.md, DEC-02 Evidence Needs | High |
+| 13 | NEED-03 privacy rules resolvable by direct confirmation with IT Director | Fact | decision-readiness-register.md, DEC-02 Evidence Needs | High |
+| 14 | Risk level across decisions: Medium; no decision is Ready today | Fact | decision-readiness-register.md, Summary, Key Patterns | High |
+
+### artifact-support-request.md
+
+- **Location:** `projects/lead-lab/alson-decision-readiness/leadlab-rebuild-decisions/stages/04-readiness-assessment/artifact-support-request.md`
+- **Type:** Document (referral)
+- **Role:** ASR-01 contract: required content, acceptance test, owner, persistence need
+- **Origin:** AI-assisted pipeline output (decision readiness)
+- **Content summary:** ASR-01 requires a maintained record of participant access granting on the new platform, including the email-handling basis and per-program update procedure; needed before DEC-02 finalization; IT team owner; existing SharePoint procedure does not cover the new platform.
+- **Completeness:** Complete
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 15 | Existing access procedure is SharePoint/Outlook-group specific; does not cover new platform or email privacy basis | Fact | artifact-support-request.md, ASR-01 Existing records considered | High |
+| 16 | No privacy policy or access register found in project evidence | Fact | artifact-support-request.md, ASR-01 | High |
+| 17 | Access management recurs every program; multiple admins; personal data involved | Fact | artifact-support-request.md, ASR-01 Referral rationale | High |
+
+### decision-evidence-base.md
+
+- **Location:** `projects/lead-lab/alson-decision-readiness/leadlab-rebuild-decisions/stages/02-evidence/decision-evidence-base.md`
+- **Type:** Document (evidence register)
+- **Role:** Observations O-1..O-30 with per-source citations and confidence
+- **Origin:** AI-assisted pipeline output
+- **Content summary:** Direct and supporting facts for the decision set: platform, access, hosting, maintenance, timeline, historical charter facts.
+- **Completeness:** Current
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 18 | Platform decision blocks all build work | Fact | decision-evidence-base.md, O-6 | High |
+| 19 | Original charter constraint: no custom development within SharePoint | Fact | decision-evidence-base.md, O-8 | High |
+| 20 | Storage overload risk; mitigation: upload videos to YouTube | Fact | decision-evidence-base.md, O-25 | High |
+| 21 | Lessons: advanced analytics limited by SharePoint; stress testing managed adoption risks | Fact | decision-evidence-base.md, O-27, O-28 | Medium |
+| 22 | Original project: no budget, no expenses, completed early | Fact | decision-evidence-base.md, O-26 | High |
+
+### project-next-actions.md
+
+- **Location:** `projects/lead-lab/alson-next-actions/leadlab-rebuild-cycle-1/stages/04-recommend/project-next-actions.md`
+- **Type:** Document (recommendation register)
+- **Role:** ACT-01..06 interventions; HND-01 ASR referral monitor
+- **Origin:** AI-assisted pipeline output, passed quality 96.9%
+- **Content summary:** Compare platforms, run AI build spike, confirm date flexibility and privacy rules, decide DEC-01, confirm maintenance owner; watch for ASR-01 return.
+- **Completeness:** Current
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 23 | ACT-04 confirms privacy basis with IT Director; result feeds ASR-01 record | Fact | project-next-actions.md, ACT-04 | Medium |
+| 24 | No build schedule or milestones exists; deadline risk unquantified after DEC-01 | Fact | project-next-actions.md, Evidence Gaps | High |
+| 25 | ASR-01 return (access handling record basis) feeds DEC-02 access decision | Fact | project-next-actions.md, Watch | High |
+| 26 | No test plan or acceptance criteria exists; launch quality unverifiable | Fact | project-next-actions.md, Evidence Gaps | High |
+
+### Canonical registers (artifacts/logs and registers/)
+
+- **Location:** `projects/lead-lab/artifacts/logs and registers/` (assumption-log.md, backlog.md, decision-log.md, dependencies-log.md, issues-log.md, risk-register.md)
+- **Type:** Documents (registers)
+- **Role:** Existing carriers for essential records 2, 4, 5, 6
+- **Origin:** AI-assisted creation from accepted brief; dated 11-Aug-2026
+- **Content summary:** Decision log D-01..D-08 (all open); risk register R-01..R-07 with ratings and responses; assumption log AL-01..AL-07; issue log ISS-01..07; dependency log DEP-01..07; backlog BL-01..18 with MoSCoW and effort.
+- **Completeness:** Current (starting estimates flagged in each source section)
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 27 | Decision log exists and is current; all decisions open | Fact | decision-log.md, Register | High |
+| 28 | Risk register exists with responses defined; 2 high-exposure risks | Fact | risk-register.md, Register, Summary | High |
+| 29 | Backlog exists with 18 items; 4 blocked on human decisions | Fact | backlog.md, Register | High |
+| 30 | Assumption log flags AI-acceleration assumption unproven (AL-01) | Fact | assumption-log.md, AL-01 | High |
+
+### Old artifacts (docx)
+
+- **Location:** `projects/lead-lab/Old artifacts/` (Project Charter.docx, Project Closure Report.docx, Procedures/How to give Lead Lab participants access to the portal.docx, Procedures/How to add videos in the portal.docx)
+- **Type:** Documents (closed-project records)
+- **Role:** Historical facts; reference procedure for ASR-01
+- **Origin:** Human-authored (closed project Dec 2024 - Jan 2025)
+- **Content summary:** Charter: SharePoint portal, M365 SSO requirement, feature set, roles, no-custom-development constraint, risk mitigations. Closure report: performance, lessons, external-hosting recommendation. Access procedure: 6 steps to add participant emails to the LeadLab Portal Access Outlook group. Video procedure: YouTube embed workflow.
+- **Completeness:** Historical (Outdated for new platform; Current as historical record)
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 31 | Access procedure: participant emails added to Outlook group; M365 SSO gates access; no privacy basis stated | Fact | How to give Lead Lab participants access to the portal.docx, Steps 1-6 | High |
+| 32 | Original stakeholder requirements included M365 SSO | Fact | Project Charter.docx, Stakeholder Requirements as Known | High |
+| 33 | Original roles: Owner Carmen Sarmiento, Sponsor Stephen Salainti, Tech Adviser Ryann Micua, Lead Dev/PM Joven Agno | Fact | Project Charter.docx, Stakeholders, Resources Preassigned | High |
+| 34 | Stress testing with expected user volumes was a charter mitigation | Fact | Project Charter.docx, High-level Project Risks | High |
+
+### lead-lab/CONTEXT.md
+
+- **Location:** `projects/lead-lab/CONTEXT.md`
+- **Type:** Document (project container)
+- **Role:** Status and routing index
+- **Origin:** Human-maintained
+- **Content summary:** Intake accepted (100%); decision readiness passed (95.7%, governance pending); next actions passed (96.9%); platform and access decisions open; build not started; deadline Sep 11.
+- **Completeness:** Current
+
+#### Observations
+
+| # | Observation | Type | Source Citation | Confidence |
+|---|-------------|------|----------------|------------|
+| 35 | Build not started; blocked on DEC-01 and DEC-02 | Fact | lead-lab/CONTEXT.md, Status | High |
+
+## Topic Cross-Reference
+
+| Topic | Sources |
+|-------|---------|
+| Mandate and scope | request-brief.md, Project Charter.docx, lead-lab/CONTEXT.md |
+| Platform decision | decision-readiness-register.md (DEC-01), decision-evidence-base.md, project-next-actions.md |
+| Access mechanism and email handling | artifact-support-request.md, decision-readiness-register.md (DEC-02, NEED-03/05), access procedure docx, project-next-actions.md (ACT-04) |
+| Delivery control and timing | request-brief.md, backlog.md, decision-evidence-base.md (O-4, O-24) |
+| Decisions | decision-log.md, decision-readiness-register.md |
+| RAID | risk-register.md, issues-log.md, assumption-log.md, dependencies-log.md |
+| Verification and testing | project-next-actions.md (Evidence Gaps), Project Charter.docx (stress testing), decision-evidence-base.md (O-28) |
+| Operations and maintenance | access procedure docx, video procedure docx, decision-readiness-register.md (DEC-06), decision-log.md (D-03) |
+
+## Unreadable Sources
+
+- `LeadLab Portal - Process Part 1.webm`: video file, no transcript; content covered by the two text procedures
+- `Leadlab Portal - Process Part 2.webm`: video file, no transcript; content covered by the two text procedures

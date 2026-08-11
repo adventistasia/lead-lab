@@ -1,0 +1,104 @@
+# Audit Findings: Project Artifact Prescription
+
+**Date:** 2026-08-11
+**Prescription audited:** `projects/lead-lab/alson-artifact-prescription/leadlab-rebuild-artifacts/stages/05-report/project-artifact-prescription.md`
+**Supporting evidence reviewed:** artifact-prescription-register.md, dependency-map.csv, artifact-support-handoff.md, source-inventory.md, project-assessment.md, investigation-brief.md, run-manifest.md
+
+---
+
+## Acceptance Criteria Results
+
+### Universal Criteria
+
+| ID | Criterion | Result | Notes |
+|----|-----------|--------|-------|
+| U-01 | Identity | PASS | Title, run, date, status (Proposed), approver in Decision Record |
+| U-02 | Purpose | PASS | Opens with the recommendation and the decision it supports (DEC-02/ASR-01) |
+| U-03 | Scope | PASS | Prescription scope clear: catalog sweep, gated on DEC-01; exclusions in brief |
+| U-04 | Required structure | PASS | All report template sections present |
+| U-05 | Specificity | PASS | Actual IDs (PM-31, DEV-07, D-01, BL-11) used throughout |
+| U-06 | Plain language | PASS | Plain terms; no unexplained jargon |
+| U-07 | Traceability | PASS | Sources, register, CSV, ASH cross-referenced |
+| U-08 | Usability | PASS | Approver can act from the report alone; action plan has owner/trigger/dependency |
+| U-09 | Risk and limitation visibility | PASS | Open decisions, upstream blocks, conditional DEV-10 all visible |
+| U-10 | Ownership and accountability | PASS | Owners per action; approver named |
+| U-11 | Consistency | PASS | Terms match registers (D-01, BL-10, DEC-02, NEED-03) |
+| U-12 | Acceptance readiness | PASS | Reviewable; approver named; next review trigger stated |
+| U-13 | Concise writing | PASS | Leads with answer; no filler sections |
+
+### Artifact-Specific Criteria
+
+| ID | Criterion | Result | Notes |
+|----|-----------|--------|-------|
+| AP-01 | Project profile assessed | PASS | Profile in project-assessment.md; summary in report |
+| AP-02 | Source artifacts inventoried | PASS | 12 sources in source-inventory.md with locations, roles, observations, confidence |
+| AP-03 | Essential records covered | PASS | All 8 records with need + treatment (register + report) |
+| AP-04 | Extension coverage | PASS | All 104 catalog items disposed; 82 default Not needed + 22 treated individually |
+| AP-05 | Trigger application justified | PASS | Trigger Elevations table cites specific triggers + evidence |
+| AP-06 | Dispositions justified | PASS | Every row has rationale tied to assessment findings |
+| AP-07 | Evidence cited | PASS | Citations per row ([request-brief.md], [risk-register.md], etc.) |
+| AP-08 | Confidence labeled | PASS | Disposition Confidence section labels all 22 treated items; default High convention stated (evidence-standards rule 6). Note: added during audit pass, see Fixes |
+| AP-09 | Minimum contents specified | PASS | Action plan actions 1-10 state contents; ASH minimum contents for ASR-01 |
+| AP-10 | Actions prioritized | PASS | Grouped by timing band, ordered by dependency + need |
+| AP-11 | Action dependencies noted | PASS | Dependency column in report; register table; CSV rows with strength |
+| AP-12 | Dependency order respected | PASS | No dependent action precedes its hard predecessor; all chains root at D-01/backlog |
+| AP-13 | Uncertainty handled | PASS | No Needs confirmation items; DEV-10 conditional resolution path stated |
+| AP-14 | Generated views specified | PASS | Generated Views table names source records + validation points for all 6 |
+| AP-15 | AI provenance | PASS | AI assurance section names validation points; pipeline outputs labeled |
+| AP-16 | Single source of truth | PASS | PM-23/BA-19 single entry; generated views not treated as records |
+| AP-17 | Alternatives considered | PASS | Six alternatives with rejection reasons |
+| AP-18 | Decision record complete | PASS | Author, date, approver, open decisions, next review |
+| AP-19 | Crosswalk traceability | PASS | Crosswalk Traceability section maps treated items to crosswalk files. Note: added during audit pass, see Fixes |
+| AP-20 | ASR coverage | PASS | ASR-01 addressed in Decision Support Traceability |
+| AP-21 | ASH completeness | PASS | All contract fields populated for ASR-01 |
+| AP-22 | Prior baseline preserved | NOT APPLICABLE | No prior accepted baseline; full baseline fallback per handoff contract; reason documented in run manifest + report |
+
+**Summary:** 34 pass, 0 partial, 0 fail, 1 not applicable (AP-22, reason documented).
+
+---
+
+## Quality Scores
+
+| Dimension | Score (1-13) | Notes |
+|-----------|--------------|-------|
+| Evidence integrity | 13 | All claims cited; types labeled; confidence per disposition |
+| Investigation completeness | 13 | 14 dimensions; gaps and unknowns explicit |
+| Tailoring quality | 13 | Essential-first, triggers applied, DEV tailoring by production stage |
+| Recommendation soundness | 12 | Strong rationale and trade-offs; recommendation confidence implicit rather than labeled on the recommendation statement itself |
+| Traceability | 13 | PMI crosswalks, ASR traceability, dependency map |
+| Actionability | 13 | Every action has title, timing, contents, effort, owner, trigger, dependency |
+| Internal consistency | 12 | Register/CSV/report/ASH consistent; register Dependency Map table is a summary of the CSV (24 rows) — acceptable, noted |
+| Usability | 12 | Standalone approval possible; full profile lives in assessment file |
+| Conciseness | 13 | Answer-first, no filler |
+
+**Total Score:** 114 out of 117
+**Percentage:** 97.4%
+**Critical dimension check:** Pass (Evidence integrity: 13, Traceability: 13 — both ≥ 5)
+**Classification:** Decision-ready
+
+---
+
+## Critical Failures
+
+| Issue | Type | Required Fix |
+|-------|------|-------------|
+| None | - | - |
+
+---
+
+## Recommended Fixes
+
+| # | Finding | Affected Output | Severity | Correction |
+|---|---------|----------------|----------|------------|
+| 1 | AP-08: confidence not labeled per disposition on first pass | artifact-prescription-register.md | Important | **Applied.** Added Disposition Confidence section (22 treated items) + default High convention for Not needed items |
+| 2 | AP-19: crosswalk file not referenced per treated item | artifact-prescription-register.md | Important | **Applied.** Added Crosswalk Traceability section mapping treated items to PM/BA/DEV crosswalk files |
+| 3 | CSV validation row used inconsistent column count | dependency-map.csv | Nice-to-have | **Applied.** Re-shaped to full 10-column schema with validation result in notes |
+| 4 | Recommendation statement lacks an explicit confidence label | project-artifact-prescription.md | Nice-to-have | Leave as-is: recommendation confidence derivable from open decisions and Medium confidence on upstream items; flag in what-now for next cycle if governance feedback asks |
+
+## Quality Gate
+
+**Pass.** Quality percentage 97.4% (threshold 95%), no blocking acceptance failures, critical dimensions (Evidence integrity 13, Traceability 13) scored 5+. AP-22 Not Applicable is documented, not a failure.
+
+## Governance Gate
+
+Outside this stage's scope. Project manager (Requester) is the prescription approver; governance gate completion is tracked in Stage 07. Remaining condition: requester acceptance or qualified acceptance.

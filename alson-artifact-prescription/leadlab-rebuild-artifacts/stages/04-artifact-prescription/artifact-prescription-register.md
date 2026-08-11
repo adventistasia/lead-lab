@@ -1,0 +1,266 @@
+# Artifact Prescription Register: LeadLab Portal Rebuild
+
+Run: `projects/lead-lab/alson-artifact-prescription/leadlab-rebuild-artifacts/`
+Mode: Full baseline (fallback rule), ASR-01 addressed within it. Date: 2026-08-11
+
+## Summary
+
+| Need | Count |
+|------|-------|
+| Essential | 20 (14 maintained + 6 generated views) |
+| Optional | 0 |
+| Not needed | 82 |
+| Needs confirmation | 0 |
+| **Total catalog items** | **104** |
+
+| Treatment | PM | BA | DEV | Total |
+|-----------|----|----|-----|-------|
+| Use as-is | 5 | 0 | 0 | 5 |
+| Update | 0 | 0 | 0 | 0 |
+| Create | 0 | 0 | 0 | 0 |
+| Create later | 3 | 3 | 5 | 11 |
+| Combine | 0 | 0 | 0 | 0 |
+| Generate on demand | 2 | 4 | 0 | 6 |
+| **Treated total** | **10** | **7** | **5** | **22** |
+| Not needed (no treatment) | 49 | 28 | 5 | 82 |
+
+Confidence convention: every disposition carries a confidence label (evidence-standards.md, rule 6). Default for Not needed items: **High** — the deciding factors (small size, short duration, low stakeholder complexity, no mandate, no vendor, risk Medium) are directly evidenced in project-assessment.md. All treated items are labeled individually in the Disposition Confidence section below.
+
+## Essential Records
+
+| # | Record | Carried By | Need | Treatment | Minimum Contents / Rationale |
+|---|--------|-----------|------|-----------|------------------------------|
+| 1 | Mandate and outcomes | request-brief.md (Situation, People, Constraints); Project Charter.docx (historical) | Essential | Use as-is | Brief is the accepted authority: problem, sponsor/owner, goals, success measures, constraints. Charter kept as historical reference only. [request-brief.md; charter docx] |
+| 2 | Scope and acceptance | request-brief.md (Request Details); backlog.md (BL-01..18); PM-23/BA-19 (Create later) | Essential | Use as-is + Create later (acceptance criteria) | Scope boundaries explicit in brief; deliverables in backlog; acceptance criteria per backlog item must be defined before testing (BL-11). [request-brief.md; backlog.md] |
+| 3 | Ownership and governance | request-brief.md (People); decision-log.md (decision owners) | Essential | Use as-is | All roles named: requester+IT team, IT Director, LeadLab Director (final OK), media team, participants. [request-brief.md People] |
+| 4 | Delivery control | request-brief.md (deadline); backlog.md (effort); PM-31 (Create later) | Essential | Use as-is + Create later (milestones) | Deadline Sep 11, 2026 recorded; effort sizes in backlog; milestone list needed once DEC-01 lands (next-actions Evidence Gaps: no build schedule exists). [request-brief.md Timing; project-next-actions.md Evidence Gaps] |
+| 5 | Decisions and changes | decision-log.md (D-01..D-08) | Essential | Use as-is | Register exists, current, all decisions open; maintained as decisions land. No separate change control at this size. [decision-log.md] |
+| 6 | RAID controls | risk-register.md (PM-44), issues-log.md (PM-15), assumption-log.md (PM-45), dependencies-log.md | Essential | Use as-is | All four registers exist, current, with owners and responses. [artifacts/logs and registers/] |
+| 7 | Verification and acceptance | PM-23/BA-19 (Create later), DEV-08 (Create later), final OK evidence (BL-12) | Essential | Create later | No test plan or acceptance criteria exist (next-actions Evidence Gaps). Define acceptance criteria per feature and a test plan before the BL-11 test window; final OK from LeadLab Director is the acceptance record. [project-next-actions.md Evidence Gaps] |
+| 8 | Transition and ownership | DEV-07 access handling record (Create later); BA-34 readiness (Create later); DEC-06 maintenance owner | Essential | Create later | Operational handover content: participant access management procedure (ASR-01/NEED-05), pre-launch readiness check, maintenance owner confirmation (DEC-06). [artifact-support-request.md; decision-readiness-register.md DEC-06] |
+
+## Trigger Elevations
+
+Triggers applied from essential-artifact-model.md: **Production software** (portal live for the Sep 11 program with real participants), **Sensitive data** (participant email addresses, personal data), **Mandate** (none confirmed — no regulatory/contractual obligation identified).
+
+| Trigger | Catalog Item | Need | Treatment | Rationale |
+|---------|--------------|------|-----------|-----------|
+| Production software | PM-23 / BA-19 Acceptance criteria | Essential | Create later | Acceptance of a live participant-facing portal requires defined criteria per feature; none exist. [project-next-actions.md Evidence Gaps] |
+| Production software | PM-31 Milestone list | Essential | Create later | Hard deadline Sep 11; no build milestones exist; gated on DEC-01. [request-brief.md Timing; project-next-actions.md Evidence Gaps] |
+| Production software | DEV-03 Software Architecture Description | Essential | Create later | Production portal needs architecture/stack/integration record; platform undecided (DEC-01). [decision-readiness-register.md DEC-01] |
+| Production software + Sensitive data | DEV-06 Security and Privacy Design | Essential | Create later | Restricted access (no public access, R-03) and participant email handling (R-04) require access-control and privacy design; email basis pending NEED-03. [risk-register.md R-03, R-04; decision-readiness-register.md NEED-03] |
+| Production software + Sensitive data | DEV-07 Deployment and Runtime Operations Plan | Essential | Create later | Production operations, deployment, backup; carries the participant access handling record for ASR-01 (mechanism, granters, email-handling basis, per-program update). [artifact-support-request.md; dev-crosswalk.md DEV-07/DOC-08] |
+| Production software | DEV-08 Test Strategy and Plan | Essential | Create later | Launch quality needs explicit testing: access restriction, devices, participants (BL-11); charter lesson: stress testing. [backlog.md BL-08, BL-09, BL-11; decision-evidence-base.md O-28] |
+| Production software (conditional) | DEV-10 Repository and Development Guide | Essential (conditional) | Create later | Applicable only if DEC-01 = custom code; dev conventions needed for AI-assisted build. [decision-readiness-register.md DEC-01; dev-crosswalk.md] |
+| Production software | BA-34 Readiness assessment | Essential | Create later | Pre-launch readiness check: content loaded (BL-10), testing done (BL-11), access operable (DEV-07), maintenance owner (DEC-06). [backlog.md; decision-readiness-register.md DEC-06] |
+
+## Extension Catalog
+
+Default for non-elevated items: **Not needed** — no conditional trigger applies (small size, short duration, low stakeholder complexity, no mandate, no vendor procurement, risk Medium not High). Individual rationale given where the item needed a distinct decision. [disposition-rules.md Default rule; essential-artifact-model.md Trigger table]
+
+### PM Artifacts
+
+| ID | Artifact | Need | Treatment | Rationale |
+|----|----------|------|-----------|-----------|
+| PM-01 | Project charter | Not needed | - | Accepted request brief is the authorization (names owner, sponsor, responsible person); old charter is historical. [request-brief.md] |
+| PM-02 | Business case | Not needed | - | No formal investment; justification is in brief Situation; DEC-01 comparison serves option justification. [request-brief.md] |
+| PM-03 | Benefits management plan | Not needed | - | Single-event program; success = portal works Sep 11 (brief). No multi-period benefits. |
+| PM-04 | Project management plan | Not needed | - | Small adaptive delivery; backlog + brief + registers are the plan; plan views generated on demand if needed. |
+| PM-05 | Change management plan | Not needed | - | Change control via decision log at this size (record 5). |
+| PM-06 | Quality management plan | Not needed | - | Quality = acceptance criteria (PM-23) + test approach (DEV-08). |
+| PM-07 | Lessons learned register | Not needed | - | Old project lessons documented in closure report; new project closure summary at end. |
+| PM-08 | Decision log | Essential | Use as-is | Record 5 carrier; exists and current. [decision-log.md] |
+| PM-09 | Performance reports | Essential (view) | Generate on demand | Status views regenerable from backlog + registers; AI-generated with human review. [essential-artifact-model.md] |
+| PM-10 | Change log | Not needed | - | Decision log carries changes; no formal change control. |
+| PM-11 | Closure report | Essential | Create later | Project will close after go-live/transition; closure precedent exists (Old artifacts closure report). Trigger: post-launch. |
+| PM-12 | Communications management plan | Not needed | - | Small stakeholder set; direct communication. [request-brief.md People] |
+| PM-13 | Stakeholder register | Not needed | - | All stakeholders named in brief People (owner, sponsor, adviser, PM, IT Director, LeadLab Director, media team, participants); register adds nothing. [request-brief.md People] |
+| PM-14 | Stakeholder engagement plan | Not needed | - | Same basis as PM-13. |
+| PM-15 | Issue log | Essential | Use as-is | Record 6 carrier; exists and current. [issues-log.md] |
+| PM-16 | Escalation matrix | Not needed | - | Escalation path defined (IT Director; LeadLab Director; next-actions Escalation). [project-next-actions.md] |
+| PM-17 | Stakeholder satisfaction survey | Not needed | - | No survey program for a 1-month portal rebuild. |
+| PM-18 | Scope management plan | Not needed | - | Scope fixed by brief; changes via decision log. |
+| PM-19 | Requirements documentation | Not needed | - | Requirements carried by backlog (BL-01..18) + brief feature scope; separate document duplicates. [backlog.md] |
+| PM-20 | Project scope statement | Not needed | - | Scope in/out explicit in brief Request Details. |
+| PM-21 | WBS | Not needed | - | Backlog decomposition suffices at this size. |
+| PM-22 | WBS dictionary | Not needed | - | Same basis as PM-21. |
+| PM-23 | Acceptance criteria | Essential | Create later | See Trigger Elevations. Combined into backlog items before testing. |
+| PM-24 | Verified deliverables | Not needed | - | Lifecycle state of DEV-08 test execution. |
+| PM-25 | Accepted deliverables | Not needed | - | Acceptance = final OK (BL-12) + acceptance criteria pass. |
+| PM-26 | Schedule management plan | Not needed | - | Milestones (PM-31) + backlog suffice. |
+| PM-27 | Activity list | Not needed | - | Backlog is the activity list. |
+| PM-28 | Network diagram | Not needed | - | No activity-level sequencing needed. |
+| PM-29 | Project schedule | Not needed | - | Milestone list + backlog cover a 1-month window. |
+| PM-30 | Schedule baseline | Not needed | - | No formal baseline discipline at this size. |
+| PM-31 | Milestone list | Essential | Create later | See Trigger Elevations. |
+| PM-32 | Financial management plan | Not needed | - | No formal budget (AL-04). |
+| PM-33 | Activity cost estimates | Not needed | - | No budget; costs only surface in DEC-01 comparison (decision readiness). |
+| PM-34 | Cost baseline | Not needed | - | No budget. |
+| PM-35 | Project budget | Not needed | - | No formal budget. |
+| PM-36 | Financial status reports | Not needed | - | No budget to report; old project had no expenses (O-26). |
+| PM-37 | Resource management plan | Not needed | - | Fixed small team (requester + IT team). |
+| PM-38 | Resource requirements | Not needed | - | Team known and fixed. |
+| PM-39 | Responsibility register / RACI | Not needed | - | Roles named in brief; decision owners in decision log; tiny team. |
+| PM-40 | Resource assignments | Not needed | - | Team fixed. |
+| PM-41 | Resource utilization reports | Not needed | - | No resource tracking program. |
+| PM-42 | Resource release notice | Not needed | - | Closure report covers release. |
+| PM-43 | Risk management plan | Not needed | - | Risk register maintained; small project; no separate plan discipline. |
+| PM-44 | Risk register | Essential | Use as-is | Record 6 carrier; exists, current, responses defined. [risk-register.md] |
+| PM-45 | Assumption log | Essential | Use as-is | Record 6 carrier; exists and current (AL-01..07). [assumption-log.md] |
+| PM-46 | Risk response plan | Not needed | - | Responses recorded in PM-44 (crosswalk: Part of PM-44). |
+| PM-47 | Risk reports | Essential (view) | Generate on demand | Risk posture views regenerable from risk register. |
+| PM-48 | Backlog | Essential | Use as-is | Records 2/4 carrier; exists and current (BL-01..18). [backlog.md] |
+| PM-49 | Basis of estimates | Not needed | - | Effort sizes are starting estimates; no budget to justify. |
+| PM-50 | Configuration management plan | Not needed | - | No configuration discipline needed at this size. |
+| PM-51 | Project calendars | Not needed | - | Single deadline; no calendar model needed. |
+| PM-52 | Quality control measurements | Not needed | - | Test results recorded in DEV-08 execution and acceptance. |
+| PM-53 | Quality metrics | Not needed | - | No metric program; acceptance criteria serve. |
+| PM-54 | Quality reports | Not needed | - | No reporting cadence at this size. |
+| PM-55 | Quality test and evaluation documents | Not needed | - | Test plan/test cases carried in DEV-08; avoid duplication (dev-crosswalk: PM-55/DEV-08 overlap). |
+| PM-56 | Resource breakdown structure | Not needed | - | Fixed small team. |
+| PM-57 | Resource calendar | Not needed | - | No multi-resource scheduling. |
+| PM-58 | Skill matrix | Not needed | - | Team skills known to IT Director. |
+| PM-59 | Team charter | Not needed | - | Small existing team; no charter needed. |
+
+### BA Artifacts
+
+| ID | Artifact | Need | Treatment | Rationale |
+|----|----------|------|-----------|-----------|
+| BA-01 | Situation statement | Not needed | - | Problem/opportunity carried by brief Situation (accepted). |
+| BA-02 | Business goals and objectives | Not needed | - | Success measures in brief How to know it is done. |
+| BA-03 | Current-state assessment | Not needed | - | Current state documented in brief Situation + procedures + decision evidence base (O-10, O-13). |
+| BA-04 | Future-state definition | Not needed | - | Future state = same features on new platform (brief). |
+| BA-05 | Required capabilities and features | Not needed | - | Carried by backlog (BL-01..18). |
+| BA-06 | Option list | Essential (view) | Generate on demand | DEC-01 option set (builder/WordPress/custom) generated from evidence base for the comparison; not maintained. [decision-readiness-register.md DEC-01] |
+| BA-07 | Feasibility study results | Essential (view) | Generate on demand | NEED-02 spike + comparison results feed DEC-01; view, not maintained. |
+| BA-08 | Weighted ranking matrix | Essential (view) | Generate on demand | DEC-01 comparison ranking view; validated by IT Director. |
+| BA-09 | Recommended solution option | Essential (view) | Generate on demand | DEC-01 recommendation view from comparison + spike; approved at decision. |
+| BA-10 | Business case | Not needed | - | No formal investment; DEC-01 comparison serves (overlap with PM-02). |
+| BA-11 | Product roadmap | Not needed | - | Single release; backlog is the roadmap. |
+| BA-12 | Business analysis plan | Not needed | - | No separate BA function; BA embedded in small build team. |
+| BA-13 | Stakeholder information | Not needed | - | Brief People covers all (overlap with PM-13). |
+| BA-14 | Engagement and communication approach | Not needed | - | Same basis as PM-13/PM-14. |
+| BA-15 | Transition planning information | Essential | Create later | Content migration (DEC-04) and SharePoint decommission (DEC-08) planning after go-live; trigger: successful launch. [decision-readiness-register.md DEC-04, DEC-08] |
+| BA-16 | Elicitation notes | Not needed | - | No formal elicitation; requirements derive from current portal. |
+| BA-17 | Requirements specification | Not needed | - | Requirements carried by backlog (overlap with PM-19). |
+| BA-18 | User stories | Not needed | - | Feature-level backlog items suffice for a known-scope rebuild. |
+| BA-19 | Acceptance criteria | Essential | Create later | Same as PM-23 (overlap; single entry in backlog). |
+| BA-20 | Models | Not needed | - | No process/data models needed; procedures document workflows. |
+| BA-21 | Glossary | Not needed | - | No terminology ambiguity warranting a glossary. |
+| BA-22 | Traceability matrix | Not needed | - | Small scope; no audit exposure; backlog links features to acceptance. |
+| BA-23 | Approval records | Not needed | - | Approvals recorded in decision log outcomes; final acceptance at BL-12. |
+| BA-24 | Change and impact analysis | Not needed | - | No formal change control; decision log. |
+| BA-25 | Solution evaluation approach | Not needed | - | Success defined in brief; no formal evaluation program for 1-month portal. |
+| BA-26 | Performance measures | Not needed | - | No measurement program. |
+| BA-27 | Acceptance results | Not needed | - | Final OK (BL-12) + test evidence in DEV-08. |
+| BA-28 | Defect information | Not needed | - | Defects tracked in issues log during build/testing. |
+| BA-29 | Release acceptance | Not needed | - | Single release; final OK covers. |
+| BA-30 | BA performance assessment | Not needed | - | No BA function to assess. |
+| BA-31 | Confirmed elicitation results | Not needed | - | No formal elicitation. |
+| BA-32 | Product risk analysis | Not needed | - | Product risks covered in risk register (R-03, R-07). |
+| BA-33 | Product scope | Not needed | - | Scope boundaries explicit in brief; carried by backlog. |
+| BA-34 | Readiness assessment | Essential | Create later | See Trigger Elevations. |
+| BA-35 | Solution design | Not needed | - | Existing portal is the reference design; build detail in backlog + DEV-03. |
+
+### DEV Artifacts
+
+| ID | Artifact | Need | Treatment | Rationale |
+|----|----------|------|-----------|-----------|
+| DEV-01 | Prototype Build Brief | Not needed | - | Production delivery, not prototype; scope defined in backlog. [artifact-catalog.md DEV tailoring] |
+| DEV-02 | UX and Interface Design | Not needed | - | Rebuild of known UI (multi-device, filter/search/download); existing portal is the reference. |
+| DEV-03 | Software Architecture Description | Essential | Create later | See Trigger Elevations. |
+| DEV-04 | API and Integration Specification | Not needed | - | Single integration (YouTube embed) documented in DEV-03; SSO per platform capability. [dev-crosswalk.md] |
+| DEV-05 | Data Model and Database Design | Not needed | - | Platform-managed data stores (builder/WordPress); revisit only if DEC-01 = custom code. [artifact-catalog.md DEV tailoring] |
+| DEV-06 | Security and Privacy Design | Essential | Create later | See Trigger Elevations. |
+| DEV-07 | Deployment and Runtime Operations Plan | Essential | Create later | See Trigger Elevations; carries ASR-01 access handling record; overlaps DOC-08 (reference, not duplicate). [dev-crosswalk.md] |
+| DEV-08 | Test Strategy and Plan | Essential | Create later | See Trigger Elevations. |
+| DEV-09 | Architecture Decision Records | Not needed | - | Decisions recorded in decision log; small team; no separate ADR discipline. |
+| DEV-10 | Repository and Development Guide | Essential (conditional) | Create later | See Trigger Elevations; only if custom code. |
+
+## Crosswalk Traceability
+
+| Treated Item | Crosswalk Source |
+|--------------|------------------|
+| PM-08, PM-09, PM-11, PM-15, PM-23, PM-31, PM-44, PM-45, PM-47, PM-48 | `references/pmi-pm-input-output-crosswalk.md` (Decision log; Performance reports / Status report alias; Final report alias; Issue log; Acceptance criteria; Milestone list; Risk register; Assumption log; Risk reports; Backlog) |
+| BA-06, BA-07, BA-08, BA-09, BA-15, BA-19, BA-34 | `references/pmi-ba-input-output-crosswalk.md` (Option list; Feasibility study results; Weighted ranking matrix; Recommended solution option; Transition plan alias; Acceptance criteria; Readiness assessment) |
+| DEV-03, DEV-06, DEV-07, DEV-08, DEV-10 | `references/dev-crosswalk.md` (DEV tailoring logic by delivery stage; overlap with DOC-08/PM-44/PM-55; dependency and minimum-content guidance) |
+
+## Disposition Confidence
+
+Default for Not needed items: High (factors evidenced in project-assessment.md). Treated items:
+
+| Item | Need | Treatment | Confidence | Note |
+|------|------|-----------|------------|------|
+| PM-08 | Essential | Use as-is | High | Register exists, current [decision-log.md] |
+| PM-09 | Essential (view) | Generate on demand | High | Regenerable from backlog + registers |
+| PM-11 | Essential | Create later | High | Closure precedent exists |
+| PM-15 | Essential | Use as-is | High | Register exists, current [issues-log.md] |
+| PM-23 | Essential | Create later | High | Gap evidenced [project-next-actions.md] |
+| PM-31 | Essential | Create later | High | Gap evidenced; gated on DEC-01 |
+| PM-44 | Essential | Use as-is | High | Register exists, current [risk-register.md] |
+| PM-45 | Essential | Use as-is | High | Register exists, current [assumption-log.md] |
+| PM-47 | Essential (view) | Generate on demand | High | Regenerable from risk register |
+| PM-48 | Essential | Use as-is | High | Backlog current [backlog.md] |
+| BA-06 | Essential (view) | Generate on demand | High | Option set named in DEC-01 |
+| BA-07 | Essential (view) | Generate on demand | Medium | Depends on unproven ACT-02 spike result |
+| BA-08 | Essential (view) | Generate on demand | High | Comparison data from NEED-01 |
+| BA-09 | Essential (view) | Generate on demand | High | Feeds DEC-01 decision record |
+| BA-15 | Essential | Create later | High | DEC-04/DEC-08 timing defined |
+| BA-19 | Essential | Create later | High | Same basis as PM-23 |
+| BA-34 | Essential | Create later | High | Pre-launch checks defined in backlog |
+| DEV-03 | Essential | Create later | High | Production software trigger applies |
+| DEV-06 | Essential | Create later | High | Production + sensitive data triggers |
+| DEV-07 | Essential | Create later | High | Production + sensitive data; ASR-01 carrier |
+| DEV-08 | Essential | Create later | High | Production software; BL-11 test window |
+| DEV-10 | Essential (conditional) | Create later | Medium | Condition = DEC-01 chooses custom code |
+
+## Dependency Map
+
+| Action | Artifact | Required Information | Predecessor Artifact(s) | Input Status | Strength | Unblocks |
+|--------|----------|---------------------|------------------------|--------------|----------|----------|
+| Create later | PM-31 Milestone list | Build start/milestone dates | D-01 (decision-log) | Partial | Hard | Delivery control (record 4), BA-34 |
+| Create later | PM-23/BA-19 Acceptance criteria | Feature scope per backlog item | PM-48 backlog | Available | Hard | DEV-08 test plan, record 7 |
+| Create later | DEV-03 Architecture | Platform, hosting, integration choice | D-01 (decision-log) | Partial | Hard | DEV-06, DEV-07, DEV-08 |
+| Create later | DEV-06 Security/Privacy | Access design, email basis | D-01 (Hard); DEV-03 (Soft); NEED-03 confirmation (Hard) | Missing | Hard | DEV-07, DEC-02 input |
+| Create later | DEV-07 Ops + access record (ASR-01) | Platform, access mechanism, email basis, admin ops | D-01, D-02 (Hard); DEV-03, DEV-06 (Soft); old access procedure docx (reference) | Missing | Hard | Launch operations, DEC-02 reassessment, BA-34 |
+| Create later | DEV-08 Test plan | Acceptance criteria, feature scope | PM-23/BA-19 (Hard); PM-48 (Soft); DEV-03 (Soft) | Partial | Hard | Record 7, launch testing |
+| Create later | DEV-10 Dev guide | Platform = custom code | D-01 (Conditional) | Partial | Conditional | Build workflow |
+| Create later | BA-34 Readiness assessment | Launch evidence: content, tests, access, owner | DEV-07 (Soft); DEV-08 results (Soft); DEC-06 confirmation (Soft); BL-10 content load (Hard) | Missing | Hard | Go-live decision, record 8 |
+| Create later | PM-11 Closure report | Launch + transition outcomes | DEC-04 (Soft); go-live evidence | Missing | Soft | Record 8, project close |
+| Create later | BA-15 Transition planning | Post-launch state, decommission intent | DEC-04 (Hard); BA-34 (Soft) | Missing | Hard | DEC-08, content migration |
+
+**Dependency Notes**
+
+- All hard chains root at the DEC-01 decision (decision-log D-01) or the backlog; DEC-01 is upstream-blocked (decision readiness), so no prescription action can start until the decision lands. No hard cycle exists.
+- DEV-06 and DEV-07 additionally require the NEED-03 confirmation (ACT-04, decision readiness) for the email-handling basis content.
+- The ASR-01 record (DEV-07 access procedure) is the only item that unblocks a decision-readiness reassessment (DEC-02).
+
+**Cycle validation:** Pass. Directed graph acyclic; every Hard dependency has a reachable starting point (D-01, PM-48 backlog, NEED-03). [Full CSV: dependency-map.csv]
+
+## Generated Views
+
+| View | Source Records | Validation Point | Replaces |
+|------|---------------|------------------|----------|
+| Status/performance reports (PM-09) | backlog.md, decision-log.md, registers | Requester review before use | Maintained status reports |
+| Risk reports (PM-47) | risk-register.md | Requester/IT Director review | Maintained risk reports |
+| Option list (BA-06) | decision-evidence-base.md | IT Director review (DEC-01) | Maintained option list |
+| Feasibility results (BA-07) | ACT-02 spike evidence | IT Director review (DEC-01) | Maintained feasibility study |
+| Weighted ranking (BA-08) | comparison data (NEED-01) | IT Director review (DEC-01) | Maintained ranking matrix |
+| Recommended solution (BA-09) | BA-08 view + spike results | DEC-01 decision record | Maintained recommendation doc |
+
+## Decision Support Traceability (ASR-01)
+
+| ASR ID | Evidence Need | Decision ID | Artifact ID | Artifact Disposition | How Content Satisfies Need | Needs Additional Mechanism |
+|--------|---------------|-------------|-------------|----------------------|---------------------------|---------------------------|
+| ASR-01 | Durable, maintained record of how participant access is granted on the new platform, including the basis for storing and using participant email addresses (NEED-05) | DEC-02 | DEV-07 (Participant access management section of Deployment and Runtime Operations Plan) | Create later | Record will name the access mechanism on the chosen platform, who grants access, the email-handling basis (org policy or documented consent), and the per-program update procedure — matching the ASR acceptance test (record exists, names mechanism, states basis, admins can operate from it) | No for NEED-05 (DEV-07 alone carries the record). DEC-02 additionally needs NEED-03 (privacy basis confirmation, direct) and NEED-04 (platform access capabilities, part of NEED-01 comparison) |
+
+## Needs Confirmation
+
+None. The only uncertain decisions are platform/hosting/access choices (DEC-01/DEC-02/DEC-05), which are upstream decision-readiness items, not prescription items.
+
+## Key Patterns
+
+- Existing record base is strong: records 1-6 are carried by accepted brief + five current registers; the prescription adds no maintenance burden for them.
+- All creates are gated on DEC-01 (or DEC-02); the prescription is deliberately staged so nothing is built before the platform decision.
+- The single ASR (NEED-05) maps to one carrier (DEV-07) with a precise minimum-content contract, reflecting that only one durable record is justified for this project.
+- Risk level Medium and no mandate/vendor triggers keep the extension catalog at 22 treated items of 104.
