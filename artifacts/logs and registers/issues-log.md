@@ -1,14 +1,19 @@
-AGENTS.md Identity Precedence governs this template. The identity rules determine writing style, section order, and what to include or omit.
-# {{PROJECT_NAME}} Issue Log
+# LeadLab Portal Rebuild Issue Log
 
-Project: {{PROJECT_NAME}}
-Change ID: {{CHANGE_ID}}
+Project: LeadLab Portal Rebuild
+Change ID: leadlab-rebuild-2026-08-11
 
 ## Register
 
 | ID | Issue | Priority | Owner | Status | Due | Action / Resolution |
 |----|-------|----------|-------|--------|-----|---------------------|
-| ISS-01 | {{ISSUE_DESCRIPTION}} | {{PRIORITY}} | {{OWNER}} | {{STATUS}} | {{DUE_DATE}} | {{ACTION_RESOLUTION}} |
+| ISS-01 | Platform choice undecided; blocks all build work | High | Requester + IT team | Open | Before build start (mid-Aug 2026) | Shortlist 2-3 platforms against the Sep 11 timeline and restricted-access requirement; get decision |
+| ISS-02 | Participant access mechanism undecided | High | Requester + IT team | Open | Before build start | Choose between SSO, login, and email-list gating; decide before build |
+| ISS-03 | Timeline pressure: ~1 month to build and test; AI-acceleration assumption unproven | High | Requester + IT team | Open | Monitor weekly to Sep 11 | Track progress against the deadline; validate the AI-assumption early; escalate if slipping |
+| ISS-04 | Participant email data handling and privacy rules not confirmed | Medium | Requester + IT team | Open | Before participant data is collected | Confirm privacy rules for participant email addresses |
+| ISS-05 | Ongoing ownership after launch unassigned | Medium | Requester + IT team | Open | Before launch | Assign maintainer and maintenance responsibility |
+| ISS-06 | YouTube hosting dependency undecided for new platform | Medium | Requester + IT team | Open | During platform selection | Decide whether to keep YouTube or host videos on the new platform |
+| ISS-07 | Content migration plan deferred; existing content stays on SharePoint and YouTube | Low | Requester + IT team | Open | After Sep 11 launch | Plan content transition after the program; confirm what must be live on Sep 11 |
 
 ## Priority
 
@@ -27,6 +32,6 @@ Change ID: {{CHANGE_ID}}
 | Resolved | Action complete |
 | Closed | Verified and archived |
 
-## Reference Implementation
+## Source
 
-See `projects/alson-wp/artifacts/issues-log.md` — 19 issues across full project lifecycle.
+Open questions and risks from the accepted request brief (`alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`). Priorities are starting assessments.
