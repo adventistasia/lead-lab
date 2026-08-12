@@ -10,7 +10,7 @@ Always load `AGENTS.md` for identity and output rules.
 | Area            | Status                            | Evidence                                                                          |
 | --------------- | --------------------------------- | --------------------------------------------------------------------------------- |
 | Project intake  | Complete, accepted (100% quality) | `alson-project-intake/leadlab-rebuild/stages/02-measure/output/audit-findings.md` |
-| Access decision | Open, blocked on DEC-01           | decision readiness register (DEC-02)                                              |
+| Access decision | Open, blocked on D-01              | `artifacts/logs and registers/decision-log.md` (D-02)                              |
 | Build           | Not started, blocked on decisions | -                                                                                 |
 | Deadline        | Before Sep 11, 2026               | request brief, Timing                                                             |
 
@@ -23,10 +23,8 @@ lead-lab/
 ├── Old artifacts/          (closed-project source: charter, closure report, procedures)
 ├── alson-project-intake/
 │   └── leadlab-rebuild/    (accepted intake run: request brief, audit, what-now)
-├── alson-decision-readiness/
-│   └── leadlab-rebuild-decisions/  (8 decisions DEC-01..08, needs, brief, what-now)
-└── alson-next-actions/
-    └── leadlab-rebuild-cycle-1/    (ACT-01..06 recommendations, audit, what-now)
+└── artifacts/
+    └── logs and registers/ (decision log, RAID logs, backlog)
 ```
 
 ## Task Routing
@@ -36,7 +34,7 @@ lead-lab/
 | ----------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
 | Recheck project intent or details   | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Accepted brief, all fields sourced         |
 | Verify against closed project facts | `Old artifacts/`                                                               | Charter, closure report, portal procedures |
-| Start the build                     | Do not start until platform and access are decided                             | DEC-01 gates all build work                |
+| Start the build                     | Do not start until platform and access are decided                             | D-01 gates all build work                  |
 
 
 ## What to Load
