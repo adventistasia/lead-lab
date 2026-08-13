@@ -5,7 +5,7 @@ Change ID: leadlab-rebuild-2026-08-11
 
 | ID | Decision / Question | Owner | Status | Due / Decided | Outcome | Rationale | Reference |
 |----|-------------------|-------|--------|--------------|---------|-----------|-----------|
-| D-01 | Which platform replaces SharePoint? (website builder, WordPress, custom code) | Requester + IT team; final OK from LeadLab Director | Open | Before build start (mid-Aug 2026) | Not decided | Blocks all build work; compare options against ~1 month timeline and restricted access | request brief, Risks and Open Questions |
+| D-01 | Which platform replaces SharePoint? (website builder, WordPress, custom code) | Requester + IT team; final OK from LeadLab Director | Decided | 13-Aug-2026 | Self-hosted WordPress (O-03) on the team's own server | Best balance of timeline fit, feature scope, customization, restricted access, and cost; subject to D-05 (server/domain) and D-02 (access) confirmations | platform-selection-decision.md, Recommendation |
 | D-02 | How do participants get restricted access? (SSO, login, email-list gating) | Requester + IT team | Open | Before build start | Not decided | Affects build effort and participant email data handling | request brief, Risks and Open Questions |
 | D-03 | Who maintains WordPress and the server after the Sep 11 launch? | Requester + IT team | Open | Before launch | Not decided | No owner assigned for ongoing WordPress and server support | request brief, Risks and Open Questions |
 | D-04 | Keep YouTube for video hosting or host on the new platform? | Requester + IT team | Open | During platform selection | Not decided | Affects platform choice and storage | request brief, Risks and Open Questions |
@@ -21,6 +21,7 @@ Open decisions and stated positions from the accepted request brief (`alson-proj
 
 ## Changes
 
+- 13-Aug-2026: D-01 decided: self-hosted WordPress (O-03) on the team's own server. Remaining confirmations: D-05 (server/domain) and D-02 (access approach).
 - 13-Aug-2026: WordPress will run on the team's own server, not managed hosting. IT will configure the server (D-03, D-05 updated; risk register R-08 to R-10 added).
 - 13-Aug-2026: Cost baseline recorded: known third-party cost is up to `$25`/year for the domain; WordPress, SSL, DNS, backups, and uptime monitoring at `$0` on free tiers. Funding gate D-09 added.
 - 13-Aug-2026: Funding decision updated (D-09): the IT Department will shoulder the third-party costs. Client funding approval is no longer required.

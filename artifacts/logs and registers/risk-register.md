@@ -18,7 +18,7 @@ Change ID: leadlab-rebuild-2026-08-11
 | ID | Risk | Owner | Status | P x I | Trigger | Response |
 |----|------|-------|--------|-------|---------|----------|
 | R-01 | Timeline slip: ~1 month to design, build, and test; AI-acceleration assumption unproven | Requester + IT team | Open | 12 | Platform decision delayed; build overruns; no test time left | Decide platform early; validate AI-acceleration assumption with a scoped build spike; fix a fallback date for review |
-| R-02 | Platform choice undecided, blocking all build work | Requester + IT team | Open | 12 | No shortlist by mid-Aug 2026; build cannot start | Shortlist 2-3 platforms against timeline and restricted-access needs; decide before build starts |
+| R-02 | Platform choice undecided, blocking all build work | Requester + IT team | Closed | 12 | No shortlist by mid-Aug 2026; build cannot start | Shortlist 2-3 platforms against timeline and restricted-access needs; decide before build starts. Resolved 13-Aug-2026: self-hosted WordPress (O-03) decided (D-01) |
 | R-03 | Access design undecided; participants must not get public access | Requester + IT team | Open | 9 | Public access possible if gating not implemented | Decide access mechanism (SSO, login, email-list gating) before build; test restricted access explicitly |
 | R-04 | Participant email data handling unclear; privacy rules not confirmed | Requester + IT team | Open | 9 | Email addresses collected or stored on new platform without privacy confirmation | Confirm data-handling and privacy rules before collecting any participant data |
 | R-05 | Ongoing ownership after Sep 11 launch unassigned (WordPress + server) | Requester + IT team | Open | 6 | Portal live with no assigned maintainer | Confirm WordPress and server maintenance owner before launch |
@@ -41,11 +41,11 @@ Change ID: leadlab-rebuild-2026-08-11
 
 | Metric | Count |
 |--------|-------|
-| High exposure (P x I >= 12) | 4 |
+| High exposure (P x I >= 12) | 3 |
 | Medium exposure (P x I 6-11) | 4 |
 | Low exposure (P x I 1-5) | 2 |
 | Unscored (P x I pending evidence) | 1 |
-| **Total identified risks** | **11** |
+| **Total identified risks** | **10** |
 
 ## Source
 

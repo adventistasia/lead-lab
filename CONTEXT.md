@@ -11,8 +11,8 @@ Always load `AGENTS.md` for identity and output rules.
 | --------------- | --------------------------------- | --------------------------------------------------------------------------------- |
 | Project intake  | Complete, accepted (100% quality) | `alson-project-intake/leadlab-rebuild/stages/02-measure/output/audit-findings.md` |
 | Funding         | Confirmed; IT Department shoulders third-party costs (D-09) | `artifacts/logs and registers/decision-log.md` (D-09) |
-| Access decision | Open, blocked on D-01              | `artifacts/logs and registers/decision-log.md` (D-02)                              |
-| Build           | Not started, blocked on decisions | -                                                                                 |
+| Access decision | Open (D-02); unblocked by D-01 | `artifacts/logs and registers/decision-log.md` (D-02) |
+| Build           | Not started, blocked on D-02 (access) and D-05 (server/domain) | - |
 | Deadline        | Before Sep 11, 2026               | request brief, Timing                                                             |
 
 
@@ -35,7 +35,7 @@ lead-lab/
 | ----------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
 | Recheck project intent or details   | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Accepted brief, all fields sourced         |
 | Verify against closed project facts | `Old artifacts/`                                                               | Charter, closure report, portal procedures |
-| Start the build                     | Do not start until platform and access are decided                             | D-01 gates all build work                  |
+| Start the build                     | Do not start until access (D-02) and server/domain (D-05) are confirmed                             | D-01 decided (WordPress); D-02/D-05 gate build work |
 
 
 ## What to Load
