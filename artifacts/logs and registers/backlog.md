@@ -9,7 +9,7 @@
 | 1 | BL-19 | Record IT Department funding commitment for baseline third-party costs (D-09) | Must | XS | Done |
 | 2 | BL-20 | Confirm IT coverage for optional third-party costs if SSO, paid plugins, email, or network services are selected (D-09, R-11) | Should | XS | Not started |
 | 3 | BL-01 | Decide platform (website builder, WordPress, or custom code) against Sep 11 timeline and restricted access | Must | M | Done |
-| 4 | BL-02 | Decide participant access mechanism (SSO, login, email-list gating) | Must | M | Not started |
+| 4 | BL-02 | Decide participant access mechanism (SSO, login, email-list gating) | Must | M | In progress |
 | 5 | BL-03 | Select and register domain; confirm server readiness, DNS, SSL, and backups | Must | S | Not started |
 | 6 | BL-04 | Provision and configure server with WordPress (IT) | Must | M | Not started |
 | 7 | BL-05 | Build portal: session videos by category and date | Must | L | Not started |

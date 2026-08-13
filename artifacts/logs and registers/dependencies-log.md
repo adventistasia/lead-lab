@@ -8,7 +8,7 @@ Change ID: leadlab-rebuild-2026-08-11
 | ID | Dependency | Owner | Status | Needed By | Impact if Unmet | Action |
 |----|------------|-------|--------|-----------|-----------------|--------|
 | DEP-01 | Platform decision (D-01) | Requester + IT team | Met | Before build start (mid-Aug 2026) | All build work blocked | Decided 13-Aug-2026: self-hosted WordPress (O-03). Remaining confirmations: D-02 (access), D-05 (server/domain) |
-| DEP-02 | Access mechanism decision (D-02) | Requester + IT team | Open | Before build start | Build effort and participant email data handling unresolved | Decide SSO, login, or email-list gating |
+| DEP-02 | Access mechanism decision (D-02) | Requester + IT team | Open | Before build start | Build effort and participant email data handling unresolved | Access options emailed to stakeholders 13-Aug-2026; await response |
 | DEP-03 | Media team supplies session video links | Media team | Open | Before content population for Sep 11 | Portal missing session content at launch | Confirm link supply timing with media team |
 | DEP-04 | Existing YouTube videos stay in place | Existing platform (YouTube) | Met | Ongoing | Videos unavailable during transition | None; current state, unchanged |
 | DEP-05 | Domain name availability | Requester + IT team | Open | During platform selection | Hosting choice constrained | Confirm whether a domain name is available |
