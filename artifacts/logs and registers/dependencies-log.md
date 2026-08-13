@@ -14,6 +14,7 @@ Change ID: leadlab-rebuild-2026-08-11
 | DEP-05 | Domain name availability | Requester + IT team | Open | During platform selection | Hosting choice constrained | Confirm whether a domain name is available |
 | DEP-06 | IT Director agreement to proceed | IT Director | Met | Project start | Team work not sanctioned | None; stated as agreed in request brief |
 | DEP-07 | LeadLab Director final OK | LeadLab Director | Open | Before launch (before Sep 11, 2026) | Portal cannot be accepted as done | Present portal for final approval before launch |
+| DEP-08 | IT Department funding commitment for third-party costs (D-09) | IT Department | Met | Before domain purchase and build start | Third-party costs not covered | Baseline costs covered; no further action. Confirm IT coverage if optional costs (SSO, plugins, email) are selected |
 
 ## Status
 
@@ -26,4 +27,4 @@ Change ID: leadlab-rebuild-2026-08-11
 
 ## Source
 
-Dependencies derived from the accepted request brief (`alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`): people, timing, and current-state facts. Statuses reflect the brief, not confirmed events.
+Dependencies derived from the accepted request brief (`alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`): people, timing, and current-state facts. DEP-08 updated 13-Aug-2026 from conversation with the Requester.

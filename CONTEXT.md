@@ -10,6 +10,7 @@ Always load `AGENTS.md` for identity and output rules.
 | Area            | Status                            | Evidence                                                                          |
 | --------------- | --------------------------------- | --------------------------------------------------------------------------------- |
 | Project intake  | Complete, accepted (100% quality) | `alson-project-intake/leadlab-rebuild/stages/02-measure/output/audit-findings.md` |
+| Funding         | Confirmed; IT Department shoulders third-party costs (D-09) | `artifacts/logs and registers/decision-log.md` (D-09) |
 | Access decision | Open, blocked on D-01              | `artifacts/logs and registers/decision-log.md` (D-02)                              |
 | Build           | Not started, blocked on decisions | -                                                                                 |
 | Deadline        | Before Sep 11, 2026               | request brief, Timing                                                             |

@@ -21,9 +21,13 @@ Change ID: leadlab-rebuild-2026-08-11
 | R-02 | Platform choice undecided, blocking all build work | Requester + IT team | Open | 12 | No shortlist by mid-Aug 2026; build cannot start | Shortlist 2-3 platforms against timeline and restricted-access needs; decide before build starts |
 | R-03 | Access design undecided; participants must not get public access | Requester + IT team | Open | 9 | Public access possible if gating not implemented | Decide access mechanism (SSO, login, email-list gating) before build; test restricted access explicitly |
 | R-04 | Participant email data handling unclear; privacy rules not confirmed | Requester + IT team | Open | 9 | Email addresses collected or stored on new platform without privacy confirmation | Confirm data-handling and privacy rules before collecting any participant data |
-| R-05 | Ongoing ownership after Sep 11 launch unassigned | Requester + IT team | Open | 6 | Portal live with no assigned maintainer | Confirm owner and maintenance responsibility before launch |
+| R-05 | Ongoing ownership after Sep 11 launch unassigned (WordPress + server) | Requester + IT team | Open | 6 | Portal live with no assigned maintainer | Confirm WordPress and server maintenance owner before launch |
 | R-06 | Content transition deferred; existing videos and materials stay in place | Requester + IT team | Open | 4 | New portal goes live without needed content | Confirm which content must be live on Sep 11; plan transition after launch |
 | R-07 | YouTube hosting dependency undecided for the new platform | Requester + IT team | Open | 4 | Platform chosen that cannot embed or host videos | Confirm video hosting approach during platform selection |
+| R-08 | Server or WordPress security compromised (patches not applied) | IT team | Open | 12 | No update schedule; admin credentials shared | Set IT patch schedule; restrict admin access; apply WordPress and OS updates |
+| R-09 | Backups not configured; content loss on server failure | IT team | Open | 12 | Server fails with no backup | Configure automated backups before launch; test restore |
+| R-10 | Server availability not guaranteed; portal offline | IT team | Open | 9 | Server down; no monitoring or recovery plan | Monitor uptime; define recovery procedure; confirm outage communication |
+| R-11 | IT Department funding does not cover unexpected third-party costs (SSO, plugins, email, taxes, server/network) | IT Department | Open | TBD | Optional costs exceed IT funding scope (D-09) | Confirm IT cost authority before any purchase; escalate within IT; keep SharePoint as fallback if unresolved |
 
 ## Status
 
@@ -37,10 +41,11 @@ Change ID: leadlab-rebuild-2026-08-11
 
 | Metric | Count |
 |--------|-------|
-| High exposure (P x I >= 12) | 2 |
-| Medium exposure (P x I 6-11) | 3 |
+| High exposure (P x I >= 12) | 4 |
+| Medium exposure (P x I 6-11) | 4 |
 | Low exposure (P x I 1-5) | 2 |
-| **Total identified risks** | **7** |
+| Unscored (P x I pending evidence) | 1 |
+| **Total identified risks** | **11** |
 
 ## Source
 
