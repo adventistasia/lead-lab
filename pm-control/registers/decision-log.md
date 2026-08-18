@@ -7,6 +7,7 @@ Project: Lead Lab
 
 | ID | Decision or question | Owner | Status | Needed by | Decided | Outcome | Rationale | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|---|
+| D-02 | How do participants get restricted access? (SSO, login, email-list gating) | Requester + IT team | Made | Before build start | 2026-08-18 | Standard login | Access method affects build effort and participant email-data handling; standard login selected by explicit PM direction. | D-01, D-05 | Conversation (PM direction, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-02) | 2026-08-18 |
 
 ## Status
 
@@ -26,4 +27,4 @@ Generated from the register rows. Do not manually maintain these counts.
 | Pending | 0 |
 | Due within configured window | Unconfigured |
 | Overdue | 0 |
-| Total decisions | 0 |
+| Total decisions | 1 |
