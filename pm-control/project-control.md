@@ -1,6 +1,6 @@
 # Lead Lab (lead-lab) Control Dashboard
 
-**Next action:** Confirm access decision (D-02) and server/domain readiness (D-05) so build can start for the Sep 11, 2026 deadline.
+**Next action:** Start build on staging; confirm production DNS, SSL, backups, and uptime responsibility (D-05) and assign the maintenance owner (D-03) before launch.
 
 This file is the project-level dashboard and configuration record.
 
@@ -10,30 +10,30 @@ This file is the project-level dashboard and configuration record.
 |---|---|
 | Project outcome | Rebuild of the LeadLab Portal on a new platform to replace SharePoint; same feature scope; restricted to participants; live before Sep 11, 2026 |
 | Control root | /Users/agnojf/Documents/alson-workspace/projects/lead-lab/pm-control |
-| Current phase | Build not started; gated by D-02 (access) and D-05 (server/domain) |
+| Current phase | Build gated for access lifted (D-02 Made); ready to start on staging; production readiness pending (D-05) |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured threshold |
 | Last verified | 2026-08-18 |
 | Last status report | None |
-| Next review trigger | D-02 stakeholder response, before build start |
+| Next review trigger | Production readiness confirmation (D-05 close-out), before build start |
 
 ## Performance Domains
 
 | Domain | Condition | Trend | Confidence | Source |
 |---|---|---|---|---|
-| Governance | Action | Stable | Medium | decision-log (7 pending), project-control registers |
-| Scope | Watch | Stable | Medium | request brief, D-08 pending formal approval |
-| Schedule | Action | Worsening | Medium | Sep 11 fixed deadline, no test time, D-02/D-05 gate build |
+| Governance | Action | Stable | Medium | decision-log (3 pending), project-control registers |
+| Scope | Watch | Stable | Medium | request brief, D-08 confirmed by PM 18-Aug-2026; LeadLab Director final OK pending (DEP-07) |
+| Schedule | Action | Worsening | Medium | Sep 11 fixed deadline (D-06 confirmed), no test time, D-05 production readiness still open |
 | Finance | Watch | Stable | Medium | D-09 baseline covered; R-11 optional costs unresolved |
-| Stakeholders | Watch | Stable | Low | access-response pending, LeadLab Director approval outstanding |
-| Resources | Watch | Stable | Low | server/domain unconfirmed (AL-08), maintenance owner unassigned |
-| Risk | Action | Stable | Medium | 4 high-exposure open risks; RAID operational |
+| Stakeholders | Watch | Stable | Low | access confirmed (D-02) 18-Aug-2026; LeadLab Director approval outstanding (DEP-07) |
+| Resources | Watch | Stable | Low | staging confirmed (D-05); production readiness unconfirmed; maintenance owner unassigned (D-03) |
+| Risk | Action | Stable | Medium | 3 open high-exposure risks (R-01, R-08, R-09); RAID operational |
 
 ## Baseline and Change Control
 
 | Baseline area | Current version or date | Source |
 |---|---|---|
-| Scope | Same feature scope; not formally approved (D-08) | request brief, What is included or not |
+| Scope | Same feature scope; confirmed by PM 18-Aug-2026 (D-08); LeadLab Director final OK pending (DEP-07) | request brief, What is included or not |
 | Schedule | Before Sep 11, 2026 | request brief, Timing |
 | Cost | IT baseline third-party costs covered (domain up to $25/yr) | decision-log D-09 |
 | Quality | Restricted access gate; no formal acceptance criteria documented | unconfigured |
