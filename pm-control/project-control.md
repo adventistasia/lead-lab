@@ -37,9 +37,9 @@ This file is the project-level dashboard and configuration record.
 | Process register | `process-register.md` |
 | Artifact index | `artifact-index.md` |
 | Active process run | None |
-| Process attention | None assessed |
-| Next process trigger | To be selected after setup |
-| Last process review | None |
+| Process attention | PM-15: staging acceptance evidence missing |
+| Next process trigger | Complete AC-01 to AC-12 and the participant test, then obtain authorized acceptance review |
+| Last process review | 2026-08-18; `runs/2026-08-18-pm-15-validate-scope` |
 
 ## Baseline and Change Control
 

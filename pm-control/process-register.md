@@ -19,7 +19,7 @@ The process register tracks tailored use of the 40 PMI processes. It is a contro
 | PM-12 | Scope | Planning | Define Scope | Not assessed | | Not assessed | | | | | |
 | PM-13 | Scope | Planning | Develop Scope Structure | Not assessed | | Not assessed | | | | | |
 | PM-14 | Scope | Monitoring and Controlling | Monitor and Control Scope | Not assessed | | Not assessed | | | | | |
-| PM-15 | Scope | Monitoring and Controlling | Validate Scope | Not assessed | | Not assessed | | | | | |
+| PM-15 | Scope | Monitoring and Controlling | Validate Scope | Required | Standard | Attention | `runs/2026-08-18-pm-15-validate-scope` | 2026-08-18 | Complete `AC-01` to `AC-12` with staging evidence and obtain authorized acceptance review before the LeadLab Director final OK | No canonical artifact; draft retained in run folder | `runs/2026-08-18-pm-15-validate-scope/stages/02-assemble-evidence/evidence-package.md` |
 | PM-16 | Schedule | Planning | Plan Schedule Management | Not assessed | | Not assessed | | | | | |
 | PM-17 | Schedule | Planning | Develop Schedule | Not assessed | | Not assessed | | | | | |
 | PM-18 | Schedule | Monitoring and Controlling | Monitor and Control Schedule | Not assessed | | Not assessed | | | | | |
