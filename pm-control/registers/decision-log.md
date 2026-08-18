@@ -15,6 +15,7 @@ Project: Lead Lab (lead-lab)
 | D-07 | Content migration plan after launch | Requester + IT team | Pending | After Sep 11 launch | | Deferred; start fresh | Existing content stays in place for now; transition later | R-06, ISS-07, AL-03 | projects/lead-lab/artifacts/logs and registers/decision-log.md | 2026-08-18 |
 | D-08 | Rebuild scope: same features, no new features | Requester + IT team; LeadLab Director | Made | Before build start | 2026-08-18 | Same feature scope, no new features | Stated in request brief; confirmed by PM 18-Aug-2026. LeadLab Director final OK still required before launch (DEP-07) | AL-02, DEP-07 | projects/lead-lab/artifacts/logs and registers/decision-log.md; PM confirmation 2026-08-18 | 2026-08-18 |
 | D-09 | Who shoulders the third-party costs (domain and any extras)? | IT Department (confirmed by Requester) | Made | 13-Aug-2026 | 13-Aug-2026 | IT Department covers baseline third-party costs (domain up to $25/yr); client approval not required | Optional costs (SSO, plugins, email, taxes, unexpected server/network) remain TBD | R-11, AL-04, DEP-08 | projects/lead-lab/artifacts/logs and registers/decision-log.md | 2026-08-18 |
+| D-10 | Is the DEV-01 Prototype Build Brief accepted as the build input? | Requester + IT team; final OK from LeadLab Director | Made | Before build start | 2026-08-18 | Accepted as the build input; promote Draft v0.1 to Accepted v1.0 | The brief passed all 10 acceptance criteria and the 100% quality audit; it defines AC-01 to AC-12 for the staging build | DEP-07, AL-01, R-01, ACT-03 | projects/lead-lab/prototype-build-brief/2026-08-18-approval-cycle/stages/03-learn/what-now.md; PM confirmation 2026-08-18 (conversation) | 2026-08-18 |
 
 ## Status
 
@@ -35,4 +36,4 @@ Generated from the register rows. Do not manually maintain these counts.
 | Proposed | 0 |
 | Due within 5 days | 0 (due dates not configured) |
 | Overdue | 0 |
-| Total decisions | 9 |
+| Total decisions | 10 |

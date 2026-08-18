@@ -8,6 +8,7 @@ Project: Lead Lab (lead-lab)
 |---|---|---|---|---|---|---|---|---|
 | ACT-01 | Confirm the restricted-access approach and record the final D-02 decision before build | Requester + IT team | Resolved | High | Before build start | D-02, ISS-02, DEP-02, R-03, R-04, AL-10 | projects/lead-lab/pm-control/registers/decision-log.md (D-02) | 2026-08-18 |
 | ACT-02 | Confirm server and domain readiness, including DNS, SSL, backups, and uptime responsibility | Requester + IT team | Open | High | Before build start | D-05, DEP-05, R-08, R-09, R-10, AL-08 | projects/lead-lab/pm-control/registers/decision-log.md (D-05) | 2026-08-18 |
+| ACT-03 | Start the scoped DEV-01 build spike on staging and test AC-01 to AC-12 | IT team | Open | High | After DEV-01 approval; before production content load | D-10, D-01, D-02, D-05, AL-01, R-01, DEP-07 | projects/lead-lab/prototype-build-brief/2026-08-18-approval-cycle/stages/03-learn/what-now.md (Do Next #1) | 2026-08-18 |
 
 ## State
 
@@ -26,9 +27,9 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Open or in progress | 1 |
+| Open or in progress | 2 |
 | Overdue | 0 |
 | Blocked | 0 |
-| Total actions | 2 |
+| Total actions | 3 |
 
-Note: ACT-01 resolved 18-Aug-2026 (D-02 Made). ACT-02 stays open; staging confirmed, production DNS, SSL, backups, and uptime responsibility outstanding.
+Note: ACT-01 resolved 18-Aug-2026 (D-02 Made). ACT-02 and ACT-03 stay open; production readiness remains outstanding, and the staging build has not started.
