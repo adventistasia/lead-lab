@@ -6,7 +6,8 @@ Project: Lead Lab (lead-lab)
 
 | ID | Action | Owner | State | Priority | Due or trigger | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|
-| _No actions captured yet_ | | | | | | | | |
+| ACT-01 | Confirm the restricted-access approach and record the final D-02 decision before build | Requester + IT team | Proposed | High | Before build start | D-02, ISS-02, DEP-02, R-03, R-04, AL-10 | projects/lead-lab/pm-control/registers/decision-log.md (D-02) | 2026-08-18 |
+| ACT-02 | Confirm server and domain readiness, including DNS, SSL, backups, and uptime responsibility | Requester + IT team | Proposed | High | Before build start | D-05, DEP-05, R-08, R-09, R-10, AL-08 | projects/lead-lab/pm-control/registers/decision-log.md (D-05) | 2026-08-18 |
 
 ## State
 
@@ -28,6 +29,6 @@ Generated from the register rows. Do not manually maintain these counts.
 | Open or in progress | 0 |
 | Overdue | 0 |
 | Blocked | 0 |
-| Total actions | 0 |
+| Total actions | 2 |
 
-Note: no action-log source exists yet; actions can be derived from risk responses and decisions when the PM directs a capture.
+Note: actions derived from the decision log (D-02, D-05). Both rows remain Proposed until the PM accepts them.
