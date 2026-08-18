@@ -8,6 +8,7 @@ Project: Lead Lab
 | ID | Decision or question | Owner | Status | Needed by | Decided | Outcome | Rationale | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|---|
 | D-02 | How do participants get restricted access? (SSO, login, email-list gating) | Requester + IT team | Made | Before build start | 2026-08-18 | Standard login | Access method affects build effort and participant email-data handling; standard login selected by explicit PM direction. | D-01, D-05 | Conversation (PM direction, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-02) | 2026-08-18 |
+| D-05 | Is the team's server ready for WordPress, and is a domain name available? | Requester + IT team | Pending | During platform selection |  | Server-side readiness confirmed; domain selection and registration deferred to a later project phase. | Domain availability remains unresolved, so the combined server/domain decision is not yet made. | D-01 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05); `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` (Constraints and Assumptions) | 2026-08-18 |
 
 ## Status
 
@@ -24,7 +25,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Pending | 0 |
+| Pending | 1 |
 | Due within configured window | Unconfigured |
 | Overdue | 0 |
-| Total decisions | 1 |
+| Total decisions | 2 |
