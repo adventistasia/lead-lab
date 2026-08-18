@@ -7,8 +7,9 @@ Project: Lead Lab
 
 | ID | Decision or question | Owner | Status | Needed by | Decided | Outcome | Rationale | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|---|
-| D-02 | How do participants get restricted access? (SSO, login, email-list gating) | Requester + IT team | Made | Before build start | 2026-08-18 | Standard login | Access method affects build effort and participant email-data handling; standard login selected by explicit PM direction. | D-01, D-05 | Conversation (PM direction, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-02) | 2026-08-18 |
-| D-05 | Is the team's server ready for WordPress, and is a domain name available? | Requester + IT team | Pending | During platform selection |  | Server-side readiness confirmed; domain selection and registration deferred to a later project phase. | Domain availability remains unresolved, so the combined server/domain decision is not yet made. | D-01 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05); `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` (Constraints and Assumptions) | 2026-08-18 |
+| D-02 | How do participants get restricted access? (SSO, login, email-list gating) | Requester + IT team | Made | Before prototype acceptance | 2026-08-18 | Native WordPress login is sufficient for the prototype; SSO and email-list gating are not required in this phase. | Native login is adequate for the current prototype; restricted-access behavior and participant data handling still need validation. | D-01, D-05, R-03, BL-02, BL-09 | Conversation (PM direction, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-02) | 2026-08-18 |
+| D-03 | Who maintains WordPress and the server after the Sep 11 launch? | Requester + IT team | Made | Before launch | 2026-08-18 | IT team will maintain WordPress and the server after launch. | Ownership is assigned; operating procedures remain to be defined before launch. | R-05, BL-14, ACT-05 | Conversation (PM direction, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-03) | 2026-08-18 |
+| D-05 | Is the team's server ready for WordPress, and is a domain name available? | Requester + IT team | Pending | Before production deployment |  | WordPress is deployed on the team's server in staging. Production domain selection and registration, DNS, SSL, backups, and uptime responsibility are deferred to a later project stage. | The prototype can proceed on staging; production readiness remains unresolved. | D-01, DEP-05, R-08 to R-10, BL-03 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05) | 2026-08-18 |
 
 ## Status
 
@@ -28,4 +29,4 @@ Generated from the register rows. Do not manually maintain these counts.
 | Pending | 1 |
 | Due within configured window | Unconfigured |
 | Overdue | 0 |
-| Total decisions | 2 |
+| Total decisions | 3 |

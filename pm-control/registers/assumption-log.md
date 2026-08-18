@@ -7,6 +7,16 @@ Project: Lead Lab
 
 | ID | Assumption or constraint | Type | Owner | Status | Risk if false | Validation evidence | Validation due | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|---|
+| AL-01 | AI-assisted development makes the build feasible within the timeline | Assumption | Requester + IT team | Active | Schedule slip; Sep 11 launch at risk | WordPress is deployed in staging; validate feature fit and timeline through theme configuration and prototype testing | Before prototype acceptance | R-01, BL-21, ACT-01 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-01); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| AL-02 | No new features are needed; the current feature scope is correct for the rebuild | Assumption | Requester + IT team | Active | Scope change or rework after launch | Stated in the request brief; reconfirm with LeadLab Director at approval | Before launch | D-08, DEP-07 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-02) | 2026-08-18 |
+| AL-03 | Existing content can stay on SharePoint and YouTube until after launch | Assumption | Requester + IT team | Active | Missing content at launch | Start fresh; confirm which content must be live on Sep 11 | Before content load | D-07, BL-10, BL-18 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-03) | 2026-08-18 |
+| AL-04 | IT Department covers baseline third-party costs and the server is available | Constraint | Requester + IT team | Validated | Platform cost or domain not covered | IT funding confirmed; optional-cost coverage remains unresolved | Before any optional purchase | D-09, R-11 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-04) | 2026-08-18 |
+| AL-05 | Sep 11, 2026 readiness date is fixed | Constraint | Requester + IT team | Active | No fallback date for program readiness | Deadline stated; date flexibility remains unknown | Before schedule baseline | R-01, ISS-03 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-05) | 2026-08-18 |
+| AL-06 | Access must be restricted to LeadLab participants, not public | Constraint | Requester + IT team | Active | Public exposure of participant content | Native WordPress login selected on 18-Aug-2026; restricted-access behavior still needs staging validation | Before prototype acceptance | D-02, R-03, BL-09 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-06); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| AL-07 | Microsoft 365 SSO and Outlook-group access can be replaced or replicated | Assumption | Requester + IT team | Superseded | Rebuild of access tooling; privacy review needed | Native WordPress login selected; SSO and Outlook-group replication are not required for the current prototype | If D-02 reopens | D-02, R-03 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-07); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| AL-08 | The team operates its own server and IT will configure WordPress hosting | Assumption | Requester + IT team | Validated | Hosting cost or schedule slip | WordPress is deployed on the team's server in staging | Before production deployment | D-05, BL-04 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-08); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| AL-09 | Free tiers for backups and uptime monitoring are sufficient | Assumption | Requester + IT team | Active | Backup or monitoring gaps; paid upgrade needed | Production backup and uptime setup intentionally deferred; no validation evidence yet | Before production deployment | D-05, R-08 to R-10, ACT-03 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-09) | 2026-08-18 |
+| AL-10 | Embedded-video configuration can meet the requirement that members cannot copy or discover the video URL | Assumption | Requester + IT team | Active | Video URLs may be copied or accessed outside the portal | Prototype test not yet run; define acceptable protection before prototype acceptance | Before prototype acceptance | BL-22, R-12, ACT-02 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-10); Conversation (PM update, 2026-08-18) | 2026-08-18 |
 
 ## Type
 
@@ -33,7 +43,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Active assumptions | 0 |
-| Validated | 0 |
+| Active assumptions | 7 |
+| Validated | 2 |
 | Invalidated | 0 |
 | Overdue validation | 0 |

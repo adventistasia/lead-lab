@@ -7,6 +7,11 @@ Project: Lead Lab
 
 | ID | Action | Owner | State | Priority | Due or trigger | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|
+| ACT-01 | Configure the staging theme for the accepted prototype feature scope and run prototype validation | IT team | In Progress | High | Prototype acceptance | BL-21, BL-05 to BL-09, R-01, AL-01 | Conversation (PM update, 2026-08-18); `projects/lead-lab/prototype-build-brief/2026-08-18-approval-cycle/stages/01-build/prototype-build-brief.md` | 2026-08-18 |
+| ACT-02 | Test embedded-video configuration against URL copying or discovery and define acceptable protection | IT team | Open | High | Before prototype acceptance | BL-22, R-12, AL-10 | Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| ACT-03 | Complete production domain, DNS, SSL, backup, and uptime setup | IT team | Open | Medium | Before production deployment | D-05, BL-03, R-08 to R-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05) | 2026-08-18 |
+| ACT-04 | Obtain LeadLab Director final approval before launch | Requester | Open | High | Before launch | DEP-07, BL-12 | `projects/lead-lab/CONTEXT.md`; `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-07) | 2026-08-18 |
+| ACT-05 | Define IT patch, backup, uptime, and incident procedures for post-launch maintenance | IT team | Open | Medium | Before launch | D-03, R-05, R-08 to R-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-05, R-08 to R-10) | 2026-08-18 |
 
 ## State
 
@@ -25,7 +30,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Open or in progress | 0 |
+| Open or in progress | 5 |
 | Overdue | 0 |
 | Blocked | 0 |
-| Total actions | 0 |
+| Total actions | 5 |

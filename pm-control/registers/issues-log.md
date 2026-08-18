@@ -7,6 +7,13 @@ Project: Lead Lab
 
 | ID | Issue | Priority | Owner | Status | Due | Resolution plan | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|
+| ISS-01 | Platform choice undecided; blocks all build work | High | Requester + IT team | Resolved | Before build start | Resolved 13-Aug-2026: self-hosted WordPress selected | D-01, BL-01 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-01) | 2026-08-18 |
+| ISS-02 | Participant access mechanism undecided | High | Requester + IT team | Resolved | Before prototype acceptance | Resolved 18-Aug-2026: native WordPress login selected; validate restricted access in staging | D-02, BL-02, R-03 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-02); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| ISS-03 | Timeline pressure: about one month to build and test; AI-acceleration assumption unproven | High | Requester + IT team | In Progress | Monitor weekly to Sep 11 | WordPress staging is deployed; configure the theme and run prototype tests; escalate if the schedule slips | R-01, AL-01, BL-21, ACT-01 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-03); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| ISS-04 | Participant email data handling and privacy rules not confirmed | Medium | Requester + IT team | Open | Before participant data is collected | Confirm privacy rules for participant email addresses | R-04, BL-15 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-04) | 2026-08-18 |
+| ISS-05 | Ongoing ownership after launch unassigned | Medium | IT team | Resolved | Before launch | Resolved 18-Aug-2026: IT team assigned to maintain WordPress and the server; formalize operating procedures before launch | D-03, BL-14, R-05, ACT-05 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-05); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| ISS-06 | YouTube hosting dependency undecided for the new platform | Medium | Requester + IT team | Open | During prototype and content planning | Confirm whether YouTube will remain the video host | D-04, BL-16, R-07 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-06) | 2026-08-18 |
+| ISS-07 | Content migration plan deferred; existing content stays on SharePoint and YouTube | Low | Requester + IT team | Open | After Sep 11 launch | Plan content transition after the program; confirm what must be live on Sep 11 | D-07, BL-17, BL-18, R-06 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-07) | 2026-08-18 |
 
 ## Priority
 
@@ -33,6 +40,6 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| High priority open | 0 |
+| High priority open or in progress | 1 |
 | Blocked | 0 |
-| Total issues | 0 |
+| Total issues | 7 |

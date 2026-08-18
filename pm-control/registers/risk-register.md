@@ -17,6 +17,18 @@ Project: Lead Lab
 
 | ID | Risk | Owner | Status | P x I | Trigger | Response | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|
+| R-01 | Timeline slip: about one month to design, build, and test; AI-acceleration assumption unproven | Requester + IT team | Open | 12 | Theme or prototype work overruns; no test time left | WordPress staging is deployed; configure the theme and run the scoped prototype to validate feature fit and timeline; escalate if the prototype slips | AL-01, BL-21, ACT-01 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-01); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| R-02 | Platform choice undecided, blocking all build work | Requester + IT team | Closed | 12 | No platform decision | Self-hosted WordPress selected on 13-Aug-2026 | D-01 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-02) | 2026-08-18 |
+| R-03 | Native WordPress login selected; credential sharing or a weak gate could still expose participant content | Requester + IT team | Open | 9 | Unauthenticated or unapproved visitors can reach content | Use native WordPress login; test unauthenticated and unapproved access explicitly in staging | D-02, BL-09, AL-06 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-03); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| R-04 | Participant email data handling unclear; privacy rules not confirmed | Requester + IT team | Open | 9 | Email addresses collected or stored on new platform without privacy confirmation | Confirm data-handling and privacy rules before collecting any participant data | BL-15, AL-06 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-04) | 2026-08-18 |
+| R-05 | Ongoing WordPress and server operating procedures are not yet defined | IT team | Open | 6 | Portal live without a patch, backup, uptime, or incident procedure | IT team is assigned as owner; define patch, backup, uptime, and incident procedures before launch | D-03, BL-14, ACT-05 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-05); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| R-06 | Content transition deferred; existing videos and materials stay in place | Requester + IT team | Open | 4 | New portal goes live without needed content | Confirm which content must be live on Sep 11; plan transition after launch | AL-03, BL-10, BL-18 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-06) | 2026-08-18 |
+| R-07 | YouTube hosting dependency undecided for the new platform | Requester + IT team | Open | 4 | Platform cannot embed or host videos | Confirm video hosting approach during prototype and content planning | BL-16, D-04 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-07) | 2026-08-18 |
+| R-08 | Server or WordPress security compromised because patches are not applied | IT team | Open | 12 | No update schedule; admin credentials shared | Set IT patch schedule; restrict admin access; apply WordPress and OS updates | D-03, D-05, ACT-03, ACT-05 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-08) | 2026-08-18 |
+| R-09 | Backups not configured; content loss on server failure | IT team | Open | 12 | Server fails with no backup | Configure automated backups before launch; test restore | D-05, ACT-03, ACT-05 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-09) | 2026-08-18 |
+| R-10 | Server availability not guaranteed; portal offline | IT team | Open | 9 | Server down; no monitoring or recovery plan | Monitor uptime; define recovery procedure; confirm outage communication | D-05, ACT-03, ACT-05 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-10) | 2026-08-18 |
+| R-11 | IT Department funding does not cover unexpected third-party costs | IT Department | Open | TBD | Optional costs exceed IT funding scope | Confirm IT cost authority before any purchase; keep SharePoint as fallback if unresolved | D-09, BL-20 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-11) | 2026-08-18 |
+| R-12 | Authenticated members may copy or discover the URL of an embedded video | IT team | Open | TBD | A member can inspect, copy, or access the embedded video URL outside the portal | Test the embedded-video configuration in the prototype; define acceptable protection and do not claim absolute prevention without evidence | BL-22, AL-10, ACT-02 | `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-12); Conversation (PM update, 2026-08-18) | 2026-08-18 |
 
 ## Status
 
@@ -34,7 +46,8 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| High exposure (P x I 12-25) | 0 |
-| Medium exposure (P x I 6-11) | 0 |
-| Low exposure (P x I 1-5) | 0 |
-| Total identified risks | 0 |
+| High exposure (P x I 12-25) | 3 |
+| Medium exposure (P x I 6-11) | 4 |
+| Low exposure (P x I 1-5) | 2 |
+| Unscored (P x I pending evidence) | 2 |
+| Total identified risks | 11 |

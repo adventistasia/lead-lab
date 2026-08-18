@@ -7,6 +7,14 @@ Project: Lead Lab
 
 | ID | Dependency | Owner | Priority | Status | Needed by | Impact if unmet | Action | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|---|
+| DEP-01 | Platform decision (D-01) | Requester + IT team | Critical | Met | Before prototype build | All build work blocked | Self-hosted WordPress selected on 13-Aug-2026; staging deployment is complete and D-05 production readiness remains open | D-01, BL-01, BL-04 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-01); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| DEP-02 | Access mechanism decision (D-02) | Requester + IT team | Critical | Met | Before prototype acceptance | Build access behavior and participant data handling unresolved | Native WordPress login selected on 18-Aug-2026; validate access behavior and privacy handling in staging | D-02, BL-02, BL-09, R-03 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-02); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| DEP-03 | Media team supplies session video links | Media team | High | Open | Before content population for Sep 11 | Portal missing session content at launch | Confirm link supply timing with the media team | BL-10, R-06 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-03) | 2026-08-18 |
+| DEP-04 | Existing YouTube videos stay in place | Existing platform (YouTube) | Low | Met | Ongoing | Videos unavailable during transition | None; current state unchanged | AL-03, D-04 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-04) | 2026-08-18 |
+| DEP-05 | Domain name availability and production URL | Requester + IT team | High | Open | Before production deployment | Production launch cannot proceed without a production URL and related setup | Deferred from the prototype stage; select and register the domain and confirm DNS, SSL, backups, and uptime before production deployment | D-05, BL-03, ACT-03, R-08 to R-10 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-05); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| DEP-06 | IT Director agreement to proceed | IT Director | Medium | Met | Project start | Team work not sanctioned | None; stated as agreed in the request brief | D-01 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-06) | 2026-08-18 |
+| DEP-07 | LeadLab Director final OK | LeadLab Director | Critical | Open | Before launch | Portal cannot be accepted as done | Present the staging and production portal for final approval before launch | BL-12, ACT-04 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-07); `projects/lead-lab/CONTEXT.md` | 2026-08-18 |
+| DEP-08 | IT Department funding commitment for third-party costs (D-09) | IT Department | Medium | Met | Before domain purchase and build start | Third-party costs not covered | Baseline costs covered; confirm IT coverage if optional costs are selected | D-09, BL-19, BL-20, R-11 | `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-08) | 2026-08-18 |
 
 ## Priority
 
@@ -33,7 +41,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Critical or at risk | 0 |
-| Open | 0 |
-| Met | 0 |
-| Total dependencies | 0 |
+| Critical or at risk | 1 |
+| Open | 3 |
+| Met | 5 |
+| Total dependencies | 8 |
