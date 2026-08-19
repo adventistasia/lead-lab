@@ -7,6 +7,7 @@ Project: Lead Lab
 
 | ID | Change | Affected area | Requested by | Status | Date | Impact assessment | Decision | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|---|
+| CHG-01 | Replace the self-hosted WordPress direction and staging prototype with a zero-license-cost self-hosted web application using the approved Option B MVP; retain SharePoint as the launch fallback. | Scope, schedule, quality, operations, platform baseline | PM direction; requester not separately recorded | Approved | 2026-08-19 | Material change approved with conditions. Scope and delivery structure move to the Option B application; the WordPress build action is superseded. The remaining delivery window is 23 calendar days, with environment, vertical-slice, feature-complete, go/no-go, and production gates proposed for 2026-08-20 through 2026-09-10. Software licence cost remains $0, but domain, infrastructure, support, and internal delivery effort are not fully baselined. Security, access control, backups, restore testing, monitoring, RQ-17 video URL protection, and RQ-18 SSO remain acceptance or decision gates. SharePoint must remain available until acceptance. | D-10 (Option B platform direction approval); approved with conditions on 2026-08-19 | D-01, D-02, D-03, D-05, D-09, D-10, R-01, R-03 to R-12, ISS-03, ISS-04, ISS-06, ISS-07, DEP-01, DEP-02, DEP-03, DEP-05, DEP-07, DEP-09, ACT-01 to ACT-06 | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`; `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`; `projects/lead-lab/artifacts/platform-selection-decision.md`; PM approval, 2026-08-19 | 2026-08-19 |
 
 ## Status
 
@@ -24,6 +25,6 @@ Generated from the register rows. Do not manually maintain these counts.
 | Metric | Count |
 |---|---|
 | Proposed | 0 |
-| Approved | 0 |
+| Approved | 1 |
 | Rejected | 0 |
-| Total changes | 0 |
+| Total changes | 1 |

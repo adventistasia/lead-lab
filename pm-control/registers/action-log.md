@@ -7,11 +7,12 @@ Project: Lead Lab
 
 | ID | Action | Owner | State | Priority | Due or trigger | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|
-| ACT-01 | Configure the staging theme for the accepted prototype feature scope and run prototype validation | IT team | In Progress | High | Prototype acceptance | BL-21, BL-05 to BL-09, R-01, AL-01 | Conversation (PM update, 2026-08-18); `projects/lead-lab/prototype-build-brief/2026-08-18-approval-cycle/stages/01-build/prototype-build-brief.md` | 2026-08-18 |
-| ACT-02 | Test embedded-video configuration against URL copying or discovery and define acceptable protection | IT team | Open | High | Before prototype acceptance | BL-22, R-12, AL-10 | Conversation (PM update, 2026-08-18) | 2026-08-18 |
-| ACT-03 | Complete production domain, DNS, SSL, backup, and uptime setup | IT team | Open | Medium | Before production deployment | D-05, BL-03, R-08 to R-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05) | 2026-08-18 |
-| ACT-04 | Obtain LeadLab Director final approval before launch | Requester | Open | High | Before launch | DEP-07, BL-12 | `projects/lead-lab/CONTEXT.md`; `projects/lead-lab/artifacts/logs and registers/dependencies-log.md` (DEP-07) | 2026-08-18 |
-| ACT-05 | Define IT patch, backup, uptime, and incident procedures for post-launch maintenance | IT team | Open | Medium | Before launch | D-03, R-05, R-08 to R-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-05, R-08 to R-10) | 2026-08-18 |
+| ACT-01 | Configure the staging theme for the accepted prototype feature scope and run prototype validation | IT team | Superseded | High | CHG-01 approved; do not continue the WordPress theme build | CHG-01, D-10, R-01 | Conversation (PM update, 2026-08-18); `projects/lead-lab/pm-control/registers/change-log.md` (CHG-01) | 2026-08-19 |
+| ACT-02 | Test embedded-video configuration against URL copying or discovery and define acceptable protection for the Option B application | IT team | Open | High | Before Option B acceptance | BL-22, R-12, AL-10, CHG-01, D-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` (RQ-17) | 2026-08-19 |
+| ACT-03 | Complete production domain, DNS, SSL, backup, and uptime setup for the Option B application | IT team | Open | Medium | Before production deployment | D-05, BL-03, R-08 to R-10, CHG-01, D-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05) | 2026-08-19 |
+| ACT-04 | Obtain LeadLab Director final approval before the Option B launch or SharePoint fallback decision | Requester | Open | High | Before launch | DEP-07, BL-12, CHG-01, D-10 | `projects/lead-lab/CONTEXT.md`; `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` | 2026-08-19 |
+| ACT-05 | Define IT patch, backup, uptime, and incident procedures for post-launch maintenance of the Option B application and server | IT team | Open | Medium | Before launch | D-03, R-05, R-08 to R-10, CHG-01, D-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-05, R-08 to R-10) | 2026-08-19 |
+| ACT-06 | Confirm Option B transition conditions: supported runtime, database, storage, technical owner, primary developer, IT operator, feature-freeze date, acceptance gates, and SharePoint fallback triggers | TBD | Proposed | High | Before technical commitment and launch | CHG-01, D-10, DEP-05, DEP-07 | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`; PM approval, 2026-08-19 | 2026-08-19 |
 
 ## State
 
@@ -20,6 +21,7 @@ Project: Lead Lab
 | Proposed | Captured by the agent; not yet accepted by the PM |
 | Open | Not started |
 | In Progress | Action underway |
+| Superseded | Replaced by an approved project direction; no further work is required on the old action |
 | Blocked | A real barrier prevents progress |
 | Resolved | Action complete |
 | Closed | Verified and archived |
@@ -30,7 +32,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Open or in progress | 5 |
+| Open or in progress | 4 |
 | Overdue | 0 |
 | Blocked | 0 |
-| Total actions | 5 |
+| Total actions | 6 |

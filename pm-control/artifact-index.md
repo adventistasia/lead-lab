@@ -10,7 +10,7 @@ No artifact ownership or canonical location was supplied or confirmed during set
 | Project charter or authorization | PM-01 | | | | | |
 | Integrated project plan | PM-02 | | | | | |
 | Scope and requirements records | PM-10 to PM-15 | Requester + IT team | External | Current | 2026-08-19 | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`; Option B baseline approved. RQ-17 video protection and RQ-18 Microsoft 365 SSO remain open decisions. | |
-| Product backlog or scope structure | PM-13 to PM-15 | Requester + IT team | External | Current | 2026-08-19 | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`; Option B delivery structure. Individual owners, feature freeze, RQ-17, RQ-18, and platform reconciliation remain open. | |
+| Product backlog or scope structure | PM-13 to PM-15 | Requester + IT team | External | Current | 2026-08-19 | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`; Option B delivery structure. CHG-01 (Replace WordPress with self-hosted Option B web application) and D-10 (Option B platform direction approval) are approved. Individual owners, feature freeze, RQ-17, and RQ-18 remain open. | |
 | Schedule and milestone records | PM-16 to PM-18 | | | | | |
 | Financial records | PM-19 to PM-22 | | | | | |
 | Stakeholder and communications records | PM-23 to PM-29 | | | | | |
