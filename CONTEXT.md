@@ -26,6 +26,7 @@ lead-lab/
 ├── CONTEXT.md              (you are here)
 ├── Old artifacts/          (closed-project source: charter, closure report, procedures)
 ├── application/            (canonical application source and delivery evidence)
+├── workspace/               (Lead Lab delivery workflow)
 ├── alson-project-intake/
 │   └── leadlab-rebuild/    (accepted intake run: request brief, audit, what-now)
 └── artifacts/
@@ -39,7 +40,7 @@ lead-lab/
 | ----------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
 | Recheck project intent or details   | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Accepted brief, all fields sourced         |
 | Verify against closed project facts | `Old artifacts/`                                                               | Charter, closure report, portal procedures |
-| Start the application build | Use `workspaces/lead-lab-workspace/`; verify the environment, select the supported stack, and build the vertical slice. Do not move to production until the approved gates pass | D-10 approved; environment conditions, vertical-slice evidence, and D-05 remain required |
+| Start the application build | Use `workspace/`; verify the environment, select the supported stack, and build the vertical slice. Do not move to production until the approved gates pass | D-10 approved; environment conditions, vertical-slice evidence, and D-05 remain required |
 
 
 ## What to Load
@@ -49,7 +50,7 @@ lead-lab/
 | ----------------- | ---------------------------- | -------------------------- |
 | Status or routing | This file only               | -                          |
 | Project details   | `request-brief.md`           | Full `Old artifacts/` scan |
-| Application build | `workspaces/lead-lab-workspace/CONTEXT.md`, `application/CONTEXT.md`, approved Option B artifacts | Superseded WordPress build route |
+| Application build | `workspace/CONTEXT.md`, `application/CONTEXT.md`, approved Option B artifacts | Superseded WordPress build route |
 | Audit or history  | `Old artifacts/`, intake run | -                          |
 
 

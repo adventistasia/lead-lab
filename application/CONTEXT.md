@@ -19,7 +19,7 @@ application/
 
 | Need | Location |
 |---|---|
-| Run the delivery workflow | `workspaces/lead-lab-workspace/CONTEXT.md` |
+| Run the delivery workflow | `../workspace/CONTEXT.md` |
 | Inspect or change application code | `source/` |
 | Record server capabilities | `environment/` |
 | Add tests or synthetic fixtures | `tests/` |

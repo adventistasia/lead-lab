@@ -9,6 +9,8 @@
 | Run path | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/` |
 | Output root | `projects/lead-lab/application/runs/` |
 | Date | 2026-08-19 |
+| Workflow location | `projects/lead-lab/workspace/` |
+| Relocation note | The delivery workflow moved from `workspaces/lead-lab-workspace/` to `projects/lead-lab/workspace/` on 2026-08-19. Run outputs and findings were not changed. |
 | Request | Run the Lead Lab workspace, use the Lead Lab project records, decide the technology stack, and save the result locally first. |
 | Cycle | Define -> Design -> Build -> Measure |
 | Prior run | None found under the application run directory |
@@ -26,7 +28,7 @@
 | `projects/lead-lab/pm-control/registers/decision-log.md` | Current decisions, including D-10 (Option B platform direction approval) |
 | `projects/lead-lab/pm-control/registers/dependencies-log.md` | Open DEP-09 (Option B authentication and participant-data handling decision) |
 | `projects/lead-lab/pm-control/registers/risk-register.md` | Access, schedule, operations, backup, and video risks |
-| `workspaces/lead-lab-workspace/references/` | Workspace architecture, security, scope, testing, and deployment constraints |
+| `projects/lead-lab/workspace/references/` | Workspace architecture, security, scope, testing, and deployment constraints |
 
 ## Handoff
 
