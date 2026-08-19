@@ -123,6 +123,36 @@ class LeadLabAccessTest extends TestCase
         $this->actingAs($participant)
             ->get(route('admin.sessions.index'))
             ->assertForbidden();
+
+        $this->actingAs($participant)
+            ->get(route('admin.classroom.index'))
+            ->assertForbidden();
+    }
+
+    public function test_admin_can_open_the_classroom_recordings_page(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $published = LearningSession::factory()->create([
+            'title' => 'Published classroom recording',
+            'session_date' => '2026-08-28',
+            'is_published' => true,
+        ]);
+        $draft = LearningSession::factory()->create([
+            'title' => 'Draft classroom recording',
+            'session_date' => '2026-09-02',
+            'is_published' => false,
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->get(route('admin.classroom.index'));
+
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $assert) => $assert
+            ->component('admin/classroom/index')
+            ->has('sessions', 2)
+            ->where('sessions.0.id', $draft->id)
+            ->where('sessions.1.id', $published->id),
+        );
     }
 
     public function test_revoked_users_are_logged_out_of_lead_lab_routes(): void

@@ -16,7 +16,7 @@ This file is the project-level dashboard and configuration record.
 | Evidence refresh period | Unconfigured |
 | Last verified | 2026-08-20 |
 | Last status report | None recorded |
-| Next review trigger | Option B environment gate or vertical-slice result; D-05 production-readiness update |
+| Next review trigger | Gate 1 environment and ownership reassessment next week; Option B vertical-slice result; D-05 production-readiness update |
 
 ## Performance Domains
 
@@ -37,9 +37,9 @@ This file is the project-level dashboard and configuration record.
 | Process register | `process-register.md` |
 | Artifact index | `artifact-index.md` |
 | Active process run | None |
-| Process attention | Option B acceptance evidence and transition conditions are missing; the current PM-15 run predates CHG-01 and CHG-02 |
-| Next process trigger | Verify the environment and vertical slice, then retarget PM-15 to the Option B acceptance boundary including RQ-20 |
-| Last process review | 2026-08-18; `runs/2026-08-18-pm-15-validate-scope` (WordPress-era evidence) |
+| Process attention | Option B acceptance evidence remains incomplete; PM-15 (Validate Scope) assessed the current Option B increment and retained the listed exceptions |
+| Next process trigger | Complete Gate 1 environment and ownership evidence next week, implement and test CHG-02 (Add an administrator Classroom link and session recordings page), then rerun PM-15 (Validate Scope) before final acceptance |
+| Last process review | 2026-08-20; `runs/2026-08-20-pm-15-validate-option-b-scope/stages/04-validate-and-review/review-record.md` |
 
 ## Baseline and Change Control
 

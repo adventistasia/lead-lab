@@ -13,22 +13,15 @@ class AdminLearningSessionController
 {
     public function index(): Response
     {
-        $sessions = LearningSession::query()
-            ->withCount('resources')
-            ->orderByDesc('session_date')
-            ->get()
-            ->map(fn (LearningSession $session): array => [
-                'id' => $session->id,
-                'title' => $session->title,
-                'category' => $session->category,
-                'session_date' => $session->session_date->toDateString(),
-                'is_published' => $session->is_published,
-                'resources_count' => $session->resources_count,
-            ])
-            ->values();
-
         return Inertia::render('admin/sessions/index', [
-            'sessions' => $sessions,
+            'sessions' => $this->sessionSummaries(),
+        ]);
+    }
+
+    public function recordings(): Response
+    {
+        return Inertia::render('admin/classroom/index', [
+            'sessions' => $this->sessionSummaries(),
         ]);
     }
 
@@ -66,5 +59,26 @@ class AdminLearningSessionController
         }
 
         return to_route('admin.sessions.index')->with('success', 'Session published to the Lead Lab classroom.');
+    }
+
+    /**
+     * @return array<int, array{id: int, title: string, category: string, session_date: string, is_published: bool, resources_count: int}>
+     */
+    private function sessionSummaries(): array
+    {
+        return LearningSession::query()
+            ->withCount('resources')
+            ->orderByDesc('session_date')
+            ->get()
+            ->map(fn (LearningSession $session): array => [
+                'id' => $session->id,
+                'title' => $session->title,
+                'category' => $session->category,
+                'session_date' => $session->session_date->toDateString(),
+                'is_published' => $session->is_published,
+                'resources_count' => $session->resources_count,
+            ])
+            ->values()
+            ->all();
     }
 }

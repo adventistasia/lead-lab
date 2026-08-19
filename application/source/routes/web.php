@@ -15,6 +15,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('resources/{learningResource}/download', [LearningResourceController::class, 'download'])->name('resources.download');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('classroom', [AdminLearningSessionController::class, 'recordings'])->name('classroom.index');
         Route::get('sessions', [AdminLearningSessionController::class, 'index'])->name('sessions.index');
         Route::post('sessions', [AdminLearningSessionController::class, 'store'])->name('sessions.store');
         Route::get('members', [AdminMemberController::class, 'index'])->name('members.index');

@@ -55,7 +55,11 @@ export function AppSidebar() {
     const navigationItems: NavItem[] =
         auth.user.role === 'admin'
             ? [
-                  ...mainNavItems,
+                  ...mainNavItems.map((item) =>
+                      item.title === 'Classroom'
+                          ? { ...item, href: '/admin/classroom' }
+                          : item,
+                  ),
                   {
                       title: 'Admin',
                       href: '/admin/sessions',
