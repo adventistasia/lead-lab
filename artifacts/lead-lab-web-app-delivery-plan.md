@@ -22,7 +22,7 @@ This is not a general community platform or an exact Skool clone.
 | Security | All community content blocked for unauthenticated users |
 | Roles | Participant, moderator, and administrator |
 | Community | Posts, comments, categories, pinned announcements |
-| Classroom | Courses, modules, recorded sessions, and materials |
+| Classroom | Courses, modules, recorded sessions, materials, and an administrator recordings page reachable from dashboard Classroom navigation |
 | Video | Embedded YouTube videos |
 | Resources | Protected downloadable files |
 | Discovery | Search plus category and date filters |
@@ -188,7 +188,7 @@ The application is ready when:
 2. Administrators can add, disable, and manage participants.
 3. Participants can create posts and comments.
 4. Moderators can manage inappropriate content.
-5. Administrators can publish courses, lessons, videos, and materials.
+5. Administrators can publish courses, lessons, videos, and materials, and open the Classroom recordings page from the dashboard.
 6. Participants can search and filter sessions.
 7. Participants can view scheduled events.
 8. The application works on desktop, tablet, and mobile.

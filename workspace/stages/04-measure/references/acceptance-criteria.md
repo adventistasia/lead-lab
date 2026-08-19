@@ -26,6 +26,12 @@ These criteria operationalize the first technical gate. The approved scope file 
 | VS-07 | Revoke access | The administrator can disable the participant and subsequent access is denied |
 | VS-08 | Staging deployment | The same slice is available on staging from the recorded source version |
 
+## Approved MVP Scope Addition
+
+| ID | Check | Pass condition |
+|---|---|---|
+| MVP-01 | Administrator Classroom recordings navigation | From the administrator dashboard, clicking Classroom in the left sidebar opens a separate page where all session recordings are visible. The route is server-authorized and the workflow remains usable on desktop, tablet, and mobile. |
+
 ## Evidence
 
 Each result must identify the environment, synthetic account or role, action, expected result, actual result, and evidence path. A missing result is `Blocked`, not `Pass`.

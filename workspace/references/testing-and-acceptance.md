@@ -29,4 +29,4 @@ The minimum end-to-end flow is:
 
 ## Full MVP Testing
 
-After the vertical slice passes, test access, roles, community, classroom, video, materials, search, filters, calendar, moderation, responsive behavior, backups, restore, monitoring, and launch content against the approved requirements. Do not accept a prototype or launch from code presence alone.
+After the vertical slice passes, test access, roles, community, classroom, administrator Classroom navigation and recordings listing, video, materials, search, filters, calendar, moderation, responsive behavior, backups, restore, monitoring, and launch content against the approved requirements. Do not accept a prototype or launch from code presence alone.
