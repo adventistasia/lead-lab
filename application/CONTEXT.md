@@ -28,8 +28,9 @@ application/
 
 ## Current State
 
-- The application source is not initialized.
-- The framework and database are not selected until environment evidence is available.
+- The local application source uses Laravel, Inertia React, TypeScript, Tailwind CSS, and shadcn/ui, with the first protected session vertical slice implemented.
+- Local development uses SQLite; staging and production still require MySQL or MariaDB verification.
+- The local build and Measure audit pass conditionally; participant creation or invitation, browser playback evidence, and staging operations remain open.
 - The approved product baseline is the Option B self-hosted web application.
 - The previous WordPress build remains historical evidence and is not the current application source.
 - SharePoint remains the launch fallback until acceptance.

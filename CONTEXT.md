@@ -13,7 +13,7 @@ Always load `AGENTS.md` for identity and output rules.
 | Project intake  | Complete, accepted (100% quality) | `alson-project-intake/leadlab-rebuild/stages/02-measure/output/audit-findings.md` |
 | Funding         | Confirmed; IT Department shoulders third-party costs (D-09) | `artifacts/logs and registers/decision-log.md` (D-09) |
 | Access decision | Option B authentication and participant-data handling remain open; the WordPress login decision is superseded (D-02, D-10) | `pm-control/registers/decision-log.md` |
-| Build           | In progress; the approved target is a self-hosted Option B web application; environment verification and the vertical slice remain | `pm-control/project-control.md`; `artifacts/lead-lab-web-app-delivery-plan.md` |
+| Build           | In progress; local protected session vertical slice is implemented and conditionally measured; participant invitation and staging verification remain | `application/`; `application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md`; `pm-control/project-control.md` |
 | Production readiness | Deferred to a later stage; D-05 remains open for runtime, domain, DNS, SSL, backups, uptime, and deployment responsibility | `pm-control/registers/decision-log.md` (D-05) |
 | Maintenance     | IT team assigned to maintain the Option B application and server after launch (D-03) | `pm-control/registers/decision-log.md` (D-03) |
 | Deadline        | Before Sep 11, 2026               | request brief, Timing                                                             |
