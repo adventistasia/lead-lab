@@ -38,6 +38,28 @@ class LeadLabAccessTest extends TestCase
         Storage::disk('local')->assertExists($resource->stored_path);
     }
 
+    public function test_admin_can_save_a_session_from_classroom_and_return_to_classroom(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(
+            route('admin.sessions.store', ['return_to' => 'classroom']),
+            [
+                'title' => 'Classroom-created session',
+                'category' => 'Execution rhythm',
+                'session_date' => '2026-08-29',
+                'description' => 'A session created from the administrator Classroom modal.',
+                'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+            ],
+        );
+
+        $response->assertRedirect(route('admin.classroom.index'));
+        $this->assertDatabaseHas('learning_sessions', [
+            'title' => 'Classroom-created session',
+            'is_published' => false,
+        ]);
+    }
+
     public function test_admin_can_publish_and_unpublish_a_session(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -373,6 +395,15 @@ class LeadLabAccessTest extends TestCase
 
         $this->actingAs($participant)
             ->get(route('admin.classroom.index'))
+            ->assertForbidden();
+
+        $this->actingAs($participant)
+            ->post(route('admin.sessions.store', ['return_to' => 'classroom']), [
+                'title' => 'Unauthorized session',
+                'category' => 'Execution rhythm',
+                'session_date' => '2026-08-29',
+                'description' => 'This should not be saved.',
+            ])
             ->assertForbidden();
     }
 

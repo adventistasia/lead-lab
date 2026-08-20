@@ -10,6 +10,8 @@ import {
     Upload,
 } from 'lucide-react';
 import type { FormEvent } from 'react';
+import { SessionFormFields } from '@/components/session-form-fields';
+import type { SessionFormData } from '@/components/session-form-fields';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,15 +21,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import {
-    Field,
-    FieldDescription,
-    FieldError,
-    FieldGroup,
-    FieldLabel,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { dashboard } from '@/routes';
 
 type LearningSession = {
@@ -50,15 +43,6 @@ type EditableSession = {
     resource_title: string | null;
 };
 
-type SessionForm = {
-    title: string;
-    category: string;
-    session_date: string;
-    description: string;
-    video_url: string;
-    resource: File | null;
-};
-
 export default function AdminSessions({
     sessions,
     session,
@@ -66,7 +50,7 @@ export default function AdminSessions({
     sessions: LearningSession[];
     session?: EditableSession;
 }) {
-    const form = useForm<SessionForm>({
+    const form = useForm<SessionFormData>({
         title: session?.title ?? '',
         category: session?.category ?? '',
         session_date: session?.session_date ?? '',
@@ -170,192 +154,10 @@ export default function AdminSessions({
                                 className="flex flex-col gap-6"
                                 onSubmit={submit}
                             >
-                                <FieldGroup>
-                                    <Field
-                                        data-invalid={Boolean(
-                                            form.errors.title,
-                                        )}
-                                    >
-                                        <FieldLabel htmlFor="title">
-                                            Title
-                                        </FieldLabel>
-                                        <Input
-                                            id="title"
-                                            value={form.data.title}
-                                            onChange={(event) =>
-                                                form.setData(
-                                                    'title',
-                                                    event.target.value,
-                                                )
-                                            }
-                                            aria-invalid={Boolean(
-                                                form.errors.title,
-                                            )}
-                                            placeholder="Build your weekly lead engine"
-                                        />
-                                        <FieldError>
-                                            {form.errors.title}
-                                        </FieldError>
-                                    </Field>
-
-                                    <div className="grid gap-6 md:grid-cols-2">
-                                        <Field
-                                            data-invalid={Boolean(
-                                                form.errors.category,
-                                            )}
-                                        >
-                                            <FieldLabel htmlFor="category">
-                                                Category
-                                            </FieldLabel>
-                                            <Input
-                                                id="category"
-                                                value={form.data.category}
-                                                onChange={(event) =>
-                                                    form.setData(
-                                                        'category',
-                                                        event.target.value,
-                                                    )
-                                                }
-                                                aria-invalid={Boolean(
-                                                    form.errors.category,
-                                                )}
-                                                placeholder="Lead generation systems"
-                                            />
-                                            <FieldError>
-                                                {form.errors.category}
-                                            </FieldError>
-                                        </Field>
-
-                                        <Field
-                                            data-invalid={Boolean(
-                                                form.errors.session_date,
-                                            )}
-                                        >
-                                            <FieldLabel htmlFor="session_date">
-                                                Session date
-                                            </FieldLabel>
-                                            <Input
-                                                id="session_date"
-                                                type="date"
-                                                value={form.data.session_date}
-                                                onChange={(event) =>
-                                                    form.setData(
-                                                        'session_date',
-                                                        event.target.value,
-                                                    )
-                                                }
-                                                aria-invalid={Boolean(
-                                                    form.errors.session_date,
-                                                )}
-                                            />
-                                            <FieldError>
-                                                {form.errors.session_date}
-                                            </FieldError>
-                                        </Field>
-                                    </div>
-
-                                    <Field
-                                        data-invalid={Boolean(
-                                            form.errors.description,
-                                        )}
-                                    >
-                                        <FieldLabel htmlFor="description">
-                                            Description
-                                        </FieldLabel>
-                                        <Textarea
-                                            id="description"
-                                            value={form.data.description}
-                                            onChange={(event) =>
-                                                form.setData(
-                                                    'description',
-                                                    event.target.value,
-                                                )
-                                            }
-                                            aria-invalid={Boolean(
-                                                form.errors.description,
-                                            )}
-                                            placeholder="What should participants take away from this session?"
-                                            rows={5}
-                                        />
-                                        <FieldDescription>
-                                            Keep the description practical and
-                                            easy to scan.
-                                        </FieldDescription>
-                                        <FieldError>
-                                            {form.errors.description}
-                                        </FieldError>
-                                    </Field>
-
-                                    <Field
-                                        data-invalid={Boolean(
-                                            form.errors.video_url,
-                                        )}
-                                    >
-                                        <FieldLabel htmlFor="video_url">
-                                            YouTube URL or embed code
-                                        </FieldLabel>
-                                        <Input
-                                            id="video_url"
-                                            type="text"
-                                            value={form.data.video_url}
-                                            onChange={(event) =>
-                                                form.setData(
-                                                    'video_url',
-                                                    event.target.value,
-                                                )
-                                            }
-                                            aria-invalid={Boolean(
-                                                form.errors.video_url,
-                                            )}
-                                            placeholder="Paste a YouTube URL or <iframe ...> code"
-                                        />
-                                        <FieldDescription>
-                                            Paste once. The application extracts
-                                            the video and builds the protected
-                                            player automatically. Use Unlisted
-                                            videos for participant recordings.
-                                        </FieldDescription>
-                                        <FieldError>
-                                            {form.errors.video_url}
-                                        </FieldError>
-                                    </Field>
-
-                                    <Field
-                                        data-invalid={Boolean(
-                                            form.errors.resource,
-                                        )}
-                                    >
-                                        <FieldLabel htmlFor="resource">
-                                            Supporting material
-                                        </FieldLabel>
-                                        <Input
-                                            id="resource"
-                                            type="file"
-                                            accept=".pdf,.doc,.docx,.txt"
-                                            onChange={(event) =>
-                                                form.setData(
-                                                    'resource',
-                                                    event.target.files?.[0] ??
-                                                        null,
-                                                )
-                                            }
-                                            aria-invalid={Boolean(
-                                                form.errors.resource,
-                                            )}
-                                        />
-                                        <FieldDescription>
-                                            {session?.resource_title
-                                                ? `Current material: ${session.resource_title}. Upload a replacement to swap it. `
-                                                : ''}
-                                            Stored outside the public web
-                                            directory and downloaded through an
-                                            authenticated route.
-                                        </FieldDescription>
-                                        <FieldError>
-                                            {form.errors.resource}
-                                        </FieldError>
-                                    </Field>
-                                </FieldGroup>
+                                <SessionFormFields
+                                    form={form}
+                                    resourceTitle={session?.resource_title}
+                                />
 
                                 <div className="flex flex-wrap gap-3">
                                     <Button

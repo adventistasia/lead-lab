@@ -106,7 +106,11 @@ class AdminLearningSessionController
         $this->storeResource($session, $request);
         $this->flashSuccess('Session saved as a draft.');
 
-        return to_route('admin.sessions.index');
+        return to_route(
+            $request->input('return_to') === 'classroom'
+                ? 'admin.classroom.index'
+                : 'admin.sessions.index',
+        );
     }
 
     public function update(Request $request, LearningSession $learningSession): RedirectResponse
