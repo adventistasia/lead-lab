@@ -19,6 +19,7 @@ type Recording = {
     category: string;
     session_date: string;
     is_published: boolean;
+    is_archived: boolean;
     resources_count: number;
 };
 
@@ -50,7 +51,8 @@ export default function AdminClassroom({
                     </h1>
                     <p className="max-w-2xl text-base leading-7 text-muted-foreground">
                         Review every recording in the classroom, including draft
-                        sessions, before opening the protected session view.
+                        and archived sessions, before opening the protected
+                        session view.
                     </p>
                     <ClassroomFilters
                         action="/admin/classroom"
@@ -103,14 +105,18 @@ export default function AdminClassroom({
                                                 </h2>
                                                 <Badge
                                                     variant={
-                                                        session.is_published
-                                                            ? 'default'
-                                                            : 'outline'
+                                                        session.is_archived
+                                                            ? 'destructive'
+                                                            : session.is_published
+                                                              ? 'default'
+                                                              : 'outline'
                                                     }
                                                 >
-                                                    {session.is_published
-                                                        ? 'Published'
-                                                        : 'Draft'}
+                                                    {session.is_archived
+                                                        ? 'Archived'
+                                                        : session.is_published
+                                                          ? 'Published'
+                                                          : 'Draft'}
                                                 </Badge>
                                             </div>
                                             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">

@@ -18,7 +18,13 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('classroom', [AdminLearningSessionController::class, 'recordings'])->name('classroom.index');
         Route::get('sessions', [AdminLearningSessionController::class, 'index'])->name('sessions.index');
+        Route::get('sessions/{learningSession}/edit', [AdminLearningSessionController::class, 'edit'])->name('sessions.edit');
         Route::post('sessions', [AdminLearningSessionController::class, 'store'])->name('sessions.store');
+        Route::patch('sessions/{learningSession}', [AdminLearningSessionController::class, 'update'])->name('sessions.update');
+        Route::patch('sessions/{learningSession}/publish', [AdminLearningSessionController::class, 'publish'])->name('sessions.publish');
+        Route::patch('sessions/{learningSession}/unpublish', [AdminLearningSessionController::class, 'unpublish'])->name('sessions.unpublish');
+        Route::patch('sessions/{learningSession}/archive', [AdminLearningSessionController::class, 'archive'])->name('sessions.archive');
+        Route::patch('sessions/{learningSession}/restore', [AdminLearningSessionController::class, 'restore'])->name('sessions.restore');
         Route::get('members', [AdminMemberController::class, 'index'])->name('members.index');
         Route::patch('members/{user}/status', [AdminMemberController::class, 'updateStatus'])->name('members.status');
     });

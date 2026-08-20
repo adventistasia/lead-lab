@@ -42,33 +42,85 @@ declare global {
 
 const YOUTUBE_API_SOURCE = 'https://www.youtube.com/iframe_api';
 
-function loadYouTubeApi(onReady: () => void): () => void {
+let youtubeApiPromise: Promise<YouTubeApi> | null = null;
+
+function loadYouTubeApi(): Promise<YouTubeApi> {
     if (window.YT?.Player) {
-        onReady();
-
-        return () => undefined;
+        return Promise.resolve(window.YT);
     }
 
-    const previousReady = window.onYouTubeIframeAPIReady;
-    const ready = () => {
-        previousReady?.();
-        onReady();
-    };
-
-    window.onYouTubeIframeAPIReady = ready;
-
-    if (!document.querySelector(`script[src="${YOUTUBE_API_SOURCE}"]`)) {
-        const script = document.createElement('script');
-        script.src = YOUTUBE_API_SOURCE;
-        script.async = true;
-        document.head.appendChild(script);
+    if (youtubeApiPromise) {
+        return youtubeApiPromise;
     }
 
-    return () => {
-        if (window.onYouTubeIframeAPIReady === ready) {
-            window.onYouTubeIframeAPIReady = previousReady;
+    youtubeApiPromise = new Promise<YouTubeApi>((resolve, reject) => {
+        const script = document.querySelector<HTMLScriptElement>(
+            `script[src="${YOUTUBE_API_SOURCE}"]`,
+        );
+        const previousReady = window.onYouTubeIframeAPIReady;
+        let settled = false;
+
+        const cleanup = () => {
+            if (pollId !== undefined) {
+                window.clearInterval(pollId);
+            }
+
+            if (window.onYouTubeIframeAPIReady === ready) {
+                window.onYouTubeIframeAPIReady = previousReady;
+            }
+
+            script?.removeEventListener('error', handleError);
+        };
+
+        const resolveIfReady = () => {
+            if (settled || !window.YT?.Player) {
+                return;
+            }
+
+            settled = true;
+            cleanup();
+            resolve(window.YT);
+        };
+
+        const handleError = () => {
+            if (settled) {
+                return;
+            }
+
+            settled = true;
+            cleanup();
+            reject(new Error('YouTube playback API failed to load.'));
+        };
+
+        const ready = () => {
+            try {
+                previousReady?.();
+            } finally {
+                resolveIfReady();
+            }
+        };
+
+        window.onYouTubeIframeAPIReady = ready;
+
+        if (script) {
+            script.addEventListener('error', handleError, { once: true });
+        } else {
+            const nextScript = document.createElement('script');
+            nextScript.src = YOUTUBE_API_SOURCE;
+            nextScript.async = true;
+            nextScript.addEventListener('error', handleError, { once: true });
+            document.head.appendChild(nextScript);
         }
-    };
+
+        const pollId = window.setInterval(resolveIfReady, 50);
+        resolveIfReady();
+    }).catch((error) => {
+        youtubeApiPromise = null;
+
+        throw error;
+    });
+
+    return youtubeApiPromise;
 }
 
 function formatTime(seconds: number): string {
@@ -98,54 +150,51 @@ export function YouTubePlayer({
     const [isMuted, setIsMuted] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isReady, setIsReady] = useState(false);
+    const [loadError, setLoadError] = useState(false);
 
     useEffect(() => {
         let cancelled = false;
 
-        const initializePlayer = () => {
-            if (
-                cancelled ||
-                !iframeRef.current ||
-                !window.YT?.Player ||
-                playerRef.current
-            ) {
-                return;
-            }
+        loadYouTubeApi()
+            .then((youtube) => {
+                if (cancelled || !iframeRef.current || playerRef.current) {
+                    return;
+                }
 
-            playerRef.current = new window.YT.Player(iframeRef.current, {
-                events: {
-                    onReady: (event) => {
-                        if (cancelled) {
-                            return;
-                        }
+                playerRef.current = new youtube.Player(iframeRef.current, {
+                    events: {
+                        onReady: (event) => {
+                            if (cancelled) {
+                                return;
+                            }
 
-                        setDuration(event.target.getDuration());
-                        setIsReady(true);
+                            setDuration(event.target.getDuration());
+                            setIsReady(true);
+                        },
+                        onStateChange: (event) => {
+                            if (cancelled) {
+                                return;
+                            }
+
+                            setIsPlaying(event.data === 1);
+
+                            if (event.data === 0) {
+                                setCurrentTime(event.target.getDuration());
+                            }
+                        },
                     },
-                    onStateChange: (event) => {
-                        if (cancelled) {
-                            return;
-                        }
-
-                        setIsPlaying(event.data === 1);
-
-                        if (event.data === 0) {
-                            setCurrentTime(event.target.getDuration());
-                        }
-                    },
-                },
+                });
+            })
+            .catch(() => {
+                if (!cancelled) {
+                    setLoadError(true);
+                }
             });
-        };
-
-        const removeReadyHandler = loadYouTubeApi(initializePlayer);
 
         return () => {
             cancelled = true;
-            removeReadyHandler();
             playerRef.current?.destroy();
             playerRef.current = null;
-            setIsReady(false);
-            setIsPlaying(false);
         };
     }, [embedUrl]);
 
@@ -257,7 +306,9 @@ export function YouTubePlayer({
                 </div>
                 {!isReady && (
                     <p className="text-xs text-muted-foreground" role="status">
-                        Loading playback controls...
+                        {loadError
+                            ? 'Playback could not load. Refresh and try again.'
+                            : 'Loading playback controls...'}
                     </p>
                 )}
             </div>

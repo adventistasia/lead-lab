@@ -66,6 +66,7 @@ export default function SessionShow({ session }: { session: Session }) {
                         <CardContent>
                             {session.video_embed_url ? (
                                 <YouTubePlayer
+                                    key={`${session.id}-${session.video_embed_url}`}
                                     embedUrl={session.video_embed_url}
                                     title={session.title}
                                 />

@@ -18,8 +18,9 @@ use Illuminate\Support\Carbon;
  * @property string $description
  * @property string|null $video_url
  * @property bool $is_published
+ * @property Carbon|null $archived_at
  */
-#[Fillable(['title', 'category', 'session_date', 'description', 'video_url', 'is_published'])]
+#[Fillable(['title', 'category', 'session_date', 'description', 'video_url', 'is_published', 'archived_at'])]
 class LearningSession extends Model
 {
     /** @use HasFactory<LearningSessionFactory> */
@@ -30,6 +31,7 @@ class LearningSession extends Model
         return [
             'session_date' => 'date',
             'is_published' => 'boolean',
+            'archived_at' => 'datetime',
         ];
     }
 

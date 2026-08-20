@@ -15,7 +15,7 @@ class LeadLabAccessTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_admin_can_publish_a_session_with_a_protected_resource(): void
+    public function test_admin_can_save_a_session_as_a_draft_with_a_protected_resource(): void
     {
         Storage::fake('local');
         $admin = User::factory()->create(['role' => 'admin']);
@@ -26,7 +26,6 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'A practical session for building a weekly operating rhythm.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
-            'is_published' => true,
             'resource' => UploadedFile::fake()->createWithContent('worksheet.txt', 'Lead Lab worksheet'),
         ]);
 
@@ -34,8 +33,130 @@ class LeadLabAccessTest extends TestCase
         $resource = LearningResource::query()->where('learning_session_id', $session->id)->firstOrFail();
 
         $response->assertRedirect(route('admin.sessions.index'));
-        $this->assertTrue($session->is_published);
+        $this->assertFalse($session->is_published);
         $this->assertSame('worksheet.txt', $resource->title);
+        Storage::disk('local')->assertExists($resource->stored_path);
+    }
+
+    public function test_admin_can_publish_and_unpublish_a_session(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => false]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.publish', $session))
+            ->assertRedirect(route('admin.sessions.index'))
+            ->assertSessionHas(
+                'inertia.flash_data.toast.message',
+                'Session published to the Lead Lab classroom.',
+            );
+
+        $this->assertTrue($session->refresh()->is_published);
+        $this->actingAs($admin)
+            ->get(route('admin.sessions.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('sessions.0.id', $session->id)
+                ->where('sessions.0.is_published', true),
+            );
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.unpublish', $session))
+            ->assertRedirect(route('admin.sessions.index'));
+
+        $this->assertFalse($session->refresh()->is_published);
+        $this->actingAs($admin)
+            ->get(route('admin.sessions.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('sessions.0.id', $session->id)
+                ->where('sessions.0.is_published', false),
+            );
+    }
+
+    public function test_admin_classroom_reflects_lifecycle_changes_after_navigation(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => false]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.publish', $session))
+            ->assertRedirect(route('admin.sessions.index'));
+
+        $this->actingAs($admin)
+            ->get(route('admin.classroom.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('sessions', 1)
+                ->where('sessions.0.id', $session->id)
+                ->where('sessions.0.is_published', true)
+                ->where('sessions.0.is_archived', false),
+            );
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.archive', $session))
+            ->assertRedirect(route('admin.sessions.index'));
+
+        $this->actingAs($admin)
+            ->get(route('admin.classroom.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('sessions', 1)
+                ->where('sessions.0.id', $session->id)
+                ->where('sessions.0.is_published', true)
+                ->where('sessions.0.is_archived', true),
+            );
+    }
+
+    public function test_admin_can_edit_session_fields_and_replace_a_protected_resource(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create([
+            'title' => 'Original session title',
+            'video_url' => 'https://www.youtube.com/watch?v=oldVideo123',
+        ]);
+        $oldPath = 'lead-lab/resources/original.txt';
+        Storage::disk('local')->put($oldPath, 'Original material');
+        $session->resources()->create([
+            'title' => 'original.txt',
+            'stored_path' => $oldPath,
+            'mime_type' => 'text/plain',
+            'size' => 17,
+        ]);
+
+        $response = $this->actingAs($admin)->post(
+            route('admin.sessions.update', $session),
+            [
+                '_method' => 'PATCH',
+                'title' => 'Updated session title',
+                'category' => 'Conversation skills',
+                'session_date' => '2026-09-01',
+                'description' => 'The updated session description.',
+                'video_url' => 'https://youtu.be/newVideo456',
+                'resource' => UploadedFile::fake()->createWithContent(
+                    'updated.txt',
+                    'Updated material',
+                ),
+            ],
+        );
+
+        $session->refresh();
+        $resource = $session->resources()->firstOrFail();
+
+        $response
+            ->assertRedirect(route('admin.sessions.index'))
+            ->assertSessionHas(
+                'inertia.flash_data.toast.message',
+                'Session changes saved.',
+            );
+        $this->assertSame('Updated session title', $session->title);
+        $this->assertSame('Conversation skills', $session->category);
+        $this->assertSame('2026-09-01', $session->session_date->toDateString());
+        $this->assertSame('The updated session description.', $session->description);
+        $this->assertSame(
+            'https://www.youtube.com/watch?v=newVideo456',
+            $session->video_url,
+        );
+        $this->assertSame('updated.txt', $resource->title);
+        $this->assertNotSame($oldPath, $resource->stored_path);
+        Storage::disk('local')->assertMissing($oldPath);
         Storage::disk('local')->assertExists($resource->stored_path);
     }
 
@@ -49,7 +170,6 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'A session created from a pasted YouTube embed code.',
             'video_url' => '<iframe src="https://www.youtube.com/embed/abc123XYZ01?si=demo" title="Session recording"></iframe>',
-            'is_published' => true,
         ]);
 
         $session = LearningSession::query()->where('title', 'Embed code session')->firstOrFail();
@@ -71,7 +191,6 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'A session created from a short YouTube URL.',
             'video_url' => 'https://youtu.be/abc123XYZ01',
-            'is_published' => true,
         ])->assertRedirect(route('admin.sessions.index'));
 
         $this->assertDatabaseHas('learning_sessions', [
@@ -90,7 +209,6 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'A session created from a YouTube embed URL.',
             'video_url' => 'https://www.youtube.com/embed/abc123XYZ01',
-            'is_published' => true,
         ])->assertRedirect(route('admin.sessions.index'));
 
         $this->assertDatabaseHas('learning_sessions', [
@@ -109,7 +227,6 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'This should not be saved.',
             'video_url' => 'https://vimeo.com/123456789',
-            'is_published' => true,
         ]);
 
         $response->assertSessionHasErrors('video_url');
@@ -199,6 +316,51 @@ class LeadLabAccessTest extends TestCase
         $this->actingAs($admin)
             ->get(route('sessions.show', $session))
             ->assertOk();
+    }
+
+    public function test_archived_sessions_can_be_restored_and_are_hidden_from_participants(): void
+    {
+        Storage::fake('local');
+        $participant = User::factory()->create();
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => true]);
+        $resource = $session->resources()->create([
+            'title' => 'Archived notes.txt',
+            'stored_path' => 'lead-lab/resources/archived-notes.txt',
+            'mime_type' => 'text/plain',
+            'size' => 14,
+        ]);
+        Storage::disk('local')->put($resource->stored_path, 'Archived notes');
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.archive', $session))
+            ->assertRedirect();
+
+        $this->assertNotNull($session->refresh()->archived_at);
+        $this->actingAs($participant)
+            ->get(route('classroom.index'))
+            ->assertInertia(fn (Assert $assert) => $assert->has('sessions', 0));
+        $this->actingAs($participant)
+            ->get(route('dashboard'))
+            ->assertInertia(fn (Assert $assert) => $assert->has('sessions', 0));
+        $this->actingAs($participant)
+            ->get(route('sessions.show', $session))
+            ->assertNotFound();
+        $this->actingAs($participant)
+            ->get(route('resources.download', $resource))
+            ->assertNotFound();
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.restore', $session))
+            ->assertRedirect();
+
+        $this->assertNull($session->refresh()->archived_at);
+        $this->actingAs($participant)
+            ->get(route('classroom.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('sessions', 1)
+                ->where('sessions.0.id', $session->id),
+            );
     }
 
     public function test_non_admins_cannot_open_admin_pages(): void

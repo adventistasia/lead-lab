@@ -26,6 +26,7 @@ class LearningSessionController
 
         $query = LearningSession::query()
             ->where('is_published', true)
+            ->whereNull('archived_at')
             ->withCount('resources')
             ->filterForClassroom($search, $category, $dateFrom, $dateTo);
 
@@ -43,6 +44,7 @@ class LearningSessionController
 
         $categories = LearningSession::query()
             ->where('is_published', true)
+            ->whereNull('archived_at')
             ->distinct()
             ->orderBy('category')
             ->pluck('category')
@@ -62,7 +64,11 @@ class LearningSessionController
 
     public function show(Request $request, LearningSession $learningSession): Response
     {
-        abort_unless($learningSession->is_published || $request->user()->isAdmin(), 404);
+        abort_unless(
+            $request->user()->isAdmin()
+                || ($learningSession->is_published && $learningSession->archived_at === null),
+            404,
+        );
 
         $learningSession->load('resources');
 

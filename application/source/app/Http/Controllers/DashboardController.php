@@ -13,6 +13,7 @@ class DashboardController
     {
         $sessions = LearningSession::query()
             ->where('is_published', true)
+            ->whereNull('archived_at')
             ->withCount('resources')
             ->orderBy('session_date')
             ->get()
