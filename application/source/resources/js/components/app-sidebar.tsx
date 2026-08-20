@@ -30,7 +30,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Classroom',
-        href: '/dashboard#classroom',
+        href: '/classroom',
         icon: BookOpen,
     },
     {

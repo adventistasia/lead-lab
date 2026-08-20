@@ -97,6 +97,9 @@ class LeadLabAccessTest extends TestCase
         $this->get(route('sessions.show', $session))
             ->assertRedirect(route('login'));
 
+        $this->get(route('classroom.index'))
+            ->assertRedirect(route('login'));
+
         $this->get(route('resources.download', $resource))
             ->assertRedirect(route('login'));
     }
@@ -152,6 +155,32 @@ class LeadLabAccessTest extends TestCase
             ->has('sessions', 2)
             ->where('sessions.0.id', $draft->id)
             ->where('sessions.1.id', $published->id),
+        );
+    }
+
+    public function test_participants_can_open_published_classroom_recordings_page(): void
+    {
+        $participant = User::factory()->create();
+        $published = LearningSession::factory()->create([
+            'title' => 'Published participant recording',
+            'session_date' => '2026-08-28',
+            'is_published' => true,
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Draft participant recording',
+            'session_date' => '2026-09-02',
+            'is_published' => false,
+        ]);
+
+        $response = $this->actingAs($participant)
+            ->get(route('classroom.index'));
+
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $assert) => $assert
+            ->component('classroom/index')
+            ->has('sessions', 1)
+            ->where('sessions.0.id', $published->id)
+            ->where('sessions.0.title', 'Published participant recording'),
         );
     }
 

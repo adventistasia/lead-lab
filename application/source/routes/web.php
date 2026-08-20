@@ -11,6 +11,7 @@ Route::inertia('/', 'welcome')->name('home');
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('classroom', [LearningSessionController::class, 'index'])->name('classroom.index');
     Route::get('sessions/{learningSession}', [LearningSessionController::class, 'show'])->name('sessions.show');
     Route::get('resources/{learningResource}/download', [LearningResourceController::class, 'download'])->name('resources.download');
 
