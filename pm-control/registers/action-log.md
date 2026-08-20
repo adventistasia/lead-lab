@@ -18,7 +18,7 @@ Project: Lead Lab
 | ACT-09 | Reconcile the application-managed account direction, participant-data rules, and `RQ-18 (Microsoft 365 SSO should be used for the new application)` in the canonical decision and dependency records | TBD | Proposed | High | Before technical commitment and participant use | DEP-09, ISS-04, RQ-18, LL-20 | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/run-manifest.md` (user direction); `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` (blocking gap); verified 2026-08-19 | 2026-08-19 |
 | ACT-10 | Implement and verify administrative activity logging before launch acceptance | TBD | Proposed | High | Before launch | ISS-10, LL-16, RQ-11 | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` (security finding and blocking gap); verified 2026-08-19 | 2026-08-19 |
 | ACT-11 | Complete the Gate 1 environment and ownership evidence pack: target server and software versions, staging URL, deployment path, rollback method, private storage, HTTPS, backup and restore, monitoring and logs, technical owner, human primary developer, IT operator, protected delivery time, authentication direction, and participant-data rules | Unassigned | Proposed | High | Next week, exact date not baselined; before Gate 1 reassessment and before the vertical slice is treated as an authorized staging commitment | ACT-06 (Confirm Option B transition conditions); ACT-09 (Reconcile authentication and participant-data direction); D-05 (team server readiness and production URL); DEP-09 (Option B authentication and participant-data handling) | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` (Target Environment Evidence Needed, Ownership Evidence Needed, Authentication and Participant Data, Required Next Actions); user request, 2026-08-20 | 2026-08-20 |
-| ACT-12 | Implement participant Classroom recordings navigation and a published-session recordings page for CHG-05 (Extend CHG-02 to participants) | Unassigned | In Progress | High | Before feature freeze and launch acceptance | CHG-05, CHG-02, D-14, RQ-20, R-03, ISS-09, DEP-07 | User PM approval and implementation direction, 2026-08-20; `projects/lead-lab/pm-control/registers/change-log.md` (CHG-05); `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` (RQ-20); `projects/lead-lab/application/runs/2026-08-20-chg-05-participant-classroom/stages/03-build/build-handoff.md` | 2026-08-20 |
+| ACT-12 | Implement participant Classroom recordings navigation and a published-session recordings page for CHG-05 (Extend CHG-02 to participants) | Unassigned | Resolved | High | Before feature freeze and launch acceptance | CHG-05, CHG-02, D-14, RQ-20, R-03, ISS-09, DEP-07 | User PM approval and implementation direction, 2026-08-20; Conversation (PM update, 2026-08-20: CHG-05 checked and works); `projects/lead-lab/pm-control/registers/change-log.md` (CHG-05); `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` (RQ-20); `projects/lead-lab/application/runs/2026-08-20-chg-05-participant-classroom/stages/03-build/build-handoff.md` | 2026-08-20 |
 
 ## State
 
@@ -38,7 +38,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Open or in progress | 5 |
+| Open or in progress | 4 |
 | Overdue | 0 |
 | Blocked | 0 |
 | Total actions | 12 |
