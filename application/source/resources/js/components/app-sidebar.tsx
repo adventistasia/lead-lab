@@ -5,7 +5,6 @@ import {
     LayoutDashboard,
     MessageSquareText,
     Search,
-    Settings2,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
@@ -60,11 +59,6 @@ export function AppSidebar() {
                           ? { ...item, href: '/admin/classroom' }
                           : item,
                   ),
-                  {
-                      title: 'Admin',
-                      href: '/admin/sessions',
-                      icon: Settings2,
-                  },
               ]
             : mainNavItems;
 

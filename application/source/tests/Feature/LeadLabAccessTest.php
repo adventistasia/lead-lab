@@ -94,6 +94,49 @@ class LeadLabAccessTest extends TestCase
             );
     }
 
+    public function test_admin_classroom_lifecycle_actions_return_to_classroom(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => false]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.publish', [
+                'learningSession' => $session,
+                'return_to' => 'classroom',
+            ]))
+            ->assertRedirect(route('admin.classroom.index'));
+
+        $this->assertTrue($session->refresh()->is_published);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.unpublish', [
+                'learningSession' => $session,
+                'return_to' => 'classroom',
+            ]))
+            ->assertRedirect(route('admin.classroom.index'));
+
+        $this->assertFalse($session->refresh()->is_published);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.archive', [
+                'learningSession' => $session,
+                'return_to' => 'classroom',
+            ]))
+            ->assertRedirect(route('admin.classroom.index'));
+
+        $this->assertNotNull($session->refresh()->archived_at);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.sessions.restore', [
+                'learningSession' => $session,
+                'return_to' => 'classroom',
+            ]))
+            ->assertRedirect(route('admin.classroom.index'));
+
+        $this->assertNull($session->refresh()->archived_at);
+        $this->assertFalse($session->is_published);
+    }
+
     public function test_admin_classroom_reflects_lifecycle_changes_after_navigation(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);

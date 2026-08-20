@@ -146,36 +146,53 @@ class AdminLearningSessionController
         return to_route('admin.sessions.index');
     }
 
-    public function publish(LearningSession $learningSession): RedirectResponse
-    {
+    public function publish(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
         $learningSession->update(['is_published' => true]);
         $this->flashSuccess('Session published to the Lead Lab classroom.');
 
-        return to_route('admin.sessions.index');
+        return $this->lifecycleRedirect($request);
     }
 
-    public function unpublish(LearningSession $learningSession): RedirectResponse
-    {
+    public function unpublish(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
         $learningSession->update(['is_published' => false]);
         $this->flashSuccess('Session unpublished from the Lead Lab classroom.');
 
-        return to_route('admin.sessions.index');
+        return $this->lifecycleRedirect($request);
     }
 
-    public function archive(LearningSession $learningSession): RedirectResponse
-    {
+    public function archive(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
         $learningSession->update(['archived_at' => now()]);
         $this->flashSuccess('Session archived.');
 
-        return to_route('admin.sessions.index');
+        return $this->lifecycleRedirect($request);
     }
 
-    public function restore(LearningSession $learningSession): RedirectResponse
-    {
+    public function restore(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
         $learningSession->update(['archived_at' => null]);
         $this->flashSuccess('Session restored.');
 
-        return to_route('admin.sessions.index');
+        return $this->lifecycleRedirect($request);
+    }
+
+    private function lifecycleRedirect(Request $request): RedirectResponse
+    {
+        return to_route(
+            $request->input('return_to') === 'classroom'
+                ? 'admin.classroom.index'
+                : 'admin.sessions.index',
+        );
     }
 
     /**

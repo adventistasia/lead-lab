@@ -1,9 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
-import { ArrowRight, CalendarDays, LibraryBig } from 'lucide-react';
+import { CalendarDays, LibraryBig } from 'lucide-react';
 import { ClassroomFilters } from '@/components/classroom-filters';
 import type { ClassroomFilterValues } from '@/components/classroom-filters';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
@@ -97,7 +96,12 @@ export default function Classroom({
                                         </div>
                                         <div className="min-w-0 flex-1">
                                             <h2 className="font-medium">
-                                                {session.title}
+                                                <Link
+                                                    href={`/sessions/${session.id}`}
+                                                    className="hover:underline"
+                                                >
+                                                    {session.title}
+                                                </Link>
                                             </h2>
                                             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
                                                 <span>{session.category}</span>
@@ -115,18 +119,6 @@ export default function Classroom({
                                                 </span>
                                             </div>
                                         </div>
-                                        <Button
-                                            asChild
-                                            className="w-full md:w-auto"
-                                            variant="outline"
-                                        >
-                                            <Link
-                                                href={`/sessions/${session.id}`}
-                                            >
-                                                Open recording
-                                                <ArrowRight data-icon="inline-end" />
-                                            </Link>
-                                        </Button>
                                     </div>
                                 ))}
                             </div>

@@ -1,11 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import {
-    ArrowRight,
-    CalendarDays,
-    LibraryBig,
-    Plus,
-    Upload,
-} from 'lucide-react';
+import { CalendarDays, LibraryBig, Plus, Upload } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { ClassroomFilters } from '@/components/classroom-filters';
@@ -31,6 +25,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { dashboard } from '@/routes';
 
 type Recording = {
@@ -41,6 +42,24 @@ type Recording = {
     is_published: boolean;
     is_archived: boolean;
     resources_count: number;
+};
+
+type LifecycleAction = 'publish' | 'unpublish' | 'archive' | 'restore';
+
+const lifecycleActions = (
+    session: Recording,
+): Array<{ value: LifecycleAction; label: string }> => {
+    if (session.is_archived) {
+        return [{ value: 'restore', label: 'Restore' }];
+    }
+
+    return [
+        {
+            value: session.is_published ? 'unpublish' : 'publish',
+            label: session.is_published ? 'Unpublish' : 'Publish',
+        },
+        { value: 'archive', label: 'Archive' },
+    ];
 };
 
 export default function AdminClassroom({
@@ -54,6 +73,10 @@ export default function AdminClassroom({
 }) {
     const [isAddSessionOpen, setIsAddSessionOpen] = useState(false);
     const [formVersion, setFormVersion] = useState(0);
+    const [selectedAction, setSelectedAction] = useState<{
+        sessionId: number;
+        action: LifecycleAction;
+    } | null>(null);
     const form = useForm<SessionFormData>({
         title: '',
         category: '',
@@ -62,6 +85,7 @@ export default function AdminClassroom({
         video_url: '',
         resource: null,
     });
+    const lifecycleForm = useForm({});
     const hasFilters =
         filters.search.trim() !== '' ||
         filters.category !== '' ||
@@ -98,6 +122,28 @@ export default function AdminClassroom({
         });
     };
 
+    const changeLifecycle = (session: Recording, action: LifecycleAction) => {
+        if (
+            action === 'archive' &&
+            !window.confirm(
+                `Archive "${session.title}"? Participants will no longer see it.`,
+            )
+        ) {
+            setSelectedAction(null);
+
+            return;
+        }
+
+        lifecycleForm.patch(
+            `/admin/sessions/${session.id}/${action}?return_to=classroom`,
+            {
+                preserveScroll: true,
+                preserveState: false,
+                onFinish: () => setSelectedAction(null),
+            },
+        );
+    };
+
     return (
         <>
             <Head title="Classroom recordings" />
@@ -111,8 +157,7 @@ export default function AdminClassroom({
                     </h1>
                     <p className="max-w-2xl text-base leading-7 text-muted-foreground">
                         Review every recording in the classroom, including draft
-                        and archived sessions, before opening the protected
-                        session view.
+                        and archived sessions, and manage its publication state.
                     </p>
                     <ClassroomFilters
                         action="/admin/classroom"
@@ -176,7 +221,12 @@ export default function AdminClassroom({
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex flex-wrap items-center gap-2">
                                                     <h2 className="font-medium">
-                                                        {session.title}
+                                                        <Link
+                                                            href={`/sessions/${session.id}`}
+                                                            className="hover:underline"
+                                                        >
+                                                            {session.title}
+                                                        </Link>
                                                     </h2>
                                                     <Badge
                                                         variant={
@@ -214,18 +264,48 @@ export default function AdminClassroom({
                                                     </span>
                                                 </div>
                                             </div>
-                                            <Button
-                                                asChild
-                                                className="w-full md:w-auto"
-                                                variant="outline"
+                                            <Select
+                                                value={
+                                                    selectedAction?.sessionId ===
+                                                    session.id
+                                                        ? selectedAction.action
+                                                        : ''
+                                                }
+                                                onValueChange={(value) => {
+                                                    const action =
+                                                        value as LifecycleAction;
+                                                    setSelectedAction({
+                                                        sessionId: session.id,
+                                                        action,
+                                                    });
+                                                    changeLifecycle(
+                                                        session,
+                                                        action,
+                                                    );
+                                                }}
                                             >
-                                                <Link
-                                                    href={`/sessions/${session.id}`}
+                                                <SelectTrigger
+                                                    className="w-full md:w-[11rem]"
+                                                    aria-label={`Actions for ${session.title}`}
+                                                    disabled={
+                                                        lifecycleForm.processing
+                                                    }
                                                 >
-                                                    Open recording
-                                                    <ArrowRight data-icon="inline-end" />
-                                                </Link>
-                                            </Button>
+                                                    <SelectValue placeholder="Session actions" />
+                                                </SelectTrigger>
+                                                <SelectContent align="end">
+                                                    {lifecycleActions(
+                                                        session,
+                                                    ).map((option) => (
+                                                        <SelectItem
+                                                            key={option.value}
+                                                            value={option.value}
+                                                        >
+                                                            {option.label}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
                                         </div>
                                     ))}
                                 </div>
