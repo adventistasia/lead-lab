@@ -7,7 +7,6 @@ import {
     Clock3,
     MessageSquareText,
     Play,
-    Search,
     UsersRound,
 } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -403,29 +402,6 @@ export default function Dashboard({
                             </div>
                         </CardContent>
                     </Card>
-                </section>
-
-                <section
-                    id="search"
-                    className="flex scroll-mt-8 flex-col gap-3 rounded-xl border border-dashed bg-muted/20 p-5"
-                >
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                        <div className="flex flex-col gap-1">
-                            <p className="font-medium">
-                                Find a session or resource
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                                Search published classroom content by title,
-                                category, date, or resource.
-                            </p>
-                        </div>
-                        <Button asChild variant="outline">
-                            <Link href="/classroom">
-                                <Search data-icon="inline-start" />
-                                Open classroom search
-                            </Link>
-                        </Button>
-                    </div>
                 </section>
             </div>
         </>

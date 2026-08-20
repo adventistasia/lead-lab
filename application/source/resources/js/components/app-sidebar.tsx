@@ -4,7 +4,6 @@ import {
     CalendarDays,
     LayoutDashboard,
     MessageSquareText,
-    Search,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
@@ -41,11 +40,6 @@ const mainNavItems: NavItem[] = [
         title: 'Calendar',
         href: '/dashboard#calendar',
         icon: CalendarDays,
-    },
-    {
-        title: 'Search',
-        href: '/dashboard#search',
-        icon: Search,
     },
 ];
 
