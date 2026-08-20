@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\LearningResource;
 use App\Models\LearningSession;
+use App\Support\YouTubeVideoReference;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
+use InvalidArgumentException;
 
 class AdminLearningSessionController
 {
@@ -32,17 +35,25 @@ class AdminLearningSessionController
             'category' => ['required', 'string', 'max:80'],
             'session_date' => ['required', 'date'],
             'description' => ['required', 'string', 'max:5000'],
-            'video_url' => ['nullable', 'url', 'max:500'],
+            'video_url' => ['nullable', 'string', 'max:2000'],
             'is_published' => ['sometimes', 'boolean'],
             'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
         ]);
+
+        try {
+            $videoUrl = YouTubeVideoReference::normalize($validated['video_url'] ?? null);
+        } catch (InvalidArgumentException $exception) {
+            throw ValidationException::withMessages([
+                'video_url' => $exception->getMessage(),
+            ]);
+        }
 
         $session = LearningSession::create([
             'title' => $validated['title'],
             'category' => $validated['category'],
             'session_date' => $validated['session_date'],
             'description' => $validated['description'],
-            'video_url' => $validated['video_url'] ?? null,
+            'video_url' => $videoUrl,
             'is_published' => $validated['is_published'] ?? false,
         ]);
 

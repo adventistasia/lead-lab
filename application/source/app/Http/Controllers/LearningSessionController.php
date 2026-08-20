@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LearningSession;
+use App\Support\YouTubeVideoReference;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -36,6 +37,8 @@ class LearningSessionController
 
         $learningSession->load('resources');
 
+        $videoUrl = $learningSession->video_url;
+
         return Inertia::render('sessions/show', [
             'session' => [
                 'id' => $learningSession->id,
@@ -43,7 +46,10 @@ class LearningSessionController
                 'category' => $learningSession->category,
                 'session_date' => $learningSession->session_date->toFormattedDateString(),
                 'description' => $learningSession->description,
-                'video_embed_url' => $this->youtubeEmbedUrl($learningSession->video_url),
+                'video_embed_url' => YouTubeVideoReference::embedUrl(
+                    $videoUrl,
+                    $request->getSchemeAndHttpHost(),
+                ),
                 'resources' => $learningSession->resources->map(fn ($resource): array => [
                     'id' => $resource->id,
                     'title' => $resource->title,
@@ -52,32 +58,5 @@ class LearningSessionController
                 ])->values(),
             ],
         ]);
-    }
-
-    private function youtubeEmbedUrl(?string $url): ?string
-    {
-        if (! $url) {
-            return null;
-        }
-
-        $parsed = parse_url($url);
-        $host = is_array($parsed) ? ($parsed['host'] ?? '') : '';
-        $path = is_array($parsed) ? trim($parsed['path'] ?? '', '/') : '';
-        $videoId = null;
-
-        if (str_contains($host, 'youtu.be')) {
-            $candidate = strtok($path, '/');
-            $videoId = is_string($candidate) ? $candidate : null;
-        } elseif (is_array($parsed) && isset($parsed['query'])) {
-            parse_str($parsed['query'], $query);
-            $candidate = $query['v'] ?? null;
-            $videoId = is_string($candidate) ? $candidate : null;
-        } elseif (preg_match('#(?:embed|shorts)/([^/?]+)#', $path, $matches)) {
-            $videoId = $matches[1];
-        }
-
-        return $videoId
-            ? 'https://www.youtube-nocookie.com/embed/'.rawurlencode($videoId)
-            : null;
     }
 }

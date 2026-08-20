@@ -25,7 +25,7 @@ class LeadLabAccessTest extends TestCase
             'category' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'A practical session for building a weekly operating rhythm.',
-            'video_url' => 'https://www.youtube.com/watch?v=abc123',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
             'is_published' => true,
             'resource' => UploadedFile::fake()->createWithContent('worksheet.txt', 'Lead Lab worksheet'),
         ]);
@@ -39,12 +39,91 @@ class LeadLabAccessTest extends TestCase
         Storage::disk('local')->assertExists($resource->stored_path);
     }
 
+    public function test_admin_can_save_a_full_youtube_embed_code(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Embed code session',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-28',
+            'description' => 'A session created from a pasted YouTube embed code.',
+            'video_url' => '<iframe src="https://www.youtube.com/embed/abc123XYZ01?si=demo" title="Session recording"></iframe>',
+            'is_published' => true,
+        ]);
+
+        $session = LearningSession::query()->where('title', 'Embed code session')->firstOrFail();
+
+        $response->assertRedirect(route('admin.sessions.index'));
+        $this->assertSame(
+            'https://www.youtube.com/watch?v=abc123XYZ01',
+            $session->video_url,
+        );
+    }
+
+    public function test_admin_can_save_a_short_youtube_url(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Short URL session',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-28',
+            'description' => 'A session created from a short YouTube URL.',
+            'video_url' => 'https://youtu.be/abc123XYZ01',
+            'is_published' => true,
+        ])->assertRedirect(route('admin.sessions.index'));
+
+        $this->assertDatabaseHas('learning_sessions', [
+            'title' => 'Short URL session',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ]);
+    }
+
+    public function test_admin_can_save_a_youtube_embed_url(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Embed URL session',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-28',
+            'description' => 'A session created from a YouTube embed URL.',
+            'video_url' => 'https://www.youtube.com/embed/abc123XYZ01',
+            'is_published' => true,
+        ])->assertRedirect(route('admin.sessions.index'));
+
+        $this->assertDatabaseHas('learning_sessions', [
+            'title' => 'Embed URL session',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ]);
+    }
+
+    public function test_admin_cannot_save_a_non_youtube_video_reference(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Invalid video session',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-28',
+            'description' => 'This should not be saved.',
+            'video_url' => 'https://vimeo.com/123456789',
+            'is_published' => true,
+        ]);
+
+        $response->assertSessionHasErrors('video_url');
+        $this->assertDatabaseMissing('learning_sessions', [
+            'title' => 'Invalid video session',
+        ]);
+    }
+
     public function test_participants_can_view_published_sessions_and_download_resources(): void
     {
         Storage::fake('local');
         $participant = User::factory()->create();
         $session = LearningSession::factory()->create([
-            'video_url' => 'https://www.youtube.com/watch?v=abc123',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
         ]);
         $resource = $session->resources()->create([
             'title' => 'Session notes.txt',
@@ -59,7 +138,10 @@ class LeadLabAccessTest extends TestCase
         $page->assertOk();
         $page->assertInertia(fn (Assert $assert) => $assert
             ->component('sessions/show')
-            ->where('session.video_embed_url', 'https://www.youtube-nocookie.com/embed/abc123')
+            ->where(
+                'session.video_embed_url',
+                'https://www.youtube-nocookie.com/embed/abc123XYZ01?controls=0&rel=0&playsinline=1&iv_load_policy=3&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8000',
+            )
             ->has('session.resources', 1),
         );
 

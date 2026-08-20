@@ -9,6 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { YouTubePlayer } from '@/components/youtube-player';
 import { dashboard } from '@/routes';
 
 type SessionResource = {
@@ -64,15 +65,10 @@ export default function SessionShow({ session }: { session: Session }) {
                         </CardHeader>
                         <CardContent>
                             {session.video_embed_url ? (
-                                <div className="overflow-hidden rounded-xl bg-muted">
-                                    <iframe
-                                        className="aspect-video w-full border-0"
-                                        src={session.video_embed_url}
-                                        title={session.title}
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowFullScreen
-                                    />
-                                </div>
+                                <YouTubePlayer
+                                    embedUrl={session.video_embed_url}
+                                    title={session.title}
+                                />
                             ) : (
                                 <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl bg-muted text-center">
                                     <Play className="size-6 text-muted-foreground" />

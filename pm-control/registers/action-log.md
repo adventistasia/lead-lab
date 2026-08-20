@@ -8,7 +8,7 @@ Project: Lead Lab
 | ID | Action | Owner | State | Priority | Due or trigger | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|
 | ACT-01 | Configure the staging theme for the accepted prototype feature scope and run prototype validation | IT team | Superseded | High | CHG-01 approved; do not continue the WordPress theme build | CHG-01, D-10, R-01 | Conversation (PM update, 2026-08-18); `projects/lead-lab/pm-control/registers/change-log.md` (CHG-01) | 2026-08-19 |
-| ACT-02 | Test embedded-video configuration against URL copying or discovery and define acceptable protection for the Option B application | IT team | In Progress | High | Before Option B acceptance | BL-22, R-12, AL-10, CHG-01, D-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` (RQ-17); `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` (RQ-17 residual risk) | 2026-08-20 |
+| ACT-02 | Test embedded-video configuration against URL copying or discovery and define acceptable protection for the Option B application | IT team | Resolved | High | Before Option B acceptance | BL-22, R-12, AL-10, CHG-01, D-10, D-15 (Accept the standard YouTube embed limitation for MVP session recordings) | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` (RQ-17); `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` (RQ-17 residual risk); `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 10.38.23 AM.png` (user-supplied ACT-02 evidence); `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 11.18.09 AM.png` (user-supplied browser evidence); `projects/lead-lab/application/runs/2026-08-20-act-02-youtube-embed-protection/` (design, build, and measure handoffs); `projects/lead-lab/pm-control/registers/decision-log.md` (D-15) | 2026-08-20 |
 | ACT-03 | Complete production domain, DNS, SSL, backup, and uptime setup for the Option B application | IT team | Open | Medium | Before production deployment | D-05, BL-03, R-08 to R-10, CHG-01, D-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/decision-log.md` (D-05); `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` (ENV-04, ENV-05, VS-08) | 2026-08-19 |
 | ACT-04 | Obtain LeadLab Director final approval before the Option B launch or SharePoint fallback decision | Requester | Open | High | Before launch | DEP-07, BL-12, CHG-01, D-10 | `projects/lead-lab/CONTEXT.md`; `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` | 2026-08-19 |
 | ACT-05 | Define IT patch, backup, uptime, and incident procedures for post-launch maintenance of the Option B application and server | IT team | Open | Medium | Before launch | D-03, R-05, R-08 to R-10, CHG-01, D-10 | Conversation (PM update, 2026-08-18); `projects/lead-lab/artifacts/logs and registers/risk-register.md` (R-05, R-08 to R-10); `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` (ENV-05 and security findings) | 2026-08-19 |
@@ -38,7 +38,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Open or in progress | 4 |
+| Open or in progress | 3 |
 | Overdue | 0 |
 | Blocked | 0 |
 | Total actions | 12 |

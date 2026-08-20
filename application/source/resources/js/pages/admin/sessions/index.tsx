@@ -218,11 +218,11 @@ export default function AdminSessions({
                                         )}
                                     >
                                         <FieldLabel htmlFor="video_url">
-                                            YouTube URL
+                                            YouTube URL or embed code
                                         </FieldLabel>
                                         <Input
                                             id="video_url"
-                                            type="url"
+                                            type="text"
                                             value={form.data.video_url}
                                             onChange={(event) =>
                                                 form.setData(
@@ -233,11 +233,13 @@ export default function AdminSessions({
                                             aria-invalid={Boolean(
                                                 form.errors.video_url,
                                             )}
-                                            placeholder="https://www.youtube.com/watch?v=..."
+                                            placeholder="Paste a YouTube URL or <iframe ...> code"
                                         />
                                         <FieldDescription>
-                                            Authenticated participants may still
-                                            discover or share an embedded URL.
+                                            Paste once. The application extracts
+                                            the video and builds the protected
+                                            player automatically. Use Unlisted
+                                            videos for participant recordings.
                                         </FieldDescription>
                                         <FieldError>
                                             {form.errors.video_url}
