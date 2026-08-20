@@ -240,6 +240,48 @@ class LeadLabAccessTest extends TestCase
         );
     }
 
+    public function test_admin_can_filter_published_and_draft_classroom_recordings(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $matchingDraft = LearningSession::factory()->create([
+            'title' => 'Private launch workshop',
+            'category' => 'Preview sessions',
+            'session_date' => '2026-08-28',
+            'is_published' => false,
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Published launch workshop',
+            'category' => 'Preview sessions',
+            'session_date' => '2026-08-10',
+            'is_published' => true,
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Outside filter window',
+            'category' => 'Preview sessions',
+            'session_date' => '2026-09-10',
+            'is_published' => false,
+        ]);
+
+        $response = $this->actingAs($admin)->get(route('admin.classroom.index', [
+            'search' => 'Private launch',
+            'category' => 'Preview sessions',
+            'date_from' => '2026-08-20',
+            'date_to' => '2026-08-31',
+        ]));
+
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $assert) => $assert
+            ->component('admin/classroom/index')
+            ->has('sessions', 1)
+            ->where('sessions.0.id', $matchingDraft->id)
+            ->where('sessions.0.is_published', false)
+            ->where('filters.search', 'Private launch')
+            ->where('filters.category', 'Preview sessions')
+            ->where('filters.date_from', '2026-08-20')
+            ->where('filters.date_to', '2026-08-31')
+        );
+    }
+
     public function test_participants_can_open_published_classroom_recordings_page(): void
     {
         $participant = User::factory()->create();
@@ -264,6 +306,91 @@ class LeadLabAccessTest extends TestCase
             ->where('sessions.0.id', $published->id)
             ->where('sessions.0.title', 'Published participant recording'),
         );
+    }
+
+    public function test_participants_can_search_sessions_and_resource_metadata(): void
+    {
+        $participant = User::factory()->create();
+        $matching = LearningSession::factory()->create([
+            'title' => 'Build a consistent follow-up rhythm',
+            'category' => 'Conversation skills',
+            'description' => 'A practical session for better outreach follow-up.',
+            'session_date' => '2026-08-28',
+        ]);
+        $matching->resources()->create([
+            'title' => 'Follow-up worksheet.txt',
+            'stored_path' => 'lead-lab/resources/follow-up.txt',
+            'mime_type' => 'text/plain',
+            'size' => 10,
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Unrelated session',
+            'category' => 'Execution rhythm',
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Matching draft',
+            'is_published' => false,
+        ]);
+
+        $response = $this->actingAs($participant)->get(route('classroom.index', [
+            'search' => 'worksheet',
+        ]));
+
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $assert) => $assert
+            ->component('classroom/index')
+            ->has('sessions', 1)
+            ->where('sessions.0.id', $matching->id)
+            ->where('filters.search', 'worksheet')
+        );
+    }
+
+    public function test_participants_can_filter_sessions_by_category_and_date_range(): void
+    {
+        $participant = User::factory()->create();
+        $matching = LearningSession::factory()->create([
+            'title' => 'In-range conversation session',
+            'category' => 'Conversation skills',
+            'session_date' => '2026-08-28',
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Wrong category',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-28',
+        ]);
+        LearningSession::factory()->create([
+            'title' => 'Outside date range',
+            'category' => 'Conversation skills',
+            'session_date' => '2026-09-12',
+        ]);
+
+        $response = $this->actingAs($participant)->get(route('classroom.index', [
+            'category' => 'Conversation skills',
+            'date_from' => '2026-08-20',
+            'date_to' => '2026-08-31',
+        ]));
+
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $assert) => $assert
+            ->component('classroom/index')
+            ->has('sessions', 1)
+            ->where('sessions.0.id', $matching->id)
+            ->where('filters.category', 'Conversation skills')
+            ->where('filters.date_from', '2026-08-20')
+            ->where('filters.date_to', '2026-08-31')
+        );
+    }
+
+    public function test_invalid_classroom_date_range_is_rejected(): void
+    {
+        $participant = User::factory()->create();
+
+        $this->actingAs($participant)
+            ->get(route('classroom.index', [
+                'date_from' => '2026-09-01',
+                'date_to' => '2026-08-01',
+            ]))
+            ->assertSessionHasErrors('date_to');
     }
 
     public function test_revoked_users_are_logged_out_of_lead_lab_routes(): void

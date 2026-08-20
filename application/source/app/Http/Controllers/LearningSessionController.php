@@ -10,11 +10,26 @@ use Inertia\Response;
 
 class LearningSessionController
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $sessions = LearningSession::query()
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:120'],
+            'category' => ['nullable', 'string', 'max:80'],
+            'date_from' => ['nullable', 'date'],
+            'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
+        ]);
+
+        $search = trim((string) ($validated['search'] ?? ''));
+        $category = trim((string) ($validated['category'] ?? ''));
+        $dateFrom = $validated['date_from'] ?? null;
+        $dateTo = $validated['date_to'] ?? null;
+
+        $query = LearningSession::query()
             ->where('is_published', true)
             ->withCount('resources')
+            ->filterForClassroom($search, $category, $dateFrom, $dateTo);
+
+        $sessions = $query
             ->orderByDesc('session_date')
             ->get()
             ->map(fn (LearningSession $session): array => [
@@ -26,8 +41,22 @@ class LearningSessionController
             ])
             ->values();
 
+        $categories = LearningSession::query()
+            ->where('is_published', true)
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category')
+            ->values();
+
         return Inertia::render('classroom/index', [
             'sessions' => $sessions,
+            'categories' => $categories,
+            'filters' => [
+                'search' => $search,
+                'category' => $category,
+                'date_from' => $dateFrom,
+                'date_to' => $dateTo,
+            ],
         ]);
     }
 

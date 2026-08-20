@@ -21,7 +21,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import { dashboard } from '@/routes';
@@ -416,18 +415,16 @@ export default function Dashboard({
                                 Find a session or resource
                             </p>
                             <p className="text-sm text-muted-foreground">
-                                Search and filters will connect to the classroom
-                                content model next.
+                                Search published classroom content by title,
+                                category, date, or resource.
                             </p>
                         </div>
-                        <div className="relative w-full sm:w-72">
-                            <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-                            <Input
-                                aria-label="Search sessions and resources"
-                                className="pl-9"
-                                placeholder="Search the classroom"
-                            />
-                        </div>
+                        <Button asChild variant="outline">
+                            <Link href="/classroom">
+                                <Search data-icon="inline-start" />
+                                Open classroom search
+                            </Link>
+                        </Button>
                     </div>
                 </section>
             </div>

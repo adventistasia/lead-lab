@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, CalendarDays, LibraryBig } from 'lucide-react';
+import { ClassroomFilters } from '@/components/classroom-filters';
+import type { ClassroomFilterValues } from '@/components/classroom-filters';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,9 +24,19 @@ type Recording = {
 
 export default function AdminClassroom({
     sessions,
+    categories,
+    filters,
 }: {
     sessions: Recording[];
+    categories: string[];
+    filters: ClassroomFilterValues;
 }) {
+    const hasFilters =
+        filters.search.trim() !== '' ||
+        filters.category !== '' ||
+        filters.date_from !== null ||
+        filters.date_to !== null;
+
     return (
         <>
             <Head title="Classroom recordings" />
@@ -40,6 +52,11 @@ export default function AdminClassroom({
                         Review every recording in the classroom, including draft
                         sessions, before opening the protected session view.
                     </p>
+                    <ClassroomFilters
+                        action="/admin/classroom"
+                        categories={categories}
+                        filters={filters}
+                    />
                 </div>
 
                 <Card>
@@ -58,10 +75,15 @@ export default function AdminClassroom({
                         {sessions.length === 0 ? (
                             <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed p-8 text-center">
                                 <LibraryBig className="size-6 text-muted-foreground" />
-                                <p className="font-medium">No recordings yet</p>
+                                <p className="font-medium">
+                                    {hasFilters
+                                        ? 'No recordings match these filters'
+                                        : 'No recordings yet'}
+                                </p>
                                 <p className="text-sm text-muted-foreground">
-                                    Publish a session from the admin area to add
-                                    the first recording.
+                                    {hasFilters
+                                        ? 'Try a broader search or clear the filters.'
+                                        : 'Publish a session from the admin area to add the first recording.'}
                                 </p>
                             </div>
                         ) : (

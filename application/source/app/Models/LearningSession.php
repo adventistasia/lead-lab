@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\LearningSessionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -30,6 +31,51 @@ class LearningSession extends Model
             'session_date' => 'date',
             'is_published' => 'boolean',
         ];
+    }
+
+    /**
+     * @param  Builder<LearningSession>  $query
+     * @return Builder<LearningSession>
+     */
+    public function scopeFilterForClassroom(
+        Builder $query,
+        string $search = '',
+        string $category = '',
+        ?string $dateFrom = null,
+        ?string $dateTo = null,
+    ): Builder {
+        if ($search !== '') {
+            $like = "%{$search}%";
+
+            $query->where(function (Builder $query) use ($like): void {
+                $query
+                    ->where('title', 'like', $like)
+                    ->orWhere('category', 'like', $like)
+                    ->orWhere('description', 'like', $like)
+                    ->orWhereHas(
+                        'resources',
+                        fn (Builder $resourceQuery) => $resourceQuery->where(
+                            'title',
+                            'like',
+                            $like,
+                        ),
+                    );
+            });
+        }
+
+        if ($category !== '') {
+            $query->where('category', $category);
+        }
+
+        if ($dateFrom !== null) {
+            $query->whereDate('session_date', '>=', $dateFrom);
+        }
+
+        if ($dateTo !== null) {
+            $query->whereDate('session_date', '<=', $dateTo);
+        }
+
+        return $query;
     }
 
     /** @return HasMany<LearningResource, $this> */

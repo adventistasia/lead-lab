@@ -21,10 +21,38 @@ class AdminLearningSessionController
         ]);
     }
 
-    public function recordings(): Response
+    public function recordings(Request $request): Response
     {
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:120'],
+            'category' => ['nullable', 'string', 'max:80'],
+            'date_from' => ['nullable', 'date'],
+            'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
+        ]);
+
+        $search = trim((string) ($validated['search'] ?? ''));
+        $category = trim((string) ($validated['category'] ?? ''));
+        $dateFrom = $validated['date_from'] ?? null;
+        $dateTo = $validated['date_to'] ?? null;
+
         return Inertia::render('admin/classroom/index', [
-            'sessions' => $this->sessionSummaries(),
+            'sessions' => $this->sessionSummaries(
+                $search,
+                $category,
+                $dateFrom,
+                $dateTo,
+            ),
+            'categories' => LearningSession::query()
+                ->distinct()
+                ->orderBy('category')
+                ->pluck('category')
+                ->values(),
+            'filters' => [
+                'search' => $search,
+                'category' => $category,
+                'date_from' => $dateFrom,
+                'date_to' => $dateTo,
+            ],
         ]);
     }
 
@@ -75,10 +103,15 @@ class AdminLearningSessionController
     /**
      * @return array<int, array{id: int, title: string, category: string, session_date: string, is_published: bool, resources_count: int}>
      */
-    private function sessionSummaries(): array
-    {
+    private function sessionSummaries(
+        string $search = '',
+        string $category = '',
+        ?string $dateFrom = null,
+        ?string $dateTo = null,
+    ): array {
         return LearningSession::query()
             ->withCount('resources')
+            ->filterForClassroom($search, $category, $dateFrom, $dateTo)
             ->orderByDesc('session_date')
             ->get()
             ->map(fn (LearningSession $session): array => [
