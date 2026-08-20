@@ -128,7 +128,7 @@ export default function Dashboard({
     return (
         <>
             <Head title="Home" />
-            <div className="flex flex-1 flex-col gap-8 p-4 md:p-8">
+            <div className="flex min-w-0 flex-1 flex-col gap-8 p-4 md:p-8">
                 <section className="grid gap-6 overflow-hidden rounded-2xl border bg-card p-6 shadow-sm lg:grid-cols-[1fr_20rem] lg:p-8">
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-wrap items-center gap-2">
@@ -215,9 +215,9 @@ export default function Dashboard({
 
                 <section
                     id="classroom"
-                    className="grid scroll-mt-8 gap-6 xl:grid-cols-[1.25fr_0.75fr]"
+                    className="grid min-w-0 scroll-mt-8 gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]"
                 >
-                    <Card>
+                    <Card className="min-w-0">
                         <CardHeader className="flex flex-row items-start justify-between gap-4">
                             <div className="flex flex-col gap-1.5">
                                 <CardTitle>Continue learning</CardTitle>
@@ -273,7 +273,7 @@ export default function Dashboard({
                         </CardContent>
                     </Card>
 
-                    <Card id="community" className="scroll-mt-8">
+                    <Card id="community" className="min-w-0 scroll-mt-8">
                         <CardHeader>
                             <div className="flex items-center justify-between gap-4">
                                 <div className="flex flex-col gap-1.5">

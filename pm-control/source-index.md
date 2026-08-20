@@ -10,6 +10,7 @@ Locations of authoritative project documents. These files stay where they are. T
 | Brand treatment review | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 5.37.46 AM.png` | Visual review showing the yellow and green button combination to simplify | 2026-08-20 | User-supplied review source for the neutral secondary treatment |
 | Embedded-video exposure screenshot | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 10.38.23 AM.png` | Screenshot shows the embedded player exposing `Watch on YouTube` and YouTube controls | 2026-08-20 | User-supplied evidence for ACT-02 and RQ-17 video URL protection |
 | Reduced-control player review | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 11.18.09 AM.png` | Screenshot confirms YouTube still renders the chain icon and `Watch on YouTube` control when the application uses `controls=0` | 2026-08-20 | User-supplied browser evidence for ACT-02 and RQ-17 residual-risk review |
+| Homepage layout overflow screenshot | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 4.15.13 PM.png` | Screenshot shows the homepage Community pulse card extending beyond the right side of the viewport | 2026-08-20 | User-supplied defect evidence for ACT-14 (Correct homepage Community pulse horizontal overflow) and RQ-08 (The application must work on desktop, tablet, and mobile devices) |
 
 ## Rules
 
