@@ -21,7 +21,7 @@ The process register tracks tailored use of the 40 PMI processes. It is a contro
 | PM-14 | Scope | Monitoring and Controlling | Monitor and Control Scope | Not assessed | | Not assessed | | | | | |
 | PM-15 | Scope | Monitoring and Controlling | Validate Scope | Required | Standard | Attention | `runs/2026-08-20-pm-15-validate-option-b-scope-rerun` | 2026-08-20 | Complete the remaining Option B acceptance evidence, including later participant access/data and Gate 1 environment/ownership evidence, then rerun PM-15 (Validate Scope) before the LeadLab Director final OK | No canonical artifact; draft retained in run folder | `runs/2026-08-20-pm-15-validate-option-b-scope-rerun/stages/04-validate-and-review/review-record.md` |
 | PM-16 | Schedule | Planning | Plan Schedule Management | Not assessed | | Not assessed | | | | | |
-| PM-17 | Schedule | Planning | Develop Schedule | Not assessed | | Not assessed | | | | | |
+| PM-17 | Schedule | Planning | Develop Schedule | Required | Formal | Attention | `runs/2026-08-21-pm-17-develop-schedule` | 2026-08-21 | Complete the Gate 1 environment and ownership reassessment on 2026-08-25, resolve the Gate 2 participant-access conflict, and refresh the conditional forecast before any schedule baseline decision | No baseline; conditional forecast retained in the run folder | `runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md` |
 | PM-18 | Schedule | Monitoring and Controlling | Monitor and Control Schedule | Not assessed | | Not assessed | | | | | |
 | PM-19 | Finance | Planning | Plan Financial Management | Not assessed | | Not assessed | | | | | |
 | PM-20 | Finance | Planning | Estimate Costs | Not assessed | | Not assessed | | | | | |

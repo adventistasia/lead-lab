@@ -16,7 +16,7 @@ Project: Lead Lab
 | AL-07 | Microsoft 365 SSO and Outlook-group access can be replaced or replicated | Assumption | Requester + IT team | Superseded | Rebuild of access tooling; privacy review needed | Native WordPress login selected; SSO and Outlook-group replication are not required for the current prototype | If D-02 reopens | D-02, R-03 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-07); Conversation (PM update, 2026-08-18) | 2026-08-18 |
 | AL-08 | The team operates its own server and IT will configure WordPress hosting | Assumption | Requester + IT team | Validated | Hosting cost or schedule slip | WordPress is deployed on the team's server in staging | Before production deployment | D-05, BL-04 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-08); Conversation (PM update, 2026-08-18) | 2026-08-18 |
 | AL-09 | Free tiers for backups and uptime monitoring are sufficient | Assumption | Requester + IT team | Active | Backup or monitoring gaps; paid upgrade needed | Production backup and uptime setup intentionally deferred; no validation evidence yet | Before production deployment | D-05, R-08 to R-10, ACT-03 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-09) | 2026-08-18 |
-| AL-10 | Embedded-video configuration can meet the requirement that members cannot copy or discover the video URL | Assumption | Requester + IT team | Active | Video URLs may be copied or accessed outside the portal | Prototype test not yet run; define acceptable protection before prototype acceptance | Before prototype acceptance | BL-22, R-12, ACT-02 | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-10); Conversation (PM update, 2026-08-18) | 2026-08-18 |
+| AL-10 | Embedded-video configuration can meet the requirement that members cannot copy or discover the video URL | Assumption | Requester + IT team | Superseded | Video URLs may be copied or accessed outside the portal | Superseded by D-15 (Is the standard YouTube embed limitation acceptable for MVP session recordings?); ACT-02 (Test embedded-video configuration against URL copying or discovery and define acceptable protection for the Option B application) is resolved; R-12 (Authenticated members may copy or discover the URL of an embedded video) is mitigated with the residual limitation accepted | 2026-08-20 decision recorded | BL-22, R-12, ACT-02 (Test embedded-video configuration against URL copying or discovery and define acceptable protection for the Option B application), D-15 (Is the standard YouTube embed limitation acceptable for MVP session recordings?) | `projects/lead-lab/artifacts/logs and registers/assumption-log.md` (AL-10); `projects/lead-lab/pm-control/registers/decision-log.md` (D-15); `projects/lead-lab/pm-control/registers/risk-register.md` (R-12); `projects/lead-lab/application/runs/2026-08-20-act-02-youtube-embed-protection/` | 2026-08-21 |
 
 ## Type
 
@@ -43,7 +43,7 @@ Generated from the register rows. Do not manually maintain these counts.
 
 | Metric | Count |
 |---|---|
-| Active assumptions | 7 |
+| Active assumptions | 6 |
 | Validated | 2 |
 | Invalidated | 0 |
 | Overdue validation | 0 |
