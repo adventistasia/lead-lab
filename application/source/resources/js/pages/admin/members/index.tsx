@@ -17,14 +17,26 @@ type Member = {
     email: string;
     role: string;
     is_active: boolean;
+    access_status: 'pending' | 'active' | 'revoked';
+    email_verified_at: string | null;
     created_at: string | null;
 };
 
-export default function AdminMembers({ members }: { members: Member[] }) {
-    const toggleAccess = (member: Member) => {
-        router.patch(`/admin/members/${member.id}/status`, undefined, {
-            preserveScroll: true,
-        });
+export default function AdminMembers({
+    members,
+    emailVerificationRequired,
+}: {
+    members: Member[];
+    emailVerificationRequired: boolean;
+}) {
+    const updateAccess = (member: Member, status: 'active' | 'revoked') => {
+        router.patch(
+            `/admin/members/${member.id}/status`,
+            { status },
+            {
+                preserveScroll: true,
+            },
+        );
     };
 
     return (
@@ -39,9 +51,9 @@ export default function AdminMembers({ members }: { members: Member[] }) {
                         Member access
                     </h1>
                     <p className="max-w-2xl text-muted-foreground">
-                        Grant or revoke access without changing the content
-                        itself. Revoked members are denied on their next
-                        request.
+                        Review registrations and manage access without changing
+                        the content itself. Pending and revoked members cannot
+                        enter the workspace.
                     </p>
                 </div>
 
@@ -72,30 +84,68 @@ export default function AdminMembers({ members }: { members: Member[] }) {
                                         {member.role} · joined{' '}
                                         {member.created_at}
                                     </p>
+                                    <p className="text-xs text-muted-foreground">
+                                        {member.email_verified_at
+                                            ? 'Email verified'
+                                            : 'Email not verified'}
+                                    </p>
                                 </div>
                                 <Badge
                                     variant={
-                                        member.is_active
-                                            ? 'secondary'
-                                            : 'destructive'
-                                    }
-                                >
-                                    {member.is_active ? 'Active' : 'Revoked'}
-                                </Badge>
-                                <Button
-                                    variant={
-                                        member.is_active
+                                        member.access_status === 'revoked'
                                             ? 'destructive'
-                                            : 'outline'
+                                            : member.access_status === 'pending'
+                                              ? 'outline'
+                                              : 'secondary'
                                     }
-                                    size="sm"
-                                    onClick={() => toggleAccess(member)}
                                 >
-                                    <UserRoundX data-icon="inline-start" />
-                                    {member.is_active
-                                        ? 'Revoke access'
-                                        : 'Restore access'}
-                                </Button>
+                                    {member.access_status === 'pending'
+                                        ? 'Pending'
+                                        : member.access_status === 'active'
+                                          ? 'Active'
+                                          : 'Revoked'}
+                                </Badge>
+                                {member.access_status === 'pending' ? (
+                                    !emailVerificationRequired ||
+                                    member.email_verified_at ? (
+                                        <Button
+                                            variant="default"
+                                            size="sm"
+                                            onClick={() =>
+                                                updateAccess(member, 'active')
+                                            }
+                                        >
+                                            Approve access
+                                        </Button>
+                                    ) : (
+                                        <span className="text-xs text-muted-foreground">
+                                            Waiting for email verification
+                                        </span>
+                                    )
+                                ) : (
+                                    <Button
+                                        variant={
+                                            member.access_status === 'active'
+                                                ? 'destructive'
+                                                : 'outline'
+                                        }
+                                        size="sm"
+                                        onClick={() =>
+                                            updateAccess(
+                                                member,
+                                                member.access_status ===
+                                                    'active'
+                                                    ? 'revoked'
+                                                    : 'active',
+                                            )
+                                        }
+                                    >
+                                        <UserRoundX data-icon="inline-start" />
+                                        {member.access_status === 'active'
+                                            ? 'Revoke access'
+                                            : 'Restore access'}
+                                    </Button>
+                                )}
                             </div>
                         ))}
                     </CardContent>

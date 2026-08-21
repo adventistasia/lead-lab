@@ -36,7 +36,7 @@
 |---|---|---|---|---|---|---|---|
 | LL-01 | Verify supported runtime, database, storage, staging, and deployment method. | WP-01 | Must | RQ-10, RQ-11 | IT environment | TBD | Ready for verification |
 | LL-02 | Build the authenticated application shell and navigation. | WP-01 | Must | RQ-01, RQ-08 | LL-01 | TBD | Not started |
-| LL-03 | Implement invite or administrator-controlled participant access. | WP-01 | Must | RQ-01, RQ-09 | Authentication decision | TBD | Not started |
+| LL-03 | Implement participant self-registration with a participant-only role, pending state, configurable email verification, and administrator approval. | WP-01 | Must | RQ-01, RQ-09 | Authentication decision | TBD | In progress |
 | LL-04 | Implement participant, moderator, and administrator permissions. | WP-01/WP-06 | Should | RQ-15 | LL-03 | TBD | Not started |
 | LL-05 | Build community posts, comments, categories, and pinned announcements. | WP-02 | Should | RQ-12 | LL-02, LL-04 | TBD | Not started |
 | LL-06 | Build basic moderation controls. | WP-02/WP-06 | Could | RQ-16 | LL-05 | TBD | Not started |
@@ -47,27 +47,30 @@
 | LL-11 | Build event records with dates, times, descriptions, and meeting links. | WP-04 | Should | RQ-14 | LL-02, LL-04 | TBD | Not started |
 | LL-12 | Implement search across session and material metadata. | WP-05 | Must | RQ-05 | LL-08, LL-10 | TBD | Not started |
 | LL-13 | Implement category and date filters. | WP-05 | Must | RQ-03, RQ-04 | LL-08 | TBD | Not started |
-| LL-14 | Build member administration, access revocation, and permission management. | WP-06 | Must | RQ-09, RQ-15 | LL-03, LL-04 | TBD | Not started |
+| LL-14 | Build member administration, access approval, revocation, restoration, and permission management. | WP-06 | Must | RQ-09, RQ-15 | LL-03, LL-04 | TBD | In progress |
 | LL-15 | Build content, category, course, lesson, event, and file administration. | WP-06 | Must | RQ-02, RQ-13, RQ-14 | LL-08, LL-11 | TBD | Not started |
-| LL-16 | Record relevant administrative activity. | WP-06/WP-07 | Must | RQ-11 | LL-14, LL-15 | TBD | Not started |
-| LL-17 | Enforce server-side authorization for routes, APIs, and files. | WP-07 | Must | RQ-10 | LL-01, LL-03, LL-10 | TBD | Not started |
+| LL-16 | Record relevant administrative activity, including registration and access changes. | WP-06/WP-07 | Must | RQ-11 | LL-14, LL-15 | TBD | In progress |
+| LL-17 | Enforce server-side authorization for routes, APIs, and files, including pending and revoked access states. | WP-07 | Must | RQ-10 | LL-01, LL-03, LL-10 | TBD | In progress |
 | LL-18 | Configure HTTPS, backups, restore testing, uptime monitoring, and incident checks. | WP-07 | Must | RQ-11 | LL-01, IT procedures | TBD | Not started |
 | LL-19 | Decide and test acceptable embedded-video URL protection. | WP-07 | Unresolved | RQ-17 | Video decision, host capability | TBD | Conditional |
 | LL-20 | Decide whether Microsoft 365 SSO is retained, replaced, or deferred. | WP-07 | Unresolved | RQ-18 | Identity decision, IT capability | TBD | Conditional |
 | LL-21 | Obtain and approve the September content inventory. | WP-08 | Must | RQ-02, RQ-06, RQ-07 | Media team | TBD | Not started |
 | LL-22 | Load and quality-check required session content and materials. | WP-08 | Must | RQ-02, RQ-06, RQ-07 | LL-21, LL-08, LL-09, LL-10 | TBD | Not started |
-| LL-23 | Test authentication, roles, access revocation, and direct unauthorized requests. | WP-09 | Must | RQ-01, RQ-09, RQ-10, RQ-15 | LL-03, LL-04, LL-14, LL-17 | TBD | Not started |
+| LL-23 | Test authentication, roles, registration, access approval, revocation, restoration, and direct unauthorized requests. | WP-09 | Must | RQ-01, RQ-09, RQ-10, RQ-15 | LL-03, LL-04, LL-14, LL-17 | TBD | In progress |
 | LL-24 | Test content, search, filters, video, downloads, community, classroom, administrator recordings navigation, calendar, and moderation. | WP-09 | Must | RQ-02 to RQ-07, RQ-12 to RQ-16, RQ-20 | WP-02 to WP-06 | TBD | Not started |
 | LL-25 | Test desktop, tablet, and mobile workflows. | WP-09 | Must | RQ-08 | WP-01 to WP-06 | TBD | Not started |
 | LL-26 | Run participant acceptance testing and record defects or exceptions. | WP-09 | Must | RQ-01 to RQ-16, RQ-20 | LL-22 to LL-25, LL-28 | TBD | Not started |
 | LL-27 | Obtain LeadLab Director acceptance and release or activate SharePoint fallback. | WP-09 | Must | RQ-01 to RQ-16, RQ-19, RQ-20 | LL-26, DEP-07 | TBD | Not started |
 | LL-28 | Add the administrator Classroom sidebar link and separate recordings page listing all session recordings. | WP-03/WP-06 | Must | RQ-20 | LL-02, LL-08, LL-15, LL-17 | TBD | Not started |
+| LL-29 | Restore and verify email verification and real mail transport before staging or participant use. | WP-01/WP-07 | Must | RQ-01, RQ-09, RQ-11 | DEP-09 (Option B authentication and participant-data handling decision), ACT-21 (Restore and verify email verification and real mail transport before staging or participant use) | TBD | Not started |
 
 ## Change Traceability
 
 | Change | Applied baseline effect |
 |---|---|
 | CHG-02 (Add an administrator Classroom link and session recordings page) | Added RQ-20, LL-28, and the related feature and acceptance coverage. |
+| CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval) | Replaced invitation-only participant onboarding with self-registration, pending access, administrator approval, revocation, restoration, and related testing. |
+| CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development) | Added a local-only bypass; staging and production must restore the verification gate and real mail transport. |
 
 ## Delivery Sequence
 

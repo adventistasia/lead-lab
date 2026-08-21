@@ -92,6 +92,17 @@ export default function Welcome() {
                                 <a href="#about">See how it works</a>
                             </Button>
                         </div>
+                        {!auth.user && (
+                            <p className="text-sm text-muted-foreground">
+                                New to Lead Lab?{' '}
+                                <Link
+                                    href="/register"
+                                    className="font-medium text-foreground underline underline-offset-4"
+                                >
+                                    Request access
+                                </Link>
+                            </p>
+                        )}
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <ShieldCheck className="size-4" />
                             <span>

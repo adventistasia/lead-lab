@@ -99,6 +99,11 @@ export default function Login({ status, canResetPassword }: Props) {
                     {status}
                 </div>
             )}
+
+            <p className="text-center text-sm text-muted-foreground">
+                Need access?{' '}
+                <TextLink href="/register">Create an account</TextLink>
+            </p>
         </>
     );
 }

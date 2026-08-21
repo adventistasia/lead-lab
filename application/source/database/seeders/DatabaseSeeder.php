@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
             'role' => 'admin',
             'is_active' => true,
+            'access_status' => User::ACCESS_ACTIVE,
             'must_change_password' => false,
             'email_verified_at' => now(),
         ]);
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
             'role' => 'participant',
             'is_active' => true,
+            'access_status' => User::ACCESS_ACTIVE,
             'must_change_password' => false,
             'email_verified_at' => now(),
         ]);

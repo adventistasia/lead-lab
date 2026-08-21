@@ -18,7 +18,7 @@ This is not a general community platform or an exact Skool clone.
 
 | Area | Required capability |
 |---|---|
-| Access | Admin-created or invited participant accounts |
+| Access | Participant self-registration with a participant-only role, pending state, and administrator approval, revocation, and restoration; target-state email verification is required |
 | Security | All community content blocked for unauthenticated users |
 | Roles | Participant, moderator, and administrator |
 | Community | Posts, comments, categories, pinned announcements |
@@ -58,7 +58,7 @@ Use this stack if the existing server supports PHP and MySQL:
 | Application | Laravel modular monolith |
 | Interface | Server-rendered responsive UI, optionally using Livewire |
 | Database | Existing MySQL or MariaDB |
-| Authentication | Laravel authentication with admin-controlled registration |
+| Authentication | Laravel application-managed authentication with self-registration, configurable email verification, and administrator-controlled approval |
 | Files | Private server storage outside the public web directory |
 | Search | Database-backed search |
 | Web server | Existing Apache or Nginx |
@@ -118,7 +118,8 @@ Due August 23.
 
 Pass conditions:
 
-- Administrator can create a participant
+- Participant can self-register as a pending account
+- Administrator can approve a pending participant after the target-state verification gate is satisfied
 - Participant can log in
 - Unauthenticated visitor cannot see content
 - Administrator can publish a lesson
@@ -158,6 +159,7 @@ Otherwise, continue using SharePoint for the September program.
 - Validate file type and size.
 - Protect forms against CSRF.
 - Rate-limit login attempts.
+- Require email verification and a working mail transport before participant use; the local development bypass is not a launch control.
 - Record important administrative actions.
 - Apply HTTPS before participant use.
 - Back up the database and uploaded files.
@@ -185,7 +187,7 @@ At least one developer must work on the app as a primary assignment. Part-time d
 The application is ready when:
 
 1. Unapproved visitors cannot access community content or files.
-2. Administrators can add, disable, and manage participants.
+2. Administrators can approve, disable, restore, and manage participants.
 3. Participants can create posts and comments.
 4. Moderators can manage inappropriate content.
 5. Administrators can publish courses, lessons, videos, and materials, and open the Classroom recordings page from the dashboard.
@@ -223,4 +225,4 @@ After approval, the project should formally record the direction change and:
 - Stop `ACT-01 (configure the WordPress staging theme)`.
 - Replace the WordPress backlog with the delivery phases and gates above.
 
-No project registers are changed by this proposed plan.
+This proposed plan predates CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval) and CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development). Current control records hold those approved updates; this reconciliation does not establish a schedule baseline or launch acceptance.

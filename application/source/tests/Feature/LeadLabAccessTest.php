@@ -635,7 +635,9 @@ class LeadLabAccessTest extends TestCase
         $participant = User::factory()->create();
 
         $this->actingAs($admin)
-            ->patch(route('admin.members.status', $participant))
+            ->patch(route('admin.members.status', $participant), [
+                'status' => User::ACCESS_REVOKED,
+            ])
             ->assertRedirect();
 
         $this->assertFalse($participant->refresh()->is_active);
@@ -643,5 +645,140 @@ class LeadLabAccessTest extends TestCase
         $this->actingAs($participant)
             ->get(route('dashboard'))
             ->assertRedirect(route('login'));
+
+        $this->assertDatabaseHas('activity_logs', [
+            'actor_id' => $admin->id,
+            'action' => 'member_access_revoked',
+            'subject_type' => User::class,
+            'subject_id' => $participant->id,
+        ]);
+    }
+
+    public function test_admin_can_approve_a_verified_pending_participant(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $response = $this->actingAs($admin)->patch(
+            route('admin.members.status', $participant),
+            ['status' => User::ACCESS_ACTIVE],
+        );
+
+        $response->assertRedirect();
+        $this->assertSame(User::ACCESS_ACTIVE, $participant->refresh()->access_status);
+        $this->assertTrue($participant->is_active);
+        $this->assertDatabaseHas('activity_logs', [
+            'actor_id' => $admin->id,
+            'action' => 'member_access_approved',
+            'subject_type' => User::class,
+            'subject_id' => $participant->id,
+        ]);
+    }
+
+    public function test_pending_participants_are_redirected_to_the_registration_status_page(): void
+    {
+        $participant = User::factory()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($participant)
+            ->get(route('dashboard'))
+            ->assertRedirect(route('registration.pending'));
+
+        $this->actingAs($participant)
+            ->get(route('registration.pending'))
+            ->assertOk()
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('auth/registration-pending')
+                ->where('emailVerified', true)
+                ->where('emailVerificationRequired', true),
+            );
+    }
+
+    public function test_admin_can_approve_an_unverified_pending_participant_when_verification_is_bypassed(): void
+    {
+        config(['fortify.require_email_verification' => false]);
+
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.status', $participant), [
+                'status' => User::ACCESS_ACTIVE,
+            ])
+            ->assertRedirect();
+
+        $this->assertSame(User::ACCESS_ACTIVE, $participant->refresh()->access_status);
+        $this->assertTrue($participant->is_active);
+    }
+
+    public function test_admin_cannot_approve_an_unverified_pending_participant_when_verification_is_required(): void
+    {
+        config(['fortify.require_email_verification' => true]);
+
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.status', $participant), [
+                'status' => User::ACCESS_ACTIVE,
+            ])
+            ->assertSessionHasErrors('status');
+
+        $this->assertSame(User::ACCESS_PENDING, $participant->refresh()->access_status);
+        $this->assertFalse($participant->is_active);
+    }
+
+    public function test_admin_member_page_shows_pending_access_and_email_state(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('admin/members/index')
+                ->where('members.0.id', $participant->id)
+                ->where('members.0.access_status', User::ACCESS_PENDING)
+                ->where('members.0.email_verified_at', null)
+                ->where('emailVerificationRequired', true),
+            );
+    }
+
+    public function test_admin_can_restore_a_revoked_participant(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->create([
+            'access_status' => User::ACCESS_REVOKED,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.status', $participant), [
+                'status' => User::ACCESS_ACTIVE,
+            ])
+            ->assertRedirect();
+
+        $this->assertSame(User::ACCESS_ACTIVE, $participant->refresh()->access_status);
+        $this->assertTrue($participant->is_active);
+        $this->assertDatabaseHas('activity_logs', [
+            'actor_id' => $admin->id,
+            'action' => 'member_access_restored',
+            'subject_type' => User::class,
+            'subject_id' => $participant->id,
+        ]);
     }
 }

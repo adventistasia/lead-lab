@@ -43,10 +43,14 @@ Use `npm run build` for a production asset build. Use `php artisan test`, `npm r
 - Laravel application scaffold completed.
 - shadcn components are installed in `resources/js/components/ui/`.
 - Lead Lab dashboard shell, session publishing, protected resources, and member access controls are implemented.
-- TypeScript, ESLint, Prettier, Vite build, PHPUnit, and PHP Pint checks pass.
+- Participant self-registration, pending access, administrator approval, revocation, restoration, and activity logging are implemented locally.
+- Mailpit is available for local SMTP testing through `projects/lead-lab/application/docker-compose.yml` on ports 1025 and 8025.
+- Local development currently sets `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=false` so signup and approval do not depend on email delivery. Staging and production must restore the verification gate.
+- TypeScript, ESLint, Prettier, Vite build, PHPUnit, and PHP Pint checks pass; the latest PHP run recorded 70 tests and 445 assertions.
 
 ## Limitations
 
 - SQLite is a local development choice. Staging must verify MySQL or MariaDB compatibility.
 - HTTPS, backups, restore testing, monitoring, staging deployment, and IT ownership are not provided by this local environment.
 - The local vertical slice uses synthetic seeded accounts and content. It is not staging or production evidence.
+- Mailpit and the local email-verification bypass are development-only controls and are not participant-use or launch evidence.

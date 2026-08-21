@@ -4,6 +4,7 @@ import {
     CalendarDays,
     LayoutDashboard,
     MessageSquareText,
+    UsersRound,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
@@ -53,6 +54,11 @@ export function AppSidebar() {
                           ? { ...item, href: '/admin/classroom' }
                           : item,
                   ),
+                  {
+                      title: 'Members',
+                      href: '/admin/members',
+                      icon: UsersRound,
+                  },
               ]
             : mainNavItems;
 

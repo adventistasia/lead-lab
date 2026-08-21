@@ -49,6 +49,8 @@ return [
 
     'email' => 'email',
 
+    'require_email_verification' => (bool) env('LEAD_LAB_REQUIRE_EMAIL_VERIFICATION', true),
+
     /*
     |--------------------------------------------------------------------------
     | Lowercase Usernames
@@ -161,6 +163,7 @@ return [
     */
 
     'features' => [
+        Features::registration(),
         Features::resetPasswords(),
         Features::emailVerification(),
         Features::twoFactorAuthentication([

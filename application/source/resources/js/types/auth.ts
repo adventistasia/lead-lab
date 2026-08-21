@@ -4,6 +4,7 @@ export type User = {
     email: string;
     role: 'admin' | 'participant';
     is_active: boolean;
+    access_status: 'pending' | 'active' | 'revoked';
     avatar?: string;
     email_verified_at: string | null;
     two_factor_enabled?: boolean;

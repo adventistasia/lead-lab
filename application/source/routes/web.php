@@ -5,9 +5,24 @@ use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LearningResourceController;
 use App\Http\Controllers\LearningSessionController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::inertia('/', 'welcome')->name('home');
+
+Route::middleware('auth')->get('registration/pending', function (Request $request) {
+    if ($request->user()->canAccessLeadLab()) {
+        return redirect()->route('dashboard');
+    }
+
+    abort_unless($request->user()->isPending(), 404);
+
+    return Inertia::render('auth/registration-pending', [
+        'emailVerified' => $request->user()->hasVerifiedEmail(),
+        'emailVerificationRequired' => config('fortify.require_email_verification'),
+    ]);
+})->name('registration.pending');
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');

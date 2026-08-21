@@ -11,6 +11,10 @@ class EnsureActiveUser
 {
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->user()?->isPending()) {
+            return redirect()->route('registration.pending');
+        }
+
         if (! $request->user()?->canAccessLeadLab()) {
             Auth::logout();
             $request->session()->invalidate();

@@ -28,7 +28,7 @@ The application will be self-hosted and use open-source software without a Skool
 
 | Area | Baseline capability |
 |---|---|
-| Access | Invite-only or administrator-controlled participant access. |
+| Access | Application-managed participant self-registration with a participant-only role, pending state, administrator approval, revocation, and restoration. Email verification is required for the target-state MVP; local development may use the separately recorded bypass. |
 | Security | Protected application routes, APIs, and files; unauthenticated users cannot view private content. |
 | Roles | Participant, moderator, and administrator roles with defined permissions. |
 | Community | Posts, comments, categories, and pinned announcements. |
@@ -55,7 +55,7 @@ The application will be self-hosted and use open-source software without a Skool
 | RQ-06 | Participants must play supplied training videos. | Must | An authenticated participant can play the video inside the session view. | Approved |
 | RQ-07 | Participants must access or download supporting materials. | Must | The correct authenticated participant can access the material; unauthenticated access is denied. | Approved |
 | RQ-08 | The application must work on desktop, tablet, and mobile devices. | Must | Core workflows remain usable at agreed breakpoints. | Approved |
-| RQ-09 | Administrators must grant and revoke participant access. | Must | Access can be granted, used, revoked, and blocked. | Approved |
+| RQ-09 | Administrators must approve, grant, revoke, and restore participant access. | Must | A registered participant can be approved for access, use the application, be revoked, and be blocked from protected content. | Approved |
 | RQ-10 | Protected routes, APIs, and files must enforce server-side access controls. | Must | Direct unauthenticated requests are denied. | Approved |
 | RQ-11 | The application must support HTTPS, backups, restore testing, monitoring, and administrative activity logging before launch. | Must | IT demonstrates each operational control. | Approved |
 | RQ-12 | Participants should have a community feed with posts, comments, categories, and pinned announcements. | Should | Participants interact with approved posts within defined permissions. | Approved |
@@ -87,6 +87,7 @@ RQ-17 (video protection) and RQ-18 (Microsoft 365 SSO) remain open decisions. Th
 - The application will be self-hosted using open-source software.
 - The target program begins September 11, 2026.
 - Participant access must remain restricted.
+- Target-state participant approval must use verified email addresses. The local `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=false` setting is a temporary development exception and is not staging or production evidence.
 - The IT team can provide a supported runtime, database, storage, HTTPS, backup, and monitoring environment.
 - The media team will provide required September content.
 - YouTube remains acceptable for MVP video playback if its URL-sharing limitations are accepted.
@@ -136,6 +137,7 @@ Any change to this baseline must:
 | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` | Proposed Option B product direction, MVP capabilities, exclusions, gates, and fallback. |
 | `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/` | Candidate requirement analysis and unresolved requirement decisions. |
 | `projects/lead-lab/pm-control/registers/change-log.md` (CHG-02) | Approved administrator Classroom navigation and session recordings page change. |
+| `projects/lead-lab/pm-control/registers/change-log.md` (CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval); CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development)) | Approved participant onboarding baseline and local development exception. |
 
 ## Change History
 
@@ -143,3 +145,5 @@ Any change to this baseline must:
 |---|---|
 | 2026-08-19 | Created and approved as the Option B Skool-inspired MVP scope baseline by PM direction. |
 | 2026-08-20 | CHG-02 approved: added the administrator Classroom navigation and session recordings page requirement. |
+| 2026-08-21 | CHG-13 approved: replaced invitation-only onboarding with application-managed self-registration and administrator approval. Email verification remains required for the target-state MVP. |
+| 2026-08-21 | CHG-14 approved: local development may bypass email verification and notification delivery while Mailpit is unavailable; staging and production are not changed. |

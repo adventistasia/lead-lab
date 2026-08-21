@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +22,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string $email
  * @property string $role
  * @property bool $is_active
+ * @property string $access_status
  * @property bool $must_change_password
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -30,12 +33,18 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password', 'role', 'is_active', 'must_change_password'])]
+#[Fillable(['name', 'email', 'password', 'role', 'is_active', 'access_status', 'must_change_password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable implements PasskeyUser
+class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
 {
+    public const ACCESS_PENDING = 'pending';
+
+    public const ACCESS_ACTIVE = 'active';
+
+    public const ACCESS_REVOKED = 'revoked';
+
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
+    use HasFactory, MustVerifyEmailTrait, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
 
     /**
      * Get the attributes that should be cast.
@@ -58,13 +67,32 @@ class User extends Authenticatable implements PasskeyUser
         return $this->role === 'admin';
     }
 
+    public function sendEmailVerificationNotification(): void
+    {
+        if (! config('fortify.require_email_verification')) {
+            return;
+        }
+
+        $this->notify(new VerifyEmail());
+    }
+
     public function isModerator(): bool
     {
         return $this->role === 'moderator';
     }
 
+    public function isPending(): bool
+    {
+        return $this->access_status === self::ACCESS_PENDING;
+    }
+
+    public function isRevoked(): bool
+    {
+        return $this->access_status === self::ACCESS_REVOKED;
+    }
+
     public function canAccessLeadLab(): bool
     {
-        return $this->is_active;
+        return $this->is_active && $this->access_status === self::ACCESS_ACTIVE;
     }
 }
