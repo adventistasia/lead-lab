@@ -7,7 +7,7 @@
 | Approved | 2026-08-22, PM approval after Stage 04 of PM-16 (Plan Schedule Management) |
 | Owner | TBD |
 | Related processes | PM-16 (Plan Schedule Management), PM-17 (Develop Schedule), PM-18 (Monitor and Control Schedule) |
-| Next trigger | Complete the 2026-08-25 Gate 1 environment and ownership reassessment, then refresh PM-17 (Develop Schedule) before the conditional 2026-09-04 go/no-go review |
+| Next trigger | Complete the 2026-08-28 Gate 1 environment and ownership reassessment, then refresh PM-17 (Develop Schedule) before the conditional 2026-09-04 go/no-go review |
 
 ## Purpose
 
@@ -34,7 +34,7 @@ This plan defines how Lead Lab schedule information is planned, updated, measure
 
 ## Update Cadence And Triggers
 
-Update the schedule after a material scope, sequence, dependency, gate, or forecast change. Conduct formal reviews at the Gate 1 reassessment and before the conditional go/no-go review. A recurring weekly cadence is not recorded in the project records. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-22; `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12; `projects/lead-lab/pm-control/project-control.md`, lines 17-19]
+Update the schedule after a material scope, sequence, dependency, gate, or forecast change. Conduct formal reviews at the Gate 1 reassessment and before the conditional go/no-go review. A recurring weekly cadence is not recorded in the project records. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-35; `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12; `projects/lead-lab/pm-control/project-control.md`, lines 17-19]
 
 | Trigger | Required action |
 |---|---|
@@ -42,7 +42,7 @@ Update the schedule after a material scope, sequence, dependency, gate, or forec
 | Failed or unverified gate | Record the evidence state, cause, consequence, forecast effect, recovery options, and fallback path. |
 | New or changed critical dependency | Show its needed-by point, impact, evidence source, action path, and forecast effect. |
 | Forecast movement | Show the revised date or window, reason, consequence, confidence, and fallback effect. |
-| Gate 1 reassessment on 2026-08-25 | Review target environment, staging, deployment, rollback, storage, HTTPS, backup, monitoring, ownership, authentication, and participant-data evidence. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-22; `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 46-91] |
+| Gate 1 reassessment on 2026-08-28 | Review target environment, staging, deployment, rollback, storage, HTTPS, backup, monitoring, ownership, authentication, and participant-data evidence. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-35; `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 46-91] |
 | Before the 2026-09-04 go/no-go | Refresh PM-17 (Develop Schedule) against this plan and verify the decision entry conditions. The date remains conditional. [Source: `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12] |
 
 ## Measurement Rules
@@ -86,7 +86,7 @@ These are review triggers, not numeric tolerance thresholds. [Sources: `projects
 
 ## Calendars
 
-ART-PM-51 (Project calendars) is `Create later`. Activate it after the 2026-08-25 Gate 1 reassessment, once the technical owner, human primary developer, IT operator, and working availability are evidenced, and before any schedule baseline decision. Minimum contents are working days, holidays, work hours, timezone, release blackout periods, named resource availability, capacity assumptions, and verification source. [Source: `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 20-24 and 46-67]
+ART-PM-51 (Project calendars) is `Create later`. Activate it after the 2026-08-28 Gate 1 reassessment, once the technical owner, human primary developer, IT operator, and working availability are evidenced, and before any schedule baseline decision. Minimum contents are working days, holidays, work hours, timezone, release blackout periods, named resource availability, capacity assumptions, and verification source. [Source: `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 20-24 and 46-67]
 
 ## Authority And Ownership
 
@@ -116,6 +116,6 @@ ART-PM-51 (Project calendars) is `Create later`. Activate it after the 2026-08-2
 | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` | Environment, ownership, capacity, and calendar evidence gaps |
 | `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/` | Conditional forecast and schedule limitations |
 | `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12 | Conditional date direction |
-| `projects/lead-lab/pm-control/registers/decision-log.md`, D-22 | 2026-08-25 Gate 1 review trigger |
+| `projects/lead-lab/pm-control/registers/decision-log.md`, D-35 | 2026-08-28 Gate 1 review trigger |
 | `projects/lead-lab/pm-control/registers/dependencies-log.md` | Critical launch dependencies |
 | `projects/lead-lab/pm-control/runs/2026-08-22-pm-16-plan-schedule-management/stages/04-validate-and-review/approval-request.md` | Stage 04 review and approved scope |
