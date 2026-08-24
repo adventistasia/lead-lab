@@ -50,7 +50,7 @@ const stats = [
 ];
 
 type DashboardSession = {
-    id?: number;
+    id: number;
     title: string;
     track: string;
     duration: string;
@@ -63,27 +63,6 @@ type SessionSummary = {
     category: string;
     resources_count: number;
 };
-
-const fallbackSessions: DashboardSession[] = [
-    {
-        title: 'Build your weekly lead engine',
-        track: 'Lead generation systems',
-        duration: '42 min',
-        progress: 'Continue at 68%',
-    },
-    {
-        title: 'Turn conversations into qualified leads',
-        track: 'Conversation skills',
-        duration: '31 min',
-        progress: 'Start session',
-    },
-    {
-        title: 'Your first 30-day operating rhythm',
-        track: 'Execution rhythm',
-        duration: '54 min',
-        progress: 'Start session',
-    },
-];
 
 const communityUpdates = [
     {
@@ -108,19 +87,19 @@ const communityUpdates = [
 
 export default function Dashboard({
     sessions = [],
+    is_admin = false,
 }: {
     sessions?: SessionSummary[];
+    is_admin?: boolean;
 }) {
-    const displayedSessions: DashboardSession[] =
-        sessions.length > 0
-            ? sessions.map((session) => ({
-                  id: session.id,
-                  title: session.title,
-                  track: session.category,
-                  duration: `${session.resources_count} resource${session.resources_count === 1 ? '' : 's'}`,
-                  progress: 'Open session',
-              }))
-            : fallbackSessions;
+    const displayedSessions: DashboardSession[] = sessions.map((session) => ({
+        id: session.id,
+        title: session.title,
+        track: session.category,
+        duration: `${session.resources_count} resource${session.resources_count === 1 ? '' : 's'}`,
+        progress: 'Open session',
+    }));
+    const classroomHref = is_admin ? '/admin/classroom' : '/classroom';
 
     return (
         <>
@@ -217,56 +196,60 @@ export default function Dashboard({
                     <Card className="min-w-0">
                         <CardHeader className="flex flex-row items-start justify-between gap-4">
                             <div className="flex flex-col gap-1.5">
-                                <CardTitle>Continue learning</CardTitle>
+                                <CardTitle>Recent sessions</CardTitle>
                                 <CardDescription>
-                                    Three sessions selected for your current
-                                    track.
+                                    {sessions.length === 0
+                                        ? 'No published sessions are available yet.'
+                                        : `Your ${sessions.length === 5 ? 'five' : sessions.length} most recent sessions.`}
                                 </CardDescription>
                             </div>
                             <Button asChild variant="ghost" size="sm">
-                                <a href="#classroom">
+                                <Link href={classroomHref}>
                                     Browse all
                                     <ArrowRight data-icon="inline-end" />
-                                </a>
+                                </Link>
                             </Button>
                         </CardHeader>
                         <CardContent className="flex flex-col gap-2">
-                            {displayedSessions.map((session, index) => (
-                                <div
-                                    key={session.title}
-                                    className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted/60"
-                                >
-                                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-                                        <span className="text-sm font-semibold">
-                                            0{index + 1}
-                                        </span>
-                                    </div>
-                                    <div className="flex min-w-0 flex-1 flex-col gap-1">
-                                        {session.id ? (
+                            {displayedSessions.length === 0 ? (
+                                <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+                                    No published sessions are available yet.
+                                </p>
+                            ) : (
+                                displayedSessions.map((session, index) => (
+                                    <div
+                                        key={session.id}
+                                        className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted/60"
+                                    >
+                                        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                                            <span className="text-sm font-semibold">
+                                                0{index + 1}
+                                            </span>
+                                        </div>
+                                        <div className="flex min-w-0 flex-1 flex-col gap-1">
                                             <Link
                                                 href={`/sessions/${session.id}`}
                                                 className="truncate text-sm font-medium hover:underline"
                                             >
                                                 {session.title}
                                             </Link>
-                                        ) : (
-                                            <p className="truncate text-sm font-medium">
-                                                {session.title}
+                                            <p className="truncate text-xs text-muted-foreground">
+                                                {session.track} ·{' '}
+                                                {session.duration}
                                             </p>
-                                        )}
-                                        <p className="truncate text-xs text-muted-foreground">
-                                            {session.track} · {session.duration}
-                                        </p>
+                                        </div>
+                                        <Badge
+                                            variant={
+                                                index === 0
+                                                    ? 'default'
+                                                    : 'outline'
+                                            }
+                                        >
+                                            {session.progress}
+                                        </Badge>
                                     </div>
-                                    <Badge
-                                        variant={
-                                            index === 0 ? 'default' : 'outline'
-                                        }
-                                    >
-                                        {session.progress}
-                                    </Badge>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </CardContent>
                     </Card>
 

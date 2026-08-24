@@ -15,7 +15,9 @@ class DashboardController
             ->where('is_published', true)
             ->whereNull('archived_at')
             ->withCount('resources')
-            ->orderBy('session_date')
+            ->orderByDesc('session_date')
+            ->orderByDesc('id')
+            ->limit(5)
             ->get()
             ->map(fn (LearningSession $session): array => [
                 'id' => $session->id,
