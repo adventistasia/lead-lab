@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LearningResourceController;
 use App\Http\Controllers\LearningSessionController;
+use App\Http\Controllers\SessionQnaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,6 +30,14 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('classroom', [LearningSessionController::class, 'index'])->name('classroom.index');
     Route::get('sessions/{learningSession}', [LearningSessionController::class, 'show'])->name('sessions.show');
     Route::get('resources/{learningResource}/download', [LearningResourceController::class, 'download'])->name('resources.download');
+    Route::post('sessions/{learningSession}/questions', [SessionQnaController::class, 'storeQuestion'])->name('sessions.questions.store');
+    Route::patch('sessions/{learningSession}/questions/{sessionQuestion}', [SessionQnaController::class, 'updateQuestion'])->name('sessions.questions.update');
+    Route::delete('sessions/{learningSession}/questions/{sessionQuestion}', [SessionQnaController::class, 'destroyQuestion'])->name('sessions.questions.destroy');
+    Route::post('questions/{sessionQuestion}/answers', [SessionQnaController::class, 'storeAnswer'])->name('questions.answers.store');
+    Route::patch('questions/{sessionQuestion}/answers/{sessionAnswer}', [SessionQnaController::class, 'updateAnswer'])->name('questions.answers.update');
+    Route::delete('questions/{sessionQuestion}/answers/{sessionAnswer}', [SessionQnaController::class, 'destroyAnswer'])->name('questions.answers.destroy');
+    Route::post('questions/{sessionQuestion}/vote', [SessionQnaController::class, 'toggleQuestionVote'])->name('questions.vote');
+    Route::post('answers/{sessionAnswer}/vote', [SessionQnaController::class, 'toggleAnswerVote'])->name('answers.vote');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('classroom', [AdminLearningSessionController::class, 'recordings'])->name('classroom.index');

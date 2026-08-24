@@ -33,8 +33,8 @@ The application will be self-hosted and use open-source software without a Skool
 | Roles | Participant, moderator, and administrator roles with defined permissions. |
 | Community | Posts, comments, categories, and pinned announcements. |
 | Moderation | Basic controls for approved moderators and administrators. |
-| Classroom | Courses, modules, lessons, recorded sessions, supporting materials, and an administrator recordings page reachable from dashboard Classroom navigation. |
-| Sessions | Title, category, date, video link, description, and related resources. |
+| Classroom | Courses, modules, lessons, recorded sessions, supporting materials, session-scoped Q&A, and an administrator recordings page reachable from dashboard Classroom navigation. |
+| Sessions | Title, category, date, video link, description, related resources, and session-scoped Q&A. |
 | Video | Embedded YouTube playback for the MVP, subject to the accepted residual URL-sharing risk. |
 | Resources | Authenticated access to downloadable supporting materials. |
 | Discovery | Search plus category and date filters for sessions and material metadata. |
@@ -67,6 +67,7 @@ The application will be self-hosted and use open-source software without a Skool
 | RQ-18 | Microsoft 365 SSO should be used for the new application. | Unresolved | A decision records whether SSO is retained, replaced, or deferred. | Open decision |
 | RQ-19 | Payments, public discovery, points, leaderboards, direct messaging, multiple communities, native apps, advanced analytics, and existing-content migration are excluded from the MVP. | Deferred | No launch work item is created unless an approved change reopens the capability. | Approved exclusion |
 | RQ-20 | Administrators must access a Classroom page from the dashboard sidebar that lists all session recordings. | Must | From the administrator dashboard, clicking Classroom in the left sidebar opens a separate page where all session recordings are visible. | Approved |
+| RQ-21 | Each session detail view should provide Session Materials and Q&A tabs with protected materials and session-scoped participant interaction. | Should | The session view shows downloadable materials in the Session Materials tab. Active authenticated users can ask questions, answer, and upvote in the Q&A tab. Authors can edit or delete their own content, and administrators can moderate all content. The question feed shows about three normal question cards before the feed itself becomes scrollable. The question form is collapsed by default and opens through an `Ask a question` button. | Approved |
 
 ## Exclusions
 
@@ -106,7 +107,7 @@ RQ-17 (video protection) and RQ-18 (Microsoft 365 SSO) remain open decisions. Th
 
 The baseline is accepted for delivery when:
 
-1. RQ-01 through RQ-16 and RQ-20 pass their defined acceptance outcomes or have an explicitly approved exception.
+1. RQ-01 through RQ-16, RQ-20, and RQ-21 pass their defined acceptance outcomes or have an explicitly approved exception.
 2. RQ-17 has an agreed residual-risk outcome before launch.
 3. RQ-18 has an explicit retain, replace, or defer decision before technical commitment.
 4. Required September content is loaded and tested.
@@ -138,6 +139,7 @@ Any change to this baseline must:
 | `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/` | Candidate requirement analysis and unresolved requirement decisions. |
 | `projects/lead-lab/pm-control/registers/change-log.md` (CHG-02) | Approved administrator Classroom navigation and session recordings page change. |
 | `projects/lead-lab/pm-control/registers/change-log.md` (CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval); CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development)) | Approved participant onboarding baseline and local development exception. |
+| `projects/lead-lab/pm-control/registers/change-log.md` (CHG-16 (Add `Session Materials` and `Q&A` tabs to each session detail view)) | Approved session detail Q&A change and related acceptance boundary. |
 
 ## Change History
 
@@ -147,3 +149,4 @@ Any change to this baseline must:
 | 2026-08-20 | CHG-02 approved: added the administrator Classroom navigation and session recordings page requirement. |
 | 2026-08-21 | CHG-13 approved: replaced invitation-only onboarding with application-managed self-registration and administrator approval. Email verification remains required for the target-state MVP. |
 | 2026-08-21 | CHG-14 approved: local development may bypass email verification and notification delivery while Mailpit is unavailable; staging and production are not changed. |
+| 2026-08-24 | CHG-16 approved: added Session Materials and Q&A tabs with session-scoped questions, answers, voting, author controls, and administrator moderation. |

@@ -63,6 +63,7 @@
 | LL-27 | Obtain LeadLab Director acceptance and release or activate SharePoint fallback. | WP-09 | Must | RQ-01 to RQ-16, RQ-19, RQ-20 | LL-26, DEP-07 | TBD | Not started |
 | LL-28 | Add the administrator Classroom sidebar link and separate recordings page listing all session recordings. | WP-03/WP-06 | Must | RQ-20 | LL-02, LL-08, LL-15, LL-17 | TBD | Not started |
 | LL-29 | Restore and verify email verification and real mail transport before staging or participant use. | WP-01/WP-07 | Must | RQ-01, RQ-09, RQ-11 | DEP-09 (Option B authentication and participant-data handling decision), ACT-21 (Restore and verify email verification and real mail transport before staging or participant use) | TBD | Not started |
+| LL-30 | Build session detail Session Materials and Q&A tabs with session-scoped questions, answers, voting, author ownership, administrator moderation, a fixed-height scrollable question feed, and a collapsed Ask a question form toggle. | WP-03/WP-06/WP-09 | Should | RQ-07, RQ-10, RQ-15, RQ-16, RQ-21 | LL-03, LL-04, LL-08, LL-10, LL-17 | TBD | In progress |
 
 ## Change Traceability
 
@@ -71,6 +72,8 @@
 | CHG-02 (Add an administrator Classroom link and session recordings page) | Added RQ-20, LL-28, and the related feature and acceptance coverage. |
 | CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval) | Replaced invitation-only participant onboarding with self-registration, pending access, administrator approval, revocation, restoration, and related testing. |
 | CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development) | Added a local-only bypass; staging and production must restore the verification gate and real mail transport. |
+| CHG-16 (Add `Session Materials` and `Q&A` tabs to each session detail view) | Added RQ-21 and LL-30 for protected session materials, session-scoped Q&A, participant interaction, author controls, administrator moderation, and local acceptance testing. |
+| CHG-17 (Defer the Gate 1 environment and ownership reassessment while the local core-functionality build is completed) | Changed delivery sequence only; Gate 1 remains required before staging and no schedule baseline is approved. |
 
 ## Delivery Sequence
 

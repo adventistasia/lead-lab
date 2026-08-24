@@ -1,5 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Download, FileText, Play } from 'lucide-react';
+import { SessionQna } from '@/components/session-q-and-a';
+import type { SessionQuestion } from '@/components/session-q-and-a';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,6 +11,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { YouTubePlayer } from '@/components/youtube-player';
 import { dashboard } from '@/routes';
 
@@ -27,6 +30,7 @@ type Session = {
     description: string;
     video_embed_url: string | null;
     resources: SessionResource[];
+    questions: SessionQuestion[];
 };
 
 export default function SessionShow({ session }: { session: Session }) {
@@ -83,49 +87,74 @@ export default function SessionShow({ session }: { session: Session }) {
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Session materials</CardTitle>
+                            <CardTitle>
+                                Session resources and discussion
+                            </CardTitle>
                             <CardDescription>
-                                Protected files are served through an
-                                authenticated download route.
+                                Review protected materials or continue the
+                                conversation for this session.
                             </CardDescription>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-3">
-                            {session.resources.length === 0 ? (
-                                <p className="text-sm text-muted-foreground">
-                                    No materials attached.
-                                </p>
-                            ) : (
-                                session.resources.map((resource) => (
-                                    <div
-                                        key={resource.id}
-                                        className="flex items-center gap-3 rounded-lg border p-3"
-                                    >
-                                        <FileText className="size-5 shrink-0 text-muted-foreground" />
-                                        <div className="flex min-w-0 flex-1 flex-col gap-1">
-                                            <p className="truncate text-sm font-medium">
-                                                {resource.title}
-                                            </p>
-                                            <p className="text-xs text-muted-foreground">
-                                                {resource.size
-                                                    ? `${Math.ceil(resource.size / 1024)} KB`
-                                                    : 'Protected resource'}
-                                            </p>
-                                        </div>
-                                        <Button
-                                            asChild
-                                            size="icon"
-                                            variant="outline"
-                                        >
-                                            <a
-                                                href={resource.download_url}
-                                                aria-label={`Download ${resource.title}`}
+                        <CardContent>
+                            <Tabs defaultValue="materials" className="gap-4">
+                                <TabsList className="grid w-full grid-cols-2">
+                                    <TabsTrigger value="materials">
+                                        Session Materials
+                                    </TabsTrigger>
+                                    <TabsTrigger value="q-and-a">
+                                        Q&amp;A
+                                    </TabsTrigger>
+                                </TabsList>
+                                <TabsContent
+                                    value="materials"
+                                    className="flex flex-col gap-3"
+                                >
+                                    {session.resources.length === 0 ? (
+                                        <p className="text-sm text-muted-foreground">
+                                            No materials attached.
+                                        </p>
+                                    ) : (
+                                        session.resources.map((resource) => (
+                                            <div
+                                                key={resource.id}
+                                                className="flex items-center gap-3 rounded-lg border p-3"
                                             >
-                                                <Download data-icon="inline-start" />
-                                            </a>
-                                        </Button>
-                                    </div>
-                                ))
-                            )}
+                                                <FileText className="size-5 shrink-0 text-muted-foreground" />
+                                                <div className="flex min-w-0 flex-1 flex-col gap-1">
+                                                    <p className="truncate text-sm font-medium">
+                                                        {resource.title}
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        {resource.size
+                                                            ? `${Math.ceil(resource.size / 1024)} KB`
+                                                            : 'Protected resource'}
+                                                    </p>
+                                                </div>
+                                                <Button
+                                                    asChild
+                                                    size="icon"
+                                                    variant="outline"
+                                                >
+                                                    <a
+                                                        href={
+                                                            resource.download_url
+                                                        }
+                                                        aria-label={`Download ${resource.title}`}
+                                                    >
+                                                        <Download data-icon="inline-start" />
+                                                    </a>
+                                                </Button>
+                                            </div>
+                                        ))
+                                    )}
+                                </TabsContent>
+                                <TabsContent value="q-and-a">
+                                    <SessionQna
+                                        sessionId={session.id}
+                                        questions={session.questions}
+                                    />
+                                </TabsContent>
+                            </Tabs>
                         </CardContent>
                     </Card>
                 </div>

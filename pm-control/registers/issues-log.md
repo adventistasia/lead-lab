@@ -7,6 +7,7 @@ Project: Lead Lab
 
 | ID | Issue | Priority | Owner | Status | Due | Resolution plan | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|
+| ISS-11 | Administrator Classroom session actions did not expose the existing session editor | Medium | Unassigned | Resolved | Before local feature acceptance | Added `Edit session` to the Classroom action selector and routed it to the existing protected editor. Focused feature coverage confirms the editor loads the selected session. | CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown), ACT-35 (Expose the existing session editor from Classroom session actions), RQ-02 (Administrators must publish sessions with title, category, date, video link, and materials) | Current working session, 2026-08-24; `projects/lead-lab/application/source/resources/js/pages/admin/classroom/index.tsx`; `projects/lead-lab/application/source/tests/Feature/LeadLabAccessTest.php` | 2026-08-24 |
 | ISS-01 | Platform choice undecided; blocks all build work | High | Requester + IT team | Resolved | Before build start | Resolved 13-Aug-2026: self-hosted WordPress selected | D-01, BL-01 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-01) | 2026-08-18 |
 | ISS-02 | Participant access mechanism undecided | High | Requester + IT team | Resolved | Before prototype acceptance | Resolved 18-Aug-2026: native WordPress login selected; validate restricted access in staging | D-02, BL-02, R-03 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-02); Conversation (PM update, 2026-08-18) | 2026-08-18 |
 | ISS-03 | Timeline pressure: 23 calendar days remain to build and test the Option B application; environment and staffing assumptions are unproven | High | Requester + IT team | In Progress | Monitor weekly to Sep 11 | Verify the environment and staffing, run the vertical slice, and use the proposed go/no-go gates and SharePoint fallback if the schedule slips | R-01, AL-01, BL-21, ACT-06, CHG-01, D-10 | `projects/lead-lab/artifacts/logs and registers/issues-log.md` (ISS-03); `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` | 2026-08-19 |
@@ -45,4 +46,4 @@ Generated from the register rows. Do not manually maintain these counts.
 |---|---|
 | High priority open or in progress | 2 |
 | Blocked | 0 |
-| Total issues | 10 |
+| Total issues | 11 |

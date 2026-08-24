@@ -225,6 +225,27 @@ class LeadLabAccessTest extends TestCase
         Storage::disk('local')->assertExists($resource->stored_path);
     }
 
+    public function test_admin_can_open_the_session_editor_from_classroom_actions(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create([
+            'title' => 'Editable classroom session',
+            'description' => 'Edit this session from Classroom actions.',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.sessions.edit', $session))
+            ->assertOk()
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('admin/sessions/index')
+                ->where('session.id', $session->id)
+                ->where('session.title', 'Editable classroom session')
+                ->where('session.description', 'Edit this session from Classroom actions.')
+                ->where('session.video_url', 'https://www.youtube.com/watch?v=abc123XYZ01'),
+            );
+    }
+
     public function test_admin_can_save_a_full_youtube_embed_code(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -330,6 +351,197 @@ class LeadLabAccessTest extends TestCase
         $download = $this->actingAs($participant)->get(route('resources.download', $resource));
 
         $download->assertDownload('Session notes.txt');
+    }
+
+    public function test_active_users_can_view_session_questions_and_answers(): void
+    {
+        $participant = User::factory()->create(['name' => 'Participant One']);
+        $author = User::factory()->create(['name' => 'Question Author']);
+        $session = LearningSession::factory()->create([
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ]);
+        $question = $session->questions()->create([
+            'user_id' => $author->id,
+            'title' => 'How should I apply this session?',
+            'details' => 'I would like to use this in my next weekly review.',
+        ]);
+        $answer = $question->answers()->create([
+            'user_id' => $author->id,
+            'body' => 'Start with one small change and review it next week.',
+        ]);
+        $question->votes()->create(['user_id' => $participant->id]);
+        $answer->votes()->create(['user_id' => $participant->id]);
+
+        $this->actingAs($participant)
+            ->get(route('sessions.show', $session))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('sessions/show')
+                ->where('session.questions.0.title', 'How should I apply this session?')
+                ->where('session.questions.0.details', 'I would like to use this in my next weekly review.')
+                ->where('session.questions.0.votes_count', 1)
+                ->where('session.questions.0.has_voted', true)
+                ->where('session.questions.0.answers.0.body', 'Start with one small change and review it next week.')
+                ->where('session.questions.0.answers.0.votes_count', 1)
+                ->where('session.questions.0.answers.0.has_voted', true),
+            );
+    }
+
+    public function test_active_users_can_create_edit_delete_and_vote_on_q_and_a_content(): void
+    {
+        $author = User::factory()->create();
+        $answerer = User::factory()->create();
+        $session = LearningSession::factory()->create();
+
+        $this->actingAs($author)
+            ->post(route('sessions.questions.store', $session), [
+                'title' => 'What is the first step?',
+                'details' => 'Please share a practical starting point.',
+            ])
+            ->assertRedirect();
+
+        $question = $session->questions()->firstOrFail();
+
+        $this->actingAs($answerer)
+            ->post(route('questions.answers.store', $question), [
+                'body' => 'Start by writing down the smallest next action.',
+            ])
+            ->assertRedirect();
+
+        $answer = $question->answers()->firstOrFail();
+
+        $this->actingAs($answerer)
+            ->post(route('questions.vote', $question))
+            ->assertRedirect();
+        $this->assertDatabaseHas('session_question_votes', [
+            'session_question_id' => $question->id,
+            'user_id' => $answerer->id,
+        ]);
+
+        $this->actingAs($answerer)
+            ->post(route('questions.vote', $question))
+            ->assertRedirect();
+        $this->assertDatabaseMissing('session_question_votes', [
+            'session_question_id' => $question->id,
+            'user_id' => $answerer->id,
+        ]);
+
+        $this->actingAs($answerer)
+            ->post(route('answers.vote', $answer))
+            ->assertRedirect();
+        $this->assertDatabaseHas('session_answer_votes', [
+            'session_answer_id' => $answer->id,
+            'user_id' => $answerer->id,
+        ]);
+
+        $this->actingAs($author)
+            ->patch(route('sessions.questions.update', [$session, $question]), [
+                'title' => 'Updated first step',
+                'details' => 'Updated practical context.',
+            ])
+            ->assertRedirect();
+
+        $this->actingAs($answerer)
+            ->patch(route('questions.answers.update', [$question, $answer]), [
+                'body' => 'Start with one documented next action.',
+            ])
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('session_questions', [
+            'id' => $question->id,
+            'title' => 'Updated first step',
+        ]);
+        $this->assertDatabaseHas('session_answers', [
+            'id' => $answer->id,
+            'body' => 'Start with one documented next action.',
+        ]);
+
+        $this->actingAs($answerer)
+            ->delete(route('questions.answers.destroy', [$question, $answer]))
+            ->assertRedirect();
+        $this->assertDatabaseMissing('session_answers', ['id' => $answer->id]);
+
+        $this->actingAs($author)
+            ->delete(route('sessions.questions.destroy', [$session, $question]))
+            ->assertRedirect();
+        $this->assertDatabaseMissing('session_questions', ['id' => $question->id]);
+    }
+
+    public function test_users_cannot_manage_other_users_q_and_a_content_but_admins_can(): void
+    {
+        $author = User::factory()->create();
+        $otherParticipant = User::factory()->create();
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create();
+        $question = $session->questions()->create([
+            'user_id' => $author->id,
+            'title' => 'Owner question',
+            'details' => null,
+        ]);
+        $answer = $question->answers()->create([
+            'user_id' => $author->id,
+            'body' => 'Owner answer',
+        ]);
+
+        $this->actingAs($otherParticipant)
+            ->patch(route('sessions.questions.update', [$session, $question]), [
+                'title' => 'Unauthorized edit',
+                'details' => null,
+            ])
+            ->assertForbidden();
+        $this->actingAs($otherParticipant)
+            ->delete(route('questions.answers.destroy', [$question, $answer]))
+            ->assertForbidden();
+
+        $this->actingAs($admin)
+            ->patch(route('sessions.questions.update', [$session, $question]), [
+                'title' => 'Admin edit',
+                'details' => null,
+            ])
+            ->assertRedirect();
+        $this->actingAs($admin)
+            ->delete(route('questions.answers.destroy', [$question, $answer]))
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('session_questions', [
+            'id' => $question->id,
+            'title' => 'Admin edit',
+        ]);
+        $this->assertDatabaseMissing('session_answers', ['id' => $answer->id]);
+    }
+
+    public function test_q_and_a_content_cannot_cross_session_boundaries(): void
+    {
+        $participant = User::factory()->create();
+        $firstSession = LearningSession::factory()->create();
+        $secondSession = LearningSession::factory()->create();
+        $question = $secondSession->questions()->create([
+            'user_id' => $participant->id,
+            'title' => 'Second session question',
+            'details' => null,
+        ]);
+
+        $this->actingAs($participant)
+            ->patch(route('sessions.questions.update', [$firstSession, $question]), [
+                'title' => 'Cross-session edit',
+                'details' => null,
+            ])
+            ->assertNotFound();
+
+        $this->actingAs($participant)
+            ->post(route('sessions.questions.store', $firstSession), [
+                'title' => 'First session question',
+                'details' => null,
+            ])
+            ->assertRedirect();
+
+        $this->assertDatabaseHas('session_questions', [
+            'learning_session_id' => $firstSession->id,
+            'title' => 'First session question',
+        ]);
+        $this->assertDatabaseHas('session_questions', [
+            'learning_session_id' => $secondSession->id,
+            'title' => 'Second session question',
+        ]);
     }
 
     public function test_application_managed_participants_can_log_in(): void

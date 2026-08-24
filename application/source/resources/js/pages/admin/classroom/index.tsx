@@ -1,4 +1,4 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 import { CalendarDays, LibraryBig, Plus, Upload } from 'lucide-react';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
@@ -45,15 +45,21 @@ type Recording = {
 };
 
 type LifecycleAction = 'publish' | 'unpublish' | 'archive' | 'restore';
+type SessionAction = LifecycleAction | 'edit';
 
 const lifecycleActions = (
     session: Recording,
-): Array<{ value: LifecycleAction; label: string }> => {
+): Array<{ value: SessionAction; label: string }> => {
+    const actions: Array<{ value: SessionAction; label: string }> = [
+        { value: 'edit', label: 'Edit session' },
+    ];
+
     if (session.is_archived) {
-        return [{ value: 'restore', label: 'Restore' }];
+        return [...actions, { value: 'restore', label: 'Restore' }];
     }
 
     return [
+        ...actions,
         {
             value: session.is_published ? 'unpublish' : 'publish',
             label: session.is_published ? 'Unpublish' : 'Publish',
@@ -75,7 +81,7 @@ export default function AdminClassroom({
     const [formVersion, setFormVersion] = useState(0);
     const [selectedAction, setSelectedAction] = useState<{
         sessionId: number;
-        action: LifecycleAction;
+        action: SessionAction;
     } | null>(null);
     const form = useForm<SessionFormData>({
         title: '',
@@ -273,11 +279,24 @@ export default function AdminClassroom({
                                                 }
                                                 onValueChange={(value) => {
                                                     const action =
-                                                        value as LifecycleAction;
+                                                        value as SessionAction;
                                                     setSelectedAction({
                                                         sessionId: session.id,
                                                         action,
                                                     });
+
+                                                    if (action === 'edit') {
+                                                        router.get(
+                                                            `/admin/sessions/${session.id}/edit`,
+                                                            {},
+                                                            {
+                                                                preserveState: false,
+                                                            },
+                                                        );
+
+                                                        return;
+                                                    }
+
                                                     changeLifecycle(
                                                         session,
                                                         action,

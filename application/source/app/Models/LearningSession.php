@@ -85,4 +85,10 @@ class LearningSession extends Model
     {
         return $this->hasMany(LearningResource::class);
     }
+
+    /** @return HasMany<SessionQuestion, $this> */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(SessionQuestion::class);
+    }
 }

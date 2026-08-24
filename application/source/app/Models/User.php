@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -73,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
             return;
         }
 
-        $this->notify(new VerifyEmail());
+        $this->notify(new VerifyEmail);
     }
 
     public function isModerator(): bool
@@ -94,5 +95,17 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
     public function canAccessLeadLab(): bool
     {
         return $this->is_active && $this->access_status === self::ACCESS_ACTIVE;
+    }
+
+    /** @return HasMany<SessionQuestion, $this> */
+    public function sessionQuestions(): HasMany
+    {
+        return $this->hasMany(SessionQuestion::class);
+    }
+
+    /** @return HasMany<SessionAnswer, $this> */
+    public function sessionAnswers(): HasMany
+    {
+        return $this->hasMany(SessionAnswer::class);
     }
 }

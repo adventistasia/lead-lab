@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LearningSession;
+use App\Models\SessionQuestion;
 use App\Support\YouTubeVideoReference;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -72,6 +73,19 @@ class LearningSessionController
 
         $learningSession->load('resources');
 
+        $questions = $learningSession->questions()
+            ->with([
+                'user:id,name,role',
+                'votes',
+                'answers' => fn ($query) => $query
+                    ->with(['user:id,name,role', 'votes'])
+                    ->oldest(),
+            ])
+            ->latest()
+            ->get();
+
+        $user = $request->user();
+
         $videoUrl = $learningSession->video_url;
 
         return Inertia::render('sessions/show', [
@@ -91,6 +105,35 @@ class LearningSessionController
                     'size' => $resource->size,
                     'download_url' => route('resources.download', $resource),
                 ])->values(),
+                'questions' => $questions->map(fn (SessionQuestion $question): array => [
+                    'id' => $question->id,
+                    'title' => $question->title,
+                    'details' => $question->details,
+                    'created_at' => $question->created_at->toIso8601String(),
+                    'author' => [
+                        'id' => $question->user->id,
+                        'name' => $question->user->name,
+                        'role' => $question->user->role,
+                    ],
+                    'votes_count' => $question->votes->count(),
+                    'has_voted' => $question->votes->contains('user_id', $user->id),
+                    'can_edit' => $user->isAdmin() || $question->user_id === $user->id,
+                    'can_delete' => $user->isAdmin() || $question->user_id === $user->id,
+                    'answers' => $question->answers->map(fn ($answer): array => [
+                        'id' => $answer->id,
+                        'body' => $answer->body,
+                        'created_at' => $answer->created_at->toIso8601String(),
+                        'author' => [
+                            'id' => $answer->user->id,
+                            'name' => $answer->user->name,
+                            'role' => $answer->user->role,
+                        ],
+                        'votes_count' => $answer->votes->count(),
+                        'has_voted' => $answer->votes->contains('user_id', $user->id),
+                        'can_edit' => $user->isAdmin() || $answer->user_id === $user->id,
+                        'can_delete' => $user->isAdmin() || $answer->user_id === $user->id,
+                    ])->values()->all(),
+                ])->values()->all(),
             ],
         ]);
     }
