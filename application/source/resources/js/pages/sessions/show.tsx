@@ -53,7 +53,7 @@ export default function SessionShow({ session }: { session: Session }) {
                     <h1 className="max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">
                         {session.title}
                     </h1>
-                    <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
+                    <p className="max-w-2xl text-base leading-8 text-muted-foreground">
                         {session.description}
                     </p>
                 </div>

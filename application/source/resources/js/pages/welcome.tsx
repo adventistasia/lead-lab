@@ -73,7 +73,7 @@ export default function Welcome() {
                             <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
                                 Build the lead system you can keep.
                             </h1>
-                            <p className="max-w-xl text-lg leading-8 text-muted-foreground">
+                            <p className="max-w-xl text-base leading-8 text-muted-foreground">
                                 A private place for Lead Lab sessions, practical
                                 resources, live events, and the conversations
                                 that help the work move forward.
