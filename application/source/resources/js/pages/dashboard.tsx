@@ -3,7 +3,6 @@ import {
     ArrowRight,
     BookOpen,
     CalendarDays,
-    CheckCircle2,
     Clock3,
     MessageSquareText,
     Play,
@@ -20,7 +19,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import { dashboard } from '@/routes';
 
@@ -329,42 +327,7 @@ export default function Dashboard({
                     </Card>
                 </section>
 
-                <section
-                    id="calendar"
-                    className="grid scroll-mt-8 gap-6 lg:grid-cols-[0.8fr_1.2fr]"
-                >
-                    <Card className="bg-muted/40 shadow-none">
-                        <CardHeader>
-                            <div className="flex items-center gap-3">
-                                <div className="flex size-10 items-center justify-center rounded-lg bg-background text-foreground">
-                                    <CheckCircle2 className="size-5" />
-                                </div>
-                                <div className="flex flex-col gap-1">
-                                    <CardTitle className="text-base">
-                                        Your rhythm
-                                    </CardTitle>
-                                    <CardDescription>
-                                        Keep the small promises.
-                                    </CardDescription>
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-col gap-3">
-                            <div className="flex items-center justify-between text-sm">
-                                <span className="text-muted-foreground">
-                                    This week
-                                </span>
-                                <span className="font-medium">
-                                    4 of 5 actions
-                                </span>
-                            </div>
-                            <Progress
-                                value={80}
-                                aria-label="Weekly progress: 80 percent"
-                            />
-                        </CardContent>
-                    </Card>
-
+                <section id="calendar" className="scroll-mt-8">
                     <Card>
                         <CardHeader className="flex flex-row items-start justify-between gap-4">
                             <div className="flex flex-col gap-1.5">
