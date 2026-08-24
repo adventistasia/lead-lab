@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\LearningResource;
 use App\Models\LearningSession;
 use App\Support\YouTubeVideoReference;
@@ -104,6 +105,7 @@ class AdminLearningSessionController
         ]);
 
         $this->storeResource($session, $request);
+        ActivityLog::record($request->user(), 'session_created', $session);
         $this->flashSuccess('Session saved as a draft.');
 
         return to_route(
@@ -141,6 +143,9 @@ class AdminLearningSessionController
         ]);
 
         $this->replaceResource($learningSession, $request);
+        ActivityLog::record($request->user(), 'session_updated', $learningSession, [
+            'resource_replaced' => $request->hasFile('resource'),
+        ]);
         $this->flashSuccess('Session changes saved.');
 
         return to_route('admin.sessions.index');
@@ -151,6 +156,7 @@ class AdminLearningSessionController
         LearningSession $learningSession,
     ): RedirectResponse {
         $learningSession->update(['is_published' => true]);
+        ActivityLog::record($request->user(), 'session_published', $learningSession);
         $this->flashSuccess('Session published to the Lead Lab classroom.');
 
         return $this->lifecycleRedirect($request);
@@ -161,6 +167,7 @@ class AdminLearningSessionController
         LearningSession $learningSession,
     ): RedirectResponse {
         $learningSession->update(['is_published' => false]);
+        ActivityLog::record($request->user(), 'session_unpublished', $learningSession);
         $this->flashSuccess('Session unpublished from the Lead Lab classroom.');
 
         return $this->lifecycleRedirect($request);
@@ -171,6 +178,7 @@ class AdminLearningSessionController
         LearningSession $learningSession,
     ): RedirectResponse {
         $learningSession->update(['archived_at' => now()]);
+        ActivityLog::record($request->user(), 'session_archived', $learningSession);
         $this->flashSuccess('Session archived.');
 
         return $this->lifecycleRedirect($request);
@@ -181,6 +189,7 @@ class AdminLearningSessionController
         LearningSession $learningSession,
     ): RedirectResponse {
         $learningSession->update(['archived_at' => null]);
+        ActivityLog::record($request->user(), 'session_restored', $learningSession);
         $this->flashSuccess('Session restored.');
 
         return $this->lifecycleRedirect($request);

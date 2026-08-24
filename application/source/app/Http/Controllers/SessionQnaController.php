@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\LearningSession;
 use App\Models\SessionAnswer;
 use App\Models\SessionAnswerVote;
@@ -48,6 +49,7 @@ class SessionQnaController
             'title' => $validated['title'],
             'details' => $validated['details'] ?? null,
         ]);
+        $this->recordQuestionModeration($request, 'qna_question_updated', $sessionQuestion);
 
         return back();
     }
@@ -61,6 +63,7 @@ class SessionQnaController
         $this->ensureSessionVisible($request, $learningSession);
         $this->ensureCanManage($request, $sessionQuestion->user_id);
 
+        $this->recordQuestionModeration($request, 'qna_question_deleted', $sessionQuestion);
         $sessionQuestion->delete();
 
         return back();
@@ -98,6 +101,7 @@ class SessionQnaController
         ]);
 
         $sessionAnswer->update(['body' => $validated['body']]);
+        $this->recordAnswerModeration($request, 'qna_answer_updated', $sessionQuestion, $sessionAnswer);
 
         return back();
     }
@@ -112,6 +116,7 @@ class SessionQnaController
         $this->ensureSessionVisible($request, $sessionQuestion->learningSession);
         $this->ensureCanManage($request, $sessionAnswer->user_id);
 
+        $this->recordAnswerModeration($request, 'qna_answer_deleted', $sessionQuestion, $sessionAnswer);
         $sessionAnswer->delete();
 
         return back();
@@ -182,5 +187,37 @@ class SessionQnaController
             $request->user()->isAdmin() || $request->user()->id === $ownerId,
             403,
         );
+    }
+
+    private function recordQuestionModeration(
+        Request $request,
+        string $action,
+        SessionQuestion $sessionQuestion,
+    ): void {
+        if (! $request->user()->isAdmin()) {
+            return;
+        }
+
+        ActivityLog::record($request->user(), $action, $sessionQuestion, [
+            'learning_session_id' => $sessionQuestion->learning_session_id,
+            'content_owner_id' => $sessionQuestion->user_id,
+        ]);
+    }
+
+    private function recordAnswerModeration(
+        Request $request,
+        string $action,
+        SessionQuestion $sessionQuestion,
+        SessionAnswer $sessionAnswer,
+    ): void {
+        if (! $request->user()->isAdmin()) {
+            return;
+        }
+
+        ActivityLog::record($request->user(), $action, $sessionAnswer, [
+            'learning_session_id' => $sessionQuestion->learning_session_id,
+            'session_question_id' => $sessionQuestion->id,
+            'content_owner_id' => $sessionAnswer->user_id,
+        ]);
     }
 }

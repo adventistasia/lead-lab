@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\ActivityLog;
 use App\Models\LearningResource;
 use App\Models\LearningSession;
+use App\Models\SessionAnswer;
+use App\Models\SessionQuestion;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -267,6 +270,51 @@ class LeadLabAccessTest extends TestCase
         );
     }
 
+    public function test_admin_session_actions_are_logged(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Audited session',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-28',
+            'description' => 'A session used to verify administrative activity logging.',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ])->assertRedirect();
+
+        $session = LearningSession::query()->where('title', 'Audited session')->firstOrFail();
+
+        $this->actingAs($admin)->patch(route('admin.sessions.update', $session), [
+            'title' => 'Updated audited session',
+            'category' => 'Execution rhythm',
+            'session_date' => '2026-08-29',
+            'description' => 'Updated session details.',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ])->assertRedirect();
+
+        $this->actingAs($admin)->patch(route('admin.sessions.publish', $session))->assertRedirect();
+        $this->actingAs($admin)->patch(route('admin.sessions.unpublish', $session))->assertRedirect();
+        $this->actingAs($admin)->patch(route('admin.sessions.archive', $session))->assertRedirect();
+        $this->actingAs($admin)->patch(route('admin.sessions.restore', $session))->assertRedirect();
+
+        foreach ([
+            'session_created',
+            'session_updated',
+            'session_published',
+            'session_unpublished',
+            'session_archived',
+            'session_restored',
+        ] as $action) {
+            $this->assertDatabaseHas('activity_logs', [
+                'actor_id' => $admin->id,
+                'action' => $action,
+                'subject_type' => LearningSession::class,
+                'subject_id' => $session->id,
+            ]);
+        }
+    }
+
     public function test_admin_can_save_a_short_youtube_url(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -507,6 +555,81 @@ class LeadLabAccessTest extends TestCase
             'title' => 'Admin edit',
         ]);
         $this->assertDatabaseMissing('session_answers', ['id' => $answer->id]);
+    }
+
+    public function test_admin_q_and_a_moderation_actions_are_logged(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $author = User::factory()->create();
+        $session = LearningSession::factory()->create();
+        $question = $session->questions()->create([
+            'user_id' => $author->id,
+            'title' => 'Question to moderate',
+            'details' => 'Question details.',
+        ]);
+        $answer = $question->answers()->create([
+            'user_id' => $author->id,
+            'body' => 'Answer to moderate.',
+        ]);
+        $questionToDelete = $session->questions()->create([
+            'user_id' => $author->id,
+            'title' => 'Question to delete',
+            'details' => null,
+        ]);
+
+        $this->actingAs($author)
+            ->patch(route('sessions.questions.update', [$session, $question]), [
+                'title' => 'Author update',
+                'details' => null,
+            ])
+            ->assertRedirect();
+
+        $this->assertDatabaseMissing('activity_logs', [
+            'action' => 'qna_question_updated',
+            'subject_type' => SessionQuestion::class,
+            'subject_id' => $question->id,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('sessions.questions.update', [$session, $question]), [
+                'title' => 'Admin update',
+                'details' => 'Admin moderation update.',
+            ])
+            ->assertRedirect();
+        $this->actingAs($admin)
+            ->patch(route('questions.answers.update', [$question, $answer]), [
+                'body' => 'Admin answer update.',
+            ])
+            ->assertRedirect();
+        $this->actingAs($admin)
+            ->delete(route('questions.answers.destroy', [$question, $answer]))
+            ->assertRedirect();
+        $this->actingAs($admin)
+            ->delete(route('sessions.questions.destroy', [$session, $questionToDelete]))
+            ->assertRedirect();
+
+        foreach ([
+            ['action' => 'qna_question_updated', 'subject' => $question, 'type' => SessionQuestion::class],
+            ['action' => 'qna_answer_updated', 'subject' => $answer, 'type' => SessionAnswer::class],
+            ['action' => 'qna_answer_deleted', 'subject' => $answer, 'type' => SessionAnswer::class],
+            ['action' => 'qna_question_deleted', 'subject' => $questionToDelete, 'type' => SessionQuestion::class],
+        ] as $expected) {
+            $this->assertDatabaseHas('activity_logs', [
+                'actor_id' => $admin->id,
+                'action' => $expected['action'],
+                'subject_type' => $expected['type'],
+                'subject_id' => $expected['subject']->id,
+            ]);
+        }
+
+        $answerLog = ActivityLog::query()
+            ->where('action', 'qna_answer_deleted')
+            ->where('subject_id', $answer->id)
+            ->firstOrFail();
+
+        $this->assertSame($session->id, $answerLog->metadata['learning_session_id']);
+        $this->assertSame($question->id, $answerLog->metadata['session_question_id']);
+        $this->assertSame($author->id, $answerLog->metadata['content_owner_id']);
     }
 
     public function test_q_and_a_content_cannot_cross_session_boundaries(): void
