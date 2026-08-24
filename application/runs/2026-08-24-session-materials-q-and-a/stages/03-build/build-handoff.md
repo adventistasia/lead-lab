@@ -51,10 +51,10 @@ The local implementation covers `RQ-21 (Session detail materials and Q&A tabs)` 
 ## Known Limitations
 
 - Search, filtering, advanced sorting, notifications, attachments, and answer nesting beyond one level are not included in this increment.
-- Browser visual and responsive evidence has not been recorded yet.
+- The PM confirmed the listed local browser checks on 2026-08-24; formal Measure evidence and the broader acceptance audit remain open.
 - Q&A moderation actions are not yet included in the administrative activity log.
 - Local SQLite evidence does not replace the deferred Gate 1, staging, or production checks.
 
 ## Rollback And Next Action
 
-Rollback is limited to the changed source, migration, test, and run files listed above. If the increment is rejected, revert the Q&A source and migration before any staging work; do not deploy the local schema. The next action is a local browser review of both tabs, the collapsed question form, and the scroll behavior at desktop and mobile widths, followed by a Measure audit of the new acceptance and moderation evidence.
+Rollback is limited to the changed source, migration, test, and run files listed above. If the increment is rejected, revert the Q&A source and migration before any staging work; do not deploy the local schema. The listed local browser checkpoint is confirmed. The next action is a Measure audit of the new acceptance, authorization, session-isolation, voting, responsive, and moderation evidence.

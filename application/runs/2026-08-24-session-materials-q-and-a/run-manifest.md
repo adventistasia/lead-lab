@@ -12,8 +12,20 @@
 | Local-only boundary | Gate 1, staging, production, participant-data governance, and final launch acceptance remain open. |
 | Latest feedback | Fixed-height Q&A feed for about three normal question cards; only the question feed scrolls beyond that visible height. The question form is collapsed by default and opens through `Ask a question`. |
 | Session follow-up | Added the missing `Edit session` option to administrator Classroom actions and linked it to the existing editor. |
-| Status | Local implementation complete; browser and Measure evidence remain open |
+| Status | Local implementation and listed browser checks confirmed; Measure evidence remains open |
 | Date | 2026-08-24 |
+
+## PM Confirmation
+
+On 2026-08-24, the PM confirmed that these local checks are working:
+
+- `Session Materials` and `Q&A` tabs
+- Protected downloads
+- Fixed-height, scrollable Q&A feed
+- Collapsed `Ask a question` form
+- Administrator `Edit session` action
+
+This confirms the listed local browser checkpoint only. The Measure audit, broader acceptance evidence, Gate 1, staging, production, participant-data governance, and launch acceptance remain open.
 
 ## Output
 
