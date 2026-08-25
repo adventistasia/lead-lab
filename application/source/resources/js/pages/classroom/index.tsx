@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { CalendarDays, LibraryBig } from 'lucide-react';
 import { ClassroomFilters } from '@/components/classroom-filters';
 import type { ClassroomFilterValues } from '@/components/classroom-filters';
+import { SessionThumbnail } from '@/components/session-thumbnail';
 import { Badge } from '@/components/ui/badge';
 import {
     Card,
@@ -18,6 +19,7 @@ type Recording = {
     category: string;
     session_date: string;
     resources_count: number;
+    video_thumbnail_url: string | null;
 };
 
 export default function Classroom({
@@ -89,11 +91,14 @@ export default function Classroom({
                                 {sessions.map((session) => (
                                     <div
                                         key={session.id}
-                                        className="flex flex-col gap-4 rounded-xl border p-4 md:flex-row md:items-center"
+                                        className="group flex flex-row items-center gap-4 rounded-xl border p-4 sm:gap-5"
                                     >
-                                        <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-                                            <LibraryBig className="size-5" />
-                                        </div>
+                                        <SessionThumbnail
+                                            thumbnailUrl={
+                                                session.video_thumbnail_url
+                                            }
+                                            alt={`${session.title} thumbnail`}
+                                        />
                                         <div className="min-w-0 flex-1">
                                             <h2 className="font-medium">
                                                 <Link

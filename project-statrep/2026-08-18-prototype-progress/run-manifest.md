@@ -10,7 +10,7 @@
 | Source request | User update: staging WordPress deployed; prototype-first scope confirmed; native WordPress login selected; production setup deferred; IT maintenance owner confirmed; project records requested for update |
 | Prior run | `project-statrep/2026-08-13-access-decision-email` |
 | Update ID | UPD-20260818-001 |
-| Project | LeadLab Portal Rebuild (`repository root`) |
+| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
 
 ## Stage Status
 

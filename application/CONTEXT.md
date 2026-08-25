@@ -28,9 +28,9 @@ application/
 
 ## Current State
 
-- The local application source uses Laravel, Inertia React, TypeScript, Tailwind CSS, and shadcn/ui, with the first protected session vertical slice implemented.
+- The local application source uses Laravel, Inertia React, TypeScript, Tailwind CSS, and shadcn/ui, with the protected session vertical slice and calendar event workflow implemented locally.
 - Local development uses SQLite; staging and production still require MySQL or MariaDB verification.
-- The local build and Measure audit pass conditionally; participant self-registration, member approval, revocation, restoration, and audit logging are implemented locally, while browser playback evidence, participant-data rules, and staging operations remain open.
+- The local build and Measure audit pass conditionally; participant self-registration, member approval, revocation, restoration, audit logging, and administrator calendar event create/edit/delete are implemented locally, while authenticated browser evidence, participant-data rules, and staging operations remain open.
 - The approved product baseline is the Option B self-hosted web application.
 - The previous WordPress build remains historical evidence and is not the current application source.
 - SharePoint remains the launch fallback until acceptance.

@@ -15,6 +15,7 @@
 - RQ-19 exclusions must not enter the backlog without an approved change.
 - The administrator Classroom recordings page is approved under CHG-02 and must remain traceable to RQ-20.
 - The prior WordPress backlog remains historical evidence and is not rewritten here.
+- `Implemented locally` means the feature implementation and automated local checks are complete; browser, staging, and launch acceptance remain separate gates.
 
 ## Work Packages
 
@@ -23,7 +24,7 @@
 | WP-01 | Product foundation and access | Application shell, environment, authentication, roles, and access lifecycle. | RQ-01, RQ-09, RQ-15 |
 | WP-02 | Community | Posts, comments, categories, announcements, and moderation. | RQ-12, RQ-15, RQ-16 |
 | WP-03 | Classroom and session content | Courses, modules, lessons, recorded sessions, videos, materials, and administrator recordings access. | RQ-02, RQ-06, RQ-07, RQ-13, RQ-20 |
-| WP-04 | Calendar and events | Scheduled events and meeting links. | RQ-14 |
+| WP-04 | Calendar and events | Administrator-created published events and responsive calendar viewing. | RQ-14 |
 | WP-05 | Search and discovery | Search plus category/date discovery. | RQ-03, RQ-04, RQ-05 |
 | WP-06 | Administration and moderation | Member, content, permission, category, course, lesson, event, file, and moderation administration. | RQ-02, RQ-09, RQ-15, RQ-16 |
 | WP-07 | Security and operations | Server-side protection, HTTPS, backups, restore testing, monitoring, logs, and conditional decisions. | RQ-10, RQ-11, RQ-17, RQ-18 |
@@ -44,11 +45,11 @@
 | LL-08 | Build session fields for title, category, date, description, video, and materials. | WP-03 | Must | RQ-02 | LL-02 | TBD | Not started |
 | LL-09 | Implement YouTube video embedding and playback. | WP-03 | Must | RQ-06 | LL-08, video decision | TBD | Not started |
 | LL-10 | Implement private material storage and authenticated downloads. | WP-03/WP-07 | Must | RQ-07, RQ-10 | LL-03, LL-01 | TBD | Not started |
-| LL-11 | Build event records with dates, times, descriptions, and meeting links. | WP-04 | Should | RQ-14 | LL-02, LL-04 | TBD | Not started |
+| LL-11 | Build administrator-created published event records with title, start and end date-times, descriptions, administrator edit/delete actions, responsive calendar viewing, and continuous multi-day event markers for active administrators and participants. | WP-04 | Should | RQ-14 | LL-02, LL-04 | TBD | Implemented locally |
 | LL-12 | Implement search across session and material metadata. | WP-05 | Must | RQ-05 | LL-08, LL-10 | TBD | Not started |
 | LL-13 | Implement category and date filters. | WP-05 | Must | RQ-03, RQ-04 | LL-08 | TBD | Not started |
 | LL-14 | Build member administration, access approval, revocation, restoration, and permission management. | WP-06 | Must | RQ-09, RQ-15 | LL-03, LL-04 | TBD | In progress |
-| LL-15 | Build content, category, course, lesson, event, and file administration. | WP-06 | Must | RQ-02, RQ-13, RQ-14 | LL-08, LL-11 | TBD | Not started |
+| LL-15 | Build content, category, course, lesson, event, and file administration, including dashboard event creation and calendar edit/delete workflows. | WP-06 | Must | RQ-02, RQ-13, RQ-14 | LL-08, LL-11 | TBD | In progress |
 | LL-16 | Record relevant administrative activity, including registration and access changes. | WP-06/WP-07 | Must | RQ-11 | LL-14, LL-15 | TBD | In progress |
 | LL-17 | Enforce server-side authorization for routes, APIs, and files, including pending and revoked access states. | WP-07 | Must | RQ-10 | LL-01, LL-03, LL-10 | TBD | In progress |
 | LL-18 | Configure HTTPS, backups, restore testing, uptime monitoring, and incident checks. | WP-07 | Must | RQ-11 | LL-01, IT procedures | TBD | Not started |
@@ -74,6 +75,7 @@
 | CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development) | Added a local-only bypass; staging and production must restore the verification gate and real mail transport. |
 | CHG-16 (Add `Session Materials` and `Q&A` tabs to each session detail view) | Added RQ-21 and LL-30 for protected session materials, session-scoped Q&A, participant interaction, author controls, administrator moderation, and local acceptance testing. |
 | CHG-17 (Defer the Gate 1 environment and ownership reassessment while the local core-functionality build is completed) | Changed delivery sequence only; Gate 1 remains required before staging and no schedule baseline is approved. |
+| CHG-20 (Add the Lead Lab calendar event workflow) | Clarified LL-11 and the calendar portion of LL-15 for published administrator-created events, administrator edit/delete actions, and responsive calendar viewing under the existing RQ-14 (The application should provide a calendar with scheduled events) baseline. The event form does not include a meeting link. |
 
 ## Delivery Sequence
 

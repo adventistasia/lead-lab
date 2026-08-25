@@ -53,6 +53,17 @@ final class YouTubeVideoReference
         return 'https://www.youtube-nocookie.com/embed/'.rawurlencode($videoId).'?'.$query;
     }
 
+    public static function thumbnailUrl(?string $url): ?string
+    {
+        $videoId = $url === null ? null : self::videoIdFromUrl($url);
+
+        if ($videoId === null) {
+            return null;
+        }
+
+        return 'https://i.ytimg.com/vi/'.rawurlencode($videoId).'/hqdefault.jpg';
+    }
+
     private static function videoIdFromInput(string $input): ?string
     {
         $decoded = html_entity_decode(trim($input), ENT_QUOTES | ENT_HTML5, 'UTF-8');

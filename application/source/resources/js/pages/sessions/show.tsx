@@ -29,6 +29,7 @@ type Session = {
     session_date: string;
     description: string;
     video_embed_url: string | null;
+    initial_tab: 'materials' | 'q-and-a';
     resources: SessionResource[];
     questions: SessionQuestion[];
 };
@@ -96,7 +97,10 @@ export default function SessionShow({ session }: { session: Session }) {
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <Tabs defaultValue="materials" className="gap-4">
+                            <Tabs
+                                defaultValue={session.initial_tab}
+                                className="gap-4"
+                            >
                                 <TabsList className="grid w-full grid-cols-2">
                                     <TabsTrigger value="materials">
                                         Session Materials

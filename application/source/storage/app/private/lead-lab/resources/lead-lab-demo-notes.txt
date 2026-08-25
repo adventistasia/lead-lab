@@ -1,3 +1,0 @@
-Lead Lab demo resource
-
-Use this file to validate protected downloads in the local vertical slice.

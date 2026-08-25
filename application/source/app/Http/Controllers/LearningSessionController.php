@@ -40,6 +40,9 @@ class LearningSessionController
                 'category' => $session->category,
                 'session_date' => $session->session_date->toFormattedDateString(),
                 'resources_count' => $session->resources_count,
+                'video_thumbnail_url' => YouTubeVideoReference::thumbnailUrl(
+                    $session->video_url,
+                ),
             ])
             ->values();
 
@@ -99,6 +102,9 @@ class LearningSessionController
                     $videoUrl,
                     $request->getSchemeAndHttpHost(),
                 ),
+                'initial_tab' => $request->query('tab') === 'q-and-a'
+                    ? 'q-and-a'
+                    : 'materials',
                 'resources' => $learningSession->resources->map(fn ($resource): array => [
                     'id' => $resource->id,
                     'title' => $resource->title,

@@ -16,8 +16,8 @@ The ICM folder structure is the workflow control surface. Each stage has one job
 ## Core Rules
 
 - Always read this workspace `CONTEXT.md` before task work.
-- Treat `/artifacts/lead-lab-web-app-scope-and-requirements.md` as the product scope source of truth.
-- Treat `/application/source/` as the canonical application source location.
+- Treat `artifacts/lead-lab-web-app-scope-and-requirements.md` as the product scope source of truth.
+- Treat `application/source/` as the canonical application source location.
 - Keep run artifacts under the confirmed `{{RUN_PATH}}`; do not mix them into reusable references or source code.
 - Select the technical stack from verified server evidence. Do not invent runtime, database, storage, or deployment capabilities.
 - Prefer a modular monolith and existing team-supported infrastructure. Do not introduce microservices without an approved change.

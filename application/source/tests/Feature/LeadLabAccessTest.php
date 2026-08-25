@@ -421,9 +421,10 @@ class LeadLabAccessTest extends TestCase
         $answer->votes()->create(['user_id' => $participant->id]);
 
         $this->actingAs($participant)
-            ->get(route('sessions.show', $session))
+            ->get(route('sessions.show', [$session, 'tab' => 'q-and-a']))
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('sessions/show')
+                ->where('session.initial_tab', 'q-and-a')
                 ->where('session.questions.0.title', 'How should I apply this session?')
                 ->where('session.questions.0.details', 'I would like to use this in my next weekly review.')
                 ->where('session.questions.0.votes_count', 1)
@@ -791,6 +792,7 @@ class LeadLabAccessTest extends TestCase
         $published = LearningSession::factory()->create([
             'title' => 'Published classroom recording',
             'session_date' => '2026-08-28',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
             'is_published' => true,
         ]);
         $draft = LearningSession::factory()->create([
@@ -807,7 +809,11 @@ class LeadLabAccessTest extends TestCase
             ->component('admin/classroom/index')
             ->has('sessions', 2)
             ->where('sessions.0.id', $draft->id)
-            ->where('sessions.1.id', $published->id),
+            ->where('sessions.1.id', $published->id)
+            ->where(
+                'sessions.1.video_thumbnail_url',
+                'https://i.ytimg.com/vi/abc123XYZ01/hqdefault.jpg',
+            ),
         );
     }
 
@@ -859,6 +865,7 @@ class LeadLabAccessTest extends TestCase
         $published = LearningSession::factory()->create([
             'title' => 'Published participant recording',
             'session_date' => '2026-08-28',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
             'is_published' => true,
         ]);
         LearningSession::factory()->create([
@@ -875,7 +882,11 @@ class LeadLabAccessTest extends TestCase
             ->component('classroom/index')
             ->has('sessions', 1)
             ->where('sessions.0.id', $published->id)
-            ->where('sessions.0.title', 'Published participant recording'),
+            ->where('sessions.0.title', 'Published participant recording')
+            ->where(
+                'sessions.0.video_thumbnail_url',
+                'https://i.ytimg.com/vi/abc123XYZ01/hqdefault.jpg',
+            ),
         );
     }
 

@@ -12,7 +12,7 @@
 | Local-only boundary | Gate 1, staging, production, participant-data governance, and final launch acceptance remain open. |
 | Latest feedback | Fixed-height Q&A feed for about three normal question cards; only the question feed scrolls beyond that visible height. The question form is collapsed by default and opens through `Ask a question`. |
 | Session follow-up | Added the missing `Edit session` option to administrator Classroom actions and linked it to the existing editor. |
-| Status | Local implementation, listed browser checks, and the local activity-log audit confirmed; formal Measure evidence remains open |
+| Status | Conditional local Measure pass recorded on 2026-08-25; staging, production, participant-data governance, and final launch acceptance remain open |
 | Date | 2026-08-24 |
 
 ## PM Confirmation
@@ -25,7 +25,7 @@ On 2026-08-24, the PM confirmed that these local checks are working:
 - Collapsed `Ask a question` form
 - Administrator `Edit session` action
 
-This confirms the listed local browser checkpoint and local activity-log audit only. The formal Measure audit, broader acceptance evidence, Gate 1, staging, production, participant-data governance, and launch acceptance remain open.
+This confirms the listed local browser checkpoint and local activity-log audit only. The formal local Measure audit is now recorded as a conditional pass. Broader acceptance evidence, Gate 1, staging, production, participant-data governance, and launch acceptance remain open.
 
 ## Output
 
@@ -33,3 +33,4 @@ This confirms the listed local browser checkpoint and local activity-log audit o
 |---|---|---|
 | 02 Design | `stages/02-design/design-handoff.md`, `solution-design.md`, and `environment-gate.md` | Complete |
 | 03 Build | `stages/03-build/build-handoff.md` and `activity-log-audit.md` | Complete; local audit evidence added |
+| 04 Measure | `stages/04-measure/audit-findings.md` | Complete; conditional local pass; staging and launch evidence remain open |

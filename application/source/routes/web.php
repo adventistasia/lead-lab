@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminCalendarEventController;
 use App\Http\Controllers\AdminLearningSessionController;
 use App\Http\Controllers\AdminMemberController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LearningResourceController;
 use App\Http\Controllers\LearningSessionController;
@@ -27,6 +29,7 @@ Route::middleware('auth')->get('registration/pending', function (Request $reques
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('calendar', CalendarController::class)->name('calendar');
     Route::get('classroom', [LearningSessionController::class, 'index'])->name('classroom.index');
     Route::get('sessions/{learningSession}', [LearningSessionController::class, 'show'])->name('sessions.show');
     Route::get('resources/{learningResource}/download', [LearningResourceController::class, 'download'])->name('resources.download');
@@ -49,6 +52,9 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::patch('sessions/{learningSession}/unpublish', [AdminLearningSessionController::class, 'unpublish'])->name('sessions.unpublish');
         Route::patch('sessions/{learningSession}/archive', [AdminLearningSessionController::class, 'archive'])->name('sessions.archive');
         Route::patch('sessions/{learningSession}/restore', [AdminLearningSessionController::class, 'restore'])->name('sessions.restore');
+        Route::post('calendar-events', [AdminCalendarEventController::class, 'store'])->name('calendar-events.store');
+        Route::patch('calendar-events/{calendarEvent}', [AdminCalendarEventController::class, 'update'])->name('calendar-events.update');
+        Route::delete('calendar-events/{calendarEvent}', [AdminCalendarEventController::class, 'destroy'])->name('calendar-events.destroy');
         Route::get('members', [AdminMemberController::class, 'index'])->name('members.index');
         Route::patch('members/{user}/status', [AdminMemberController::class, 'updateStatus'])->name('members.status');
     });

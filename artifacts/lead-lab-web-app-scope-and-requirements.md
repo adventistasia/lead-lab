@@ -38,7 +38,7 @@ The application will be self-hosted and use open-source software without a Skool
 | Video | Embedded YouTube playback for the MVP, subject to the accepted residual URL-sharing risk. |
 | Resources | Authenticated access to downloadable supporting materials. |
 | Discovery | Search plus category and date filters for sessions and material metadata. |
-| Calendar | Events with dates, times, descriptions, and meeting links. |
+| Calendar | Administrators create, edit, and delete published events with title, start and end date-times, and descriptions from the calendar workflow. Active administrators and participants view those events in a responsive calendar. |
 | Administration | Member, content, category, course, lesson, event, file, and permission management. |
 | Devices | Responsive desktop, tablet, and mobile interface. |
 | Operations | HTTPS, backups, restore testing, uptime monitoring, and administrative activity logging. |
@@ -60,7 +60,7 @@ The application will be self-hosted and use open-source software without a Skool
 | RQ-11 | The application must support HTTPS, backups, restore testing, monitoring, and administrative activity logging before launch. | Must | IT demonstrates each operational control. | Approved |
 | RQ-12 | Participants should have a community feed with posts, comments, categories, and pinned announcements. | Should | Participants interact with approved posts within defined permissions. | Approved |
 | RQ-13 | The application should provide courses, modules, and lessons. | Should | Administrators organize lessons and participants find them. | Approved |
-| RQ-14 | The application should provide a calendar with events and meeting links. | Should | Participants view approved events and open meeting links. | Approved |
+| RQ-14 | The application should provide a calendar with scheduled events. | Should | An administrator can add, edit, and delete published events from the calendar workflow with a title, start and end date-times, and description. Active administrators and participants can view the published events in a responsive calendar. Multi-day events show a continuous marker inside the date cells across every covered day. Event times use the configured application timezone. | Approved |
 | RQ-15 | The application should support participant, moderator, and administrator permissions. | Should | Each role passes a permissions test. | Approved |
 | RQ-16 | Moderators and administrators should manage community content. | Could | Approved moderation actions produce the expected result. | Approved |
 | RQ-17 | The application should deter or limit discovery and sharing of embedded video URLs to the extent supported by the selected host. | Unresolved | An agreed protection test passes and residual limitations are recorded. | Open decision |
@@ -80,6 +80,7 @@ The application will be self-hosted and use open-source software without a Skool
 - Video hosting or streaming.
 - Advanced analytics.
 - Existing SharePoint content migration.
+- Recurring events, attendee invitations, reminders, and external Google or Outlook calendar synchronization.
 
 RQ-17 (video protection) and RQ-18 (Microsoft 365 SSO) remain open decisions. They are not silently treated as approved or rejected.
 
@@ -93,6 +94,7 @@ RQ-17 (video protection) and RQ-18 (Microsoft 365 SSO) remain open decisions. Th
 - The media team will provide required September content.
 - YouTube remains acceptable for MVP video playback if its URL-sharing limitations are accepted.
 - SharePoint remains the fallback until the application passes launch acceptance.
+- Administrator-created calendar events publish immediately, and event times use the configured application timezone.
 
 ## Dependencies
 
@@ -140,6 +142,7 @@ Any change to this baseline must:
 | `pm-control/registers/change-log.md` (CHG-02) | Approved administrator Classroom navigation and session recordings page change. |
 | `pm-control/registers/change-log.md` (CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval); CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development)) | Approved participant onboarding baseline and local development exception. |
 | `pm-control/registers/change-log.md` (CHG-16 (Add `Session Materials` and `Q&A` tabs to each session detail view)) | Approved session detail Q&A change and related acceptance boundary. |
+| CHG-20 (Add the Lead Lab calendar event workflow) | Clarified RQ-14 (The application should provide a calendar with scheduled events) as the calendar create, edit, delete, and responsive viewing behavior described above. |
 
 ## Change History
 
@@ -150,3 +153,4 @@ Any change to this baseline must:
 | 2026-08-21 | CHG-13 approved: replaced invitation-only onboarding with application-managed self-registration and administrator approval. Email verification remains required for the target-state MVP. |
 | 2026-08-21 | CHG-14 approved: local development may bypass email verification and notification delivery while Mailpit is unavailable; staging and production are not changed. |
 | 2026-08-24 | CHG-16 approved: added Session Materials and Q&A tabs with session-scoped questions, answers, voting, author controls, and administrator moderation. |
+| 2026-08-25 | CHG-20 (Add the Lead Lab calendar event workflow): administrators create, edit, and delete published events from the calendar workflow, while active administrators and participants view the responsive calendar. Multi-day events show a continuous marker inside the date cells across every covered day. The event form does not include a meeting link. Recurrence, invitations, reminders, and external calendar synchronization remain excluded. |
