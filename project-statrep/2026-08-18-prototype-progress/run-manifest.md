@@ -5,12 +5,12 @@
 |---|---|
 | Workspace | project-statrep |
 | Run slug | 2026-08-18-prototype-progress |
-| Run path | `projects/lead-lab/project-statrep/2026-08-18-prototype-progress` |
+| Run path | `project-statrep/2026-08-18-prototype-progress` |
 | Date | 18-Aug-2026 |
 | Source request | User update: staging WordPress deployed; prototype-first scope confirmed; native WordPress login selected; production setup deferred; IT maintenance owner confirmed; project records requested for update |
-| Prior run | `projects/lead-lab/project-statrep/2026-08-13-access-decision-email` |
+| Prior run | `project-statrep/2026-08-13-access-decision-email` |
 | Update ID | UPD-20260818-001 |
-| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
+| Project | LeadLab Portal Rebuild (`repository root`) |
 
 ## Stage Status
 

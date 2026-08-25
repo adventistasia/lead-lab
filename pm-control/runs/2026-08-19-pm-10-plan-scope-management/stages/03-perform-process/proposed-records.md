@@ -11,7 +11,7 @@ These records are proposals only. They must not be written to canonical register
 | Disposition | Required |
 | Rigor | Formal |
 | State | Current after approved reconciliation; otherwise Governance pending |
-| Last run | `projects/lead-lab/pm-control/runs/2026-08-19-pm-10-plan-scope-management` |
+| Last run | `pm-control/runs/2026-08-19-pm-10-plan-scope-management` |
 | Last performed | 2026-08-19 |
 | Next trigger | Complete PM-11 requirements analysis and confirm the scope-direction change before PM-12 scope definition |
 | Canonical output | Approved scope-management approach linked to the PM-10 run evidence |
@@ -25,7 +25,7 @@ The artifact review found no existing record that can safely become the new web-
 | Artifact | Scope and requirements records |
 | Related processes | PM-10 to PM-15 |
 | Owner | TBD; PM to confirm |
-| Location | Proposed: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`; requires PM confirmation |
+| Location | Proposed: `artifacts/lead-lab-web-app-scope-and-requirements.md`; requires PM confirmation |
 | Status | Proposed |
 | Minimum content | Approved scope approach, requirements, scope statement, exclusions, WBS/backlog structure, traceability, acceptance criteria, and change history |
 

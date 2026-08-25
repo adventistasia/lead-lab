@@ -9,7 +9,7 @@ The local development environment is ready for this feature build. Staging and p
 
 | Item | Value |
 |---|---|
-| Application | `projects/lead-lab/application/source/` |
+| Application | `application/source/` |
 | Runtime | PHP 8.5.9, Laravel 13.26.1 |
 | Interface | Inertia React, TypeScript, Tailwind CSS v4, shadcn/ui |
 | Database | Local SQLite |
@@ -18,7 +18,7 @@ The local development environment is ready for this feature build. Staging and p
 
 ## Build Decision
 
-Proceed with local implementation only. Do not treat the local build as staging or production evidence. The source environment and current Gate 1 status are recorded in `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`.
+Proceed with local implementation only. Do not treat the local build as staging or production evidence. The source environment and current Gate 1 status are recorded in `application/environment/gate-1-environment-and-ownership.md`.
 
 ## Blocked Release Inputs
 

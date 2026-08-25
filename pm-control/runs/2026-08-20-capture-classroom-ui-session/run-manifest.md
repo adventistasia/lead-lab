@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | INTAKE-2026-08-20-CLASSROOM-UI-SESSION |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Record all Lead Lab application changes completed in this session in the PM artifacts. |
 | Capture type | Conversation and build-evidence intake |
 | Started | 2026-08-20 |
@@ -19,10 +19,10 @@
 - Current conversation and PM completion direction, verified 2026-08-20.
 - `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 5.15.28 PM.png`, verified 2026-08-20.
 - `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 6.04.06 PM.png`, verified 2026-08-20.
-- `projects/lead-lab/application/runs/2026-08-20-admin-classroom-session-actions/`, verified 2026-08-20.
-- `projects/lead-lab/application/runs/2026-08-20-classroom-session-title-links/`, verified 2026-08-20.
-- `projects/lead-lab/application/runs/2026-08-20-hide-admin-sessions-menu/`, verified 2026-08-20.
-- `projects/lead-lab/application/runs/2026-08-20-remove-participant-open-recording/`, verified 2026-08-20.
+- `application/runs/2026-08-20-admin-classroom-session-actions/`, verified 2026-08-20.
+- `application/runs/2026-08-20-classroom-session-title-links/`, verified 2026-08-20.
+- `application/runs/2026-08-20-hide-admin-sessions-menu/`, verified 2026-08-20.
+- `application/runs/2026-08-20-remove-participant-open-recording/`, verified 2026-08-20.
 
 ## Authority Boundary
 

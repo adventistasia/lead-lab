@@ -8,7 +8,7 @@
 | Brief ID | leadlab-rebuild-2026-08-11 |
 | Date | 11-Aug-2026 |
 | Request type | Project |
-| Source | Conversation + closed-project artifacts (`projects/lead-lab/Old artifacts/`) |
+| Source | Conversation + closed-project artifacts (`Old artifacts/`) |
 
 ## Summary
 

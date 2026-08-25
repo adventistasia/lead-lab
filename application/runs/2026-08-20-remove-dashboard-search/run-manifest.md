@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | Project | Lead Lab |
-| Run path | `projects/lead-lab/application/runs/2026-08-20-remove-dashboard-search/` |
+| Run path | `application/runs/2026-08-20-remove-dashboard-search/` |
 | Request | Remove the dashboard `#search` target and its navigation entry for all users. |
 | Result | Local implementation complete; frontend checks pass |
 | Started | 2026-08-20 |

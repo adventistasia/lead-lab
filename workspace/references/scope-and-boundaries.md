@@ -5,7 +5,7 @@
 
 The approved product boundary is maintained in:
 
-`projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`
+`artifacts/lead-lab-web-app-scope-and-requirements.md`
 
 Load that file for requirements, exclusions, unresolved decisions, dependencies, and acceptance boundaries. Do not copy the full requirement list into this reference.
 

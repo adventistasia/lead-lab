@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-14-2026-08-24-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Check in with scope: assess whether current work and recent approved changes remain within the approved Option B scope baseline. |
 | Primary process | PM-14 (Monitor and Control Scope) |
 | Related processes | None; acceptance validation remains a later PM-15 trigger. |
@@ -29,12 +29,12 @@
 |---|---|
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | Process map | `workspaces/alson-pm-control/references/process-map.md` |
-| Scope baseline | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Current backlog | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` |
-| Delivery plan | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` |
-| Current changes and decisions | `projects/lead-lab/pm-control/registers/change-log.md` and `registers/decision-log.md` |
-| Current work and exceptions | `projects/lead-lab/pm-control/registers/action-log.md`, `registers/issues-log.md`, `registers/dependencies-log.md`, and `registers/risk-register.md` |
-| Latest local increment | `projects/lead-lab/application/runs/2026-08-24-session-materials-q-and-a/stages/03-build/build-handoff.md` |
+| Scope baseline | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Current backlog | `artifacts/lead-lab-web-app-backlog.md` |
+| Delivery plan | `artifacts/lead-lab-web-app-delivery-plan.md` |
+| Current changes and decisions | `pm-control/registers/change-log.md` and `registers/decision-log.md` |
+| Current work and exceptions | `pm-control/registers/action-log.md`, `registers/issues-log.md`, `registers/dependencies-log.md`, and `registers/risk-register.md` |
+| Latest local increment | `application/runs/2026-08-24-session-materials-q-and-a/stages/03-build/build-handoff.md` |
 
 ## Authority Boundary
 

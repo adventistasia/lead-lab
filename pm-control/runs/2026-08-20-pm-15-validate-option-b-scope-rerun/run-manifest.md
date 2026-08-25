@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-15-2026-08-20-03` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Rerun PM-15 after the PM confirmed completion of the local browser and responsive validation; defer participant onboarding, authentication and participant-data work, and Gate 1 work for later. |
 | Primary process | PM-15 (Validate Scope) |
 | Related processes | None; no dependency is required for this assessment |
@@ -29,14 +29,14 @@
 |---|---|
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.6 (Validate Scope) |
-| Prior PM-15 run | `projects/lead-lab/pm-control/runs/2026-08-20-pm-15-validate-option-b-scope/` |
-| Scope baseline | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Current backlog | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` |
-| Classroom search and filters evidence | `projects/lead-lab/application/runs/2026-08-20-classroom-search-filters/stages/03-build/build-handoff.md` |
-| CHG-04 (Simplify the CHG-03 button hierarchy) evidence | `projects/lead-lab/application/runs/2026-08-20-chg-04-simplify-brand-buttons/stages/03-build/build-handoff.md` and `stages/04-measure/audit-findings.md` |
-| CHG-05 (Extend CHG-02 to participants) evidence | `projects/lead-lab/application/runs/2026-08-20-chg-05-participant-classroom/stages/03-build/build-handoff.md` |
-| ACT-02 (Test embedded-video configuration and define acceptable protection for the Option B application) evidence | `projects/lead-lab/application/runs/2026-08-20-act-02-youtube-embed-protection/stages/03-build/build-handoff.md` |
-| Gate 1 evidence | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` |
+| Prior PM-15 run | `pm-control/runs/2026-08-20-pm-15-validate-option-b-scope/` |
+| Scope baseline | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Current backlog | `artifacts/lead-lab-web-app-backlog.md` |
+| Classroom search and filters evidence | `application/runs/2026-08-20-classroom-search-filters/stages/03-build/build-handoff.md` |
+| CHG-04 (Simplify the CHG-03 button hierarchy) evidence | `application/runs/2026-08-20-chg-04-simplify-brand-buttons/stages/03-build/build-handoff.md` and `stages/04-measure/audit-findings.md` |
+| CHG-05 (Extend CHG-02 to participants) evidence | `application/runs/2026-08-20-chg-05-participant-classroom/stages/03-build/build-handoff.md` |
+| ACT-02 (Test embedded-video configuration and define acceptable protection for the Option B application) evidence | `application/runs/2026-08-20-act-02-youtube-embed-protection/stages/03-build/build-handoff.md` |
+| Gate 1 evidence | `application/environment/gate-1-environment-and-ownership.md` |
 | Current PM direction | Current conversation, 2026-08-20: item 1 confirmed done; items 2 and 3 deferred; PM-15 requested |
 
 ## Final State Before Reconciliation

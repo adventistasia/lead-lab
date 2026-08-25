@@ -23,10 +23,10 @@ This cycle does not build application code, approve production release, approve 
 
 ## Evidence
 
-- The approved product is a private, self-hosted, single-community Option B web application. Source: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`, Scope Statement.
-- The approved delivery plan names Laravel, PHP, MySQL or MariaDB, server-rendered UI, private storage, database-backed search, and the existing Apache or Nginx server as the default candidate. Source: `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, Technical Plan.
-- The delivery sequence starts with environment verification and a vertical slice. Source: `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`, Delivery Sequence.
-- The environment, technical owner, primary developer, IT operator, and authentication conditions are not yet recorded as met. Source: `projects/lead-lab/pm-control/project-control.md`, Next action and Process System.
+- The approved product is a private, self-hosted, single-community Option B web application. Source: `artifacts/lead-lab-web-app-scope-and-requirements.md`, Scope Statement.
+- The approved delivery plan names Laravel, PHP, MySQL or MariaDB, server-rendered UI, private storage, database-backed search, and the existing Apache or Nginx server as the default candidate. Source: `artifacts/lead-lab-web-app-delivery-plan.md`, Technical Plan.
+- The delivery sequence starts with environment verification and a vertical slice. Source: `artifacts/lead-lab-web-app-backlog.md`, Delivery Sequence.
+- The environment, technical owner, primary developer, IT operator, and authentication conditions are not yet recorded as met. Source: `pm-control/project-control.md`, Next action and Process System.
 
 ## Working Decision
 

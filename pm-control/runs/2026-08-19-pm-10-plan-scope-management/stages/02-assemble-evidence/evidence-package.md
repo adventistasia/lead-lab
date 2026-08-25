@@ -9,21 +9,21 @@ The project needs a formal but lightweight scope-management approach before requ
 
 | ID | Evidence | Source and location | Date | Confidence |
 |---|---|---|---|---|
-| E-01 | The accepted request defined a SharePoint replacement with the same feature scope, restricted participants, and readiness before September 11, 2026. | `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`, Summary and Request Details | 2026-08-11 | High |
+| E-01 | The accepted request defined a SharePoint replacement with the same feature scope, restricted participants, and readiness before September 11, 2026. | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`, Summary and Request Details | 2026-08-11 | High |
 | E-02 | The accepted request identifies current features: recorded YouTube sessions, category/date filtering, search, downloads, and multi-device access. | `request-brief.md`, Situation and Request Details | 2026-08-11 | High |
-| E-03 | The current project context states that WordPress is deployed in staging and that theme setup and prototype validation remain. | `projects/lead-lab/CONTEXT.md`, Status and Task Routing | 2026-08-18 | High |
-| E-04 | The current platform decision selects self-hosted WordPress. | `projects/lead-lab/artifacts/logs and registers/decision-log.md`, D-01 (platform replacement decision) | 2026-08-13 | High |
-| E-05 | The current access decision selects native WordPress login for the prototype. | `projects/lead-lab/artifacts/logs and registers/decision-log.md`, D-02 (participant access mechanism) | 2026-08-18 | High |
-| E-06 | The current backlog still contains WordPress server, theme, portal, access, and video-protection work. | `projects/lead-lab/artifacts/logs and registers/backlog.md`, BL-03 to BL-22 | 2026-08-18 | High |
-| E-07 | The current action log still has WordPress staging theme configuration in progress. | `projects/lead-lab/pm-control/registers/action-log.md`, ACT-01 (staging theme and prototype validation) | 2026-08-18 | High |
-| E-08 | The new web-app delivery plan proposes a private single-community application with community, classroom, calendar, search, member management, and protected files. | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, Recommendation and Launch Scope | 2026-08-19 | High, but proposed |
+| E-03 | The current project context states that WordPress is deployed in staging and that theme setup and prototype validation remain. | `CONTEXT.md`, Status and Task Routing | 2026-08-18 | High |
+| E-04 | The current platform decision selects self-hosted WordPress. | `artifacts/logs and registers/decision-log.md`, D-01 (platform replacement decision) | 2026-08-13 | High |
+| E-05 | The current access decision selects native WordPress login for the prototype. | `artifacts/logs and registers/decision-log.md`, D-02 (participant access mechanism) | 2026-08-18 | High |
+| E-06 | The current backlog still contains WordPress server, theme, portal, access, and video-protection work. | `artifacts/logs and registers/backlog.md`, BL-03 to BL-22 | 2026-08-18 | High |
+| E-07 | The current action log still has WordPress staging theme configuration in progress. | `pm-control/registers/action-log.md`, ACT-01 (staging theme and prototype validation) | 2026-08-18 | High |
+| E-08 | The new web-app delivery plan proposes a private single-community application with community, classroom, calendar, search, member management, and protected files. | `artifacts/lead-lab-web-app-delivery-plan.md`, Recommendation and Launch Scope | 2026-08-19 | High, but proposed |
 | E-09 | The new delivery plan sets proposed gates, including environment readiness, vertical slice, feature completion, and launch decision. | `lead-lab-web-app-delivery-plan.md`, Delivery Gates | 2026-08-19 | High, but proposed |
 | E-10 | The new delivery plan is marked `Proposed` and states that project registers have not changed. | `lead-lab-web-app-delivery-plan.md`, Plan Status and Required Project Changes | 2026-08-19 | High |
-| E-11 | The canonical change log has no entries. | `projects/lead-lab/pm-control/registers/change-log.md`, Register | 2026-08-18 | High |
-| E-12 | The canonical artifact index has no confirmed owner or location for scope and requirements records. | `projects/lead-lab/pm-control/artifact-index.md`, Scope and requirements records | 2026-08-18 | High |
-| E-13 | The process register has not assessed PM-10 through PM-14; PM-15 is required and has an attention state because staging acceptance evidence is missing. | `projects/lead-lab/pm-control/process-register.md`, PM-10 to PM-15 | 2026-08-18 | High |
-| E-14 | Current issues and risks identify schedule pressure, unclear participant-data handling, unresolved video hosting, and incomplete operating controls. | `projects/lead-lab/pm-control/registers/issues-log.md`, ISS-03 to ISS-07; `registers/risk-register.md`, R-01, R-03 to R-12 | 2026-08-18 | High |
-| E-15 | Current dependencies include unresolved production URL, content supply, and LeadLab Director approval. | `projects/lead-lab/pm-control/registers/dependencies-log.md`, DEP-03, DEP-05, DEP-07 | 2026-08-18 | High |
+| E-11 | The canonical change log has no entries. | `pm-control/registers/change-log.md`, Register | 2026-08-18 | High |
+| E-12 | The canonical artifact index has no confirmed owner or location for scope and requirements records. | `pm-control/artifact-index.md`, Scope and requirements records | 2026-08-18 | High |
+| E-13 | The process register has not assessed PM-10 through PM-14; PM-15 is required and has an attention state because staging acceptance evidence is missing. | `pm-control/process-register.md`, PM-10 to PM-15 | 2026-08-18 | High |
+| E-14 | Current issues and risks identify schedule pressure, unclear participant-data handling, unresolved video hosting, and incomplete operating controls. | `pm-control/registers/issues-log.md`, ISS-03 to ISS-07; `registers/risk-register.md`, R-01, R-03 to R-12 | 2026-08-18 | High |
+| E-15 | Current dependencies include unresolved production URL, content supply, and LeadLab Director approval. | `pm-control/registers/dependencies-log.md`, DEP-03, DEP-05, DEP-07 | 2026-08-18 | High |
 | E-16 | The user selected the Planning focus area and Scope domain, then chose to run PM-10 through PM-13 in sequence. | Current conversation | 2026-08-19 | High for process direction |
 
 ## Current Scope State

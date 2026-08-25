@@ -5,14 +5,14 @@
 |---|---|
 | Run ID | `lead-lab-pm-16-2026-08-22-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Run PM-16 (Plan Schedule Management) through the required PM review checkpoint |
 | Primary process | PM-16 (Plan Schedule Management) |
 | Related process | PM-17 (Develop Schedule), explicit downstream dependency; the existing PM-17 conditional forecast will need to use or be refreshed against the approved schedule approach |
 | Started | 2026-08-22 |
 | Run state | Reconciled |
 | Last stage | 05 Reconcile |
-| Proposed run path | `projects/lead-lab/pm-control/runs/2026-08-22-pm-16-plan-schedule-management/` |
+| Proposed run path | `pm-control/runs/2026-08-22-pm-16-plan-schedule-management/` |
 
 ## Stage Outputs
 
@@ -36,7 +36,7 @@ This run may prepare a schedule management approach, measurement rules, update c
 | Process recipe | `workspaces/alson-pm-control/references/processes/schedule.md`, PM-16 |
 | Tailoring rules | `workspaces/alson-pm-control/references/tailoring-rules.md` |
 | Artifact candidate map | `workspaces/alson-pm-control/references/artifact-management/process-artifact-map.md`, PM-16 |
-| Control dashboard | `projects/lead-lab/pm-control/project-control.md` |
-| Process register | `projects/lead-lab/pm-control/process-register.md` |
-| Existing schedule evidence | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`; `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/` |
-| Environment and ownership evidence | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` |
+| Control dashboard | `pm-control/project-control.md` |
+| Process register | `pm-control/process-register.md` |
+| Existing schedule evidence | `artifacts/lead-lab-web-app-delivery-plan.md`; `pm-control/runs/2026-08-21-pm-17-develop-schedule/` |
+| Environment and ownership evidence | `application/environment/gate-1-environment-and-ownership.md` |

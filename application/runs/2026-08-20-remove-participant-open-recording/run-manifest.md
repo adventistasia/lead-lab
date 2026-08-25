@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | Project | Lead Lab |
-| Run path | `projects/lead-lab/application/runs/2026-08-20-remove-participant-open-recording/` |
+| Run path | `application/runs/2026-08-20-remove-participant-open-recording/` |
 | Request | Remove the participant Classroom `Open recording` button now that session titles are clickable. |
 | Result | Local implementation complete; frontend checks pass |
 | Started | 2026-08-20 |

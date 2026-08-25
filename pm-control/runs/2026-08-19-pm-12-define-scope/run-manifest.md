@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-12-2026-08-19-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Continue the Planning focus area Scope sequence after PM-11 and define the proposed web-app scope boundaries. |
 | Primary process | PM-12 Define Scope |
 | Related processes | PM-13 Develop Scope Structure; PM-14 Monitor and Control Scope; PM-15 Validate Scope |
@@ -30,7 +30,7 @@
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | Tailoring rules | `workspaces/alson-pm-control/references/tailoring-rules.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.3 |
-| Prior process | `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/` |
+| Prior process | `pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/` |
 | Project evidence | Accepted request brief, historical charter and closure report, proposed web-app plan, decision records, and PM-10/PM-11 outputs |
 | Canonical records changed | PM-10 and PM-11 process metadata only in prior approved runs |
 | PM direction | User authorized the Scope process sequence and approved PM-10 and PM-11 process metadata only |

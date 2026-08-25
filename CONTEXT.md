@@ -38,6 +38,7 @@ lead-lab/
 
 | Task                                | Go To                                                                          | Description                                |
 | ----------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------ |
+| Access the primary Lead Lab repository | https://github.com/adventistasia/lead-lab.git                                | Canonical remote repository for Lead Lab files |
 | Recheck project intent or details   | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Accepted brief, all fields sourced         |
 | Verify against closed project facts | `Old artifacts/`                                                               | Charter, closure report, portal procedures |
 | Start the application build | Use `workspace/`; verify the environment, select the supported stack, and build the vertical slice. Do not move to production until the approved gates pass | D-10 approved; environment conditions, vertical-slice evidence, and D-05 remain required |

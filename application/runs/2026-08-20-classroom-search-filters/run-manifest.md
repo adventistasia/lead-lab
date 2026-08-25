@@ -8,7 +8,7 @@
 | Request | Continue local development after browser validation and deferment of staging, participant onboarding, and authentication governance work; apply the Classroom search and filters to the administrator Classroom view. |
 | Approved scope | `LL-12 (Implement search across session and material metadata)` and `LL-13 (Implement category and date filters)` |
 | Requirements | `RQ-03 (Participants must filter sessions by category)`, `RQ-04 (Participants must filter sessions by date or date range)`, and `RQ-05 (Participants must search sessions and supporting-material metadata)` |
-| Source root | `projects/lead-lab/application/source/` |
+| Source root | `application/source/` |
 | Status | Local implementation complete; browser, staging, and launch acceptance remain open |
 | Date | 2026-08-20 |
 

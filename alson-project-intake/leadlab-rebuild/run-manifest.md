@@ -4,13 +4,13 @@
 - **Skill:** Alson Project Intake
 - **Workspace:** `project-intake`
 - **Date:** 2026-08-11
-- **Run path:** `projects/lead-lab/alson-project-intake/leadlab-rebuild/`
+- **Run path:** `alson-project-intake/leadlab-rebuild/`
 - **Run slug:** `leadlab-rebuild`
-- **Output root:** `projects/lead-lab/alson-project-intake/`
+- **Output root:** `alson-project-intake/`
 
 ## Source Request
 
-> I have a closed project that we want to revamp. Check projects/lead-lab/Old artifacts for the artifacts. We are currently using SharePoint as it's platform and we want to move away from Sharepoint.
+> I have a closed project that we want to revamp. Check Old artifacts for the artifacts. We are currently using SharePoint as it's platform and we want to move away from Sharepoint.
 
 ## Clarified Through Conversation
 

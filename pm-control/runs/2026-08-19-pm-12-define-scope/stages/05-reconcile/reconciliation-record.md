@@ -11,9 +11,9 @@
 
 | Record | Before | After | Evidence |
 |---|---|---|---|
-| `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` | Did not exist | Created as the approved Option B scope and requirements baseline | PM-12 draft, Stage 04 review, and PM direction |
-| `projects/lead-lab/pm-control/artifact-index.md`, Scope and requirements records | No owner or location confirmed | Owner `Requester + IT team`; location `External`; status `Current`; source path recorded | PR-12-02 and PM direction |
-| `projects/lead-lab/pm-control/process-register.md`, PM-12 (Define Scope) | Disposition `Not assessed`; no rigor, state, run, trigger, or output recorded | Disposition `Required`; rigor `Formal`; state `Current`; run, date, next trigger, output, and evidence recorded | PR-12-03 and PM direction |
+| `artifacts/lead-lab-web-app-scope-and-requirements.md` | Did not exist | Created as the approved Option B scope and requirements baseline | PM-12 draft, Stage 04 review, and PM direction |
+| `pm-control/artifact-index.md`, Scope and requirements records | No owner or location confirmed | Owner `Requester + IT team`; location `External`; status `Current`; source path recorded | PR-12-02 and PM direction |
+| `pm-control/process-register.md`, PM-12 (Define Scope) | Disposition `Not assessed`; no rigor, state, run, trigger, or output recorded | Disposition `Required`; rigor `Formal`; state `Current`; run, date, next trigger, output, and evidence recorded | PR-12-03 and PM direction |
 
 ## Approved Scope Boundary
 
@@ -45,7 +45,7 @@ Option B (Skool-inspired MVP) is approved as the Lead Lab product boundary. It i
 | Proposed records | `stages/03-perform-process/proposed-records.md` |
 | Review record | `stages/04-validate-and-review/review-record.md` |
 | Approval request | `stages/04-validate-and-review/approval-request.md` |
-| Approved scope artifact | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Approved scope artifact | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
 | PM approval | Current conversation, explicit selection of `Approve the full Option B baseline` |
 
 ## Next Trigger

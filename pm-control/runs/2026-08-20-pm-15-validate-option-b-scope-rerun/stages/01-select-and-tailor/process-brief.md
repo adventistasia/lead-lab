@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-15-2026-08-20-03` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Primary process | PM-15 (Validate Scope) |
 | Related processes | None |
 | Disposition | Required |

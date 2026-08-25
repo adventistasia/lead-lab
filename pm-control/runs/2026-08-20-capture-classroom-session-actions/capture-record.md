@@ -28,12 +28,12 @@ Local implementation and automated checks are complete. Authenticated browser an
 - Focused feature coverage for lifecycle mutation redirects and state changes from Classroom.
 - Frontend type, lint, formatting, and production-build checks.
 - Browser and responsive verification of valid menu options, archive confirmation, restore behavior, and post-action status refresh.
-- Build and measure handoffs under `projects/lead-lab/application/runs/2026-08-20-admin-classroom-session-actions/`.
+- Build and measure handoffs under `application/runs/2026-08-20-admin-classroom-session-actions/`.
 
 ## Traceability
 
-- Canonical implementation: `projects/lead-lab/application/source/`.
-- Administrator Classroom page: `projects/lead-lab/application/source/resources/js/pages/admin/classroom/index.tsx`.
-- Lifecycle controller: `projects/lead-lab/application/source/app/Http/Controllers/AdminLearningSessionController.php`.
-- Feature tests: `projects/lead-lab/application/source/tests/Feature/LeadLabAccessTest.php`.
+- Canonical implementation: `application/source/`.
+- Administrator Classroom page: `application/source/resources/js/pages/admin/classroom/index.tsx`.
+- Lifecycle controller: `application/source/app/Http/Controllers/AdminLearningSessionController.php`.
+- Feature tests: `application/source/tests/Feature/LeadLabAccessTest.php`.
 - User-supplied visual reference: `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 5.15.28 PM.png`.

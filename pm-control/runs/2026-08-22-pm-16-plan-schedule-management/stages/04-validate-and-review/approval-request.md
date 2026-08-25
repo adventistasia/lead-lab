@@ -18,7 +18,7 @@ Reply with one of these forms:
 | Proposal | Change requiring approval |
 |---|---|
 | PR-16-01 | Set PM-16 (Plan Schedule Management) to Required/Formal/Current, link the run, and set the next trigger to Gate 1 reassessment and PM-17 forecast refresh. |
-| PR-16-02 | Create `projects/lead-lab/pm-control/artifacts/schedule-management-plan.md` as the minimum viable ART-PM-26 control-root artifact, with owner `TBD`; link it in the artifact index. |
+| PR-16-02 | Create `pm-control/artifacts/schedule-management-plan.md` as the minimum viable ART-PM-26 control-root artifact, with owner `TBD`; link it in the artifact index. |
 | PR-16-03 | Keep ART-PM-29 and ART-PM-31 as a combined conditional view from the external delivery plan and PM-17 forecast. Owner and canonical location need explicit PM direction, or remain unassigned and unlocated. |
 | PR-16-04 | Record ART-PM-51 as Create later, activated after the 2026-08-25 Gate 1 reassessment and before any schedule baseline decision. Do not create a calendar now. |
 | PR-16-05 | Keep ART-BA-11, ART-BA-12, and ART-DEV-01 as no-maintained-artifact treatments for this PM-16 run. |

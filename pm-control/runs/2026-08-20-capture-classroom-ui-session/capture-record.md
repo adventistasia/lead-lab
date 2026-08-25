@@ -7,10 +7,10 @@ The PM directed that all application requests completed in this session be recor
 
 | Increment | Recorded result | Build evidence |
 |---|---|---|
-| CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown) | Administrator Classroom sessions use valid status-aware actions: Draft shows Publish and Archive, Published shows Unpublish and Archive, and Archived shows Restore. | `projects/lead-lab/application/runs/2026-08-20-admin-classroom-session-actions/` |
-| CHG-09 (Make participant and administrator Classroom session titles clickable) | Participant and administrator session titles open the existing protected `/sessions/{id}` page. | `projects/lead-lab/application/runs/2026-08-20-classroom-session-title-links/` |
-| CHG-10 (Hide the administrator `Admin` sidebar menu item that pointed to `/admin/sessions` while retaining the route and existing direct workflows) | The duplicate administrator menu item is hidden; `/admin/sessions` remains available for direct and internal workflows. | `projects/lead-lab/application/runs/2026-08-20-hide-admin-sessions-menu/` |
-| CHG-11 (Remove the participant Classroom `Open recording` button after making the session title the opening link) | The participant duplicate button is removed; the clickable title remains the session-opening control. | `projects/lead-lab/application/runs/2026-08-20-remove-participant-open-recording/` |
+| CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown) | Administrator Classroom sessions use valid status-aware actions: Draft shows Publish and Archive, Published shows Unpublish and Archive, and Archived shows Restore. | `application/runs/2026-08-20-admin-classroom-session-actions/` |
+| CHG-09 (Make participant and administrator Classroom session titles clickable) | Participant and administrator session titles open the existing protected `/sessions/{id}` page. | `application/runs/2026-08-20-classroom-session-title-links/` |
+| CHG-10 (Hide the administrator `Admin` sidebar menu item that pointed to `/admin/sessions` while retaining the route and existing direct workflows) | The duplicate administrator menu item is hidden; `/admin/sessions` remains available for direct and internal workflows. | `application/runs/2026-08-20-hide-admin-sessions-menu/` |
+| CHG-11 (Remove the participant Classroom `Open recording` button after making the session title the opening link) | The participant duplicate button is removed; the clickable title remains the session-opening control. | `application/runs/2026-08-20-remove-participant-open-recording/` |
 
 ## Control State
 

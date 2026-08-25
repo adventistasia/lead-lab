@@ -8,7 +8,7 @@
 | Item | Value |
 |---|---|
 | Host | Local macOS development machine |
-| Application source | `projects/lead-lab/application/source/` |
+| Application source | `application/source/` |
 | Local URL | `http://127.0.0.1:8000` |
 | Database | SQLite at `database/database.sqlite` |
 | File storage | Laravel local disk under `storage/app/private/` |
@@ -29,7 +29,7 @@
 
 ## Start Commands
 
-Run these from `projects/lead-lab/application/source/`:
+Run these from `application/source/`:
 
 ```text
 php artisan serve --host=127.0.0.1 --port=8000
@@ -44,7 +44,7 @@ Use `npm run build` for a production asset build. Use `php artisan test`, `npm r
 - shadcn components are installed in `resources/js/components/ui/`.
 - Lead Lab dashboard shell, session publishing, protected resources, and member access controls are implemented.
 - Participant self-registration, pending access, administrator approval, revocation, restoration, and activity logging are implemented locally.
-- Mailpit is available for local SMTP testing through `projects/lead-lab/application/docker-compose.yml` on ports 1025 and 8025.
+- Mailpit is available for local SMTP testing through `application/docker-compose.yml` on ports 1025 and 8025.
 - Local development currently sets `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=false` so signup and approval do not depend on email delivery. Staging and production must restore the verification gate.
 - TypeScript, ESLint, Prettier, Vite build, PHPUnit, and PHP Pint checks pass; the latest PHP run recorded 70 tests and 445 assertions.
 

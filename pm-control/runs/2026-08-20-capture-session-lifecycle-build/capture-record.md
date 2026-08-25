@@ -60,13 +60,13 @@ The local session-lifecycle increment is implemented, locally validated, manuall
 
 ## Traceability
 
-- Build evidence: `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/03-build/build-handoff.md`.
-- Canonical implementation: `projects/lead-lab/application/source/`.
-- Lifecycle controller: `projects/lead-lab/application/source/app/Http/Controllers/AdminLearningSessionController.php`.
-- Admin session page: `projects/lead-lab/application/source/resources/js/pages/admin/sessions/index.tsx`.
-- YouTube player: `projects/lead-lab/application/source/resources/js/components/youtube-player.tsx`.
-- Navigation cache fix: `projects/lead-lab/application/source/resources/js/components/nav-main.tsx`.
-- Acceptance and security tests: `projects/lead-lab/application/source/tests/Feature/LeadLabAccessTest.php`.
+- Build evidence: `application/runs/2026-08-19-technology-stack-decision/stages/03-build/build-handoff.md`.
+- Canonical implementation: `application/source/`.
+- Lifecycle controller: `application/source/app/Http/Controllers/AdminLearningSessionController.php`.
+- Admin session page: `application/source/resources/js/pages/admin/sessions/index.tsx`.
+- YouTube player: `application/source/resources/js/components/youtube-player.tsx`.
+- Navigation cache fix: `application/source/resources/js/components/nav-main.tsx`.
+- Acceptance and security tests: `application/source/tests/Feature/LeadLabAccessTest.php`.
 
 ## Traceability Reconciliation
 

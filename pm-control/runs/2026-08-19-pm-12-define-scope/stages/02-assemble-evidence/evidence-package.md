@@ -9,18 +9,18 @@ The evidence supports a low-risk replacement scope based on the original portal 
 
 | ID | Evidence | Source and location | Date | Confidence |
 |---|---|---|---|---|
-| E-01 | The project outcome is a restricted LeadLab portal available before the September 11, 2026 program. | `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`, Summary and Timing | 2026-08-11 | High |
+| E-01 | The project outcome is a restricted LeadLab portal available before the September 11, 2026 program. | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`, Summary and Timing | 2026-08-11 | High |
 | E-02 | The accepted request defines the original replacement features: recorded sessions, category/date filtering, search, downloads, and multi-device access. | `request-brief.md`, Situation and Request Details | 2026-08-11 | High |
 | E-03 | The accepted request states same feature scope and no new features for the rebuild. | `request-brief.md`, What is included or not | 2026-08-11 | High |
-| E-04 | The historical charter and closure report confirm the original SharePoint scope and delivered capabilities. | `projects/lead-lab/Old artifacts/Project Charter.docx`; `Project Closure Report.docx` | 2024-12-10 to 2025-01-16 | High for historical baseline |
-| E-05 | The proposed web-app plan adds community, classroom, calendar, role, moderation, administration, and protected-file capabilities. | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, Launch Scope | 2026-08-19 | High, but proposed |
+| E-04 | The historical charter and closure report confirm the original SharePoint scope and delivered capabilities. | `Old artifacts/Project Charter.docx`; `Project Closure Report.docx` | 2024-12-10 to 2025-01-16 | High for historical baseline |
+| E-05 | The proposed web-app plan adds community, classroom, calendar, role, moderation, administration, and protected-file capabilities. | `artifacts/lead-lab-web-app-delivery-plan.md`, Launch Scope | 2026-08-19 | High, but proposed |
 | E-06 | The proposed plan explicitly defers payments, points, discovery, direct messaging, multiple communities, SSO, native apps, advanced analytics, and migration. | `lead-lab-web-app-delivery-plan.md`, Deferred Scope | 2026-08-19 | High, but proposed |
-| E-07 | The current platform baseline remains self-hosted WordPress, with native WordPress login for the prototype. | `projects/lead-lab/artifacts/logs and registers/decision-log.md`, D-01 (platform replacement) and D-02 (participant access) | 2026-08-13 to 2026-08-18 | High |
-| E-08 | PM-11 produced candidate requirements but did not approve them or create a requirements baseline. | `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/stages/03-perform-process/draft-output.md`, Quality Conclusion | 2026-08-19 | High |
+| E-07 | The current platform baseline remains self-hosted WordPress, with native WordPress login for the prototype. | `artifacts/logs and registers/decision-log.md`, D-01 (platform replacement) and D-02 (participant access) | 2026-08-13 to 2026-08-18 | High |
+| E-08 | PM-11 produced candidate requirements but did not approve them or create a requirements baseline. | `pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/stages/03-perform-process/draft-output.md`, Quality Conclusion | 2026-08-19 | High |
 | E-09 | The proposed web-app schedule includes a vertical slice, feature-complete gate, launch decision, and SharePoint fallback. | `lead-lab-web-app-delivery-plan.md`, Delivery Schedule and Fallback Plan | 2026-08-19 | High, but proposed |
-| E-10 | The current change log is empty and the current backlog is still WordPress-oriented. | `projects/lead-lab/pm-control/registers/change-log.md`; `projects/lead-lab/artifacts/logs and registers/backlog.md` | 2026-08-18 | High |
-| E-11 | Final launch approval is assigned to the LeadLab Director, while the PM/scope baseline authority is not named. | `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`, People; `projects/lead-lab/pm-control/registers/dependencies-log.md`, DEP-07 | 2026-08-11 to 2026-08-18 | High |
-| E-12 | Production URL, server environment, participant data handling, video approach, launch content, and operational procedures remain unresolved. | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, Technical Plan and Delivery Gates; `request-brief.md`, Risks and Open Questions | 2026-08-19 | High |
+| E-10 | The current change log is empty and the current backlog is still WordPress-oriented. | `pm-control/registers/change-log.md`; `artifacts/logs and registers/backlog.md` | 2026-08-18 | High |
+| E-11 | Final launch approval is assigned to the LeadLab Director, while the PM/scope baseline authority is not named. | `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md`, People; `pm-control/registers/dependencies-log.md`, DEP-07 | 2026-08-11 to 2026-08-18 | High |
+| E-12 | Production URL, server environment, participant data handling, video approach, launch content, and operational procedures remain unresolved. | `artifacts/lead-lab-web-app-delivery-plan.md`, Technical Plan and Delivery Gates; `request-brief.md`, Risks and Open Questions | 2026-08-19 | High |
 
 ## Scope Boundary Options
 

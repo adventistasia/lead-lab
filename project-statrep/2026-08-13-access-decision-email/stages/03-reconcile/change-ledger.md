@@ -23,9 +23,9 @@ Applied: 5. Recorded without impact: 0. Deferred: 0. Rejected: 0. Blocked: 0.
 ## Verification Scope
 
 Changed files:
-- `projects/lead-lab/artifacts/logs and registers/decision-log.md`
-- `projects/lead-lab/artifacts/logs and registers/backlog.md`
-- `projects/lead-lab/artifacts/logs and registers/issues-log.md`
-- `projects/lead-lab/artifacts/logs and registers/dependencies-log.md`
+- `artifacts/logs and registers/decision-log.md`
+- `artifacts/logs and registers/backlog.md`
+- `artifacts/logs and registers/issues-log.md`
+- `artifacts/logs and registers/dependencies-log.md`
 
 Measure must also verify no stale D-02 language remains in risk-register.md, assumption-log.md, CONTEXT.md, or the intake run outputs.

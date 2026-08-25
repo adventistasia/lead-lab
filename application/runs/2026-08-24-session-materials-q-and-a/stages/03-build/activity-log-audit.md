@@ -32,9 +32,9 @@
 
 ## Sources
 
-- `projects/lead-lab/application/source/app/Models/ActivityLog.php`
-- `projects/lead-lab/application/source/app/Http/Controllers/AdminLearningSessionController.php`
-- `projects/lead-lab/application/source/app/Http/Controllers/SessionQnaController.php`
-- `projects/lead-lab/application/source/tests/Feature/LeadLabAccessTest.php`
-- `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`, RQ-11 and RQ-21
-- `projects/lead-lab/pm-control/registers/issues-log.md`, ISS-10
+- `application/source/app/Models/ActivityLog.php`
+- `application/source/app/Http/Controllers/AdminLearningSessionController.php`
+- `application/source/app/Http/Controllers/SessionQnaController.php`
+- `application/source/tests/Feature/LeadLabAccessTest.php`
+- `artifacts/lead-lab-web-app-scope-and-requirements.md`, RQ-11 and RQ-21
+- `pm-control/registers/issues-log.md`, ISS-10

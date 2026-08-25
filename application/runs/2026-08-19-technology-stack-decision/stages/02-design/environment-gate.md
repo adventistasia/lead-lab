@@ -5,13 +5,13 @@
 
 ## Current Evidence
 
-- The application environment directory contains the local record but no staging server record yet: `projects/lead-lab/application/environment/local-development.md`.
+- The application environment directory contains the local record but no staging server record yet: `application/environment/local-development.md`.
 - The local source scaffold reports Laravel Framework 13.26.1, PHP 8.5.9, Composer 2.10.2, Node 26.5.0, npm 11.17.0, Inertia React, TypeScript, Tailwind v4, and shadcn/ui with the Radix base.
-- The local application builds successfully with `npm --prefix projects/lead-lab/application/source run build`.
+- The local application builds successfully with `npm --prefix application/source run build`.
 - The local application uses SQLite for development. This does not replace the required staging MySQL or MariaDB verification.
-- The project dashboard requires supported runtime, database, storage, technical owner, primary developer, IT operator, acceptance gates, and fallback triggers before technical commitment: `projects/lead-lab/pm-control/project-control.md`, Next action.
-- D-05 (team server readiness and production URL) remains pending in `projects/lead-lab/pm-control/registers/decision-log.md`.
-- DEP-09 (Option B authentication and participant-data handling decision) remains open in `projects/lead-lab/pm-control/registers/dependencies-log.md`.
+- The project dashboard requires supported runtime, database, storage, technical owner, primary developer, IT operator, acceptance gates, and fallback triggers before technical commitment: `pm-control/project-control.md`, Next action.
+- D-05 (team server readiness and production URL) remains pending in `pm-control/registers/decision-log.md`.
+- DEP-09 (Option B authentication and participant-data handling decision) remains open in `pm-control/registers/dependencies-log.md`.
 
 ## Gate Checks
 

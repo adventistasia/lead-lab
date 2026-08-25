@@ -5,14 +5,14 @@
 |---|---|
 | Run ID | `lead-lab-pm-15-2026-08-21-04` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Establish whether the current Option B evidence supports launch acceptance. |
 | Primary process | PM-15: Validate Scope |
 | Related processes | None |
 | Started | 2026-08-21 |
 | Run state | Governance pending |
 | Last stage | 04 Validate and review |
-| Proposed run path | `projects/lead-lab/pm-control/runs/2026-08-21-pm-15-launch-acceptance/` |
+| Proposed run path | `pm-control/runs/2026-08-21-pm-15-launch-acceptance/` |
 
 ## Stage Outputs
 
@@ -35,7 +35,7 @@ This run assesses evidence and prepares an acceptance view. It does not accept t
 | Process map | `workspaces/alson-pm-control/references/process-map.md`; PM-15: Validate Scope |
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.6: Validate Scope |
-| Previous PM-15 run | `projects/lead-lab/pm-control/runs/2026-08-20-pm-15-validate-option-b-scope-rerun/` |
-| Current scope baseline | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Current Gate 1 evidence | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` |
-| Current schedule context | `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md` |
+| Previous PM-15 run | `pm-control/runs/2026-08-20-pm-15-validate-option-b-scope-rerun/` |
+| Current scope baseline | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Current Gate 1 evidence | `application/environment/gate-1-environment-and-ownership.md` |
+| Current schedule context | `pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md` |

@@ -11,15 +11,15 @@
 
 | Source | Section or item | Date | Evidence use | Confidence |
 |---|---|---|---|---|
-| `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` | Approved Option B baseline, requirements, and acceptance boundary, lines 4-8, 46-69, 104-114 | 2026-08-20 | Current scope and acceptance conditions | High |
-| `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` | Backlog items and delivery sequence, lines 35-64 and 72-87 | 2026-08-20 | Implementation status, CHG-02 traceability, and missing work | High |
-| `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` | Acceptance results, quality score, security findings, and blocking gaps, lines 4-61 | 2026-08-19 | Current local vertical-slice evidence and limits | High |
-| `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/03-build/build-handoff.md` | Build status, implemented scope, validation evidence, and known limits, lines 4-69 | 2026-08-19 | Implemented local capabilities and test results | High |
-| `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` | Gate result, target evidence, ownership, authentication, participant data, and required actions, lines 4-91 | 2026-08-20 | Staging and transition-condition evidence | High |
-| `projects/lead-lab/pm-control/project-control.md` | Next action, current phase, process attention, and baseline notes, lines 4-52 | 2026-08-20 | Control state and next trigger | High |
-| `projects/lead-lab/pm-control/registers/decision-log.md` | `D-05 (team server and production domain readiness)` and `D-11 (CHG-02 approval)` | 2026-08-20 | Open production-readiness question and approved scope change | High |
-| `projects/lead-lab/pm-control/registers/dependencies-log.md` | `DEP-09 (Option B authentication and participant-data handling decision)` and `DEP-07 (LeadLab Director final OK)` | 2026-08-20 | Open access/data dependency and final authority | High |
-| `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/run-manifest.md` | User direction captured in the run, lines 37-39 | 2026-08-19 | Application-managed account direction and SSO deferral needing canonical reconciliation | High |
+| `artifacts/lead-lab-web-app-scope-and-requirements.md` | Approved Option B baseline, requirements, and acceptance boundary, lines 4-8, 46-69, 104-114 | 2026-08-20 | Current scope and acceptance conditions | High |
+| `artifacts/lead-lab-web-app-backlog.md` | Backlog items and delivery sequence, lines 35-64 and 72-87 | 2026-08-20 | Implementation status, CHG-02 traceability, and missing work | High |
+| `application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` | Acceptance results, quality score, security findings, and blocking gaps, lines 4-61 | 2026-08-19 | Current local vertical-slice evidence and limits | High |
+| `application/runs/2026-08-19-technology-stack-decision/stages/03-build/build-handoff.md` | Build status, implemented scope, validation evidence, and known limits, lines 4-69 | 2026-08-19 | Implemented local capabilities and test results | High |
+| `application/environment/gate-1-environment-and-ownership.md` | Gate result, target evidence, ownership, authentication, participant data, and required actions, lines 4-91 | 2026-08-20 | Staging and transition-condition evidence | High |
+| `pm-control/project-control.md` | Next action, current phase, process attention, and baseline notes, lines 4-52 | 2026-08-20 | Control state and next trigger | High |
+| `pm-control/registers/decision-log.md` | `D-05 (team server and production domain readiness)` and `D-11 (CHG-02 approval)` | 2026-08-20 | Open production-readiness question and approved scope change | High |
+| `pm-control/registers/dependencies-log.md` | `DEP-09 (Option B authentication and participant-data handling decision)` and `DEP-07 (LeadLab Director final OK)` | 2026-08-20 | Open access/data dependency and final authority | High |
+| `application/runs/2026-08-19-technology-stack-decision/run-manifest.md` | User direction captured in the run, lines 37-39 | 2026-08-19 | Application-managed account direction and SSO deferral needing canonical reconciliation | High |
 | PM direction in the current conversation | Gate 1 moved to next week; run PM-15 (Validate Scope) before starting CHG-02 (Add an administrator Classroom link and session recordings page) | 2026-08-20 | Current sequencing instruction | High |
 | `_core/pmi-pmbok-guide-8-dd.md` | Section 2.2.2.6, lines 5865-5871 | Reference | PM-15 (Validate Scope) purpose: objective scope validation and formal acceptance | High |
 

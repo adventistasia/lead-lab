@@ -26,14 +26,14 @@ Implement the smallest approved application change, validate it, and prepare an 
 5. Add or update focused automated tests and document any manual test steps.
 6. Run formatting, static checks, unit checks, integration checks, and the vertical-slice workflow that the environment supports.
 7. Record changed source paths, test commands, results, known limitations, and rollback notes.
-8. Write `build-handoff.md` to the run folder. The canonical code remains in `projects/lead-lab/application/source/`.
+8. Write `build-handoff.md` to the run folder. The canonical code remains in `application/source/`.
 
 ## Outputs
 
 | Artifact | Location | Format |
 |---|---|---|
-| Application source | `projects/lead-lab/application/source/` | Code and configuration without secrets |
-| Test source or fixtures | `projects/lead-lab/application/tests/` | Tests and synthetic fixtures |
+| Application source | `application/source/` | Code and configuration without secrets |
+| Test source or fixtures | `application/tests/` | Tests and synthetic fixtures |
 | Build handoff | `{{RUN_PATH}}/stages/03-build/build-handoff.md` | Markdown |
 
 ## Checkpoints

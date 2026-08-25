@@ -9,7 +9,7 @@ Every pass or fail statement needs objective evidence. A missing test is not a p
 
 Use the approved delivery plan for the current gate dates and launch conditions:
 
-`projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`
+`artifacts/lead-lab-web-app-delivery-plan.md`
 
 The first technical cycle must prove the environment and vertical slice before broader feature work.
 

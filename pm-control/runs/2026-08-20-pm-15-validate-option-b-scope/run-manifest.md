@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-15-2026-08-20-02` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Run PM-15 against the current approved Option B scope before starting CHG-02 (Add an administrator Classroom link and session recordings page). |
 | Primary process | PM-15 (Validate Scope) |
 | Related processes | None |
@@ -30,9 +30,9 @@
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.6 (Validate Scope) |
 | Evidence package | `stages/02-assemble-evidence/evidence-package.md` |
-| Current scope baseline | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Current application evidence | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` |
-| Prior PM-15 run | `projects/lead-lab/pm-control/runs/2026-08-18-pm-15-validate-scope/` (prior PM-15 Validate Scope run) |
+| Current scope baseline | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Current application evidence | `application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` |
+| Prior PM-15 run | `pm-control/runs/2026-08-18-pm-15-validate-scope/` (prior PM-15 Validate Scope run) |
 | Gate 1 schedule direction | Gate 1 control trigger moved to next week; exact date is not baselined, per PM direction on 2026-08-20 |
 
 ## Final State

@@ -3,7 +3,7 @@
 
 Project: Lead Lab
 
-Run path: `projects/lead-lab/application/runs/2026-08-20-admin-classroom-add-session/`
+Run path: `application/runs/2026-08-20-admin-classroom-add-session/`
 
 ## Result
 
@@ -36,7 +36,7 @@ Excluded:
 
 | Stage | State | Evidence |
 |---|---|---|
-| Define and design | Reused approved baseline | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` |
+| Define and design | Reused approved baseline | `application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` |
 | Build | Complete locally | `stages/03-build/build-handoff.md` |
 | Measure | Verified locally | `stages/04-measure/audit-findings.md` |
 | Learn | Complete for this increment | ACT-15 (Implement and verify the administrator Classroom Add Session modal workflow) is Resolved |

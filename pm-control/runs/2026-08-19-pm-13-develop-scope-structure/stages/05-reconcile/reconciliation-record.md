@@ -11,9 +11,9 @@
 
 | Record | Before | After | Evidence |
 |---|---|---|---|
-| `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` | Did not exist | Created as the approved Option B product backlog and scope structure | PM-13 draft, Stage 04 review, and PM direction |
-| `projects/lead-lab/pm-control/artifact-index.md`, Product backlog or scope structure | No ownership or location recorded | Owner `Requester + IT team`; location `External`; status `Current`; source path recorded | PR-13-01 and PM direction |
-| `projects/lead-lab/pm-control/process-register.md`, PM-13 (Develop Scope Structure) | Disposition `Not assessed`; no rigor, state, run, trigger, or output recorded | Disposition `Required`; rigor `Formal`; state `Current`; run, date, next trigger, output, and evidence recorded | PR-13-02 and PM direction |
+| `artifacts/lead-lab-web-app-backlog.md` | Did not exist | Created as the approved Option B product backlog and scope structure | PM-13 draft, Stage 04 review, and PM direction |
+| `pm-control/artifact-index.md`, Product backlog or scope structure | No ownership or location recorded | Owner `Requester + IT team`; location `External`; status `Current`; source path recorded | PR-13-01 and PM direction |
+| `pm-control/process-register.md`, PM-13 (Develop Scope Structure) | Disposition `Not assessed`; no rigor, state, run, trigger, or output recorded | Disposition `Required`; rigor `Formal`; state `Current`; run, date, next trigger, output, and evidence recorded | PR-13-02 and PM direction |
 
 ## Backlog Transition
 
@@ -40,8 +40,8 @@ The WordPress-oriented backlog remains unchanged as historical evidence. The new
 | Proposed records | `stages/03-perform-process/proposed-records.md` |
 | Review record | `stages/04-validate-and-review/review-record.md` |
 | Approval request | `stages/04-validate-and-review/approval-request.md` |
-| Approved scope artifact | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Approved backlog | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` |
+| Approved scope artifact | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Approved backlog | `artifacts/lead-lab-web-app-backlog.md` |
 | PM approval | Current conversation, explicit selection of the recommended PM-13 approval limits |
 
 ## Next Trigger

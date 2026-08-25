@@ -36,7 +36,7 @@ Quality gate: Passed at 100%. The approved record changes are traceable and inte
 
 ## Search Evidence
 
-Inventory scope: 192 Markdown files under `projects/lead-lab` at the time of Measure.
+Inventory scope: 192 Markdown files under `repository root` at the time of Measure.
 
 | Search subject | Current-record result | Treatment |
 |---|---|---|

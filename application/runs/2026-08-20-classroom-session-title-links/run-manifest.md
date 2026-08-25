@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | Project | Lead Lab |
-| Run path | `projects/lead-lab/application/runs/2026-08-20-classroom-session-title-links/` |
+| Run path | `application/runs/2026-08-20-classroom-session-title-links/` |
 | Request | Make session titles clickable on the participant and administrator Classroom pages. |
 | Result | Local implementation complete; automated checks pass |
 | Started | 2026-08-20 |
@@ -29,6 +29,6 @@ Excluded:
 
 | Stage | State | Evidence |
 |---|---|---|
-| Define and design | Reused approved application baseline | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` |
+| Define and design | Reused approved application baseline | `application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` |
 | Build | Complete locally | `stages/03-build/build-handoff.md` |
 | Measure | Automated checks complete; authenticated browser click review remains recommended | `stages/04-measure/audit-findings.md` |

@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | INTAKE-2026-08-19-OPTION-B-BLOCKERS |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Capture the six approved Option B build and launch blockers in project control. |
 | Capture type | Meeting or source intake |
 | Started | 2026-08-19 |
@@ -15,7 +15,7 @@
 
 ## Source
 
-`projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md`, lines 4-61, verified 2026-08-19.
+`application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md`, lines 4-61, verified 2026-08-19.
 
 Supporting sources are listed in `capture-record.md`.
 

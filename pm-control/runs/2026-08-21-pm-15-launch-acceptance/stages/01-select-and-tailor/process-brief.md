@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-15-2026-08-21-04` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Primary process | PM-15: Validate Scope |
 | Related processes | None |
 | Disposition | Required |
@@ -18,7 +18,7 @@ Assess whether the current evidence proves that the approved Option B scope meet
 
 ## Acceptance Boundary
 
-The assessment covers the approved requirements and acceptance conditions in `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`:
+The assessment covers the approved requirements and acceptance conditions in `artifacts/lead-lab-web-app-scope-and-requirements.md`:
 
 1. The approved participant-access, session, search, video, resource, responsive, authorization, role, community, course, calendar, moderation, and administrator Classroom outcomes pass or have an explicitly approved exception.
 2. `RQ-17: Embedded-video URL protection` has an agreed residual-risk outcome before launch.

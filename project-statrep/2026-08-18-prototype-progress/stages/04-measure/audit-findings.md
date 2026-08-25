@@ -36,7 +36,7 @@ Quality gate: Passed at 100%. The 15 approved reconciliation rows were applied, 
 
 ## Search Evidence
 
-Inventory scope: all 56 Markdown files under `projects/lead-lab` before this audit output was created.
+Inventory scope: all 56 Markdown files under `repository root` before this audit output was created.
 
 | Search subject | Current-record result | Treatment |
 |---|---|---|

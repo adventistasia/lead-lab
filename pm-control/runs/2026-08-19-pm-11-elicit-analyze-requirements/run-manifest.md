@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-11-2026-08-19-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Continue the Planning focus area Scope sequence after PM-10, beginning requirements elicitation and analysis. |
 | Primary process | PM-11 Elicit and Analyze Requirements |
 | Related processes | PM-12 Define Scope; PM-13 Develop Scope Structure |
@@ -30,7 +30,7 @@
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | Tailoring rules | `workspaces/alson-pm-control/references/tailoring-rules.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.2 |
-| Prior process | `projects/lead-lab/pm-control/runs/2026-08-19-pm-10-plan-scope-management/` |
+| Prior process | `pm-control/runs/2026-08-19-pm-10-plan-scope-management/` |
 | Project evidence | Request brief, historical charter and closure report, historical procedures, proposed web-app plan, and current control registers |
 | Canonical records changed | PM-10 process metadata only in the prior approved run |
 | PM direction | User approved PM-10 PR-01 only and had previously authorized the Scope process sequence PM-10 through PM-13 |

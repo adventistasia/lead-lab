@@ -8,7 +8,7 @@ These records are proposals only. They must not be written to canonical register
 | Field | Proposed value |
 |---|---|
 | Artifact | Lead Lab web-app scope and requirements record |
-| Proposed location | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Proposed location | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
 | Status | Proposed |
 | Owner | TBD; PM direction required |
 | Contents | RQ-01 to RQ-19, source traceability, priorities, statuses, acceptance outcomes, open questions, and stakeholder validation record |
@@ -32,7 +32,7 @@ These records are proposals only. They must not be written to canonical register
 | Disposition | Required |
 | Rigor | Formal |
 | State | Current after approved reconciliation; otherwise Governance pending |
-| Last run | `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements` |
+| Last run | `pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements` |
 | Last performed | 2026-08-19 |
 | Next trigger | Confirm stakeholder requirements and resolve launch-versus-deferred feature classification before PM-12 |
 | Canonical output | Approved requirements record linked to the PM-11 run evidence |

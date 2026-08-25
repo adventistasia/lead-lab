@@ -33,4 +33,4 @@ Participant account lifecycle work and Gate 1 staging and ownership work are def
 - `CHG-06 (Re-sequence the next local build to session lifecycle administration and defer participant account lifecycle work)` is `Approved`.
 - `ACT-13 (Implement and verify session lifecycle administration)` is `Resolved`.
 - No requirement status, backlog status, external scope baseline, or external backlog row was changed.
-- The reconciliation points to `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/03-build/build-handoff.md` and `projects/lead-lab/pm-control/runs/2026-08-20-capture-session-lifecycle-build/capture-record.md` as evidence.
+- The reconciliation points to `application/runs/2026-08-19-technology-stack-decision/stages/03-build/build-handoff.md` and `pm-control/runs/2026-08-20-capture-session-lifecycle-build/capture-record.md` as evidence.

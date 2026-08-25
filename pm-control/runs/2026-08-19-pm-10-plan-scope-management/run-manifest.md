@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-10-2026-08-19-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Run the Planning focus area Scope processes in sequence, starting with PM-10. |
 | Primary process | PM-10 Plan Scope Management |
 | Related processes | PM-11 Elicit and Analyze Requirements; PM-12 Define Scope; PM-13 Develop Scope Structure |
@@ -30,7 +30,7 @@
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | Tailoring rules | `workspaces/alson-pm-control/references/tailoring-rules.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.1 |
-| Project evidence | `projects/lead-lab/CONTEXT.md`; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`; project decision and backlog records |
+| Project evidence | `CONTEXT.md`; `artifacts/lead-lab-web-app-delivery-plan.md`; project decision and backlog records |
 | Canonical records changed | None |
 | PM direction | User selected the Planning focus area and Scope domain, then approved running all four Scope processes in order |
 

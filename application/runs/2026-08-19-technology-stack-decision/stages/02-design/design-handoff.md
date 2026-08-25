@@ -18,9 +18,9 @@ The technology baseline is ready for local feature development and staging verif
 
 - `stages/02-design/solution-design.md`
 - `stages/02-design/environment-gate.md`
-- `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`
-- `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`
-- `projects/lead-lab/application/source/`
+- `artifacts/lead-lab-web-app-scope-and-requirements.md`
+- `artifacts/lead-lab-web-app-backlog.md`
+- `application/source/`
 
 ## First Build Items
 

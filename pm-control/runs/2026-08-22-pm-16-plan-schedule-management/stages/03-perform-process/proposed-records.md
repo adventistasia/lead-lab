@@ -8,7 +8,7 @@ All records below are proposals prepared for Stage 04 review. None has been writ
 | ID | Proposed record | Authority state | Scope |
 |---|---|---|---|
 | PR-16-01 | Record PM-16 (Plan Schedule Management) as `Required`, `Formal`, and `Current` after the run passes review; link this run and set the next trigger to the 2026-08-25 Gate 1 reassessment and PM-17 forecast refresh. | Requires explicit post-review PM approval before Stage 05 | Process metadata only; no baseline or date commitment |
-| PR-16-02 | Create the minimum viable `ART-PM-26 (Schedule management plan)` in the control root at `projects/lead-lab/pm-control/artifacts/schedule-management-plan.md`, with owner `TBD`, and link it in the artifact index. | Requires explicit post-review PM approval; owner assignment remains excluded | Schedule-management rules only |
+| PR-16-02 | Create the minimum viable `ART-PM-26 (Schedule management plan)` in the control root at `pm-control/artifacts/schedule-management-plan.md`, with owner `TBD`, and link it in the artifact index. | Requires explicit post-review PM approval; owner assignment remains excluded | Schedule-management rules only |
 | PR-16-03 | Treat `ART-PM-29 (Project schedule)` and `ART-PM-31 (Milestone list)` as a combined schedule view from the external delivery plan and PM-17 conditional forecast until the PM selects the owner and canonical location. | Owner and canonical location require separate PM direction | No external-plan edit and no new schedule baseline |
 | PR-16-04 | Record `ART-PM-51 (Project calendars)` as `Create later`, activated after the 2026-08-25 Gate 1 reassessment and before any schedule baseline decision; do not create a calendar now. | Requires explicit post-review PM approval; owner remains `TBD` | Trigger and minimum contents only |
 | PR-16-05 | Record no maintained artifact for `ART-BA-11 (Product roadmap)`, `ART-BA-12 (Business analysis plan)`, or `ART-DEV-01 (Prototype Build Brief)` in this PM-16 run because approved scope, backlog, PM-11 evidence, application context, and Gate 1 evidence already provide the needed schedule inputs. | Proposed treatment; no canonical write required | No new BA or DEV artifact |
@@ -24,7 +24,7 @@ All records below are proposals prepared for Stage 04 review. None has been writ
 | Run | `runs/2026-08-22-pm-16-plan-schedule-management` |
 | Next trigger | Complete the 2026-08-25 Gate 1 environment and ownership reassessment, then refresh PM-17 against the approved PM-16 approach before the conditional 2026-09-04 go/no-go review |
 | Canonical output | Proposed `ART-PM-26 (Schedule management plan)`; schedule baseline remains unapproved |
-| Evidence | PM-16 evidence package and draft output in this run; PM-17 review states that method, owners, calendars, and float were not available. [Sources: `stages/02-assemble-evidence/evidence-package.md`; `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md`, lines 18-22] |
+| Evidence | PM-16 evidence package and draft output in this run; PM-17 review states that method, owners, calendars, and float were not available. [Sources: `stages/02-assemble-evidence/evidence-package.md`; `pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md`, lines 18-22] |
 
 ## PR-16-02: Schedule Management Plan
 
@@ -32,7 +32,7 @@ All records below are proposals prepared for Stage 04 review. None has been writ
 |---|---|
 | Artifact | ART-PM-26 (Schedule management plan) |
 | Need and treatment | Essential; Create |
-| Proposed location | `projects/lead-lab/pm-control/artifacts/schedule-management-plan.md` |
+| Proposed location | `pm-control/artifacts/schedule-management-plan.md` |
 | Owner | TBD; no owner assignment is proposed |
 | Minimum contents | Schedule method, scope and activity granularity, source hierarchy, planning horizon, update cadence, measurement rules, dependency treatment, tolerance and escalation, baseline rules, authority, calendar trigger, and source traceability |
 | Inputs | Approved scope and backlog; external delivery plan; PM-17 conditional forecast; Gate 1 pack; decision, dependency, risk, issue, and action registers |
@@ -40,7 +40,7 @@ All records below are proposals prepared for Stage 04 review. None has been writ
 | Next trigger | Before the PM-17 forecast refresh after the 2026-08-25 Gate 1 reassessment |
 | Proposed index action | Add the control-root location and status after explicit Stage 05 approval; retain owner as `TBD` |
 
-The proposed plan protects the durable delivery-control lens because the existing sources contain schedule dates and gates but not a complete schedule method. [Sources: `projects/lead-lab/pm-control/runs/2026-08-22-pm-16-plan-schedule-management/stages/02-assemble-evidence/evidence-package.md`, lines 47-64 and 89-97; `workspaces/alson-pm-control/references/artifact-management/essential-artifact-model.md`, lines 40-49]
+The proposed plan protects the durable delivery-control lens because the existing sources contain schedule dates and gates but not a complete schedule method. [Sources: `pm-control/runs/2026-08-22-pm-16-plan-schedule-management/stages/02-assemble-evidence/evidence-package.md`, lines 47-64 and 89-97; `workspaces/alson-pm-control/references/artifact-management/essential-artifact-model.md`, lines 40-49]
 
 ## PR-16-03: Schedule And Milestone Carrier
 
@@ -49,7 +49,7 @@ The proposed plan protects the durable delivery-control lens because the existin
 | Artifacts | ART-PM-29 (Project schedule) and ART-PM-31 (Milestone list) |
 | Need and treatment | Essential information; Combine existing schedule evidence pending treatment confirmation |
 | Existing carriers | External delivery plan and PM-17 conditional forecast |
-| Current limitation | The artifact index has no schedule owner or canonical location; the external plan and conditional forecast contain conflicting or conditional dates. [Sources: `projects/lead-lab/pm-control/artifact-index.md`, line 14; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, lines 84-97; `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12] |
+| Current limitation | The artifact index has no schedule owner or canonical location; the external plan and conditional forecast contain conflicting or conditional dates. [Sources: `pm-control/artifact-index.md`, line 14; `artifacts/lead-lab-web-app-delivery-plan.md`, lines 84-97; `pm-control/registers/change-log.md`, CHG-12] |
 | Proposed combined content | Milestone name, date/window, entry condition, dependency, evidence state, forecast confidence, decision authority, fallback result, and source citation |
 | PM direction needed | Select the schedule owner and canonical location, or explicitly direct that the records remain unassigned and unlocated until a later review |
 | Boundary | No external plan edit, no owner assignment by the agent, and no schedule baseline |
@@ -62,7 +62,7 @@ The proposed plan protects the durable delivery-control lens because the existin
 | Need and treatment | Essential; Create later |
 | Activation trigger | Gate 1 environment and ownership reassessment is complete, the technical owner, human primary developer, and IT operator are confirmed, and working availability is evidenced |
 | Minimum contents | Working days, holidays, work hours, timezone, release blackout periods, named resource availability, capacity assumptions, and verification source |
-| Current state | No validated project or resource calendar exists; the current capacity note is not a schedule calendar. [Sources: `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 20-24 and 46-67] |
+| Current state | No validated project or resource calendar exists; the current capacity note is not a schedule calendar. [Sources: `application/environment/gate-1-environment-and-ownership.md`, lines 20-24 and 46-67] |
 | Next trigger | 2026-08-25 Gate 1 reassessment; before any schedule baseline decision |
 | Proposed index action | Record the trigger and later location after explicit Stage 05 approval; owner remains `TBD` |
 
@@ -70,9 +70,9 @@ The proposed plan protects the durable delivery-control lens because the existin
 
 | Artifact | Proposed treatment | Reason |
 |---|---|---|
-| ART-BA-11 (Product roadmap) | No maintained output; use existing records | Approved backlog work packages and delivery sequence already provide product sequencing for PM-16. [Source: `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`, lines 19-31 and 75-83] |
-| ART-BA-12 (Business analysis plan) | No maintained output; use existing records | Approved requirements, backlog, and PM-11 evidence provide the schedule inputs; no separate BA workstream is evidenced for this run. [Sources: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`, lines 46-69; `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`, lines 33-65; `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/stages/05-reconcile/reconciliation-record.md`, lines 16-24] |
-| ART-DEV-01 (Prototype Build Brief) | No maintained output; use existing records | The project target is a production MVP and PM-16 needs schedule inputs, not a separate prototype brief. [Sources: `projects/lead-lab/application/CONTEXT.md`, Current State; `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`, lines 10-14; `workspaces/alson-pm-control/references/artifact-management/artifact-catalog.md`, lines 130-137] |
+| ART-BA-11 (Product roadmap) | No maintained output; use existing records | Approved backlog work packages and delivery sequence already provide product sequencing for PM-16. [Source: `artifacts/lead-lab-web-app-backlog.md`, lines 19-31 and 75-83] |
+| ART-BA-12 (Business analysis plan) | No maintained output; use existing records | Approved requirements, backlog, and PM-11 evidence provide the schedule inputs; no separate BA workstream is evidenced for this run. [Sources: `artifacts/lead-lab-web-app-scope-and-requirements.md`, lines 46-69; `artifacts/lead-lab-web-app-backlog.md`, lines 33-65; `pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/stages/05-reconcile/reconciliation-record.md`, lines 16-24] |
+| ART-DEV-01 (Prototype Build Brief) | No maintained output; use existing records | The project target is a production MVP and PM-16 needs schedule inputs, not a separate prototype brief. [Sources: `application/CONTEXT.md`, Current State; `artifacts/lead-lab-web-app-scope-and-requirements.md`, lines 10-14; `workspaces/alson-pm-control/references/artifact-management/artifact-catalog.md`, lines 130-137] |
 
 ## Authority Limits
 

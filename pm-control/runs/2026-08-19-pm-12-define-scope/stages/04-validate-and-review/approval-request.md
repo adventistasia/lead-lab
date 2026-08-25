@@ -11,7 +11,7 @@ Please specify:
 2. Whether the committed launch boundary is Option A or Option B.
 3. Whether to approve `PR-12-03 (PM-12 process metadata)`.
 4. The scope owner and baseline approver, or permission to leave them `TBD`.
-5. Whether the proposed scope artifact location is acceptable: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`.
+5. Whether the proposed scope artifact location is acceptable: `artifacts/lead-lab-web-app-scope-and-requirements.md`.
 
 ## Recommended Direction
 

@@ -5,14 +5,14 @@
 |---|---|
 | Run ID | `lead-lab-pm-17-2026-08-21-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Revise the go/no-go milestone to 2026-09-04 and the launch target to 2026-09-07, then develop the schedule through the PM review checkpoint |
 | Primary process | PM-17 (Develop Schedule) |
 | Related processes | None; PM-18 (Monitor and Control Schedule) is a possible follow-on after a schedule forecast exists |
 | Started | 2026-08-21 |
 | Run state | Reconciled |
 | Last stage | 05 Reconcile |
-| Proposed run path | `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/` |
+| Proposed run path | `pm-control/runs/2026-08-21-pm-17-develop-schedule/` |
 
 ## Stage Outputs
 
@@ -26,9 +26,9 @@
 
 ## Canonical Records Changed
 
-- `projects/lead-lab/pm-control/process-register.md`
-- `projects/lead-lab/pm-control/project-control.md`
-- `projects/lead-lab/pm-control/registers/change-log.md`
+- `pm-control/process-register.md`
+- `pm-control/project-control.md`
+- `pm-control/registers/change-log.md`
 
 ## Authority Boundary
 
@@ -40,8 +40,8 @@ This run may prepare a schedule forecast, milestone list, dependency view, assum
 |---|---|
 | Process recipe | `workspaces/alson-pm-control/references/processes/schedule.md` |
 | PMI source | PMBOK Guide 8, section 2.3.2.2 (Develop Schedule), transcript pages 155-158 |
-| Control dashboard | `projects/lead-lab/pm-control/project-control.md` |
-| Process register | `projects/lead-lab/pm-control/process-register.md` |
-| Current delivery plan | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` |
-| Gate 1 evidence | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` |
+| Control dashboard | `pm-control/project-control.md` |
+| Process register | `pm-control/process-register.md` |
+| Current delivery plan | `artifacts/lead-lab-web-app-delivery-plan.md` |
+| Gate 1 evidence | `application/environment/gate-1-environment-and-ownership.md` |
 | Schedule change input | Current PM direction, 2026-08-21 |

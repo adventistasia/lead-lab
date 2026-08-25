@@ -17,7 +17,7 @@ No staging deployment, production change, participant onboarding change, authent
 - Added the same filter controls to the top of the administrator Classroom page.
 - Replaced the dashboard search placeholder with a link to Classroom search.
 - Added participant and administrator filter coverage to `tests/Feature/LeadLabAccessTest.php`.
-- Updated the application build handoff at `projects/lead-lab/application/runs/2026-08-20-classroom-search-filters/stages/03-build/build-handoff.md`.
+- Updated the application build handoff at `application/runs/2026-08-20-classroom-search-filters/stages/03-build/build-handoff.md`.
 
 ## Verification
 
@@ -52,8 +52,8 @@ Include both Classroom pages in the current local browser validation, including 
 ## Sources
 
 - Conversation with the PM, 2026-08-20.
-- `projects/lead-lab/application/runs/2026-08-20-classroom-search-filters/run-manifest.md`.
-- `projects/lead-lab/application/runs/2026-08-20-classroom-search-filters/stages/03-build/build-handoff.md`.
-- `projects/lead-lab/pm-control/project-control.md`.
-- `projects/lead-lab/pm-control/registers/action-log.md`.
-- `projects/lead-lab/pm-control/registers/decision-log.md`.
+- `application/runs/2026-08-20-classroom-search-filters/run-manifest.md`.
+- `application/runs/2026-08-20-classroom-search-filters/stages/03-build/build-handoff.md`.
+- `pm-control/project-control.md`.
+- `pm-control/registers/action-log.md`.
+- `pm-control/registers/decision-log.md`.

@@ -13,7 +13,7 @@ Please provide an explicit post-review response authorizing Stage 05 for this PM
 
 | Record | Requested direction |
 |---|---|
-| Product backlog | Create `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` with WP-01 to WP-09 and LL-01 to LL-27 |
+| Product backlog | Create `artifacts/lead-lab-web-app-backlog.md` with WP-01 to WP-09 and LL-01 to LL-27 |
 | Process register | Record PM-13 as Required/Formal/Current and link this run |
 | Existing WordPress backlog | Preserve as historical evidence; do not delete or rewrite it |
 | Work ownership | Keep individual owners `TBD` |

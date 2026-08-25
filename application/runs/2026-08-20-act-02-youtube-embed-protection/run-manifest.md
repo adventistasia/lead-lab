@@ -9,8 +9,8 @@
 | Control action | `ACT-02 (Test embedded-video configuration against URL copying or discovery and define acceptable protection for the Option B application)` |
 | Requirement | `RQ-17 (The application should deter or limit discovery and sharing of embedded video URLs to the extent supported by the selected host)` |
 | Related risk | `R-12 (Authenticated members may copy or discover the URL of an embedded video)` |
-| Source root | `projects/lead-lab/application/source/` |
-| Run path | `projects/lead-lab/application/runs/2026-08-20-act-02-youtube-embed-protection/` |
+| Source root | `application/source/` |
+| Run path | `application/runs/2026-08-20-act-02-youtube-embed-protection/` |
 | Status | Implemented and locally verified; YouTube residual limitation accepted; final browser and launch gates remain open |
 | Date | 2026-08-20 |
 

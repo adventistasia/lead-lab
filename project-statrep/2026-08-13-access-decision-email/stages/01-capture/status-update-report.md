@@ -7,7 +7,7 @@ The access-choice email was sent to all stakeholders on 13-Aug-2026. No access d
 | Field | Value |
 |---|---|
 | Update ID | `UPD-20260813-001` |
-| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
+| Project | LeadLab Portal Rebuild (`repository root`) |
 | Reported date | 13-Aug-2026 |
 | Effective or as-of date | 13-Aug-2026 |
 | Reporter or source | Agno JF (Requester), conversation |

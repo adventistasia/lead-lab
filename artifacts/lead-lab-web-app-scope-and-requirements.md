@@ -130,16 +130,16 @@ Any change to this baseline must:
 
 | Source | Use |
 |---|---|
-| `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Business need, original replacement features, stakeholders, timing, constraints, and open questions. |
-| `projects/lead-lab/Old artifacts/Project Charter.docx` | Historical stakeholder requirements, scope, assumptions, constraints, and risks. |
-| `projects/lead-lab/Old artifacts/Project Closure Report.docx` | Historical delivered capabilities and acceptance outcome. |
-| `projects/lead-lab/Old artifacts/Procedures/How to add videos in the portal.docx` | Historical content publishing fields and workflow. |
-| `projects/lead-lab/Old artifacts/Procedures/How to give Lead Lab participants access to the portal.docx` | Historical access administration workflow. |
-| `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` | Proposed Option B product direction, MVP capabilities, exclusions, gates, and fallback. |
-| `projects/lead-lab/pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/` | Candidate requirement analysis and unresolved requirement decisions. |
-| `projects/lead-lab/pm-control/registers/change-log.md` (CHG-02) | Approved administrator Classroom navigation and session recordings page change. |
-| `projects/lead-lab/pm-control/registers/change-log.md` (CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval); CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development)) | Approved participant onboarding baseline and local development exception. |
-| `projects/lead-lab/pm-control/registers/change-log.md` (CHG-16 (Add `Session Materials` and `Q&A` tabs to each session detail view)) | Approved session detail Q&A change and related acceptance boundary. |
+| `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Business need, original replacement features, stakeholders, timing, constraints, and open questions. |
+| `Old artifacts/Project Charter.docx` | Historical stakeholder requirements, scope, assumptions, constraints, and risks. |
+| `Old artifacts/Project Closure Report.docx` | Historical delivered capabilities and acceptance outcome. |
+| `Old artifacts/Procedures/How to add videos in the portal.docx` | Historical content publishing fields and workflow. |
+| `Old artifacts/Procedures/How to give Lead Lab participants access to the portal.docx` | Historical access administration workflow. |
+| `artifacts/lead-lab-web-app-delivery-plan.md` | Proposed Option B product direction, MVP capabilities, exclusions, gates, and fallback. |
+| `pm-control/runs/2026-08-19-pm-11-elicit-analyze-requirements/` | Candidate requirement analysis and unresolved requirement decisions. |
+| `pm-control/registers/change-log.md` (CHG-02) | Approved administrator Classroom navigation and session recordings page change. |
+| `pm-control/registers/change-log.md` (CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval); CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development)) | Approved participant onboarding baseline and local development exception. |
+| `pm-control/registers/change-log.md` (CHG-16 (Add `Session Materials` and `Q&A` tabs to each session detail view)) | Approved session detail Q&A change and related acceptance boundary. |
 
 ## Change History
 

@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-14-2026-08-24-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Primary process | PM-14 (Monitor and Control Scope) |
 | Related processes | None |
 | Disposition | Required |

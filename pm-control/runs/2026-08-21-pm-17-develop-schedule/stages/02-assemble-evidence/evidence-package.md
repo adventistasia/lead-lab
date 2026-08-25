@@ -15,15 +15,15 @@
 | Evidence | Location and section | Verified | Confidence |
 |---|---|---:|---|
 | PM date update | Current conversation; go/no-go 2026-09-04 and launch 2026-09-07 | 2026-08-21 | High |
-| Existing schedule | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`; Delivery Schedule, Delivery Gates, Fallback Plan | 2026-08-19 source date | High |
-| Schedule control state | `projects/lead-lab/pm-control/project-control.md`; Baseline and Change Control, Process System | 2026-08-20 | High |
-| Gate 1 state | `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`; Decision Summary and Gate 1 Assessment | 2026-08-20 | High |
-| Re-sequencing direction | `CHG-06 (Re-sequence the next local build to session lifecycle administration and defer participant account lifecycle work)` in `projects/lead-lab/pm-control/registers/change-log.md`; `D-16 (Prioritize session lifecycle administration and defer participant account lifecycle work)` in `projects/lead-lab/pm-control/registers/decision-log.md` | 2026-08-20 | High |
-| Current local evidence | `projects/lead-lab/pm-control/runs/2026-08-20-pm-15-validate-option-b-scope-rerun/stages/04-validate-and-review/review-record.md`; current increment and unresolved launch evidence | 2026-08-20 | High |
-| Delivery actions | `projects/lead-lab/pm-control/registers/action-log.md`; `ACT-03 (Complete production domain, DNS, SSL, backup, and uptime setup for the Option B application)`, `ACT-04 (Obtain LeadLab Director final approval before the Option B launch or SharePoint fallback decision)`, `ACT-05 (Define IT patch, backup, uptime, and incident procedures for post-launch maintenance of the Option B application and server)`, and `ACT-11 (Complete the Gate 1 environment and ownership evidence pack)` | 2026-08-20 | High |
-| Dependencies | `projects/lead-lab/pm-control/registers/dependencies-log.md`; `DEP-03 (Media team supplies session video links)`, `DEP-05 (Domain name availability and production URL)`, `DEP-07 (LeadLab Director final OK)`, and `DEP-09 (Option B authentication and participant-data handling decision)` | 2026-08-20 | High |
-| Schedule exposure | `projects/lead-lab/pm-control/registers/risk-register.md`; `R-01 (Timeline slip: 23 calendar days remain to design, build, test, and launch the Option B application)` and related open risks | 2026-08-19 | High |
-| Milestone ownership gap | `projects/lead-lab/pm-control/artifact-index.md`; Schedule and milestone records row | 2026-08-20 | High |
+| Existing schedule | `artifacts/lead-lab-web-app-delivery-plan.md`; Delivery Schedule, Delivery Gates, Fallback Plan | 2026-08-19 source date | High |
+| Schedule control state | `pm-control/project-control.md`; Baseline and Change Control, Process System | 2026-08-20 | High |
+| Gate 1 state | `application/environment/gate-1-environment-and-ownership.md`; Decision Summary and Gate 1 Assessment | 2026-08-20 | High |
+| Re-sequencing direction | `CHG-06 (Re-sequence the next local build to session lifecycle administration and defer participant account lifecycle work)` in `pm-control/registers/change-log.md`; `D-16 (Prioritize session lifecycle administration and defer participant account lifecycle work)` in `pm-control/registers/decision-log.md` | 2026-08-20 | High |
+| Current local evidence | `pm-control/runs/2026-08-20-pm-15-validate-option-b-scope-rerun/stages/04-validate-and-review/review-record.md`; current increment and unresolved launch evidence | 2026-08-20 | High |
+| Delivery actions | `pm-control/registers/action-log.md`; `ACT-03 (Complete production domain, DNS, SSL, backup, and uptime setup for the Option B application)`, `ACT-04 (Obtain LeadLab Director final approval before the Option B launch or SharePoint fallback decision)`, `ACT-05 (Define IT patch, backup, uptime, and incident procedures for post-launch maintenance of the Option B application and server)`, and `ACT-11 (Complete the Gate 1 environment and ownership evidence pack)` | 2026-08-20 | High |
+| Dependencies | `pm-control/registers/dependencies-log.md`; `DEP-03 (Media team supplies session video links)`, `DEP-05 (Domain name availability and production URL)`, `DEP-07 (LeadLab Director final OK)`, and `DEP-09 (Option B authentication and participant-data handling decision)` | 2026-08-20 | High |
+| Schedule exposure | `pm-control/registers/risk-register.md`; `R-01 (Timeline slip: 23 calendar days remain to design, build, test, and launch the Option B application)` and related open risks | 2026-08-19 | High |
+| Milestone ownership gap | `pm-control/artifact-index.md`; Schedule and milestone records row | 2026-08-20 | High |
 
 ## Facts
 

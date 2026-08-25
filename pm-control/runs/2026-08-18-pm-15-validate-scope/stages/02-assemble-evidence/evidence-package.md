@@ -11,13 +11,13 @@
 
 | Source | Section or item | Date | Evidence use | Confidence |
 |---|---|---|---|---|
-| `projects/lead-lab/CONTEXT.md` | Status table, lines 15-19 | 2026-08-18 | Current build state, production gate, deadline | High |
-| `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Summary; Request Details; People; Timing and Priority | 2026-08-11; accessed 2026-08-18 | Agreed outcome, features, final approval, deadline | High |
-| `projects/lead-lab/prototype-build-brief/2026-08-18-approval-cycle/stages/01-build/prototype-build-brief.md` | Purpose; Scope; Behavior `B-01` to `B-09`; Acceptance Scenarios `AC-01` to `AC-12`; Constraints | 2026-08-18 | Accepted prototype definition and objective pass conditions | High |
-| `projects/lead-lab/artifacts/logs and registers/backlog.md` | `BL-04` to `BL-12`, `BL-21`, `BL-22` | 2026-08-18 | Current delivery state and validation work | High |
-| `projects/lead-lab/pm-control/registers/action-log.md` | `ACT-01`, `ACT-02` | 2026-08-18 | Current validation actions | High |
-| `projects/lead-lab/pm-control/registers/decision-log.md` | `D-02`, `D-05` | 2026-08-18 | Access decision and production-readiness boundary | High |
-| `projects/lead-lab/pm-control/registers/issues-log.md` | `ISS-03`, `ISS-04`, `ISS-06` | 2026-08-18 | Open schedule, privacy, and video-hosting constraints | High |
+| `CONTEXT.md` | Status table, lines 15-19 | 2026-08-18 | Current build state, production gate, deadline | High |
+| `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Summary; Request Details; People; Timing and Priority | 2026-08-11; accessed 2026-08-18 | Agreed outcome, features, final approval, deadline | High |
+| `prototype-build-brief/2026-08-18-approval-cycle/stages/01-build/prototype-build-brief.md` | Purpose; Scope; Behavior `B-01` to `B-09`; Acceptance Scenarios `AC-01` to `AC-12`; Constraints | 2026-08-18 | Accepted prototype definition and objective pass conditions | High |
+| `artifacts/logs and registers/backlog.md` | `BL-04` to `BL-12`, `BL-21`, `BL-22` | 2026-08-18 | Current delivery state and validation work | High |
+| `pm-control/registers/action-log.md` | `ACT-01`, `ACT-02` | 2026-08-18 | Current validation actions | High |
+| `pm-control/registers/decision-log.md` | `D-02`, `D-05` | 2026-08-18 | Access decision and production-readiness boundary | High |
+| `pm-control/registers/issues-log.md` | `ISS-03`, `ISS-04`, `ISS-06` | 2026-08-18 | Open schedule, privacy, and video-hosting constraints | High |
 
 ## Facts
 

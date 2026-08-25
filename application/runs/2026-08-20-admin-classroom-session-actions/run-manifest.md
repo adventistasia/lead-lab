@@ -4,12 +4,12 @@
 | Field | Value |
 |---|---|
 | Project | Lead Lab |
-| Run path | `projects/lead-lab/application/runs/2026-08-20-admin-classroom-session-actions/` |
+| Run path | `application/runs/2026-08-20-admin-classroom-session-actions/` |
 | Change | CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown) |
 | Decision | D-18 (Approve the status-aware administrator Classroom session action dropdown) |
 | Action | ACT-16 (Implement and verify the status-aware administrator Classroom session action dropdown) |
 | Result | Local implementation complete; automated checks pass; authenticated browser and responsive evidence pending |
-| Design input | Reused `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` and `environment-gate.md` |
+| Design input | Reused `application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` and `environment-gate.md` |
 | Started | 2026-08-20 |
 | External records | No external scope or backlog changes |
 
@@ -36,7 +36,7 @@ Excluded:
 
 | Stage | State | Evidence |
 |---|---|---|
-| Define and design | Reused approved baseline | `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` |
+| Define and design | Reused approved baseline | `application/runs/2026-08-19-technology-stack-decision/stages/02-design/design-handoff.md` |
 | Build | Complete locally | `stages/03-build/build-handoff.md` |
 | Measure | Automated checks complete; authenticated browser/responsive review pending | `stages/04-measure/audit-findings.md` |
 | Learn | Pending PM review of remaining evidence | ACT-16 (Implement and verify the status-aware administrator Classroom session action dropdown) remains In Progress |

@@ -8,7 +8,7 @@ These records are proposals only. They must not be written to canonical register
 | Field | Proposed value |
 |---|---|
 | Artifact | Lead Lab web-app product backlog and scope structure |
-| Proposed location | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` |
+| Proposed location | `artifacts/lead-lab-web-app-backlog.md` |
 | Status | Proposed |
 | Owner | Requester + IT team unless PM changes it |
 | Contents | WP-01 to WP-09, LL-01 to LL-27, traceability, dependencies, conditional decisions, acceptance groupings, and deferred-scope protection |
@@ -22,7 +22,7 @@ These records are proposals only. They must not be written to canonical register
 | Disposition | Required |
 | Rigor | Formal |
 | State | Current after approved reconciliation; otherwise Governance pending |
-| Last run | `projects/lead-lab/pm-control/runs/2026-08-19-pm-13-develop-scope-structure` |
+| Last run | `pm-control/runs/2026-08-19-pm-13-develop-scope-structure` |
 | Last performed | 2026-08-19 |
 | Next trigger | Begin PM-14 after execution starts; use PM-15 for acceptance evidence |
 | Canonical output | Approved Option B product backlog linked to this run evidence |

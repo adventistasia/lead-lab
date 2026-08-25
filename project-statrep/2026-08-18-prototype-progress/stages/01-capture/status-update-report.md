@@ -6,7 +6,7 @@ Staging WordPress is deployed and the project is moving into prototype theme con
 | Field | Value |
 |---|---|
 | Update ID | `UPD-20260818-001` |
-| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
+| Project | LeadLab Portal Rebuild (`repository root`) |
 | Reported date | 18-Aug-2026 |
 | Effective or as-of date | 18-Aug-2026 |
 | Reporter or source | Agno JF (Requester), conversation |
@@ -24,7 +24,7 @@ Staging WordPress is deployed and the project is moving into prototype theme con
 | UPD-20260818-001-C04 | Confirmed | Native WordPress login is sufficient for the current prototype access approach; SSO and email-list gating are not required for this phase. | User statement in conversation | High |
 | UPD-20260818-001-C05 | Proposed | The prototype must address the risk that authenticated members can copy or discover the URL of an embedded video. | User statement in conversation | High |
 | UPD-20260818-001-C06 | Confirmed | The IT team will maintain WordPress and the server after launch. | User statement in conversation | High |
-| UPD-20260818-001-C07 | Observation | LeadLab Director final approval remains a required launch gate. | Existing project decision acknowledged by the user; `projects/lead-lab/CONTEXT.md` | High |
+| UPD-20260818-001-C07 | Observation | LeadLab Director final approval remains a required launch gate. | Existing project decision acknowledged by the user; `CONTEXT.md` | High |
 
 ## Source Notes
 

@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-13-2026-08-19-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Continue the Planning focus area Scope sequence after PM-12 and decompose the approved Option B baseline. |
 | Primary process | PM-13 Develop Scope Structure |
 | Related processes | PM-14 Monitor and Control Scope; PM-15 Validate Scope |
@@ -30,8 +30,8 @@
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | Tailoring rules | `workspaces/alson-pm-control/references/tailoring-rules.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.4 |
-| Approved scope baseline | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Prior process | `projects/lead-lab/pm-control/runs/2026-08-19-pm-12-define-scope/` |
+| Approved scope baseline | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Prior process | `pm-control/runs/2026-08-19-pm-12-define-scope/` |
 | Canonical records changed | PM-10, PM-11, PM-12 process metadata; approved Option B scope artifact and artifact index |
 | PM direction | User approved the full Option B baseline and authorized the Scope process sequence |
 

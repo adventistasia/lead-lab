@@ -7,8 +7,8 @@ These are proposals for Stage 05 only. No canonical project record is changed by
 
 | Proposal | Canonical record | Proposed change | Authority |
 |---|---|---|---|
-| `PR-15-01 (PM-15 process metadata update)` | `projects/lead-lab/pm-control/process-register.md`, `PM-15 (Validate Scope)` | Keep the process `Required`, `Standard`, and `Attention`; link the last run to `runs/2026-08-20-pm-15-validate-option-b-scope`; set last performed to 2026-08-20; set the next trigger to complete Gate 1 and the remaining Option B acceptance evidence, including CHG-02 (Add an administrator Classroom link and session recordings page). | Requires explicit post-review PM approval before Stage 05. |
-| `PR-15-02 (Project dashboard process update)` | `projects/lead-lab/pm-control/project-control.md`, process section | Replace the prior WordPress-era PM-15 attention reference with the current Option B evidence gap and the next validation trigger. | Requires explicit post-review PM approval before Stage 05. |
+| `PR-15-01 (PM-15 process metadata update)` | `pm-control/process-register.md`, `PM-15 (Validate Scope)` | Keep the process `Required`, `Standard`, and `Attention`; link the last run to `runs/2026-08-20-pm-15-validate-option-b-scope`; set last performed to 2026-08-20; set the next trigger to complete Gate 1 and the remaining Option B acceptance evidence, including CHG-02 (Add an administrator Classroom link and session recordings page). | Requires explicit post-review PM approval before Stage 05. |
+| `PR-15-02 (Project dashboard process update)` | `pm-control/project-control.md`, process section | Replace the prior WordPress-era PM-15 attention reference with the current Option B evidence gap and the next validation trigger. | Requires explicit post-review PM approval before Stage 05. |
 | `PR-15-03 (Acceptance boundary preservation)` | No canonical acceptance record | Preserve the current deliverable as not validated. Do not close `DEP-09 (Option B authentication and participant-data handling decision)`, `D-05 (team server and production domain readiness)`, or related actions and issues. | No acceptance or closure authority is requested. |
 
 ## Not Proposed

@@ -11,23 +11,23 @@
 
 | Source | Section or item | Evidence use | Confidence |
 |---|---|---|---|
-| `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` | Approved Option B baseline and acceptance boundary, lines 46-114 | Requirements, exclusions, acceptance authority, and launch conditions | High |
-| `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` | Work packages, backlog items, and delivery sequence, lines 19-88 | Remaining implementation and acceptance work | High |
-| `projects/lead-lab/application/CONTEXT.md` | Current application state, lines 29-43 | Current local, staging, participant, and operations boundary | High |
-| `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md` | Gate result and required environment, ownership, authentication, and participant-data evidence, lines 4-91 | Gate 1 and staging readiness | High |
-| `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` | Vertical-slice acceptance, security findings, and blocking gaps, lines 4-61 | Local baseline and unresolved launch conditions | High |
-| `projects/lead-lab/application/runs/2026-08-20-admin-classroom-add-session/stages/04-measure/audit-findings.md` | Local Add Session result and staging gap, lines 4-25 | Latest local administrator Classroom evidence | High |
-| `projects/lead-lab/application/runs/2026-08-20-admin-classroom-session-actions/stages/04-measure/audit-findings.md` | Lifecycle checks and browser/responsive gaps, lines 4-27 | Latest local lifecycle evidence and exception | High |
-| `projects/lead-lab/application/runs/2026-08-20-classroom-session-title-links/stages/04-measure/audit-findings.md` | Title-link checks and browser/responsive gap, lines 4-25 | Latest participant and administrator navigation evidence | High |
-| `projects/lead-lab/application/runs/2026-08-20-hide-admin-sessions-menu/stages/04-measure/audit-findings.md` | Sidebar source and build checks, lines 4-16 | Latest administrator navigation evidence | High |
-| `projects/lead-lab/application/runs/2026-08-20-remove-participant-open-recording/stages/04-measure/audit-findings.md` | Participant Classroom cleanup checks, lines 4-17 | Latest participant navigation evidence | High |
-| `projects/lead-lab/application/runs/2026-08-20-capture-session-lifecycle-build/reconciliation-record.md` | Local session lifecycle traceability and acceptance boundary | Links local evidence to the approved scope without accepting launch | High |
-| `projects/lead-lab/application/runs/2026-08-20-capture-classroom-ui-session/reconciliation-record.md` | Classroom UI traceability and remaining controls | Links latest UI changes to control items | High |
-| `projects/lead-lab/pm-control/registers/decision-log.md` | `D-05: Team server and production domain readiness`; `D-15: Accept the standard YouTube embed limitation for MVP session recordings` | Decision and residual-risk status | High |
-| `projects/lead-lab/pm-control/registers/dependencies-log.md` | `DEP-07: LeadLab Director final OK`; `DEP-09: Option B authentication and participant-data handling decision` | Launch dependencies and acceptance authority | High |
-| `projects/lead-lab/pm-control/registers/action-log.md` | `ACT-07: Participant creation or invitation and initial-password handling`; `ACT-09: Application-managed accounts, participant-data rules, and Microsoft 365 SSO decision`; `ACT-10: Administrative activity logging`; `ACT-11: Gate 1 environment and ownership evidence pack` | Open acceptance actions | High |
-| `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md` | Conditional schedule, Gate 1, Gate 2, production, and final-approval findings | Schedule context for launch acceptance | High |
-| `projects/lead-lab/pm-control/runs/2026-08-20-pm-15-validate-option-b-scope-rerun/stages/05-reconcile/reconciliation-record.md` | Prior PM-15 boundary and next trigger | Continuity and stale-output check | High |
+| `artifacts/lead-lab-web-app-scope-and-requirements.md` | Approved Option B baseline and acceptance boundary, lines 46-114 | Requirements, exclusions, acceptance authority, and launch conditions | High |
+| `artifacts/lead-lab-web-app-backlog.md` | Work packages, backlog items, and delivery sequence, lines 19-88 | Remaining implementation and acceptance work | High |
+| `application/CONTEXT.md` | Current application state, lines 29-43 | Current local, staging, participant, and operations boundary | High |
+| `application/environment/gate-1-environment-and-ownership.md` | Gate result and required environment, ownership, authentication, and participant-data evidence, lines 4-91 | Gate 1 and staging readiness | High |
+| `application/runs/2026-08-19-technology-stack-decision/stages/04-measure/audit-findings.md` | Vertical-slice acceptance, security findings, and blocking gaps, lines 4-61 | Local baseline and unresolved launch conditions | High |
+| `application/runs/2026-08-20-admin-classroom-add-session/stages/04-measure/audit-findings.md` | Local Add Session result and staging gap, lines 4-25 | Latest local administrator Classroom evidence | High |
+| `application/runs/2026-08-20-admin-classroom-session-actions/stages/04-measure/audit-findings.md` | Lifecycle checks and browser/responsive gaps, lines 4-27 | Latest local lifecycle evidence and exception | High |
+| `application/runs/2026-08-20-classroom-session-title-links/stages/04-measure/audit-findings.md` | Title-link checks and browser/responsive gap, lines 4-25 | Latest participant and administrator navigation evidence | High |
+| `application/runs/2026-08-20-hide-admin-sessions-menu/stages/04-measure/audit-findings.md` | Sidebar source and build checks, lines 4-16 | Latest administrator navigation evidence | High |
+| `application/runs/2026-08-20-remove-participant-open-recording/stages/04-measure/audit-findings.md` | Participant Classroom cleanup checks, lines 4-17 | Latest participant navigation evidence | High |
+| `application/runs/2026-08-20-capture-session-lifecycle-build/reconciliation-record.md` | Local session lifecycle traceability and acceptance boundary | Links local evidence to the approved scope without accepting launch | High |
+| `application/runs/2026-08-20-capture-classroom-ui-session/reconciliation-record.md` | Classroom UI traceability and remaining controls | Links latest UI changes to control items | High |
+| `pm-control/registers/decision-log.md` | `D-05: Team server and production domain readiness`; `D-15: Accept the standard YouTube embed limitation for MVP session recordings` | Decision and residual-risk status | High |
+| `pm-control/registers/dependencies-log.md` | `DEP-07: LeadLab Director final OK`; `DEP-09: Option B authentication and participant-data handling decision` | Launch dependencies and acceptance authority | High |
+| `pm-control/registers/action-log.md` | `ACT-07: Participant creation or invitation and initial-password handling`; `ACT-09: Application-managed accounts, participant-data rules, and Microsoft 365 SSO decision`; `ACT-10: Administrative activity logging`; `ACT-11: Gate 1 environment and ownership evidence pack` | Open acceptance actions | High |
+| `pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md` | Conditional schedule, Gate 1, Gate 2, production, and final-approval findings | Schedule context for launch acceptance | High |
+| `pm-control/runs/2026-08-20-pm-15-validate-option-b-scope-rerun/stages/05-reconcile/reconciliation-record.md` | Prior PM-15 boundary and next trigger | Continuity and stale-output check | High |
 
 ## Facts
 

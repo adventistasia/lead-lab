@@ -8,7 +8,7 @@
 | Request | Implement CHG-02 (Add an administrator Classroom link and session recordings page). |
 | Approved requirement | `RQ-20 (Administrators must access a Classroom page from the dashboard sidebar that lists all session recordings)` |
 | Related backlog item | `LL-28 (Add the administrator Classroom sidebar link and separate recordings page)` |
-| Source root | `projects/lead-lab/application/source/` |
+| Source root | `application/source/` |
 | Status | Implemented and verified locally; staging and launch acceptance remain open |
 | Date | 2026-08-20 |
 | Prior control gate | PM-15 (Validate Scope) reconciled process metadata; Option B scope remains not validated for launch acceptance |

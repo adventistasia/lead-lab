@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-source-refresh-2026-08-18-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Refresh and verify project sources. |
 | Started | 2026-08-18 |
 | Run state | Complete with source-coverage attention |
@@ -14,7 +14,7 @@
 
 | Source | Sections checked | Result | Last verified |
 |---|---|---|---|
-| `projects/lead-lab/CONTEXT.md` | Status, task routing, and triggers | Accessible; no conflict found | 2026-08-18 |
+| `CONTEXT.md` | Status, task routing, and triggers | Accessible; no conflict found | 2026-08-18 |
 
 ## Findings
 

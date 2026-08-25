@@ -7,9 +7,9 @@ The approved administrator Classroom action-dropdown refinement is implemented l
 
 | Control item | Implementation evidence | Result |
 |---|---|---|
-| CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown) | `projects/lead-lab/application/runs/2026-08-20-admin-classroom-session-actions/stages/03-build/build-handoff.md` | Local implementation complete; automated checks pass; browser evidence remains open |
+| CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown) | `application/runs/2026-08-20-admin-classroom-session-actions/stages/03-build/build-handoff.md` | Local implementation complete; automated checks pass; browser evidence remains open |
 | D-18 (Approve the status-aware administrator Classroom session action dropdown) | Current conversation, `pm-control/registers/decision-log.md`, and `capture-record.md` | Made and recorded on 2026-08-20 |
-| ACT-16 (Implement and verify the status-aware administrator Classroom session action dropdown) | `projects/lead-lab/application/source/resources/js/pages/admin/classroom/index.tsx`, `AdminLearningSessionController.php`, and `LeadLabAccessTest.php` | In Progress pending authenticated browser and responsive review |
+| ACT-16 (Implement and verify the status-aware administrator Classroom session action dropdown) | `application/source/resources/js/pages/admin/classroom/index.tsx`, `AdminLearningSessionController.php`, and `LeadLabAccessTest.php` | In Progress pending authenticated browser and responsive review |
 | RQ-02 (Administrators must publish sessions with title, category, date, video link, and materials) | Existing lifecycle endpoints and focused transition test | Existing requirement behavior preserved; no new session fields introduced |
 | RQ-08 (The application must work on desktop, tablet, and mobile devices) | Responsive Select classes and measure handoff | Implementation is responsive by construction; runtime evidence remains open |
 | RQ-10 (Protected routes, APIs, and files must enforce server-side access controls) | Admin middleware and unauthenticated route check | Existing authorization remains active and route protection passes |

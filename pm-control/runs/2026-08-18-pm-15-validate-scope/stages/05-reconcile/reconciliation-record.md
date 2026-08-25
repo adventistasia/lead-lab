@@ -12,8 +12,8 @@
 
 | Canonical record | Before | After | Authority and evidence |
 |---|---|---|---|
-| `projects/lead-lab/pm-control/process-register.md`, `PM-15` | Not assessed; no run | Required; Standard; Attention; linked to this run; next trigger recorded | User selected PM-15; evidence package and review record |
-| `projects/lead-lab/pm-control/project-control.md`, process section | Process attention and next review were not assessed | PM-15 evidence gap and staging-validation trigger recorded | Evidence package and review record |
+| `pm-control/process-register.md`, `PM-15` | Not assessed; no run | Required; Standard; Attention; linked to this run; next trigger recorded | User selected PM-15; evidence package and review record |
+| `pm-control/project-control.md`, process section | Process attention and next review were not assessed | PM-15 evidence gap and staging-validation trigger recorded | Evidence package and review record |
 
 ## Changes Skipped
 

@@ -4,7 +4,7 @@
 **Status:** Approved Option B delivery structure  
 **Approved:** PM direction recorded 2026-08-19; CHG-02 approved 2026-08-20
 **Owner:** Requester + IT team  
-**Source scope:** `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`
+**Source scope:** `artifacts/lead-lab-web-app-scope-and-requirements.md`
 
 ## Structure Rules
 

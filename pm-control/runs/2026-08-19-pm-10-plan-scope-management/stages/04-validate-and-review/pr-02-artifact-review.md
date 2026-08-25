@@ -3,17 +3,17 @@
 
 ## Review Scope
 
-Reviewed the current `projects/lead-lab/artifacts/` folder, the accepted intake source, and `projects/lead-lab/Old artifacts/` to identify an existing authoritative scope or requirements record for the proposed web application.
+Reviewed the current `artifacts/` folder, the accepted intake source, and `Old artifacts/` to identify an existing authoritative scope or requirements record for the proposed web application.
 
 ## Current Artifact Findings
 
 | Source | What it contains | Suitability as the new web-app baseline |
 |---|---|---|
-| `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` | Proposed MVP product goal, launch scope, deferred scope, technical direction, schedule gates, security requirements, and acceptance criteria. | Useful working input. Not suitable as an approved baseline because its status is `Proposed` and it records that project registers were not changed. |
-| `projects/lead-lab/artifacts/platform-selection-decision.md` | D-01 platform options, weighted ranking, WordPress recommendation, feature-fit assumptions, and prototype next actions. | Historical/current decision evidence for WordPress. Not suitable for the new app because its selected platform conflicts with the proposed direction. |
-| `projects/lead-lab/artifacts/logs and registers/backlog.md` | WordPress-oriented work items for server setup, theme, portal features, access, content, and launch. | Delivery tracking only. Not a requirements baseline and currently stale for the proposed app. |
-| `projects/lead-lab/artifacts/logs and registers/decision-log.md` | Platform, access, maintenance, video, production, scope, migration, and funding decisions. | Decision evidence only. It still records WordPress and does not contain the new app requirements. |
-| `projects/lead-lab/alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Accepted business need, current portal features, stakeholders, timing, constraints, assumptions, and open questions. | Strong source for the original requirement set and project context. It is an accepted intake brief, not a complete new-app scope baseline. |
+| `artifacts/lead-lab-web-app-delivery-plan.md` | Proposed MVP product goal, launch scope, deferred scope, technical direction, schedule gates, security requirements, and acceptance criteria. | Useful working input. Not suitable as an approved baseline because its status is `Proposed` and it records that project registers were not changed. |
+| `artifacts/platform-selection-decision.md` | D-01 platform options, weighted ranking, WordPress recommendation, feature-fit assumptions, and prototype next actions. | Historical/current decision evidence for WordPress. Not suitable for the new app because its selected platform conflicts with the proposed direction. |
+| `artifacts/logs and registers/backlog.md` | WordPress-oriented work items for server setup, theme, portal features, access, content, and launch. | Delivery tracking only. Not a requirements baseline and currently stale for the proposed app. |
+| `artifacts/logs and registers/decision-log.md` | Platform, access, maintenance, video, production, scope, migration, and funding decisions. | Decision evidence only. It still records WordPress and does not contain the new app requirements. |
+| `alson-project-intake/leadlab-rebuild/stages/01-build/output/request-brief.md` | Accepted business need, current portal features, stakeholders, timing, constraints, assumptions, and open questions. | Strong source for the original requirement set and project context. It is an accepted intake brief, not a complete new-app scope baseline. |
 
 ## Old Artifact Findings
 
@@ -42,7 +42,7 @@ The source set supports a new artifact, but not an immediate baseline:
 
 Create a new scope and requirements record after the platform-direction change and scope owner are approved.
 
-Proposed filename: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`
+Proposed filename: `artifacts/lead-lab-web-app-scope-and-requirements.md`
 
 Proposed minimum content:
 

@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | INTAKE-2026-08-20-CLASSROOM-SESSION-ACTIONS |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Record the approved administrator Classroom session-action dropdown change and its implementation evidence. |
 | Capture type | Conversation and build-evidence intake |
 | Started | 2026-08-20 |
@@ -18,9 +18,9 @@
 
 - Current conversation and PM approval, questions answered, verified 2026-08-20.
 - `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 5.15.28 PM.png`, verified 2026-08-20.
-- `projects/lead-lab/application/source/resources/js/pages/admin/classroom/index.tsx`, verified 2026-08-20.
-- `projects/lead-lab/application/source/app/Http/Controllers/AdminLearningSessionController.php`, verified 2026-08-20.
-- `projects/lead-lab/pm-control/registers/change-log.md`, `decision-log.md`, and `action-log.md`, verified 2026-08-20.
+- `application/source/resources/js/pages/admin/classroom/index.tsx`, verified 2026-08-20.
+- `application/source/app/Http/Controllers/AdminLearningSessionController.php`, verified 2026-08-20.
+- `pm-control/registers/change-log.md`, `decision-log.md`, and `action-log.md`, verified 2026-08-20.
 
 ## Authority Boundary
 

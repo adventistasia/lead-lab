@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | Project | Lead Lab |
-| Run path | `projects/lead-lab/application/runs/2026-08-20-hide-admin-sessions-menu/` |
+| Run path | `application/runs/2026-08-20-hide-admin-sessions-menu/` |
 | Request | Hide the administrator `/admin/sessions` page from the sidebar menu. |
 | Result | Local implementation complete; frontend checks pass |
 | Started | 2026-08-20 |

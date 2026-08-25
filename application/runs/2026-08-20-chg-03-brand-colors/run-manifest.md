@@ -11,7 +11,7 @@
 | Brand source | `/Users/agnojf/Library/CloudStorage/Dropbox/SSD - Brand Colors DD.png` |
 | Primary color | `#eab41e` yellow |
 | Secondary color | `#6eaf1f` green |
-| Source root | `projects/lead-lab/application/source/` |
+| Source root | `application/source/` |
 | Status | Implemented and locally verified; browser, staging, and launch acceptance remain open |
 | Date | 2026-08-20 |
 

@@ -30,7 +30,7 @@
 | Item | Verified value |
 |---|---|
 | Host | Local macOS development machine |
-| Application source | `projects/lead-lab/application/source/` |
+| Application source | `application/source/` |
 | Local URL | `http://127.0.0.1:8000` |
 | Database | SQLite at `database/database.sqlite` |
 | Local private storage | Laravel local disk under `storage/app/private/` |
@@ -94,7 +94,7 @@ Do not include passwords, private keys, tokens, cookies, or real participant dat
 
 ## Sources
 
-- `projects/lead-lab/application/environment/local-development.md`, lines 4-52.
-- `projects/lead-lab/application/runs/2026-08-19-technology-stack-decision/stages/02-design/environment-gate.md`, lines 4-49.
-- `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, lines 99-113 and 169-181.
+- `application/environment/local-development.md`, lines 4-52.
+- `application/runs/2026-08-19-technology-stack-decision/stages/02-design/environment-gate.md`, lines 4-49.
+- `artifacts/lead-lab-web-app-delivery-plan.md`, lines 99-113 and 169-181.
 - User-provided Gate 1 answers in the working conversation, 2026-08-20.

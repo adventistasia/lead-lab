@@ -11,7 +11,7 @@
 
 | Record | Before | After | Evidence |
 |---|---|---|---|
-| `projects/lead-lab/pm-control/process-register.md`, PM-10 (Plan Scope Management) | Disposition `Not assessed`; no rigor, state, run, trigger, or output recorded | Disposition `Required`; rigor `Formal`; state `Current`; run, date, next trigger, canonical output, and evidence recorded | PM-10 run evidence and Stage 04 review |
+| `pm-control/process-register.md`, PM-10 (Plan Scope Management) | Disposition `Not assessed`; no rigor, state, run, trigger, or output recorded | Disposition `Required`; rigor `Formal`; state `Current`; run, date, next trigger, canonical output, and evidence recorded | PM-10 run evidence and Stage 04 review |
 
 ## Changes Not Applied
 

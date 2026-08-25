@@ -5,7 +5,7 @@ Locations of authoritative project documents. These files stay where they are. T
 
 | Document type | Location | Section of interest | Last verified | Notes |
 |---|---|---|---|---|
-| Project context | `projects/lead-lab/CONTEXT.md` | Status, task routing, and known delivery gates | 2026-08-18 | Project location supplied in the request |
+| Project context | `CONTEXT.md` | Status, task routing, and known delivery gates | 2026-08-18 | Project location supplied in the request |
 | Approved brand colors | `/Users/agnojf/Library/CloudStorage/Dropbox/SSD - Brand Colors DD.png` | Primary colors: `#eab41e` yellow and `#6eaf1f` green | 2026-08-20 | User-supplied organization-approved palette source for Lead Lab implementation |
 | Brand treatment review | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 5.37.46 AM.png` | Visual review showing the yellow and green button combination to simplify | 2026-08-20 | User-supplied review source for the neutral secondary treatment |
 | Embedded-video exposure screenshot | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-20 at 10.38.23 AM.png` | Screenshot shows the embedded player exposing `Watch on YouTube` and YouTube controls | 2026-08-20 | User-supplied evidence for ACT-02 and RQ-17 video URL protection |

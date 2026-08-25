@@ -5,7 +5,7 @@
 |---|---|
 | Run ID | `lead-lab-pm-15-2026-08-18-01` |
 | Project | Lead Lab |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `pm-control/` |
 | Request | Run PM-15 against the accepted staging prototype scope. |
 | Primary process | PM-15 Validate Scope |
 | Related processes | None |
@@ -30,7 +30,7 @@
 | Process recipe | `workspaces/alson-pm-control/references/processes/scope.md` |
 | PMI source | PMBOK Guide 8, section 2.2.2.6 |
 | Evidence package | `stages/02-assemble-evidence/evidence-package.md` |
-| Canonical records changed | `projects/lead-lab/pm-control/process-register.md`; `projects/lead-lab/pm-control/project-control.md` |
+| Canonical records changed | `pm-control/process-register.md`; `pm-control/project-control.md` |
 | PM direction | User selected PM-15; no prototype acceptance direction was supplied |
 
 ## Final State

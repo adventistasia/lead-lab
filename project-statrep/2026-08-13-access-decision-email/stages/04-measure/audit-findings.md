@@ -42,7 +42,7 @@ Universal criteria U-01 to U-13: all Pass. Artifacts carry identity, attribution
 
 ## Search Evidence
 
-Scope: all Markdown files under `projects/lead-lab` (13 files). Terms: `D-02`, `BL-02`, `ISS-02`, `DEP-02`, `access options`, `email-list gating`, `participant access`. 53 matches.
+Scope: all Markdown files under `repository root` (13 files). Terms: `D-02`, `BL-02`, `ISS-02`, `DEP-02`, `access options`, `email-list gating`, `participant access`. 53 matches.
 
 | Match location | Treatment |
 |---|---|

@@ -8,7 +8,7 @@
 
 ## Process Register Proposal
 
-Update the `PM-15` row in `projects/lead-lab/pm-control/process-register.md` as follows after Stage 04 review:
+Update the `PM-15` row in `pm-control/process-register.md` as follows after Stage 04 review:
 
 | Field | Before | Proposed after review |
 |---|---|---|
@@ -23,7 +23,7 @@ Update the `PM-15` row in `projects/lead-lab/pm-control/process-register.md` as 
 
 ## Dashboard Proposal
 
-Update the process section of `projects/lead-lab/pm-control/project-control.md`:
+Update the process section of `pm-control/project-control.md`:
 
 - `Process attention`: `PM-15: staging acceptance evidence missing`
 - `Next process trigger`: `Complete AC-01 to AC-12 and the participant test, then obtain authorized acceptance review`

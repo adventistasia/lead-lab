@@ -7,7 +7,7 @@ Reconciliation applied. Handoff to Measure for audit.
 | Field | Value |
 |---|---|
 | Update ID | UPD-20260813-001 |
-| Run | `projects/lead-lab/project-statrep/2026-08-13-access-decision-email` |
+| Run | `project-statrep/2026-08-13-access-decision-email` |
 | Status | Ready for Measure |
 | Changed records | 4 canonical register files |
 | Open follow-up | Stakeholder response to access email (D-02) |

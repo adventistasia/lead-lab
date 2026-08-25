@@ -18,7 +18,7 @@ These records are proposals only. They must not be written to canonical register
 | Field | Proposed value |
 |---|---|
 | Artifact | Lead Lab web-app scope and requirements record |
-| Proposed location | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Proposed location | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
 | Owner | TBD |
 | Status | Proposed |
 | Baseline state | Do not establish until the platform direction, boundary option, authority, and requirements are approved |
@@ -31,7 +31,7 @@ These records are proposals only. They must not be written to canonical register
 | Disposition | Required |
 | Rigor | Formal |
 | State | Current after approved reconciliation; otherwise Governance pending |
-| Last run | `projects/lead-lab/pm-control/runs/2026-08-19-pm-12-define-scope` |
+| Last run | `pm-control/runs/2026-08-19-pm-12-define-scope` |
 | Last performed | 2026-08-19 |
 | Next trigger | Select the scope boundary and establish the approved baseline before PM-13 |
 | Canonical output | Approved scope statement linked to the PM-12 run evidence |

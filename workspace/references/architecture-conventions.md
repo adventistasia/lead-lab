@@ -5,7 +5,7 @@
 
 The server environment must be verified before the technical stack is selected. The delivery plan is the source for the default candidate and fallback rule:
 
-`projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`
+`artifacts/lead-lab-web-app-delivery-plan.md`
 
 ## Default Candidate
 

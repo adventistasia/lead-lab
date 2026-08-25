@@ -44,16 +44,16 @@ The Learn stage may route work back to Define, Design, or Build. Measure and Lea
 
 | Information | Source |
 |---|---|
-| Project routing and current phase | `projects/lead-lab/CONTEXT.md` |
-| Approved scope and requirements | `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md` |
-| Approved backlog | `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md` |
-| Delivery gates and fallback | `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md` |
-| Current decisions, changes, and controls | `projects/lead-lab/pm-control/registers/` |
-| Application source | `projects/lead-lab/application/source/` |
+| Project routing and current phase | `CONTEXT.md` |
+| Approved scope and requirements | `artifacts/lead-lab-web-app-scope-and-requirements.md` |
+| Approved backlog | `artifacts/lead-lab-web-app-backlog.md` |
+| Delivery gates and fallback | `artifacts/lead-lab-web-app-delivery-plan.md` |
+| Current decisions, changes, and controls | `pm-control/registers/` |
+| Application source | `application/source/` |
 | ICM structure and conventions | `_core/Interpretable_Context_Methdology_.md` and `_core/CONVENTIONS.md` |
 
 ## Run Rules
 
-For the first cycle, propose `projects/lead-lab/application/runs/` as `{{OUTPUT_ROOT}}`. Generate a run slug, show `{{RUN_PATH}}`, and confirm it before creating the run folder. Never overwrite a prior run.
+For the first cycle, propose `application/runs/` as `{{OUTPUT_ROOT}}`. Generate a run slug, show `{{RUN_PATH}}`, and confirm it before creating the run folder. Never overwrite a prior run.
 
 Stage contracts define the minimal context to load. References are stable rules. Run outputs are working artifacts. Application source remains outside run folders as the canonical implementation.

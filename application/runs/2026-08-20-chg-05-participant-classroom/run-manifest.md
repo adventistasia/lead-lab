@@ -8,7 +8,7 @@
 | Request | Implement approved CHG-05 (Extend CHG-02 to participants with a separate Classroom recordings navigation and page). |
 | Approved decision | D-14 (CHG-05 participant Classroom extension) |
 | Approved behavior | Participants see published session recordings only; draft sessions remain admin-only. |
-| Source root | `projects/lead-lab/application/source/` |
+| Source root | `application/source/` |
 | Status | Build complete; local verification passed; browser, staging, and launch acceptance remain open |
 | Date | 2026-08-20 |
 

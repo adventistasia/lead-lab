@@ -12,7 +12,7 @@
 | Primary treatment | `#eab41e` yellow for filled primary action buttons |
 | Secondary treatment | Neutral gray/white buttons and badges |
 | Green treatment | `#6eaf1f` and `#2f641c` for success states and small supporting accents |
-| Source root | `projects/lead-lab/application/source/` |
+| Source root | `application/source/` |
 | Status | Implemented and locally verified; browser and launch acceptance remain open |
 | Date | 2026-08-20 |
 

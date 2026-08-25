@@ -5,12 +5,12 @@
 |---|---|
 | Workspace | project-statrep |
 | Run slug | 2026-08-21-self-registration-session |
-| Run path | `projects/lead-lab/project-statrep/2026-08-21-self-registration-session` |
+| Run path | `project-statrep/2026-08-21-self-registration-session` |
 | Date | 21-Aug-2026 |
 | Source request | User direction: reconcile all changes completed during the participant self-registration, member access, local mail, and validation session with the Lead Lab records |
-| Prior run | `projects/lead-lab/project-statrep/2026-08-18-prototype-progress` |
+| Prior run | `project-statrep/2026-08-18-prototype-progress` |
 | Update ID | `UPD-20260821-001` |
-| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
+| Project | LeadLab Portal Rebuild (`repository root`) |
 | Run state | Completed with monitored actions |
 
 ## Stage Status

@@ -70,10 +70,10 @@ Keep 2026-09-04 and 2026-09-07 as PM-requested conditional targets. Do not basel
 
 ## Source Traceability
 
-- `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`; Delivery Schedule, Delivery Gates, Fallback Plan.
-- `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`; Decision Summary, Gate 1 Assessment, and Required Next Actions.
-- `projects/lead-lab/pm-control/project-control.md`; Baseline and Change Control and Process System.
-- `projects/lead-lab/pm-control/registers/change-log.md`; `CHG-06 (Re-sequence the next local build to session lifecycle administration and defer participant account lifecycle work)`.
-- `projects/lead-lab/pm-control/registers/decision-log.md`; `D-16 (Prioritize session lifecycle administration and defer participant account lifecycle work)` and `D-05 (Is the team's server ready for the Option B application, and is a domain name available?)`.
-- `projects/lead-lab/pm-control/registers/dependencies-log.md`; `DEP-03 (Media team supplies session video links)`, `DEP-05 (Domain name availability and production URL)`, `DEP-07 (LeadLab Director final OK)`, and `DEP-09 (Option B authentication and participant-data handling decision)`.
-- `projects/lead-lab/pm-control/registers/action-log.md`; `ACT-03 (Complete production domain, DNS, SSL, backup, and uptime setup for the Option B application)`, `ACT-04 (Obtain LeadLab Director final approval before the Option B launch or SharePoint fallback decision)`, `ACT-05 (Define IT patch, backup, uptime, and incident procedures for post-launch maintenance of the Option B application and server)`, and `ACT-11 (Complete the Gate 1 environment and ownership evidence pack)`.
+- `artifacts/lead-lab-web-app-delivery-plan.md`; Delivery Schedule, Delivery Gates, Fallback Plan.
+- `application/environment/gate-1-environment-and-ownership.md`; Decision Summary, Gate 1 Assessment, and Required Next Actions.
+- `pm-control/project-control.md`; Baseline and Change Control and Process System.
+- `pm-control/registers/change-log.md`; `CHG-06 (Re-sequence the next local build to session lifecycle administration and defer participant account lifecycle work)`.
+- `pm-control/registers/decision-log.md`; `D-16 (Prioritize session lifecycle administration and defer participant account lifecycle work)` and `D-05 (Is the team's server ready for the Option B application, and is a domain name available?)`.
+- `pm-control/registers/dependencies-log.md`; `DEP-03 (Media team supplies session video links)`, `DEP-05 (Domain name availability and production URL)`, `DEP-07 (LeadLab Director final OK)`, and `DEP-09 (Option B authentication and participant-data handling decision)`.
+- `pm-control/registers/action-log.md`; `ACT-03 (Complete production domain, DNS, SSL, backup, and uptime setup for the Option B application)`, `ACT-04 (Obtain LeadLab Director final approval before the Option B launch or SharePoint fallback decision)`, `ACT-05 (Define IT patch, backup, uptime, and incident procedures for post-launch maintenance of the Option B application and server)`, and `ACT-11 (Complete the Gate 1 environment and ownership evidence pack)`.
