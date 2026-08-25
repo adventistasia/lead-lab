@@ -6,6 +6,7 @@ import { ClassroomFilters } from '@/components/classroom-filters';
 import type { ClassroomFilterValues } from '@/components/classroom-filters';
 import { SessionFormFields } from '@/components/session-form-fields';
 import type { SessionFormData } from '@/components/session-form-fields';
+import { SessionThumbnail } from '@/components/session-thumbnail';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -42,6 +43,7 @@ type Recording = {
     is_published: boolean;
     is_archived: boolean;
     resources_count: number;
+    video_thumbnail_url: string | null;
 };
 
 type LifecycleAction = 'publish' | 'unpublish' | 'archive' | 'restore';
@@ -219,11 +221,14 @@ export default function AdminClassroom({
                                     {sessions.map((session) => (
                                         <div
                                             key={session.id}
-                                            className="flex flex-col gap-4 rounded-xl border p-4 md:flex-row md:items-center"
+                                            className="group flex flex-col gap-4 rounded-xl border p-4 sm:flex-row sm:items-center sm:gap-5"
                                         >
-                                            <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
-                                                <LibraryBig className="size-5" />
-                                            </div>
+                                            <SessionThumbnail
+                                                thumbnailUrl={
+                                                    session.video_thumbnail_url
+                                                }
+                                                alt={`${session.title} thumbnail`}
+                                            />
                                             <div className="min-w-0 flex-1">
                                                 <div className="flex flex-wrap items-center gap-2">
                                                     <h2 className="font-medium">
@@ -304,7 +309,7 @@ export default function AdminClassroom({
                                                 }}
                                             >
                                                 <SelectTrigger
-                                                    className="w-full md:w-[11rem]"
+                                                    className="w-full sm:w-[11rem]"
                                                     aria-label={`Actions for ${session.title}`}
                                                     disabled={
                                                         lifecycleForm.processing

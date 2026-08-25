@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CalendarEvent;
 use App\Models\LearningSession;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -57,6 +58,17 @@ class DatabaseSeeder extends Seeder
                 'stored_path' => $path,
                 'mime_type' => 'text/plain',
                 'size' => Storage::disk('local')->size($path),
+            ],
+        );
+
+        $eventStartsAt = now()->addDays(2)->setTime(10, 0);
+
+        CalendarEvent::updateOrCreate(
+            ['title' => 'Lead Lab office hours'],
+            [
+                'starts_at' => $eventStartsAt,
+                'ends_at' => $eventStartsAt->addHour(),
+                'description' => 'Bring one live question for the group.',
             ],
         );
     }

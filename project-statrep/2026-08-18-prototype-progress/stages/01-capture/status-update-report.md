@@ -6,7 +6,7 @@ Staging WordPress is deployed and the project is moving into prototype theme con
 | Field | Value |
 |---|---|
 | Update ID | `UPD-20260818-001` |
-| Project | LeadLab Portal Rebuild (`repository root`) |
+| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
 | Reported date | 18-Aug-2026 |
 | Effective or as-of date | 18-Aug-2026 |
 | Reporter or source | Agno JF (Requester), conversation |

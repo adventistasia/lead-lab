@@ -205,7 +205,7 @@ class AdminLearningSessionController
     }
 
     /**
-     * @return array<int, array{id: int, title: string, category: string, session_date: string, is_published: bool, is_archived: bool, resources_count: int}>
+     * @return array<int, array{id: int, title: string, category: string, session_date: string, is_published: bool, is_archived: bool, resources_count: int, video_thumbnail_url: string|null}>
      */
     private function sessionSummaries(
         string $search = '',
@@ -226,6 +226,9 @@ class AdminLearningSessionController
                 'is_published' => $session->is_published,
                 'is_archived' => $session->archived_at !== null,
                 'resources_count' => $session->resources_count,
+                'video_thumbnail_url' => YouTubeVideoReference::thumbnailUrl(
+                    $session->video_url,
+                ),
             ])
             ->values()
             ->all();

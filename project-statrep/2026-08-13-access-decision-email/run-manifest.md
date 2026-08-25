@@ -9,7 +9,7 @@
 | Source request | "Just sent the email to all stakeholders. Then let's record this in our logs and registers" |
 | Prior run | None (first run) |
 | Update ID | UPD-20260813-001 |
-| Project | LeadLab Portal Rebuild (`repository root`) |
+| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
 
 ## Stage Status
 

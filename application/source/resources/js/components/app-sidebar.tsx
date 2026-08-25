@@ -3,7 +3,6 @@ import {
     BookOpen,
     CalendarDays,
     LayoutDashboard,
-    MessageSquareText,
     UsersRound,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
@@ -33,13 +32,8 @@ const mainNavItems: NavItem[] = [
         icon: BookOpen,
     },
     {
-        title: 'Community',
-        href: '/dashboard#community',
-        icon: MessageSquareText,
-    },
-    {
         title: 'Calendar',
-        href: '/dashboard#calendar',
+        href: '/calendar',
         icon: CalendarDays,
     },
 ];

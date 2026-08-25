@@ -10,7 +10,7 @@
 | Source request | User direction: reconcile all changes completed during the participant self-registration, member access, local mail, and validation session with the Lead Lab records |
 | Prior run | `project-statrep/2026-08-18-prototype-progress` |
 | Update ID | `UPD-20260821-001` |
-| Project | LeadLab Portal Rebuild (`repository root`) |
+| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
 | Run state | Completed with monitored actions |
 
 ## Stage Status

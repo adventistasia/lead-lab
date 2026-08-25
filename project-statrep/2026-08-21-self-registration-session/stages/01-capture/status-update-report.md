@@ -6,7 +6,7 @@ The local Option B participant-onboarding increment is implemented and validated
 | Field | Value |
 |---|---|
 | Update ID | `UPD-20260821-001` |
-| Project | LeadLab Portal Rebuild (`repository root`) |
+| Project | LeadLab Portal Rebuild (`projects/lead-lab`) |
 | Reported date | 21-Aug-2026 |
 | Effective or as-of date | 21-Aug-2026 |
 | Reporter or source | Agno JF (Requester), current conversation; local implementation and validation evidence |
