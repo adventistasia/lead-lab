@@ -1,0 +1,58 @@
+{
+    "name": "laravel/chisel",
+    "description": "Toolkit for building scripts that remove unwanted code, files, and dependencies.",
+    "keywords": [
+        "laravel",
+        "chisel"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Taylor Otwell",
+            "email": "taylor@laravel.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/process": "^10.20|^11.0|^12.0|^13.0",
+        "nikic/php-parser": "^5.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24.0",
+        "pestphp/pest": "^4.1.0",
+        "phpstan/phpstan": "^2.1.26",
+        "rector/rector": "^2.1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laravel\\Chisel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "lint": "pint",
+        "refactor": "rector",
+        "test:lint": "pint --test",
+        "test:unit": "pest",
+        "test:types": "phpstan",
+        "test:refactor": "rector --dry-run",
+        "test": [
+            "@test:lint",
+            "@test:unit",
+            "@test:types",
+            "@test:refactor"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

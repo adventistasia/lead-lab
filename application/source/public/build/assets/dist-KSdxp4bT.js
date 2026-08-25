@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-CbXtAM7H.js";import{_ as t}from"./wayfinder-C_jSjMh8.js";var n=e(t(),1),r=Object.defineProperty,i=(e,t)=>r(e,`name`,{value:t,configurable:!0});function a(e){let t=n.useRef(e);return n.useEffect(()=>{t.current=e}),n.useMemo(()=>((...e)=>t.current?.(...e)),[])}i(a,`useCallbackRef`);export{a as t};
