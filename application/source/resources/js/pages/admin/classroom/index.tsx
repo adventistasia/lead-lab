@@ -34,6 +34,16 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { dashboard } from '@/routes';
+import { index as classroom } from '@/routes/admin/classroom';
+import {
+    archive,
+    edit,
+    publish,
+    restore,
+    store,
+    unpublish,
+} from '@/routes/admin/sessions';
+import { show as showSession } from '@/routes/sessions';
 
 type Recording = {
     id: number;
@@ -119,7 +129,7 @@ export default function AdminClassroom({
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        form.post('/admin/sessions?return_to=classroom', {
+        form.post(store.url({ query: { return_to: 'classroom' } }), {
             forceFormData: true,
             preserveScroll: true,
             preserveState: false,
@@ -142,8 +152,17 @@ export default function AdminClassroom({
             return;
         }
 
+        const lifecycleUrls = {
+            publish,
+            unpublish,
+            archive,
+            restore,
+        };
+
         lifecycleForm.patch(
-            `/admin/sessions/${session.id}/${action}?return_to=classroom`,
+            lifecycleUrls[action].url(session.id, {
+                query: { return_to: 'classroom' },
+            }),
             {
                 preserveScroll: true,
                 preserveState: false,
@@ -168,7 +187,7 @@ export default function AdminClassroom({
                         and archived sessions, and manage its publication state.
                     </p>
                     <ClassroomFilters
-                        action="/admin/classroom"
+                        action={classroom.url()}
                         categories={categories}
                         filters={filters}
                     />
@@ -233,7 +252,9 @@ export default function AdminClassroom({
                                                 <div className="flex flex-wrap items-center gap-2">
                                                     <h2 className="font-medium">
                                                         <Link
-                                                            href={`/sessions/${session.id}`}
+                                                            href={showSession(
+                                                                session.id,
+                                                            )}
                                                             className="hover:underline"
                                                         >
                                                             {session.title}
@@ -292,7 +313,9 @@ export default function AdminClassroom({
 
                                                     if (action === 'edit') {
                                                         router.get(
-                                                            `/admin/sessions/${session.id}/edit`,
+                                                            edit.url(
+                                                                session.id,
+                                                            ),
                                                             {},
                                                             {
                                                                 preserveState: false,
@@ -387,7 +410,7 @@ AdminClassroom.layout = {
         },
         {
             title: 'Classroom recordings',
-            href: '/admin/classroom',
+            href: classroom(),
         },
     ],
 };

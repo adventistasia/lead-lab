@@ -27,6 +27,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
+import { calendar } from '@/routes';
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -165,7 +166,9 @@ export function CalendarView({
                 <div className="flex items-center gap-2">
                     <Button asChild variant="outline" size="icon">
                         <Link
-                            href={`/calendar?month=${previousMonth}`}
+                            href={calendar({
+                                query: { month: previousMonth },
+                            })}
                             preserveScroll
                             aria-label="Previous month"
                         >
@@ -174,7 +177,9 @@ export function CalendarView({
                     </Button>
                     <Button asChild variant="outline" size="icon">
                         <Link
-                            href={`/calendar?month=${nextMonth}`}
+                            href={calendar({
+                                query: { month: nextMonth },
+                            })}
                             preserveScroll
                             aria-label="Next month"
                         >

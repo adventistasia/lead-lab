@@ -22,6 +22,16 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { dashboard } from '@/routes';
+import {
+    archive,
+    edit,
+    index as adminSessions,
+    publish,
+    restore,
+    store,
+    unpublish,
+    update,
+} from '@/routes/admin/sessions';
 
 type LearningSession = {
     id: number;
@@ -74,7 +84,14 @@ export default function AdminSessions({
             return;
         }
 
-        lifecycleForm.patch(`/admin/sessions/${learningSession.id}/${action}`, {
+        const lifecycleUrls = {
+            publish,
+            unpublish,
+            archive,
+            restore,
+        };
+
+        lifecycleForm.patch(lifecycleUrls[action].url(learningSession.id), {
             preserveScroll: true,
             preserveState: false,
             onSuccess: () => {
@@ -107,7 +124,7 @@ export default function AdminSessions({
                 ...data,
                 _method: 'PATCH',
             }));
-            form.post(`/admin/sessions/${session.id}`, {
+            form.post(update.url(session.id), {
                 ...options,
                 onFinish: () => form.transform((data) => data),
             });
@@ -115,7 +132,7 @@ export default function AdminSessions({
             return;
         }
 
-        form.post('/admin/sessions', options);
+        form.post(store.url(), options);
     };
 
     return (
@@ -173,7 +190,7 @@ export default function AdminSessions({
                                     </Button>
                                     {isEditing && (
                                         <Button asChild variant="outline">
-                                            <Link href="/admin/sessions">
+                                            <Link href={adminSessions()}>
                                                 Cancel edit
                                             </Link>
                                         </Button>
@@ -247,9 +264,7 @@ export default function AdminSessions({
                                                 size="sm"
                                                 variant="outline"
                                             >
-                                                <Link
-                                                    href={`/admin/sessions/${session.id}/edit`}
-                                                >
+                                                <Link href={edit(session.id)}>
                                                     <Pencil data-icon="inline-start" />
                                                     Edit
                                                 </Link>
@@ -338,7 +353,7 @@ AdminSessions.layout = {
         },
         {
             title: 'Manage sessions',
-            href: '/admin/sessions',
+            href: adminSessions(),
         },
     ],
 };

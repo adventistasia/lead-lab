@@ -31,7 +31,10 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { dashboard } from '@/routes';
+import { calendar, dashboard } from '@/routes';
+import { index as adminClassroom } from '@/routes/admin/classroom';
+import { index as classroom } from '@/routes/classroom';
+import { show as showSession } from '@/routes/sessions';
 
 type DashboardSession = {
     id: number;
@@ -115,7 +118,7 @@ export default function Dashboard({
         thumbnailUrl: session.video_thumbnail_url,
     }));
     const displayedCommunityUpdates = community_updates.slice(0, 3);
-    const classroomHref = is_admin ? '/admin/classroom' : '/classroom';
+    const classroomHref = is_admin ? adminClassroom() : classroom();
     const nextEvent = upcoming_events[0];
     const [isEventDialogOpen, setIsEventDialogOpen] = useState(false);
     const displayedStats = [
@@ -175,7 +178,7 @@ export default function Dashboard({
                                 </Link>
                             </Button>
                             <Button asChild variant="outline">
-                                <Link href="/calendar">
+                                <Link href={calendar()}>
                                     <CalendarDays data-icon="inline-start" />
                                     View calendar
                                 </Link>
@@ -267,7 +270,7 @@ export default function Dashboard({
                                 displayedSessions.map((session) => (
                                     <Link
                                         key={session.id}
-                                        href={`/sessions/${session.id}`}
+                                        href={showSession(session.id)}
                                         className="group flex min-w-0 items-stretch gap-4 rounded-lg p-3 transition-colors hover:bg-muted/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none sm:gap-5"
                                     >
                                         <SessionThumbnail
@@ -374,7 +377,7 @@ export default function Dashboard({
                                     </Button>
                                 )}
                                 <Button asChild variant="ghost" size="sm">
-                                    <Link href="/calendar">
+                                    <Link href={calendar()}>
                                         View calendar
                                         <ArrowRight data-icon="inline-end" />
                                     </Link>

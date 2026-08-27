@@ -16,7 +16,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { dashboard, login } from '@/routes';
+import { dashboard, login, register } from '@/routes';
 
 const features = [
     {
@@ -96,7 +96,7 @@ export default function Welcome() {
                             <p className="text-sm text-muted-foreground">
                                 New to Lead Lab?{' '}
                                 <Link
-                                    href="/register"
+                                    href={register()}
                                     className="font-medium text-foreground underline underline-offset-4"
                                 >
                                     Request access

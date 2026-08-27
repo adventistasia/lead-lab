@@ -13,7 +13,8 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { dashboard } from '@/routes';
+import { dashboard, calendar } from '@/routes';
+import { destroy as destroyCalendarEvent } from '@/routes/admin/calendar-events';
 
 export default function Calendar({
     events,
@@ -62,7 +63,9 @@ export default function Calendar({
         }
 
         deleteForm.delete(
-            `/admin/calendar-events/${event.id}?return_to=calendar`,
+            destroyCalendarEvent.url(event.id, {
+                query: { return_to: 'calendar' },
+            }),
             {
                 preserveScroll: true,
             },
@@ -148,7 +151,7 @@ Calendar.layout = {
         },
         {
             title: 'Calendar',
-            href: '/calendar',
+            href: calendar(),
         },
     ],
 };

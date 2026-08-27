@@ -12,6 +12,8 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { dashboard } from '@/routes';
+import { index as classroom } from '@/routes/classroom';
+import { show as showSession } from '@/routes/sessions';
 
 type Recording = {
     id: number;
@@ -53,7 +55,7 @@ export default function Classroom({
                         view when you are ready to continue learning.
                     </p>
                     <ClassroomFilters
-                        action="/classroom"
+                        action={classroom.url()}
                         categories={categories}
                         filters={filters}
                     />
@@ -102,7 +104,9 @@ export default function Classroom({
                                         <div className="min-w-0 flex-1">
                                             <h2 className="font-medium">
                                                 <Link
-                                                    href={`/sessions/${session.id}`}
+                                                    href={showSession(
+                                                        session.id,
+                                                    )}
                                                     className="hover:underline"
                                                 >
                                                     {session.title}
@@ -143,7 +147,7 @@ Classroom.layout = {
         },
         {
             title: 'Classroom recordings',
-            href: '/classroom',
+            href: classroom(),
         },
     ],
 };

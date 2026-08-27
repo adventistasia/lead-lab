@@ -33,7 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Resources are delivered through the authorized download controller.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],
