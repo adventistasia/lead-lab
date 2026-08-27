@@ -1,0 +1,141 @@
+import type { InertiaForm } from '@inertiajs/react';
+import {
+    Field,
+    FieldDescription,
+    FieldError,
+    FieldGroup,
+    FieldLabel,
+} from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+
+export type SessionFormData = {
+    title: string;
+    category: string;
+    session_date: string;
+    description: string;
+    video_url: string;
+    resource: File | null;
+};
+
+type SessionFormFieldsProps = {
+    form: InertiaForm<SessionFormData>;
+    resourceTitle?: string | null;
+};
+
+export function SessionFormFields({
+    form,
+    resourceTitle,
+}: SessionFormFieldsProps) {
+    return (
+        <FieldGroup>
+            <Field data-invalid={Boolean(form.errors.title)}>
+                <FieldLabel htmlFor="title">Title</FieldLabel>
+                <Input
+                    id="title"
+                    value={form.data.title}
+                    onChange={(event) =>
+                        form.setData('title', event.target.value)
+                    }
+                    aria-invalid={Boolean(form.errors.title)}
+                    placeholder="Build your weekly lead engine"
+                />
+                <FieldError>{form.errors.title}</FieldError>
+            </Field>
+
+            <div className="grid gap-6 md:grid-cols-2">
+                <Field data-invalid={Boolean(form.errors.category)}>
+                    <FieldLabel htmlFor="category">Category</FieldLabel>
+                    <Input
+                        id="category"
+                        value={form.data.category}
+                        onChange={(event) =>
+                            form.setData('category', event.target.value)
+                        }
+                        aria-invalid={Boolean(form.errors.category)}
+                        placeholder="Lead generation systems"
+                    />
+                    <FieldError>{form.errors.category}</FieldError>
+                </Field>
+
+                <Field data-invalid={Boolean(form.errors.session_date)}>
+                    <FieldLabel htmlFor="session_date">Session date</FieldLabel>
+                    <Input
+                        id="session_date"
+                        type="date"
+                        value={form.data.session_date}
+                        onChange={(event) =>
+                            form.setData('session_date', event.target.value)
+                        }
+                        aria-invalid={Boolean(form.errors.session_date)}
+                    />
+                    <FieldError>{form.errors.session_date}</FieldError>
+                </Field>
+            </div>
+
+            <Field data-invalid={Boolean(form.errors.description)}>
+                <FieldLabel htmlFor="description">Description</FieldLabel>
+                <Textarea
+                    id="description"
+                    value={form.data.description}
+                    onChange={(event) =>
+                        form.setData('description', event.target.value)
+                    }
+                    aria-invalid={Boolean(form.errors.description)}
+                    placeholder="What should participants take away from this session?"
+                    rows={5}
+                />
+                <FieldDescription>
+                    Keep the description practical and easy to scan.
+                </FieldDescription>
+                <FieldError>{form.errors.description}</FieldError>
+            </Field>
+
+            <Field data-invalid={Boolean(form.errors.video_url)}>
+                <FieldLabel htmlFor="video_url">
+                    YouTube URL or embed code
+                </FieldLabel>
+                <Input
+                    id="video_url"
+                    type="text"
+                    value={form.data.video_url}
+                    onChange={(event) =>
+                        form.setData('video_url', event.target.value)
+                    }
+                    aria-invalid={Boolean(form.errors.video_url)}
+                    placeholder="Paste a YouTube URL or <iframe ...> code"
+                />
+                <FieldDescription>
+                    Paste once. The application extracts the video and builds
+                    the protected player automatically. Use Unlisted videos for
+                    participant recordings.
+                </FieldDescription>
+                <FieldError>{form.errors.video_url}</FieldError>
+            </Field>
+
+            <Field data-invalid={Boolean(form.errors.resource)}>
+                <FieldLabel htmlFor="resource">Supporting material</FieldLabel>
+                <Input
+                    id="resource"
+                    type="file"
+                    accept=".pdf,.doc,.docx,.txt"
+                    onChange={(event) =>
+                        form.setData(
+                            'resource',
+                            event.target.files?.[0] ?? null,
+                        )
+                    }
+                    aria-invalid={Boolean(form.errors.resource)}
+                />
+                <FieldDescription>
+                    {resourceTitle
+                        ? `Current material: ${resourceTitle}. Upload a replacement to swap it. `
+                        : ''}
+                    Stored outside the public web directory and downloaded
+                    through an authenticated route.
+                </FieldDescription>
+                <FieldError>{form.errors.resource}</FieldError>
+            </Field>
+        </FieldGroup>
+    );
+}

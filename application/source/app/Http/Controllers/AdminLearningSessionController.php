@@ -1,0 +1,292 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ActivityLog;
+use App\Models\LearningResource;
+use App\Models\LearningSession;
+use App\Support\YouTubeVideoReference;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
+use Inertia\Response;
+use InvalidArgumentException;
+
+class AdminLearningSessionController
+{
+    public function index(): Response
+    {
+        return Inertia::render('admin/sessions/index', [
+            'sessions' => $this->sessionSummaries(),
+        ]);
+    }
+
+    public function edit(LearningSession $learningSession): Response
+    {
+        $learningSession->load('resources');
+
+        return Inertia::render('admin/sessions/index', [
+            'sessions' => $this->sessionSummaries(),
+            'session' => [
+                'id' => $learningSession->id,
+                'title' => $learningSession->title,
+                'category' => $learningSession->category,
+                'session_date' => $learningSession->session_date->toDateString(),
+                'description' => $learningSession->description,
+                'video_url' => $learningSession->video_url ?? '',
+                'resource_title' => $learningSession->resources->first()?->title,
+            ],
+        ]);
+    }
+
+    public function recordings(Request $request): Response
+    {
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:120'],
+            'category' => ['nullable', 'string', 'max:80'],
+            'date_from' => ['nullable', 'date'],
+            'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
+        ]);
+
+        $search = trim((string) ($validated['search'] ?? ''));
+        $category = trim((string) ($validated['category'] ?? ''));
+        $dateFrom = $validated['date_from'] ?? null;
+        $dateTo = $validated['date_to'] ?? null;
+
+        return Inertia::render('admin/classroom/index', [
+            'sessions' => $this->sessionSummaries(
+                $search,
+                $category,
+                $dateFrom,
+                $dateTo,
+            ),
+            'categories' => LearningSession::query()
+                ->distinct()
+                ->orderBy('category')
+                ->pluck('category')
+                ->values(),
+            'filters' => [
+                'search' => $search,
+                'category' => $category,
+                'date_from' => $dateFrom,
+                'date_to' => $dateTo,
+            ],
+        ]);
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:160'],
+            'category' => ['required', 'string', 'max:80'],
+            'session_date' => ['required', 'date'],
+            'description' => ['required', 'string', 'max:5000'],
+            'video_url' => ['nullable', 'string', 'max:2000'],
+            'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
+        ]);
+
+        try {
+            $videoUrl = YouTubeVideoReference::normalize($validated['video_url'] ?? null);
+        } catch (InvalidArgumentException $exception) {
+            throw ValidationException::withMessages([
+                'video_url' => $exception->getMessage(),
+            ]);
+        }
+
+        $session = LearningSession::create([
+            'title' => $validated['title'],
+            'category' => $validated['category'],
+            'session_date' => $validated['session_date'],
+            'description' => $validated['description'],
+            'video_url' => $videoUrl,
+            'is_published' => false,
+        ]);
+
+        $this->storeResource($session, $request);
+        ActivityLog::record($request->user(), 'session_created', $session);
+        $this->flashSuccess('Session saved as a draft.');
+
+        return to_route(
+            $request->input('return_to') === 'classroom'
+                ? 'admin.classroom.index'
+                : 'admin.sessions.index',
+        );
+    }
+
+    public function update(Request $request, LearningSession $learningSession): RedirectResponse
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:160'],
+            'category' => ['required', 'string', 'max:80'],
+            'session_date' => ['required', 'date'],
+            'description' => ['required', 'string', 'max:5000'],
+            'video_url' => ['nullable', 'string', 'max:2000'],
+            'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
+        ]);
+
+        try {
+            $videoUrl = YouTubeVideoReference::normalize($validated['video_url'] ?? null);
+        } catch (InvalidArgumentException $exception) {
+            throw ValidationException::withMessages([
+                'video_url' => $exception->getMessage(),
+            ]);
+        }
+
+        $learningSession->update([
+            'title' => $validated['title'],
+            'category' => $validated['category'],
+            'session_date' => $validated['session_date'],
+            'description' => $validated['description'],
+            'video_url' => $videoUrl,
+        ]);
+
+        $this->replaceResource($learningSession, $request);
+        ActivityLog::record($request->user(), 'session_updated', $learningSession, [
+            'resource_replaced' => $request->hasFile('resource'),
+        ]);
+        $this->flashSuccess('Session changes saved.');
+
+        return to_route('admin.sessions.index');
+    }
+
+    public function publish(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
+        $learningSession->update(['is_published' => true]);
+        ActivityLog::record($request->user(), 'session_published', $learningSession);
+        $this->flashSuccess('Session published to the Lead Lab classroom.');
+
+        return $this->lifecycleRedirect($request);
+    }
+
+    public function unpublish(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
+        $learningSession->update(['is_published' => false]);
+        ActivityLog::record($request->user(), 'session_unpublished', $learningSession);
+        $this->flashSuccess('Session unpublished from the Lead Lab classroom.');
+
+        return $this->lifecycleRedirect($request);
+    }
+
+    public function archive(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
+        $learningSession->update(['archived_at' => now()]);
+        ActivityLog::record($request->user(), 'session_archived', $learningSession);
+        $this->flashSuccess('Session archived.');
+
+        return $this->lifecycleRedirect($request);
+    }
+
+    public function restore(
+        Request $request,
+        LearningSession $learningSession,
+    ): RedirectResponse {
+        $learningSession->update(['archived_at' => null]);
+        ActivityLog::record($request->user(), 'session_restored', $learningSession);
+        $this->flashSuccess('Session restored.');
+
+        return $this->lifecycleRedirect($request);
+    }
+
+    private function lifecycleRedirect(Request $request): RedirectResponse
+    {
+        return to_route(
+            $request->input('return_to') === 'classroom'
+                ? 'admin.classroom.index'
+                : 'admin.sessions.index',
+        );
+    }
+
+    /**
+     * @return array<int, array{id: int, title: string, category: string, session_date: string, is_published: bool, is_archived: bool, resources_count: int, video_thumbnail_url: string|null}>
+     */
+    private function sessionSummaries(
+        string $search = '',
+        string $category = '',
+        ?string $dateFrom = null,
+        ?string $dateTo = null,
+    ): array {
+        return LearningSession::query()
+            ->withCount('resources')
+            ->filterForClassroom($search, $category, $dateFrom, $dateTo)
+            ->orderByDesc('session_date')
+            ->get()
+            ->map(fn (LearningSession $session): array => [
+                'id' => $session->id,
+                'title' => $session->title,
+                'category' => $session->category,
+                'session_date' => $session->session_date->toDateString(),
+                'is_published' => $session->is_published,
+                'is_archived' => $session->archived_at !== null,
+                'resources_count' => $session->resources_count,
+                'video_thumbnail_url' => YouTubeVideoReference::thumbnailUrl(
+                    $session->video_url,
+                ),
+            ])
+            ->values()
+            ->all();
+    }
+
+    private function storeResource(LearningSession $session, Request $request): void
+    {
+        if (! $request->hasFile('resource')) {
+            return;
+        }
+
+        $file = $request->file('resource');
+
+        LearningResource::create([
+            'learning_session_id' => $session->id,
+            'title' => $file->getClientOriginalName(),
+            'stored_path' => $file->store('lead-lab/resources'),
+            'mime_type' => $file->getMimeType(),
+            'size' => $file->getSize(),
+        ]);
+    }
+
+    private function replaceResource(LearningSession $session, Request $request): void
+    {
+        if (! $request->hasFile('resource')) {
+            return;
+        }
+
+        $file = $request->file('resource');
+        $resource = $session->resources()->first();
+        $storedPath = $file->store('lead-lab/resources');
+
+        if ($resource !== null) {
+            Storage::disk('local')->delete($resource->stored_path);
+            $resource->update([
+                'title' => $file->getClientOriginalName(),
+                'stored_path' => $storedPath,
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+            ]);
+
+            return;
+        }
+
+        LearningResource::create([
+            'learning_session_id' => $session->id,
+            'title' => $file->getClientOriginalName(),
+            'stored_path' => $storedPath,
+            'mime_type' => $file->getMimeType(),
+            'size' => $file->getSize(),
+        ]);
+    }
+
+    private function flashSuccess(string $message): void
+    {
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => $message,
+        ]);
+    }
+}
