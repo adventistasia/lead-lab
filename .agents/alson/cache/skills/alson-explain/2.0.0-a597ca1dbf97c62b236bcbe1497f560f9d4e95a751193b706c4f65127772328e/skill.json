@@ -1,0 +1,6 @@
+{
+  "name": "alson-explain",
+  "version": "2.0.0",
+  "description": "Explains a selected item in its context with evidence, citations, and plain-English clarity.",
+  "minCliVersion": "0.1.0"
+}
