@@ -1,6 +1,7 @@
 import { Pause, Play, Volume2, VolumeX } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
+import { FullscreenToggle } from '@/components/fullscreen-toggle';
 import { Button } from '@/components/ui/button';
 
 type YouTubePlayer = {
@@ -264,11 +265,12 @@ export function YouTubePlayer({
                 referrerPolicy="strict-origin-when-cross-origin"
             />
             <div className="flex flex-col gap-3 border-t bg-card p-3">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                     <Button
                         type="button"
                         size="icon"
                         variant="outline"
+                        className="shrink-0"
                         aria-label={
                             isPlaying ? 'Pause recording' : 'Play recording'
                         }
@@ -288,21 +290,24 @@ export function YouTubePlayer({
                         disabled={!isReady || duration <= 0}
                         onChange={seek}
                     />
-                    <span className="min-w-20 text-right text-xs text-muted-foreground">
+                    <span className="shrink-0 text-right text-xs whitespace-nowrap text-muted-foreground">
                         {formatTime(safeCurrentTime)} / {formatTime(duration)}
                     </span>
-                    <Button
-                        type="button"
-                        size="icon"
-                        variant="ghost"
-                        aria-label={
-                            isMuted ? 'Unmute recording' : 'Mute recording'
-                        }
-                        disabled={!isReady}
-                        onClick={toggleMute}
-                    >
-                        {isMuted ? <VolumeX /> : <Volume2 />}
-                    </Button>
+                    <div className="flex shrink-0 items-center gap-1">
+                        <Button
+                            type="button"
+                            size="icon"
+                            variant="ghost"
+                            aria-label={
+                                isMuted ? 'Unmute recording' : 'Mute recording'
+                            }
+                            disabled={!isReady}
+                            onClick={toggleMute}
+                        >
+                            {isMuted ? <VolumeX /> : <Volume2 />}
+                        </Button>
+                        <FullscreenToggle />
+                    </div>
                 </div>
                 {!isReady && (
                     <p className="text-xs text-muted-foreground" role="status">

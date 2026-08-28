@@ -21,6 +21,18 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { vote as voteAnswer } from '@/routes/answers';
+import { vote as voteQuestion } from '@/routes/questions';
+import {
+    destroy as destroyAnswer,
+    store as storeAnswer,
+    update as updateAnswer,
+} from '@/routes/questions/answers';
+import {
+    destroy as destroyQuestion,
+    store as storeQuestion,
+    update as updateQuestion,
+} from '@/routes/sessions/questions';
 type SessionQnaAuthor = {
     id: number;
     name: string;
@@ -124,7 +136,7 @@ export function SessionQna({
 
     const submitQuestion = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        questionForm.post(`/sessions/${sessionId}/questions`, {
+        questionForm.post(storeQuestion.url(sessionId), {
             preserveScroll: true,
             onSuccess: () => {
                 questionForm.reset();
@@ -141,7 +153,7 @@ export function SessionQna({
             return;
         }
 
-        answerForm.post(`/questions/${answeringQuestionId}/answers`, {
+        answerForm.post(storeAnswer.url(answeringQuestionId), {
             preserveScroll: true,
             onSuccess: () => {
                 answerForm.reset();
@@ -165,16 +177,13 @@ export function SessionQna({
         questionId: number,
     ) => {
         event.preventDefault();
-        editQuestionForm.patch(
-            `/sessions/${sessionId}/questions/${questionId}`,
-            {
-                preserveScroll: true,
-                onSuccess: () => {
-                    editQuestionForm.clearErrors();
-                    setEditingQuestionId(null);
-                },
+        editQuestionForm.patch(updateQuestion.url([sessionId, questionId]), {
+            preserveScroll: true,
+            onSuccess: () => {
+                editQuestionForm.clearErrors();
+                setEditingQuestionId(null);
             },
-        );
+        });
     };
 
     const startEditingAnswer = (answer: SessionAnswer) => {
@@ -189,7 +198,7 @@ export function SessionQna({
         answerId: number,
     ) => {
         event.preventDefault();
-        editAnswerForm.patch(`/questions/${questionId}/answers/${answerId}`, {
+        editAnswerForm.patch(updateAnswer.url([questionId, answerId]), {
             preserveScroll: true,
             onSuccess: () => {
                 editAnswerForm.clearErrors();
@@ -203,7 +212,7 @@ export function SessionQna({
             return;
         }
 
-        router.delete(`/sessions/${sessionId}/questions/${question.id}`, {
+        router.delete(destroyQuestion.url([sessionId, question.id]), {
             preserveScroll: true,
         });
     };
@@ -213,7 +222,7 @@ export function SessionQna({
             return;
         }
 
-        router.delete(`/questions/${questionId}/answers/${answer.id}`, {
+        router.delete(destroyAnswer.url([questionId, answer.id]), {
             preserveScroll: true,
         });
     };
@@ -512,7 +521,7 @@ export function SessionQna({
                                     aria-pressed={question.has_voted}
                                     onClick={() =>
                                         router.post(
-                                            `/questions/${question.id}/vote`,
+                                            voteQuestion.url(question.id),
                                             {},
                                             { preserveScroll: true },
                                         )
@@ -712,7 +721,9 @@ export function SessionQna({
                                                         }
                                                         onClick={() =>
                                                             router.post(
-                                                                `/answers/${answer.id}/vote`,
+                                                                voteAnswer.url(
+                                                                    answer.id,
+                                                                ),
                                                                 {},
                                                                 {
                                                                     preserveScroll: true,

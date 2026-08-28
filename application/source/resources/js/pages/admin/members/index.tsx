@@ -10,6 +10,10 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { dashboard } from '@/routes';
+import {
+    index as members,
+    status as updateMemberStatus,
+} from '@/routes/admin/members';
 
 type Member = {
     id: number;
@@ -31,7 +35,7 @@ export default function AdminMembers({
 }) {
     const updateAccess = (member: Member, status: 'active' | 'revoked') => {
         router.patch(
-            `/admin/members/${member.id}/status`,
+            updateMemberStatus.url(member.id),
             { status },
             {
                 preserveScroll: true,
@@ -163,7 +167,7 @@ AdminMembers.layout = {
         },
         {
             title: 'Manage members',
-            href: '/admin/members',
+            href: members(),
         },
     ],
 };

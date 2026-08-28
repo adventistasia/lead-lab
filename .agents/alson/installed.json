@@ -3,10 +3,10 @@
   "installs": {
     "alson-explain": {
       "name": "alson-explain",
-      "version": "1.0.0",
-      "hash": "374848170f31a6736fc1c23cb8c476a67938981d81061f5f6d29c44e9ad1433e",
+      "version": "2.0.0",
+      "hash": "a597ca1dbf97c62b236bcbe1497f560f9d4e95a751193b706c4f65127772328e",
       "cliVersion": "0.6.2",
-      "installedAt": "2026-08-27T05:59:41.074Z",
+      "installedAt": "2026-08-28T09:53:18.601Z",
       "files": [
         "CHANGELOG.md",
         "LICENSE",
@@ -15,7 +15,8 @@
         "references/test-scenarios.md",
         "skill.json",
         "SKILL.md"
-      ]
+      ],
+      "source": "https://raw.githubusercontent.com/agnojf/alson/main/skills/alson-explain"
     },
     "alson-pm-control": {
       "name": "alson-pm-control",

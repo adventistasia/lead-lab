@@ -704,6 +704,23 @@ class LeadLabAccessTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
+    public function test_private_resources_are_not_served_from_storage_urls(): void
+    {
+        Storage::fake('local');
+        $session = LearningSession::factory()->create();
+        $resource = $session->resources()->create([
+            'title' => 'Private notes.txt',
+            'stored_path' => 'lead-lab/resources/private-notes.txt',
+            'mime_type' => 'text/plain',
+            'size' => 12,
+        ]);
+
+        Storage::disk('local')->put($resource->stored_path, 'Private notes');
+
+        $this->get('/storage/'.$resource->stored_path)
+            ->assertNotFound();
+    }
+
     public function test_unpublished_sessions_are_hidden_from_participants_but_visible_to_admins(): void
     {
         $session = LearningSession::factory()->create(['is_published' => false]);

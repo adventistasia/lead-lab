@@ -17,7 +17,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
+import { calendar, dashboard } from '@/routes';
+import { index as adminClassroom } from '@/routes/admin/classroom';
+import { index as adminMembers } from '@/routes/admin/members';
+import { index as classroom } from '@/routes/classroom';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -28,12 +31,12 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Classroom',
-        href: '/classroom',
+        href: classroom(),
         icon: BookOpen,
     },
     {
         title: 'Calendar',
-        href: '/calendar',
+        href: calendar(),
         icon: CalendarDays,
     },
 ];
@@ -45,12 +48,12 @@ export function AppSidebar() {
             ? [
                   ...mainNavItems.map((item) =>
                       item.title === 'Classroom'
-                          ? { ...item, href: '/admin/classroom' }
+                          ? { ...item, href: adminClassroom() }
                           : item,
                   ),
                   {
                       title: 'Members',
-                      href: '/admin/members',
+                      href: adminMembers(),
                       icon: UsersRound,
                   },
               ]

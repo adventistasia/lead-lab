@@ -15,6 +15,10 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
+import {
+    store as storeCalendarEvent,
+    update as updateCalendarEvent,
+} from '@/routes/admin/calendar-events';
 
 const emptyEvent: CalendarEventFormData = {
     title: '',
@@ -87,14 +91,19 @@ export function CalendarEventDialog({
 
         if (event !== null && event !== undefined) {
             form.patch(
-                `/admin/calendar-events/${event.id}?return_to=${returnTo}`,
+                updateCalendarEvent.url(event.id, {
+                    query: { return_to: returnTo },
+                }),
                 options,
             );
 
             return;
         }
 
-        form.post(`/admin/calendar-events?return_to=${returnTo}`, options);
+        form.post(
+            storeCalendarEvent.url({ query: { return_to: returnTo } }),
+            options,
+        );
     };
 
     return (
