@@ -21,9 +21,9 @@
     "alson-pm-control": {
       "name": "alson-pm-control",
       "version": "1.0.0",
-      "hash": "b77d2561d1f69a321c79afc3cc3bad9ebdf5462c3ecd9b73c95c6fa0df7d38b3",
-      "cliVersion": "0.6.2",
-      "installedAt": "2026-08-27T05:59:41.184Z",
+      "hash": "818bb0ac485bdced0a57ef5107b535b30185a485fe99f47bf87fbe537cd4ec15",
+      "cliVersion": "0.7.0",
+      "installedAt": "2026-08-30T07:32:17.314Z",
       "files": [
         "CHANGELOG.md",
         "CONTEXT.md",
@@ -96,10 +96,12 @@
         "templates/registers/decision-log.md",
         "templates/registers/dependencies-log.md",
         "templates/registers/issues-log.md",
+        "templates/registers/lessons-learned-register.md",
         "templates/registers/risk-register.md",
         "templates/run-manifest.md",
         "templates/source-index.md"
-      ]
+      ],
+      "source": "https://raw.githubusercontent.com/agnojf/alson/main/skills/alson-pm-control"
     }
   }
 }

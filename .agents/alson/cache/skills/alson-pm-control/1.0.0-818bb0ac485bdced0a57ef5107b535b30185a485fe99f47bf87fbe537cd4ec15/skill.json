@@ -1,0 +1,6 @@
+{
+  "name": "alson-pm-control",
+  "version": "1.0.0",
+  "description": "Operates living project-control registers and tailored PMI process work with explicit PM approval gates.",
+  "minCliVersion": "0.5.0"
+}
