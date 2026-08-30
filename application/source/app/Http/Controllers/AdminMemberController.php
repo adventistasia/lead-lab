@@ -14,11 +14,21 @@ class AdminMemberController
 {
     public function index(Request $request): Response
     {
+        $status = $request->validate([
+            'status' => ['nullable', 'string', Rule::in([
+                User::ACCESS_PENDING,
+                User::ACCESS_ACTIVE,
+                User::ACCESS_REVOKED,
+            ])],
+        ])['status'] ?? null;
+
         $members = User::query()
             ->whereKeyNot($request->user()->id)
+            ->when($status !== null, fn ($query) => $query->where('access_status', $status))
             ->orderBy('name')
-            ->get(['id', 'name', 'email', 'role', 'is_active', 'access_status', 'email_verified_at', 'created_at'])
-            ->map(fn (User $user): array => [
+            ->paginate(10)
+            ->withQueryString()
+            ->through(fn (User $user): array => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
@@ -27,11 +37,13 @@ class AdminMemberController
                 'access_status' => $user->access_status,
                 'email_verified_at' => $user->email_verified_at?->toIso8601String(),
                 'created_at' => $user->created_at?->toFormattedDateString(),
-            ])
-            ->values();
+            ]);
 
         return Inertia::render('admin/members/index', [
             'members' => $members,
+            'filters' => [
+                'status' => $status,
+            ],
             'emailVerificationRequired' => config('fortify.require_email_verification'),
         ]);
     }
