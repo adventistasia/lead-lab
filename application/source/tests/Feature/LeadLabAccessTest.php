@@ -1114,11 +1114,111 @@ class LeadLabAccessTest extends TestCase
             ->get(route('admin.members.index'))
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('admin/members/index')
-                ->where('members.0.id', $participant->id)
-                ->where('members.0.access_status', User::ACCESS_PENDING)
-                ->where('members.0.email_verified_at', null)
+                ->where('members.data.0.id', $participant->id)
+                ->where('members.data.0.access_status', User::ACCESS_PENDING)
+                ->where('members.data.0.email_verified_at', null)
                 ->where('emailVerificationRequired', true),
             );
+    }
+
+    public function test_admin_member_page_paginates_ten_members_per_page(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        foreach (range(1, 15) as $number) {
+            User::factory()->create([
+                'name' => sprintf('Member %02d', $number),
+            ]);
+        }
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('members.data', 10)
+                ->where('members.current_page', 1)
+                ->where('members.per_page', 10)
+                ->where('members.total', 15)
+                ->where('members.data.0.name', 'Member 01')
+                ->where('members.data.9.name', 'Member 10'),
+            );
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', ['page' => 2]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('members.data', 5)
+                ->where('members.current_page', 2)
+                ->where('members.data.0.name', 'Member 11')
+                ->where('members.data.4.name', 'Member 15'),
+            );
+    }
+
+    public function test_admin_can_filter_members_by_each_access_status(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $pending = User::factory()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+        $active = User::factory()->create([
+            'access_status' => User::ACCESS_ACTIVE,
+            'is_active' => true,
+        ]);
+        $revoked = User::factory()->create([
+            'access_status' => User::ACCESS_REVOKED,
+            'is_active' => false,
+        ]);
+
+        foreach ([
+            User::ACCESS_PENDING => $pending,
+            User::ACCESS_ACTIVE => $active,
+            User::ACCESS_REVOKED => $revoked,
+        ] as $status => $member) {
+            $this->actingAs($admin)
+                ->get(route('admin.members.index', ['status' => $status]))
+                ->assertInertia(fn (Assert $assert) => $assert
+                    ->has('members.data', 1)
+                    ->where('members.data.0.id', $member->id)
+                    ->where('members.data.0.access_status', $status)
+                    ->where('filters.status', $status),
+                );
+        }
+    }
+
+    public function test_member_pagination_preserves_the_status_filter(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        User::factory()->count(11)->create([
+            'access_status' => User::ACCESS_ACTIVE,
+            'is_active' => true,
+        ]);
+        User::factory()->create([
+            'access_status' => User::ACCESS_REVOKED,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'status' => User::ACCESS_ACTIVE,
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('members.data', 10)
+                ->where('members.total', 11)
+                ->where('filters.status', User::ACCESS_ACTIVE)
+                ->where(
+                    'members.next_page_url',
+                    fn (?string $url): bool => $url !== null
+                        && str_contains($url, 'status=active'),
+                ),
+            );
+    }
+
+    public function test_invalid_member_status_filter_is_rejected(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', ['status' => 'unknown']))
+            ->assertSessionHasErrors('status');
     }
 
     public function test_admin_can_restore_a_revoked_participant(): void
