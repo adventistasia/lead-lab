@@ -10,7 +10,7 @@ This file is the project-level dashboard and configuration record.
 | Field | Current state |
 |---|---|
 | Project outcome | Rebuild the LeadLab Portal on a new platform with the same feature scope, restricted to participants, live before 2026-09-11. |
-| Control root | `projects/lead-lab/pm-control/` |
+| Control root | `/Users/agnojf/Documents/lead-lab/pm-control/` |
 | Current phase | Option B local core-functionality build; Gate 1 reassessment scheduled for 2026-08-28; production readiness deferred |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured |
@@ -82,6 +82,7 @@ This file is the project-level dashboard and configuration record.
 | Actions | `registers/action-log.md` | 2026-08-31 |
 | Decisions | `registers/decision-log.md` | 2026-08-31 |
 | Changes | `registers/change-log.md` | 2026-08-25 |
+| Lessons learned | `registers/lessons-learned-register.md` | 2026-08-31 |
 | Process register | `process-register.md` | 2026-08-18 |
 | Artifact index | `artifact-index.md` | 2026-08-20 |
 
