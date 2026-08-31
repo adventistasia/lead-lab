@@ -1,22 +1,22 @@
 import { usePage } from '@inertiajs/react';
-import { BookOpenCheck } from 'lucide-react';
+import AppLogoImage from '@/components/app-logo-image';
 
 export default function AppLogo() {
     const { name } = usePage().props;
+    const logoAlt = name || 'Lead Lab';
 
     return (
-        <>
-            <div className="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                <BookOpenCheck className="size-5" />
-            </div>
-            <div className="ml-1 grid flex-1 text-left">
-                <span className="truncate text-sm leading-tight font-semibold">
-                    {name || 'Lead Lab'}
-                </span>
-                <span className="truncate text-[11px] text-sidebar-foreground/60">
-                    Learning community
-                </span>
-            </div>
-        </>
+        <div className="flex min-w-0 items-center">
+            <AppLogoImage
+                alt={logoAlt}
+                className="h-8 w-auto max-w-full rounded-md object-contain group-data-[collapsible=icon]:hidden"
+            />
+            <span
+                className="hidden size-8 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white group-data-[collapsible=icon]:flex"
+                aria-hidden="true"
+            >
+                <AppLogoImage alt="" className="h-9 w-auto max-w-none" />
+            </span>
+        </div>
     );
 }

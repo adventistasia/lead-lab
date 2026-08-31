@@ -10,6 +10,7 @@ import {
     Target,
     Users,
 } from 'lucide-react';
+import AppLogoImage from '@/components/app-logo-image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -84,17 +85,10 @@ export default function Welcome() {
             <div className="min-h-screen bg-background">
                 <header className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-6 lg:px-8">
                     <div className="flex items-center gap-3">
-                        <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                            <BookOpenCheck className="size-5" />
-                        </div>
-                        <div className="flex flex-col gap-0.5">
-                            <span className="text-sm font-semibold">
-                                LeadLab
-                            </span>
-                            <span className="text-xs text-muted-foreground">
-                                Growth Series
-                            </span>
-                        </div>
+                        <AppLogoImage
+                            alt="LeadLab"
+                            className="h-auto w-36 rounded-md sm:w-44"
+                        />
                     </div>
                     <Badge className="hidden sm:inline-flex" variant="outline">
                         For leaders in our organization
