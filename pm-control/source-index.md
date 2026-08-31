@@ -24,6 +24,7 @@ Locations of authoritative project documents. These files stay where they are. T
 
 | Calendar live broadcast contrast screenshot | `/Users/agnojf/Library/CloudStorage/Dropbox/Screenshot 2026-08-26 at 11.28.45 AM.png` | Screenshot identifies the live broadcast link as difficult to read in the calendar event summary | 2026-08-26 | User-supplied accessibility evidence for CHG-26 (Add separate optional `Location` and `Live broadcast link` fields to Lead Lab calendar events), D-41 (Calendar event information and optional-field behavior), and ACT-44 (Implement and verify the optional calendar fields) |
 | LeadLab Registration Information PDF | `/Users/agnojf/Documents/lead-lab/artifacts/LEADLAB REGISTRATION INFORMATION.pdf` | Sections 1-3: program overview, program structure and learning experience, and leadership project | 2026-08-30 | User-supplied content source for CHG-31 (Reframe the public homepage as an organization-facing LeadLab Growth Series landing page); financial details and all content after section 3 are intentionally excluded |
+| Deployment and operations research | `artifacts/deployment-research/` | Synthesis and supporting deployment, email, queue, monitoring, backup, platform, and agent-operability notes | 2026-08-31 | PR #5 commit `393d8bd8`; candidate research only. Conflicts require Gate 1 validation and do not establish an approved deployment baseline. |
 
 ## Rules
 
