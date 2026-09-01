@@ -62,7 +62,7 @@ Scoring notes:
 ## Recommendation Details (BA-09)
 
 - **Selected option:** O-03 Self-hosted WordPress.
-- **Why:** Best balance of timeline fit, feature fit (search, category/date filtering, downloads, YouTube embedding, multi-device via responsive themes), customization beyond SharePoint, restricted-access control, and low recurring cost on the team's own server. Lowest-risk path to Sep 11, provided IT configures the server on schedule.
+- **Why:** Best balance of timeline fit, feature fit (search, season/date filtering, downloads, YouTube embedding, multi-device via responsive themes), customization beyond SharePoint, restricted-access control, and low recurring cost on the team's own server. Lowest-risk path to Sep 11, provided IT configures the server on schedule.
 - **Decision process:** Options listed from the request brief (website builder, WordPress, custom code; SharePoint added as do-nothing baseline). Feasibility and weighted ranking applied against criteria derived from the brief.
 - **Alternatives:** O-02 and O-04 stay viable if confirmations fail. If WordPress access control cannot be made to work, revisit O-02 (member areas) or O-04 (custom SSO). If the O-04 spike proves the timeline, it becomes a valid choice.
 - **Assumptions to validate before approval:**

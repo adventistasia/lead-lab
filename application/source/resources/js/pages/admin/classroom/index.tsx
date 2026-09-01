@@ -48,7 +48,7 @@ import { show as showSession } from '@/routes/sessions';
 type Recording = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     is_published: boolean;
     is_archived: boolean;
@@ -82,11 +82,11 @@ const lifecycleActions = (
 
 export default function AdminClassroom({
     sessions,
-    categories,
+    seasons,
     filters,
 }: {
     sessions: Recording[];
-    categories: string[];
+    seasons: string[];
     filters: ClassroomFilterValues;
 }) {
     const [isAddSessionOpen, setIsAddSessionOpen] = useState(false);
@@ -97,7 +97,7 @@ export default function AdminClassroom({
     } | null>(null);
     const form = useForm<SessionFormData>({
         title: '',
-        category: '',
+        season: '',
         session_date: '',
         description: '',
         video_url: '',
@@ -106,7 +106,7 @@ export default function AdminClassroom({
     const lifecycleForm = useForm({});
     const hasFilters =
         filters.search.trim() !== '' ||
-        filters.category !== '' ||
+        filters.season !== '' ||
         filters.date_from !== null ||
         filters.date_to !== null;
 
@@ -188,7 +188,7 @@ export default function AdminClassroom({
                     </p>
                     <ClassroomFilters
                         action={classroom.url()}
-                        categories={categories}
+                        seasons={seasons}
                         filters={filters}
                     />
                 </div>
@@ -278,7 +278,7 @@ export default function AdminClassroom({
                                                 </div>
                                                 <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
                                                     <span>
-                                                        {session.category}
+                                                        {session.season}
                                                     </span>
                                                     <span className="inline-flex items-center gap-1">
                                                         <CalendarDays className="size-3.5" />

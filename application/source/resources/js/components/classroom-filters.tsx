@@ -15,22 +15,22 @@ import {
 
 export type ClassroomFilterValues = {
     search: string;
-    category: string;
+    season: string;
     date_from: string | null;
     date_to: string | null;
 };
 
 export function ClassroomFilters({
     action,
-    categories,
+    seasons,
     filters,
 }: {
     action: string;
-    categories: string[];
+    seasons: string[];
     filters: ClassroomFilterValues;
 }) {
     const [search, setSearch] = useState(filters.search);
-    const [category, setCategory] = useState(filters.category);
+    const [season, setSeason] = useState(filters.season);
     const [dateFrom, setDateFrom] = useState(filters.date_from ?? '');
     const [dateTo, setDateTo] = useState(filters.date_to ?? '');
 
@@ -43,8 +43,8 @@ export function ClassroomFilters({
             params.search = search.trim();
         }
 
-        if (category !== '') {
-            params.category = category;
+        if (season !== '') {
+            params.season = season;
         }
 
         if (dateFrom !== '') {
@@ -63,7 +63,7 @@ export function ClassroomFilters({
 
     const clearFilters = () => {
         setSearch('');
-        setCategory('');
+        setSeason('');
         setDateFrom('');
         setDateTo('');
 
@@ -79,7 +79,7 @@ export function ClassroomFilters({
 
     const hasFilters =
         search.trim() !== '' ||
-        category !== '' ||
+        season !== '' ||
         dateFrom !== '' ||
         dateTo !== '';
     const idPrefix = action.replaceAll('/', '-').replace(/^-+/, '');
@@ -108,22 +108,22 @@ export function ClassroomFilters({
                     </div>
                 </div>
                 <div className="flex flex-col gap-2">
-                    <Label htmlFor={`${idPrefix}-category`}>Category</Label>
+                    <Label htmlFor={`${idPrefix}-season`}>Season</Label>
                     <Select
-                        value={category || 'all'}
+                        value={season || 'all'}
                         onValueChange={(value) =>
-                            setCategory(value === 'all' ? '' : value)
+                            setSeason(value === 'all' ? '' : value)
                         }
                     >
                         <SelectTrigger
-                            id={`${idPrefix}-category`}
+                            id={`${idPrefix}-season`}
                             className="w-full"
                         >
-                            <SelectValue placeholder="All categories" />
+                            <SelectValue placeholder="All seasons" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">All categories</SelectItem>
-                            {categories.map((option) => (
+                            <SelectItem value="all">All seasons</SelectItem>
+                            {seasons.map((option) => (
                                 <SelectItem key={option} value={option}>
                                     {option}
                                 </SelectItem>

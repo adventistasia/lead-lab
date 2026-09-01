@@ -80,7 +80,7 @@ class DashboardController
             ->map(fn (LearningSession $session): array => [
                 'id' => $session->id,
                 'title' => $session->title,
-                'category' => $session->category,
+                'season' => $session->season,
                 'session_date' => $session->session_date->toDateString(),
                 'description' => $session->description,
                 'resources_count' => $session->resources_count,

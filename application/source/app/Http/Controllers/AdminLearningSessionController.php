@@ -32,7 +32,7 @@ class AdminLearningSessionController
             'session' => [
                 'id' => $learningSession->id,
                 'title' => $learningSession->title,
-                'category' => $learningSession->category,
+                'season' => $learningSession->season,
                 'session_date' => $learningSession->session_date->toDateString(),
                 'description' => $learningSession->description,
                 'video_url' => $learningSession->video_url ?? '',
@@ -45,31 +45,31 @@ class AdminLearningSessionController
     {
         $validated = $request->validate([
             'search' => ['nullable', 'string', 'max:120'],
-            'category' => ['nullable', 'string', 'max:80'],
+            'season' => ['nullable', 'string', 'max:80'],
             'date_from' => ['nullable', 'date'],
             'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
         ]);
 
         $search = trim((string) ($validated['search'] ?? ''));
-        $category = trim((string) ($validated['category'] ?? ''));
+        $season = trim((string) ($validated['season'] ?? ''));
         $dateFrom = $validated['date_from'] ?? null;
         $dateTo = $validated['date_to'] ?? null;
 
         return Inertia::render('admin/classroom/index', [
             'sessions' => $this->sessionSummaries(
                 $search,
-                $category,
+                $season,
                 $dateFrom,
                 $dateTo,
             ),
-            'categories' => LearningSession::query()
+            'seasons' => LearningSession::query()
                 ->distinct()
-                ->orderBy('category')
-                ->pluck('category')
+                ->orderBy('season')
+                ->pluck('season')
                 ->values(),
             'filters' => [
                 'search' => $search,
-                'category' => $category,
+                'season' => $season,
                 'date_from' => $dateFrom,
                 'date_to' => $dateTo,
             ],
@@ -80,7 +80,7 @@ class AdminLearningSessionController
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:160'],
-            'category' => ['required', 'string', 'max:80'],
+            'season' => ['required', 'string', 'max:80'],
             'session_date' => ['required', 'date'],
             'description' => ['required', 'string', 'max:5000'],
             'video_url' => ['nullable', 'string', 'max:2000'],
@@ -97,7 +97,7 @@ class AdminLearningSessionController
 
         $session = LearningSession::create([
             'title' => $validated['title'],
-            'category' => $validated['category'],
+            'season' => $validated['season'],
             'session_date' => $validated['session_date'],
             'description' => $validated['description'],
             'video_url' => $videoUrl,
@@ -119,7 +119,7 @@ class AdminLearningSessionController
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:160'],
-            'category' => ['required', 'string', 'max:80'],
+            'season' => ['required', 'string', 'max:80'],
             'session_date' => ['required', 'date'],
             'description' => ['required', 'string', 'max:5000'],
             'video_url' => ['nullable', 'string', 'max:2000'],
@@ -136,7 +136,7 @@ class AdminLearningSessionController
 
         $learningSession->update([
             'title' => $validated['title'],
-            'category' => $validated['category'],
+            'season' => $validated['season'],
             'session_date' => $validated['session_date'],
             'description' => $validated['description'],
             'video_url' => $videoUrl,
@@ -205,23 +205,23 @@ class AdminLearningSessionController
     }
 
     /**
-     * @return array<int, array{id: int, title: string, category: string, session_date: string, is_published: bool, is_archived: bool, resources_count: int, video_thumbnail_url: string|null}>
+     * @return array<int, array{id: int, title: string, season: string, session_date: string, is_published: bool, is_archived: bool, resources_count: int, video_thumbnail_url: string|null}>
      */
     private function sessionSummaries(
         string $search = '',
-        string $category = '',
+        string $season = '',
         ?string $dateFrom = null,
         ?string $dateTo = null,
     ): array {
         return LearningSession::query()
             ->withCount('resources')
-            ->filterForClassroom($search, $category, $dateFrom, $dateTo)
+            ->filterForClassroom($search, $season, $dateFrom, $dateTo)
             ->orderByDesc('session_date')
             ->get()
             ->map(fn (LearningSession $session): array => [
                 'id' => $session->id,
                 'title' => $session->title,
-                'category' => $session->category,
+                'season' => $session->season,
                 'session_date' => $session->session_date->toDateString(),
                 'is_published' => $session->is_published,
                 'is_archived' => $session->archived_at !== null,

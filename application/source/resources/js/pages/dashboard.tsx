@@ -39,7 +39,7 @@ import { show as showSession } from '@/routes/sessions';
 type DashboardSession = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     sessionDate: string;
     description: string;
     thumbnailUrl: string | null;
@@ -48,7 +48,7 @@ type DashboardSession = {
 type SessionSummary = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     description: string;
     resources_count: number;
@@ -112,7 +112,7 @@ export default function Dashboard({
     const displayedSessions: DashboardSession[] = sessions.map((session) => ({
         id: session.id,
         title: session.title,
-        category: session.category,
+        season: session.season,
         sessionDate: formatSessionDate(session.session_date),
         description: session.description,
         thumbnailUrl: session.video_thumbnail_url,
@@ -281,7 +281,7 @@ export default function Dashboard({
                                                 {session.title}
                                             </h3>
                                             <p className="text-xs text-muted-foreground">
-                                                {session.category} ·{' '}
+                                                {session.season} ·{' '}
                                                 {session.sessionDate}
                                             </p>
                                             <p className="line-clamp-2 text-xs leading-5 text-muted-foreground">

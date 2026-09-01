@@ -36,7 +36,7 @@ import {
 type LearningSession = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     is_published: boolean;
     is_archived: boolean;
@@ -46,7 +46,7 @@ type LearningSession = {
 type EditableSession = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     description: string;
     video_url: string;
@@ -62,7 +62,7 @@ export default function AdminSessions({
 }) {
     const form = useForm<SessionFormData>({
         title: session?.title ?? '',
-        category: session?.category ?? '',
+        season: session?.season ?? '',
         session_date: session?.session_date ?? '',
         description: session?.description ?? '',
         video_url: session?.video_url ?? '',
@@ -247,7 +247,7 @@ export default function AdminSessions({
                                                 </Badge>
                                             </div>
                                             <p className="text-sm text-muted-foreground">
-                                                {session.category} ·{' '}
+                                                {session.season} ·{' '}
                                                 {session.session_date}
                                             </p>
                                             <p className="text-xs text-muted-foreground">

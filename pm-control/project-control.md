@@ -3,6 +3,7 @@
 
 **Next action:** Complete local password-recovery Mailpit and browser checks, then resolve staging and production mail transport, sender identity, queue and monitoring ownership, and Gate 1 controls before participant use.
 **Next action:** Complete authenticated browser and responsive acceptance for administrator role management under ACT-52, then continue the Gate 1 and deployment-research controls before staging or participant use.
+**Next action:** Complete authenticated browser and responsive acceptance for CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page), then continue the existing staging and launch gates.
 
 This file is the project-level dashboard and configuration record.
 
@@ -109,3 +110,7 @@ This file is the project-level dashboard and configuration record.
 - Reconcile canonical artifacts and register changes only after the process review gate.
 - Do not mark a register item closed, approved, assigned, scoped, or escalated without PM direction.
 - Keep the control-root path and project identity stable so the agent does not mix projects.
+
+## Latest Approved Feature Increment
+
+CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page) were approved on 2026-09-02. Season remains a free-text field with existing values preserved. Member search remains server-side and combines with status filtering and fixed pagination. Local implementation and automated verification are complete in commit `5725fe1c` (`feat: rename session categories and search members`) on published branch `feature/season-member-search`. Authenticated browser, responsive, staging, and launch acceptance remain open; ACT-54 (Implement and verify the end-to-end Season rename) and ACT-55 (Implement and verify administrator member search by name or email) remain In Progress. No additional maintained artifact is currently needed.

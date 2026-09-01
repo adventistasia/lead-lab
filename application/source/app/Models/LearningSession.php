@@ -13,14 +13,14 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property string $title
- * @property string $category
+ * @property string $season
  * @property Carbon $session_date
  * @property string $description
  * @property string|null $video_url
  * @property bool $is_published
  * @property Carbon|null $archived_at
  */
-#[Fillable(['title', 'category', 'session_date', 'description', 'video_url', 'is_published', 'archived_at'])]
+#[Fillable(['title', 'season', 'session_date', 'description', 'video_url', 'is_published', 'archived_at'])]
 class LearningSession extends Model
 {
     /** @use HasFactory<LearningSessionFactory> */
@@ -42,7 +42,7 @@ class LearningSession extends Model
     public function scopeFilterForClassroom(
         Builder $query,
         string $search = '',
-        string $category = '',
+        string $season = '',
         ?string $dateFrom = null,
         ?string $dateTo = null,
     ): Builder {
@@ -52,7 +52,7 @@ class LearningSession extends Model
             $query->where(function (Builder $query) use ($like): void {
                 $query
                     ->where('title', 'like', $like)
-                    ->orWhere('category', 'like', $like)
+                    ->orWhere('season', 'like', $like)
                     ->orWhere('description', 'like', $like)
                     ->orWhereHas(
                         'resources',
@@ -65,8 +65,8 @@ class LearningSession extends Model
             });
         }
 
-        if ($category !== '') {
-            $query->where('category', $category);
+        if ($season !== '') {
+            $query->where('season', $season);
         }
 
         if ($dateFrom !== null) {

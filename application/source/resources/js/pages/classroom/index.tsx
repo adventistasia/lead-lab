@@ -18,7 +18,7 @@ import { show as showSession } from '@/routes/sessions';
 type Recording = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     resources_count: number;
     video_thumbnail_url: string | null;
@@ -26,16 +26,16 @@ type Recording = {
 
 export default function Classroom({
     sessions,
-    categories,
+    seasons,
     filters,
 }: {
     sessions: Recording[];
-    categories: string[];
+    seasons: string[];
     filters: ClassroomFilterValues;
 }) {
     const hasFilters =
         filters.search.trim() !== '' ||
-        filters.category !== '' ||
+        filters.season !== '' ||
         filters.date_from !== null ||
         filters.date_to !== null;
 
@@ -56,7 +56,7 @@ export default function Classroom({
                     </p>
                     <ClassroomFilters
                         action={classroom.url()}
-                        categories={categories}
+                        seasons={seasons}
                         filters={filters}
                     />
                 </div>
@@ -113,7 +113,7 @@ export default function Classroom({
                                                 </Link>
                                             </h2>
                                             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-                                                <span>{session.category}</span>
+                                                <span>{session.season}</span>
                                                 <span className="inline-flex items-center gap-1">
                                                     <CalendarDays className="size-3.5" />
                                                     {session.session_date}

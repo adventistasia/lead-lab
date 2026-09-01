@@ -27,8 +27,8 @@
 | WP-02 | Community | Posts, comments, categories, announcements, and moderation. | RQ-12, RQ-15, RQ-16 |
 | WP-03 | Classroom and session content | Courses, modules, lessons, recorded sessions, videos, materials, and administrator recordings access. | RQ-02, RQ-06, RQ-07, RQ-13, RQ-20 |
 | WP-04 | Calendar and events | Administrator-created published events, responsive calendar viewing, and event-level email reminders. | RQ-14 |
-| WP-05 | Search and discovery | Search plus category/date discovery. | RQ-03, RQ-04, RQ-05 |
-| WP-06 | Administration and moderation | Member, content, permission, category, course, lesson, event, file, and moderation administration. | RQ-02, RQ-09, RQ-15, RQ-16 |
+| WP-05 | Search and discovery | Search plus season/date discovery. | RQ-03, RQ-04, RQ-05 |
+| WP-06 | Administration and moderation | Member, content, permission, season, course, lesson, event, file, and moderation administration. | RQ-02, RQ-09, RQ-15, RQ-16 |
 | WP-07 | Security and operations | Server-side protection, HTTPS, backups, restore testing, monitoring, logs, mail transport, queue processing, reminder scheduling, and conditional decisions. | RQ-10, RQ-11, RQ-14, RQ-17, RQ-18 |
 | WP-08 | Content readiness | September program content and verification. | RQ-02, RQ-06, RQ-07 |
 | WP-09 | Quality, participant testing, and launch | Testing, participant validation, acceptance, release, and fallback. | RQ-01 to RQ-16, RQ-19, RQ-20 |
@@ -44,14 +44,14 @@
 | LL-05 | Build community posts, comments, categories, and pinned announcements. | WP-02 | Should | RQ-12 | LL-02, LL-04 | TBD | Not started |
 | LL-06 | Build basic moderation controls. | WP-02/WP-06 | Could | RQ-16 | LL-05 | TBD | Not started |
 | LL-07 | Build courses, modules, and lessons. | WP-03 | Should | RQ-13 | LL-02, LL-04 | TBD | Not started |
-| LL-08 | Build session fields for title, category, date, description, video, and materials. | WP-03 | Must | RQ-02 | LL-02 | TBD | Implemented locally |
+| LL-08 | Build session fields for title, season, date, description, video, and materials. | WP-03 | Must | RQ-02 | LL-02 | TBD | Implemented locally |
 | LL-09 | Implement YouTube video embedding and playback. | WP-03 | Must | RQ-06 | LL-08, video decision | TBD | Implemented locally |
 | LL-10 | Implement private material storage and authenticated downloads. | WP-03/WP-07 | Must | RQ-07, RQ-10 | LL-03, LL-01 | TBD | Implemented locally |
 | LL-11 | Build administrator-created published event records with title, optional `Location`, optional `Live broadcast link`, start and end date-times, descriptions, administrator edit/delete actions in a click-opened event popup, responsive calendar viewing, continuous multi-day event markers, and event-level email reminder settings for active administrators and participants. | WP-04 | Should | RQ-14 | LL-02, LL-04 | TBD | Implemented locally |
 | LL-12 | Implement search across session and material metadata. | WP-05 | Must | RQ-05 | LL-08, LL-10 | TBD | Implemented locally |
-| LL-13 | Implement category and date filters. | WP-05 | Must | RQ-03, RQ-04 | LL-08 | TBD | Implemented locally |
+| LL-13 | Implement season and date filters. | WP-05 | Must | RQ-03, RQ-04 | LL-08 | TBD | Implemented locally |
 | LL-14 | Build member administration, access approval, revocation, restoration, and permission management. | WP-06 | Must | RQ-09, RQ-15 | LL-03, LL-04 | TBD | In progress |
-| LL-15 | Build content, category, course, lesson, event, and file administration, including dashboard event creation and click-opened calendar edit/delete workflows with optional event location, live broadcast link, and reminder settings. | WP-06 | Must | RQ-02, RQ-13, RQ-14 | LL-08, LL-11 | TBD | In progress |
+| LL-15 | Build content, season, course, lesson, event, and file administration, including dashboard event creation and click-opened calendar edit/delete workflows with optional event location, live broadcast link, and reminder settings. | WP-06 | Must | RQ-02, RQ-13, RQ-14 | LL-08, LL-11 | TBD | In progress |
 | LL-16 | Record relevant administrative activity, including registration and access changes. | WP-06/WP-07 | Must | RQ-11 | LL-14, LL-15 | TBD | Implemented locally |
 | LL-17 | Enforce server-side authorization for routes, APIs, and files, including pending and revoked access states. | WP-07 | Must | RQ-10 | LL-01, LL-03, LL-10 | TBD | Implemented locally |
 | LL-18 | Configure HTTPS, backups, restore testing, uptime monitoring, and incident checks. | WP-07 | Must | RQ-11 | LL-01, IT procedures | TBD | Not started |

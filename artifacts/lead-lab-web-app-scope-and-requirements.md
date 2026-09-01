@@ -34,12 +34,12 @@ The application will be self-hosted and use open-source software without a Skool
 | Community | Posts, comments, categories, and pinned announcements. |
 | Moderation | Basic controls for approved moderators and administrators. |
 | Classroom | Courses, modules, lessons, recorded sessions, supporting materials, session-scoped Q&A, and an administrator recordings page reachable from dashboard Classroom navigation. |
-| Sessions | Title, category, date, video link, description, related resources, and session-scoped Q&A. |
+| Sessions | Title, season, date, video link, description, related resources, and session-scoped Q&A. |
 | Video | Embedded YouTube playback for the MVP, subject to the accepted residual URL-sharing risk. |
 | Resources | Authenticated access to downloadable supporting materials. |
-| Discovery | Search plus category and date filters for sessions and material metadata. |
+| Discovery | Search plus season and date filters for sessions and material metadata. |
 | Calendar | Administrators create, edit, and delete published events with title, start and end date-times, descriptions, optional location, optional live broadcast link, and event-level email reminder settings from the calendar workflow. Active administrators and participants view those events in a responsive calendar. |
-| Administration | Member, content, category, course, lesson, event, file, and permission management. |
+| Administration | Member, content, season, course, lesson, event, file, and permission management. |
 | Devices | Responsive desktop, tablet, and mobile interface. |
 | Operations | HTTPS, backups, restore testing, uptime monitoring, and administrative activity logging. |
 
@@ -48,8 +48,8 @@ The application will be self-hosted and use open-source software without a Skool
 | ID | Requirement | Priority | Acceptance outcome | Status |
 |---|---|---|---|---|
 | RQ-01 | Approved participants must access restricted LeadLab content. | Must | Unauthenticated and unapproved users cannot view protected content. | Approved |
-| RQ-02 | Administrators must publish sessions with title, category, date, video link, and materials. | Must | A complete published session appears with all supplied fields. | Approved |
-| RQ-03 | Participants must filter sessions by category. | Must | Results contain only the selected category. | Approved |
+| RQ-02 | Administrators must publish sessions with title, season, date, video link, and materials. | Must | A complete published session appears with all supplied fields. | Approved |
+| RQ-03 | Participants must filter sessions by season. | Must | Results contain only the selected season. | Approved |
 | RQ-04 | Participants must filter sessions by date or date range. | Must | Results contain only sessions within the selected date criteria. | Approved |
 | RQ-05 | Participants must search sessions and supporting-material metadata. | Must | Relevant matching sessions or material metadata are returned. | Approved |
 | RQ-06 | Participants must play supplied training videos. | Must | An authenticated participant can play the video inside the session view. | Approved |

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -14,16 +15,28 @@ class AdminMemberController
 {
     public function index(Request $request): Response
     {
-        $status = $request->validate([
+        $filters = $request->validate([
+            'search' => ['nullable', 'string', 'max:120'],
             'status' => ['nullable', 'string', Rule::in([
                 User::ACCESS_PENDING,
                 User::ACCESS_ACTIVE,
                 User::ACCESS_REVOKED,
             ])],
-        ])['status'] ?? null;
+        ]);
+        $search = trim((string) ($filters['search'] ?? ''));
+        $status = $filters['status'] ?? null;
 
         $members = User::query()
             ->whereKeyNot($request->user()->id)
+            ->when($search !== '', function (Builder $query) use ($search): void {
+                $like = "%{$search}%";
+
+                $query->where(function (Builder $query) use ($like): void {
+                    $query
+                        ->where('name', 'like', $like)
+                        ->orWhere('email', 'like', $like);
+                });
+            })
             ->when($status !== null, fn ($query) => $query->where('access_status', $status))
             ->orderBy('name')
             ->paginate(10)
@@ -42,6 +55,7 @@ class AdminMemberController
         return Inertia::render('admin/members/index', [
             'members' => $members,
             'filters' => [
+                'search' => $search,
                 'status' => $status,
             ],
             'emailVerificationRequired' => config('fortify.require_email_verification'),
