@@ -44,10 +44,11 @@ Use `npm run build` for a production asset build. Use `php artisan test`, `npm r
 - shadcn components are installed in `resources/js/components/ui/`.
 - Lead Lab dashboard shell, session publishing, protected resources, and member access controls are implemented.
 - Participant self-registration, pending access, administrator approval, revocation, restoration, and activity logging are implemented locally.
+- Password recovery is implemented locally with a branded notification, uniform account-existence responses, single-use expiry, session invalidation, and non-sensitive reset audit logging.
 - Mailpit is available for local SMTP testing through the native Homebrew service or `projects/lead-lab/application/docker-compose.yml` on ports 1025 and 8025.
 - The local `.env` uses the SMTP mailer at `127.0.0.1:1025` with the database queue for reminder delivery tests.
 - Local development currently sets `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=false` so signup and approval do not depend on email delivery. Staging and production must restore the verification gate.
-- TypeScript, ESLint, Prettier, Vite build, PHPUnit, PHPStan, and PHP Pint checks pass; the latest PHP run recorded 105 tests and 763 assertions. Native Mailpit delivery was verified for synthetic calendar reminder recipients and a synthetic queued new-participant registration alert.
+- TypeScript, ESLint, Prettier, Vite build, PHPUnit, PHPStan, and PHP Pint checks pass; the latest PHP run recorded 126 tests and 968 assertions. Native Mailpit delivery was verified previously for synthetic calendar reminder recipients and a synthetic queued new-participant registration alert; live password-reset SMTP evidence remains open because Mailpit was unavailable during the 2026-09-01 run.
 
 ## Limitations
 
