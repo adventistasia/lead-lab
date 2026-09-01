@@ -1,4 +1,4 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
 import {
     ChevronLeft,
     ChevronRight,
@@ -17,6 +17,15 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import {
     Select,
@@ -28,10 +37,12 @@ import {
 import { dashboard } from '@/routes';
 import {
     index as membersRoute,
+    role as updateMemberRole,
     status as updateMemberStatus,
 } from '@/routes/admin/members';
 
 type MemberStatus = 'pending' | 'active' | 'revoked';
+type MemberRole = 'admin' | 'participant';
 
 type Member = {
     id: number;
@@ -75,6 +86,20 @@ const statusOptions: Array<{
 const statusLabel = (status: MemberStatus): string =>
     statusOptions.find((option) => option.value === status)?.label ?? status;
 
+const roleOptions: Array<{
+    value: MemberRole;
+    label: string;
+}> = [
+    { value: 'participant', label: 'Participant' },
+    { value: 'admin', label: 'Administrator' },
+];
+
+const roleLabel = (role: string): string =>
+    roleOptions.find((option) => option.value === role)?.label ?? role;
+
+const isManageableRole = (role: string): role is MemberRole =>
+    role === 'admin' || role === 'participant';
+
 export default function AdminMembers({
     members,
     filters,
@@ -89,6 +114,12 @@ export default function AdminMembers({
     const [status, setStatus] = useState<MemberStatus | 'all'>(
         filters.status ?? 'all',
     );
+    const [selectedRoleMember, setSelectedRoleMember] = useState<Member | null>(
+        null,
+    );
+    const roleForm = useForm<{ role: MemberRole }>({
+        role: 'participant',
+    });
 
     const updateAccess = (member: Member, status: 'active' | 'revoked') => {
         router.patch(
@@ -98,6 +129,43 @@ export default function AdminMembers({
                 preserveScroll: true,
             },
         );
+    };
+
+    const openRoleDialog = (member: Member) => {
+        if (!isManageableRole(member.role)) {
+            return;
+        }
+
+        setSelectedRoleMember(member);
+        roleForm.setData('role', member.role);
+        roleForm.clearErrors();
+    };
+
+    const handleRoleDialogOpenChange = (open: boolean) => {
+        if (!open && roleForm.processing) {
+            return;
+        }
+
+        if (!open) {
+            setSelectedRoleMember(null);
+            roleForm.resetAndClearErrors();
+        }
+    };
+
+    const submitRoleChange = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if (selectedRoleMember === null) {
+            return;
+        }
+
+        roleForm.patch(updateMemberRole.url(selectedRoleMember.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setSelectedRoleMember(null);
+                roleForm.resetAndClearErrors();
+            },
+        });
     };
 
     const applyFilters = (event: FormEvent<HTMLFormElement>) => {
@@ -125,6 +193,90 @@ export default function AdminMembers({
     return (
         <>
             <Head title="Manage members" />
+            <Dialog
+                open={selectedRoleMember !== null}
+                onOpenChange={handleRoleDialogOpenChange}
+            >
+                <DialogContent className="max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Change member role</DialogTitle>
+                        <DialogDescription>
+                            {selectedRoleMember
+                                ? `Choose a role for ${selectedRoleMember.name}. This changes administrative permissions only.`
+                                : null}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <form
+                        className="flex flex-col gap-6"
+                        onSubmit={submitRoleChange}
+                    >
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor="member-role">Role</Label>
+                            <Select
+                                value={roleForm.data.role}
+                                onValueChange={(value) =>
+                                    roleForm.setData(
+                                        'role',
+                                        value as MemberRole,
+                                    )
+                                }
+                                disabled={roleForm.processing}
+                            >
+                                <SelectTrigger
+                                    id="member-role"
+                                    className="w-full"
+                                >
+                                    <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {roleOptions.map((option) => (
+                                        <SelectItem
+                                            key={option.value}
+                                            value={option.value}
+                                        >
+                                            {option.label}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            {roleForm.errors.role ? (
+                                <p className="text-sm text-destructive">
+                                    {roleForm.errors.role}
+                                </p>
+                            ) : null}
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                            Changing the role does not approve, restore, or
+                            revoke access. Pending and revoked members remain
+                            unable to enter the workspace.
+                        </p>
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    disabled={roleForm.processing}
+                                >
+                                    Cancel
+                                </Button>
+                            </DialogClose>
+                            <Button
+                                type="submit"
+                                disabled={
+                                    roleForm.processing ||
+                                    selectedRoleMember === null ||
+                                    roleForm.data.role ===
+                                        selectedRoleMember?.role
+                                }
+                            >
+                                {roleForm.processing
+                                    ? 'Saving...'
+                                    : 'Save role'}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
             <div className="flex flex-1 flex-col gap-8 p-4 md:p-8">
                 <div className="flex flex-col gap-2">
                     <Badge className="w-fit" variant="secondary">
@@ -237,8 +389,8 @@ export default function AdminMembers({
                                                 {member.email}
                                             </p>
                                             <p className="text-xs text-muted-foreground">
-                                                {member.role} · joined{' '}
-                                                {member.created_at}
+                                                {roleLabel(member.role)} ·
+                                                joined {member.created_at}
                                             </p>
                                             <p className="text-xs text-muted-foreground">
                                                 {member.email_verified_at
@@ -306,6 +458,18 @@ export default function AdminMembers({
                                                     : 'Restore access'}
                                             </Button>
                                         )}
+                                        {isManageableRole(member.role) ? (
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() =>
+                                                    openRoleDialog(member)
+                                                }
+                                            >
+                                                Change role
+                                            </Button>
+                                        ) : null}
                                     </div>
                                 ))}
                             </div>

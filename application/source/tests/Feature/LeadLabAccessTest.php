@@ -1244,4 +1244,171 @@ class LeadLabAccessTest extends TestCase
             'subject_id' => $participant->id,
         ]);
     }
+
+    public function test_admin_can_promote_a_participant_without_changing_access_state_and_logs_role_change(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->create([
+            'role' => 'participant',
+            'access_status' => User::ACCESS_ACTIVE,
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.role', $participant), [
+                'role' => 'admin',
+            ])
+            ->assertRedirect();
+
+        $participant->refresh();
+
+        $this->assertSame('admin', $participant->role);
+        $this->assertSame(User::ACCESS_ACTIVE, $participant->access_status);
+        $this->assertTrue($participant->is_active);
+
+        $activity = ActivityLog::query()
+            ->where('action', 'member_role_changed')
+            ->where('subject_id', $participant->id)
+            ->firstOrFail();
+
+        $this->assertSame($admin->id, $activity->actor_id);
+        $this->assertSame([
+            'from_role' => 'participant',
+            'to_role' => 'admin',
+        ], $activity->metadata);
+    }
+
+    public function test_admin_can_demote_an_administrator_without_changing_access_state_and_logs_role_change(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $otherAdministrator = User::factory()->create([
+            'role' => 'admin',
+            'access_status' => User::ACCESS_ACTIVE,
+            'is_active' => true,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.role', $otherAdministrator), [
+                'role' => 'participant',
+            ])
+            ->assertRedirect();
+
+        $otherAdministrator->refresh();
+
+        $this->assertSame('participant', $otherAdministrator->role);
+        $this->assertSame(User::ACCESS_ACTIVE, $otherAdministrator->access_status);
+        $this->assertTrue($otherAdministrator->is_active);
+        $this->assertDatabaseHas('activity_logs', [
+            'actor_id' => $admin->id,
+            'action' => 'member_role_changed',
+            'subject_type' => User::class,
+            'subject_id' => $otherAdministrator->id,
+        ]);
+    }
+
+    public function test_member_role_changes_leave_pending_and_revoked_access_unchanged(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        foreach ([
+            User::ACCESS_PENDING => false,
+            User::ACCESS_REVOKED => false,
+        ] as $accessStatus => $isActive) {
+            $participant = User::factory()->create([
+                'role' => 'participant',
+                'access_status' => $accessStatus,
+                'is_active' => $isActive,
+            ]);
+
+            $this->actingAs($admin)
+                ->patch(route('admin.members.role', $participant), [
+                    'role' => 'admin',
+                ])
+                ->assertRedirect();
+
+            $participant->refresh();
+
+            $this->assertSame('admin', $participant->role);
+            $this->assertSame($accessStatus, $participant->access_status);
+            $this->assertSame($isActive, $participant->is_active);
+        }
+    }
+
+    public function test_administrator_cannot_change_their_own_role(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.role', $admin), [
+                'role' => 'participant',
+            ])
+            ->assertStatus(422);
+
+        $this->assertSame('admin', $admin->refresh()->role);
+    }
+
+    public function test_non_admin_cannot_change_member_roles(): void
+    {
+        $participant = User::factory()->create();
+        $otherParticipant = User::factory()->create();
+
+        $this->actingAs($participant)
+            ->patch(route('admin.members.role', $otherParticipant), [
+                'role' => 'admin',
+            ])
+            ->assertForbidden();
+
+        $this->assertSame('participant', $otherParticipant->refresh()->role);
+    }
+
+    public function test_invalid_member_role_is_rejected_without_a_role_change(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->create();
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.role', $participant), [
+                'role' => 'moderator',
+            ])
+            ->assertSessionHasErrors('role');
+
+        $this->assertSame('participant', $participant->refresh()->role);
+        $this->assertDatabaseMissing('activity_logs', [
+            'action' => 'member_role_changed',
+            'subject_type' => User::class,
+            'subject_id' => $participant->id,
+        ]);
+    }
+
+    public function test_unchanged_member_role_is_not_logged(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $participant = User::factory()->create(['role' => 'participant']);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.role', $participant), [
+                'role' => 'participant',
+            ])
+            ->assertRedirect();
+
+        $this->assertDatabaseMissing('activity_logs', [
+            'action' => 'member_role_changed',
+            'subject_type' => User::class,
+            'subject_id' => $participant->id,
+        ]);
+    }
+
+    public function test_moderator_role_cannot_be_changed_in_this_increment(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $moderator = User::factory()->create(['role' => 'moderator']);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.role', $moderator), [
+                'role' => 'admin',
+            ])
+            ->assertSessionHasErrors('role');
+
+        $this->assertSame('moderator', $moderator->refresh()->role);
+    }
 }
