@@ -74,6 +74,8 @@ After the user supplied the session-player placement reference at `/Users/agnojf
 
 On 2026-09-01, CHG-35 (Complete and harden the existing Lead Lab password-recovery flow) was implemented in commit `57783bf2` (`feat: harden forgot password flow`) on branch `feature/forgot-password`. The local automated flow now covers uniform known and unknown email responses, active administrator and participant accounts, pending and revoked accounts, branded notification content, 60-minute expiry, single-use tokens, throttling, password confirmation, database-session invalidation, remembered-login rotation, and non-sensitive audit logging. The full PHP suite passed 126 tests with 968 assertions, and PHPStan, Pint, TypeScript, ESLint, Prettier, the Vite production build, and `git diff --check` passed. Docker and Mailpit were unavailable during verification; live SMTP inbox, browser, staging, production-mail, monitoring, participant-data, and operational ownership evidence remain open.
 
+Implementation carriers are `application/source/app/Http/Responses/PasswordResetLinkResponse.php`, `application/source/app/Notifications/ResetPasswordNotification.php`, `application/source/app/Models/User.php`, `application/source/app/Providers/FortifyServiceProvider.php`, `application/source/resources/js/pages/auth/forgot-password.tsx`, `application/source/resources/js/pages/auth/login.tsx`, `application/source/tests/Feature/Auth/PasswordResetTest.php`, `application/ops/email-delivery.md`, and `application/environment/local-development.md`.
+
 ## Status
 
 | Status | Meaning |
