@@ -90,4 +90,46 @@ class AdminMemberController
             $status === User::ACCESS_ACTIVE ? 'Member access approved.' : 'Member access revoked.',
         );
     }
+
+    public function updateRole(Request $request, User $user): RedirectResponse
+    {
+        abort_if($request->user()->is($user), 422, 'Administrators cannot change their own role.');
+
+        $role = $request->validate([
+            'role' => ['required', Rule::in(['admin', 'participant'])],
+        ])['role'];
+
+        if (! in_array($user->role, ['admin', 'participant'], true)) {
+            return back()->withErrors([
+                'role' => 'This member role cannot be changed yet.',
+            ]);
+        }
+
+        if ($user->role === $role) {
+            return back()->with('success', 'Member role is unchanged.');
+        }
+
+        $previousRole = $user->role;
+
+        $user->update([
+            'role' => $role,
+        ]);
+
+        ActivityLog::record(
+            $request->user(),
+            'member_role_changed',
+            $user,
+            [
+                'from_role' => $previousRole,
+                'to_role' => $role,
+            ],
+        );
+
+        return back()->with(
+            'success',
+            $role === 'admin'
+                ? 'Member is now an administrator.'
+                : 'Member is now a participant.',
+        );
+    }
 }

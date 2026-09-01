@@ -57,6 +57,7 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::delete('calendar-events/{calendarEvent}', [AdminCalendarEventController::class, 'destroy'])->name('calendar-events.destroy');
         Route::get('members', [AdminMemberController::class, 'index'])->name('members.index');
         Route::patch('members/{user}/status', [AdminMemberController::class, 'updateStatus'])->name('members.status');
+        Route::patch('members/{user}/role', [AdminMemberController::class, 'updateRole'])->name('members.role');
     });
 });
 
