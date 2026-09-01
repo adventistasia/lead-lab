@@ -102,6 +102,43 @@
         "templates/source-index.md"
       ],
       "source": "https://raw.githubusercontent.com/agnojf/alson/main/skills/alson-pm-control"
+    },
+    "alson-workspace-template": {
+      "name": "alson-workspace-template",
+      "version": "1.1.0",
+      "hash": "09f2e4930b3bd03bc44211b90f46529928c8249b3b2ceaab279cdc9a1377c544",
+      "cliVersion": "0.7.0",
+      "installedAt": "2026-09-01T00:42:15.982Z",
+      "files": [
+        "CHANGELOG.md",
+        "CONTEXT.md",
+        "LICENSE",
+        "README.md",
+        "skill.json",
+        "SKILL.md",
+        "templates/workspace/_config/conventions.md",
+        "templates/workspace/_config/quality-policy.md",
+        "templates/workspace/_config/review-policy.md",
+        "templates/workspace/_config/run-state-template.md",
+        "templates/workspace/_config/workspace.md",
+        "templates/workspace/AGENTS.md",
+        "templates/workspace/CONTEXT.md",
+        "templates/workspace/README.md",
+        "templates/workspace/references/README.md",
+        "templates/workspace/setup/CONTEXT.md",
+        "templates/workspace/setup/questionnaire.md",
+        "templates/workspace/setup/validation-checklist.md",
+        "templates/workspace/shared/README.md",
+        "templates/workspace/stages/_TEMPLATE/CONTEXT.md",
+        "templates/workspace/stages/_TEMPLATE/input/INPUTS.md",
+        "templates/workspace/stages/_TEMPLATE/references/README.md",
+        "templates/workspace/stages/02-measure/CONTEXT.md",
+        "templates/workspace/stages/02-measure/references/acceptance-criteria.md",
+        "templates/workspace/stages/02-measure/references/quality-rubric.md",
+        "templates/workspace/stages/03-learn/CONTEXT.md",
+        "templates/workspace/stages/03-learn/references/what-now-template.md"
+      ],
+      "source": "https://raw.githubusercontent.com/agnojf/alson/main/skills/alson-workspace-template"
     }
   }
 }
