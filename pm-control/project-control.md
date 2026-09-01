@@ -41,7 +41,7 @@ This file is the project-level dashboard and configuration record.
 | Next process trigger | Set the return-to-Gate-1 checkpoint before staging, restore target-state email verification and participant-data controls, then complete the remaining Option B acceptance evidence and rerun PM-15 (Validate Scope) |
 | Last process review | 2026-08-24; `runs/2026-08-24-pm-14-monitor-control-scope/stages/04-validate-and-review/review-record.md` |
 
-**Latest password-recovery control:** CHG-35 (Complete and harden the existing Lead Lab password-recovery flow) is approved; local implementation and automated verification for ACT-53 (Implement and verify the password-recovery flow) pass. Live Mailpit, browser, staging, production-mail, monitoring, and operational ownership evidence remain open under DEP-13 (Password-recovery email delivery and operational support) and R-17 (Password-recovery emails may be unavailable, reveal account existence, or expose reset credentials or tokens).
+**Latest password-recovery control:** CHG-35 (Complete and harden the existing Lead Lab password-recovery flow) is approved and implemented in published commit `57783bf2` (`feat: harden forgot password flow`) on branch `feature/forgot-password`; local implementation and automated verification for ACT-53 (Implement and verify the password-recovery flow) pass. Live Mailpit, browser, staging, production-mail, monitoring, and operational ownership evidence remain open under DEP-13 (Password-recovery email delivery and operational support) and R-17 (Password-recovery emails may be unavailable, reveal account existence, or expose reset credentials or tokens).
 
 ## Baseline and Change Control
 
