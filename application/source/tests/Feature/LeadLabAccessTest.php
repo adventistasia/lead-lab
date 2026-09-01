@@ -25,7 +25,7 @@ class LeadLabAccessTest extends TestCase
 
         $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Build a repeatable lead rhythm',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'A practical session for building a weekly operating rhythm.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
@@ -37,6 +37,7 @@ class LeadLabAccessTest extends TestCase
 
         $response->assertRedirect(route('admin.sessions.index'));
         $this->assertFalse($session->is_published);
+        $this->assertSame('Execution rhythm', $session->season);
         $this->assertSame('worksheet.txt', $resource->title);
         Storage::disk('local')->assertExists($resource->stored_path);
     }
@@ -49,7 +50,7 @@ class LeadLabAccessTest extends TestCase
             route('admin.sessions.store', ['return_to' => 'classroom']),
             [
                 'title' => 'Classroom-created session',
-                'category' => 'Execution rhythm',
+                'season' => 'Execution rhythm',
                 'session_date' => '2026-08-29',
                 'description' => 'A session created from the administrator Classroom modal.',
                 'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
@@ -194,7 +195,7 @@ class LeadLabAccessTest extends TestCase
             [
                 '_method' => 'PATCH',
                 'title' => 'Updated session title',
-                'category' => 'Conversation skills',
+                'season' => 'Conversation skills',
                 'session_date' => '2026-09-01',
                 'description' => 'The updated session description.',
                 'video_url' => 'https://youtu.be/newVideo456',
@@ -215,7 +216,7 @@ class LeadLabAccessTest extends TestCase
                 'Session changes saved.',
             );
         $this->assertSame('Updated session title', $session->title);
-        $this->assertSame('Conversation skills', $session->category);
+        $this->assertSame('Conversation skills', $session->season);
         $this->assertSame('2026-09-01', $session->session_date->toDateString());
         $this->assertSame('The updated session description.', $session->description);
         $this->assertSame(
@@ -255,7 +256,7 @@ class LeadLabAccessTest extends TestCase
 
         $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Embed code session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'A session created from a pasted YouTube embed code.',
             'video_url' => '<iframe src="https://www.youtube.com/embed/abc123XYZ01?si=demo" title="Session recording"></iframe>',
@@ -277,7 +278,7 @@ class LeadLabAccessTest extends TestCase
 
         $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Audited session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'A session used to verify administrative activity logging.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
@@ -287,7 +288,7 @@ class LeadLabAccessTest extends TestCase
 
         $this->actingAs($admin)->patch(route('admin.sessions.update', $session), [
             'title' => 'Updated audited session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-29',
             'description' => 'Updated session details.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
@@ -321,7 +322,7 @@ class LeadLabAccessTest extends TestCase
 
         $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Short URL session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'A session created from a short YouTube URL.',
             'video_url' => 'https://youtu.be/abc123XYZ01',
@@ -339,7 +340,7 @@ class LeadLabAccessTest extends TestCase
 
         $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Embed URL session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'A session created from a YouTube embed URL.',
             'video_url' => 'https://www.youtube.com/embed/abc123XYZ01',
@@ -357,7 +358,7 @@ class LeadLabAccessTest extends TestCase
 
         $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Invalid video session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
             'description' => 'This should not be saved.',
             'video_url' => 'https://vimeo.com/123456789',
@@ -796,7 +797,7 @@ class LeadLabAccessTest extends TestCase
         $this->actingAs($participant)
             ->post(route('admin.sessions.store', ['return_to' => 'classroom']), [
                 'title' => 'Unauthorized session',
-                'category' => 'Execution rhythm',
+                'season' => 'Execution rhythm',
                 'session_date' => '2026-08-29',
                 'description' => 'This should not be saved.',
             ])
@@ -839,26 +840,26 @@ class LeadLabAccessTest extends TestCase
         $admin = User::factory()->create(['role' => 'admin']);
         $matchingDraft = LearningSession::factory()->create([
             'title' => 'Private launch workshop',
-            'category' => 'Preview sessions',
+            'season' => 'Preview sessions',
             'session_date' => '2026-08-28',
             'is_published' => false,
         ]);
         LearningSession::factory()->create([
             'title' => 'Published launch workshop',
-            'category' => 'Preview sessions',
+            'season' => 'Preview sessions',
             'session_date' => '2026-08-10',
             'is_published' => true,
         ]);
         LearningSession::factory()->create([
             'title' => 'Outside filter window',
-            'category' => 'Preview sessions',
+            'season' => 'Preview sessions',
             'session_date' => '2026-09-10',
             'is_published' => false,
         ]);
 
         $response = $this->actingAs($admin)->get(route('admin.classroom.index', [
             'search' => 'Private launch',
-            'category' => 'Preview sessions',
+            'season' => 'Preview sessions',
             'date_from' => '2026-08-20',
             'date_to' => '2026-08-31',
         ]));
@@ -870,7 +871,7 @@ class LeadLabAccessTest extends TestCase
             ->where('sessions.0.id', $matchingDraft->id)
             ->where('sessions.0.is_published', false)
             ->where('filters.search', 'Private launch')
-            ->where('filters.category', 'Preview sessions')
+            ->where('filters.season', 'Preview sessions')
             ->where('filters.date_from', '2026-08-20')
             ->where('filters.date_to', '2026-08-31')
         );
@@ -912,7 +913,7 @@ class LeadLabAccessTest extends TestCase
         $participant = User::factory()->create();
         $matching = LearningSession::factory()->create([
             'title' => 'Build a consistent follow-up rhythm',
-            'category' => 'Conversation skills',
+            'season' => 'Conversation skills',
             'description' => 'A practical session for better outreach follow-up.',
             'session_date' => '2026-08-28',
         ]);
@@ -924,7 +925,7 @@ class LeadLabAccessTest extends TestCase
         ]);
         LearningSession::factory()->create([
             'title' => 'Unrelated session',
-            'category' => 'Execution rhythm',
+            'season' => 'Execution rhythm',
         ]);
         LearningSession::factory()->create([
             'title' => 'Matching draft',
@@ -944,27 +945,27 @@ class LeadLabAccessTest extends TestCase
         );
     }
 
-    public function test_participants_can_filter_sessions_by_category_and_date_range(): void
+    public function test_participants_can_filter_sessions_by_season_and_date_range(): void
     {
         $participant = User::factory()->create();
         $matching = LearningSession::factory()->create([
             'title' => 'In-range conversation session',
-            'category' => 'Conversation skills',
+            'season' => 'Conversation skills',
             'session_date' => '2026-08-28',
         ]);
         LearningSession::factory()->create([
-            'title' => 'Wrong category',
-            'category' => 'Execution rhythm',
+            'title' => 'Wrong season',
+            'season' => 'Execution rhythm',
             'session_date' => '2026-08-28',
         ]);
         LearningSession::factory()->create([
             'title' => 'Outside date range',
-            'category' => 'Conversation skills',
+            'season' => 'Conversation skills',
             'session_date' => '2026-09-12',
         ]);
 
         $response = $this->actingAs($participant)->get(route('classroom.index', [
-            'category' => 'Conversation skills',
+            'season' => 'Conversation skills',
             'date_from' => '2026-08-20',
             'date_to' => '2026-08-31',
         ]));
@@ -974,7 +975,7 @@ class LeadLabAccessTest extends TestCase
             ->component('classroom/index')
             ->has('sessions', 1)
             ->where('sessions.0.id', $matching->id)
-            ->where('filters.category', 'Conversation skills')
+            ->where('filters.season', 'Conversation skills')
             ->where('filters.date_from', '2026-08-20')
             ->where('filters.date_to', '2026-08-31')
         );
@@ -1184,6 +1185,78 @@ class LeadLabAccessTest extends TestCase
         }
     }
 
+    public function test_admin_can_search_members_by_name_or_email(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $nameMatch = User::factory()->create([
+            'name' => 'Alicia Jones',
+            'email' => 'alicia@example.test',
+        ]);
+        $emailMatch = User::factory()->create([
+            'name' => 'Brandon Smith',
+            'email' => 'brandon@leadlab.test',
+        ]);
+        User::factory()->create([
+            'name' => 'Unrelated member',
+            'email' => 'unrelated@example.test',
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', ['search' => 'Alicia']))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('members.data', 1)
+                ->where('members.data.0.id', $nameMatch->id)
+                ->where('filters.search', 'Alicia')
+                ->where('filters.status', null),
+            );
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', ['search' => 'brandon@leadlab']))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('members.data', 1)
+                ->where('members.data.0.id', $emailMatch->id)
+                ->where('filters.search', 'brandon@leadlab')
+                ->where('filters.status', null),
+            );
+    }
+
+    public function test_member_search_and_status_filter_are_preserved_during_pagination(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        foreach (range(1, 11) as $number) {
+            User::factory()->create([
+                'name' => sprintf('Searchable member %02d', $number),
+                'access_status' => User::ACCESS_ACTIVE,
+                'is_active' => true,
+            ]);
+        }
+
+        User::factory()->create([
+            'name' => 'Searchable revoked member',
+            'access_status' => User::ACCESS_REVOKED,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'search' => 'Searchable',
+                'status' => User::ACCESS_ACTIVE,
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->has('members.data', 10)
+                ->where('members.total', 11)
+                ->where('filters.search', 'Searchable')
+                ->where('filters.status', User::ACCESS_ACTIVE)
+                ->where(
+                    'members.next_page_url',
+                    fn (?string $url): bool => $url !== null
+                        && str_contains($url, 'search=Searchable')
+                        && str_contains($url, 'status=active'),
+                ),
+            );
+    }
+
     public function test_member_pagination_preserves_the_status_filter(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -1219,6 +1292,17 @@ class LeadLabAccessTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.members.index', ['status' => 'unknown']))
             ->assertSessionHasErrors('status');
+    }
+
+    public function test_invalid_member_search_is_rejected(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'search' => str_repeat('a', 121),
+            ]))
+            ->assertSessionHasErrors('search');
     }
 
     public function test_admin_can_restore_a_revoked_participant(): void

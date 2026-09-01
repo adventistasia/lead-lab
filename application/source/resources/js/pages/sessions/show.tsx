@@ -25,7 +25,7 @@ type SessionResource = {
 type Session = {
     id: number;
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     description: string;
     video_embed_url: string | null;
@@ -48,7 +48,7 @@ export default function SessionShow({ session }: { session: Session }) {
 
                 <div className="flex flex-col gap-3">
                     <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant="secondary">{session.category}</Badge>
+                        <Badge variant="secondary">{session.season}</Badge>
                         <Badge variant="outline">{session.session_date}</Badge>
                     </div>
                     <h1 className="max-w-3xl text-3xl font-semibold tracking-tight md:text-4xl">

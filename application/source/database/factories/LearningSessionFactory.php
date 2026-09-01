@@ -14,7 +14,7 @@ class LearningSessionFactory extends Factory
     {
         return [
             'title' => fake()->sentence(5),
-            'category' => fake()->randomElement(['Lead generation systems', 'Conversation skills', 'Execution rhythm']),
+            'season' => fake()->randomElement(['Lead generation systems', 'Conversation skills', 'Execution rhythm']),
             'session_date' => fake()->dateTimeBetween('now', '+30 days')->format('Y-m-d'),
             'description' => fake()->paragraph(),
             'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',

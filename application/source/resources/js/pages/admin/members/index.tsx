@@ -2,6 +2,7 @@ import { Head, Link, router, useForm } from '@inertiajs/react';
 import {
     ChevronLeft,
     ChevronRight,
+    Search,
     ShieldCheck,
     SlidersHorizontal,
     UserRoundX,
@@ -26,6 +27,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
     Select,
@@ -107,10 +109,12 @@ export default function AdminMembers({
 }: {
     members: MembersPage;
     filters: {
+        search: string;
         status: MemberStatus | null;
     };
     emailVerificationRequired: boolean;
 }) {
+    const [search, setSearch] = useState(filters.search);
     const [status, setStatus] = useState<MemberStatus | 'all'>(
         filters.status ?? 'all',
     );
@@ -171,13 +175,24 @@ export default function AdminMembers({
     const applyFilters = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        router.get(membersRoute.url(), status === 'all' ? {} : { status }, {
+        const params: Record<string, string> = {};
+
+        if (search.trim() !== '') {
+            params.search = search.trim();
+        }
+
+        if (status !== 'all') {
+            params.status = status;
+        }
+
+        router.get(membersRoute.url(), params, {
             preserveScroll: true,
             preserveState: true,
         });
     };
 
     const clearFilters = () => {
+        setSearch('');
         setStatus('all');
 
         router.get(
@@ -189,6 +204,9 @@ export default function AdminMembers({
             },
         );
     };
+
+    const hasFilters = search.trim() !== '' || status !== 'all';
+    const hasAppliedFilters = filters.search !== '' || filters.status !== null;
 
     return (
         <>
@@ -300,6 +318,9 @@ export default function AdminMembers({
                                 <CardDescription>
                                     {members.total}{' '}
                                     {members.total === 1 ? 'member' : 'members'}
+                                    {filters.search
+                                        ? ` matching "${filters.search}"`
+                                        : ''}
                                     {filters.status
                                         ? ` with ${statusLabel(filters.status).toLowerCase()} access`
                                         : ' in the workspace'}
@@ -319,37 +340,58 @@ export default function AdminMembers({
                                     Filter members
                                 </p>
                             </div>
-                            <div className="flex flex-col gap-2 sm:max-w-xs">
-                                <Label htmlFor="member-status">
-                                    Account status
-                                </Label>
-                                <Select
-                                    value={status}
-                                    onValueChange={(value) =>
-                                        setStatus(value as MemberStatus | 'all')
-                                    }
-                                >
-                                    <SelectTrigger
-                                        id="member-status"
-                                        className="w-full"
+                            <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(14rem,16rem)]">
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="member-search">
+                                        Search
+                                    </Label>
+                                    <div className="relative">
+                                        <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+                                        <Input
+                                            id="member-search"
+                                            className="pl-9"
+                                            value={search}
+                                            onChange={(event) =>
+                                                setSearch(event.target.value)
+                                            }
+                                            placeholder="Name or email"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="member-status">
+                                        Account status
+                                    </Label>
+                                    <Select
+                                        value={status}
+                                        onValueChange={(value) =>
+                                            setStatus(
+                                                value as MemberStatus | 'all',
+                                            )
+                                        }
                                     >
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {statusOptions.map((option) => (
-                                            <SelectItem
-                                                key={option.value}
-                                                value={option.value}
-                                            >
-                                                {option.label}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                                        <SelectTrigger
+                                            id="member-status"
+                                            className="w-full"
+                                        >
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {statusOptions.map((option) => (
+                                                <SelectItem
+                                                    key={option.value}
+                                                    value={option.value}
+                                                >
+                                                    {option.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 <Button type="submit">Apply filter</Button>
-                                {status !== 'all' ? (
+                                {hasFilters || hasAppliedFilters ? (
                                     <Button
                                         type="button"
                                         variant="outline"
@@ -364,13 +406,13 @@ export default function AdminMembers({
                         {members.data.length === 0 ? (
                             <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed p-8 text-center">
                                 <p className="font-medium">
-                                    {filters.status
-                                        ? `No ${statusLabel(filters.status).toLowerCase()} members found`
+                                    {filters.search || filters.status
+                                        ? `No members${filters.search ? ` matching "${filters.search}"` : ''}${filters.status ? ` with ${statusLabel(filters.status).toLowerCase()} access` : ''} found`
                                         : 'No members found'}
                                 </p>
                                 <p className="text-sm text-muted-foreground">
-                                    {filters.status
-                                        ? 'Try another account status.'
+                                    {filters.search || filters.status
+                                        ? 'Try another name, email, or account status.'
                                         : 'Registered accounts will appear here.'}
                                 </p>
                             </div>

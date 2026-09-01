@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 
 export type SessionFormData = {
     title: string;
-    category: string;
+    season: string;
     session_date: string;
     description: string;
     video_url: string;
@@ -44,18 +44,18 @@ export function SessionFormFields({
             </Field>
 
             <div className="grid gap-6 md:grid-cols-2">
-                <Field data-invalid={Boolean(form.errors.category)}>
-                    <FieldLabel htmlFor="category">Category</FieldLabel>
+                <Field data-invalid={Boolean(form.errors.season)}>
+                    <FieldLabel htmlFor="season">Season</FieldLabel>
                     <Input
-                        id="category"
-                        value={form.data.category}
+                        id="season"
+                        value={form.data.season}
                         onChange={(event) =>
-                            form.setData('category', event.target.value)
+                            form.setData('season', event.target.value)
                         }
-                        aria-invalid={Boolean(form.errors.category)}
-                        placeholder="Lead generation systems"
+                        aria-invalid={Boolean(form.errors.season)}
+                        placeholder="2026 Growth Series"
                     />
-                    <FieldError>{form.errors.category}</FieldError>
+                    <FieldError>{form.errors.season}</FieldError>
                 </Field>
 
                 <Field data-invalid={Boolean(form.errors.session_date)}>

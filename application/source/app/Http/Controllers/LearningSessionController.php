@@ -15,13 +15,13 @@ class LearningSessionController
     {
         $validated = $request->validate([
             'search' => ['nullable', 'string', 'max:120'],
-            'category' => ['nullable', 'string', 'max:80'],
+            'season' => ['nullable', 'string', 'max:80'],
             'date_from' => ['nullable', 'date'],
             'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
         ]);
 
         $search = trim((string) ($validated['search'] ?? ''));
-        $category = trim((string) ($validated['category'] ?? ''));
+        $season = trim((string) ($validated['season'] ?? ''));
         $dateFrom = $validated['date_from'] ?? null;
         $dateTo = $validated['date_to'] ?? null;
 
@@ -29,7 +29,7 @@ class LearningSessionController
             ->where('is_published', true)
             ->whereNull('archived_at')
             ->withCount('resources')
-            ->filterForClassroom($search, $category, $dateFrom, $dateTo);
+            ->filterForClassroom($search, $season, $dateFrom, $dateTo);
 
         $sessions = $query
             ->orderByDesc('session_date')
@@ -37,7 +37,7 @@ class LearningSessionController
             ->map(fn (LearningSession $session): array => [
                 'id' => $session->id,
                 'title' => $session->title,
-                'category' => $session->category,
+                'season' => $session->season,
                 'session_date' => $session->session_date->toFormattedDateString(),
                 'resources_count' => $session->resources_count,
                 'video_thumbnail_url' => YouTubeVideoReference::thumbnailUrl(
@@ -46,20 +46,20 @@ class LearningSessionController
             ])
             ->values();
 
-        $categories = LearningSession::query()
+        $seasons = LearningSession::query()
             ->where('is_published', true)
             ->whereNull('archived_at')
             ->distinct()
-            ->orderBy('category')
-            ->pluck('category')
+            ->orderBy('season')
+            ->pluck('season')
             ->values();
 
         return Inertia::render('classroom/index', [
             'sessions' => $sessions,
-            'categories' => $categories,
+            'seasons' => $seasons,
             'filters' => [
                 'search' => $search,
-                'category' => $category,
+                'season' => $season,
                 'date_from' => $dateFrom,
                 'date_to' => $dateTo,
             ],
@@ -95,7 +95,7 @@ class LearningSessionController
             'session' => [
                 'id' => $learningSession->id,
                 'title' => $learningSession->title,
-                'category' => $learningSession->category,
+                'season' => $learningSession->season,
                 'session_date' => $learningSession->session_date->toFormattedDateString(),
                 'description' => $learningSession->description,
                 'video_embed_url' => YouTubeVideoReference::embedUrl(

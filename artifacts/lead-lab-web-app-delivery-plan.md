@@ -25,7 +25,7 @@ This is not a general community platform or an exact Skool clone.
 | Classroom | Courses, modules, recorded sessions, materials, and an administrator recordings page reachable from dashboard Classroom navigation |
 | Video | Embedded YouTube videos |
 | Resources | Protected downloadable files |
-| Discovery | Search plus category and date filters |
+| Discovery | Search plus season and date filters |
 | Calendar | Events with dates, times, and descriptions |
 | Administration | Manage members, posts, courses, lessons, files, and events |
 | Devices | Responsive desktop, tablet, and mobile interface |

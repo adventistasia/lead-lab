@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         $session = LearningSession::updateOrCreate(
             ['title' => 'Build your weekly lead engine'],
             [
-                'category' => 'Lead generation systems',
+                'season' => 'Lead generation systems',
                 'session_date' => now()->addDays(2)->toDateString(),
                 'description' => 'A practical session for building a repeatable weekly lead rhythm.',
                 'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
