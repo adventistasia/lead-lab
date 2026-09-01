@@ -16,7 +16,7 @@ This file is the project-level dashboard and configuration record.
 | Current phase | Option B local core-functionality build; Gate 1 reassessment scheduled for 2026-08-28; production readiness deferred |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured |
-| Last verified | 2026-09-01 |
+| Last verified | 2026-09-02 |
 | Last status report | None recorded |
 | Next review trigger | Reconcile the PR #5 research conflicts, complete the overdue Gate 1 reassessment, refresh the conditional schedule before the 2026-09-04 go/no-go, and update D-05 (Is the team's server ready for the Option B application, and is a domain name available?) |
 
@@ -113,4 +113,4 @@ This file is the project-level dashboard and configuration record.
 
 ## Latest Approved Feature Increment
 
-CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page) were approved on 2026-09-02. Season remains a free-text field with existing values preserved. Member search remains server-side and combines with status filtering and fixed pagination. Local implementation and automated verification are complete in commit `5725fe1c` (`feat: rename session categories and search members`) on published branch `feature/season-member-search`. Authenticated browser, responsive, staging, and launch acceptance remain open; ACT-54 (Implement and verify the end-to-end Season rename) and ACT-55 (Implement and verify administrator member search by name or email) remain In Progress. No additional maintained artifact is currently needed.
+CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page) were approved on 2026-09-02. Season remains a free-text field with existing values preserved. Member search remains server-side and combines with status filtering and fixed pagination. Local implementation and automated verification are complete in commit `5725fe1c` (`feat: rename session categories and search members`) on published branch `feature/season-member-search`; PR #11 (feat: rename session categories and search members) was merged into `main`. Authenticated browser, responsive, staging, and launch acceptance remain open; ACT-54 (Implement and verify the end-to-end Season rename) and ACT-55 (Implement and verify administrator member search by name or email) remain In Progress. No additional maintained artifact is currently needed.
