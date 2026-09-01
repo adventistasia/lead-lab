@@ -96,7 +96,11 @@ export default function Login({ status, canResetPassword }: Props) {
             </Form>
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-brand-green-dark">
+                <div
+                    role="status"
+                    aria-live="polite"
+                    className="mb-4 text-center text-sm font-medium text-brand-green-dark"
+                >
                     {status}
                 </div>
             )}

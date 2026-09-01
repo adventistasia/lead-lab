@@ -15,7 +15,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
             <Head title="Forgot password" />
 
             {status && (
-                <div className="mb-4 text-center text-sm font-medium text-brand-green-dark">
+                <div
+                    role="status"
+                    aria-live="polite"
+                    className="mb-4 text-center text-sm font-medium text-brand-green-dark"
+                >
                     {status}
                 </div>
             )}
@@ -30,7 +34,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     id="email"
                                     type="email"
                                     name="email"
-                                    autoComplete="off"
+                                    autoComplete="email"
                                     autoFocus
                                     placeholder="email@example.com"
                                 />
@@ -47,7 +51,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     {processing && (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
                                     )}
-                                    Email password reset link
+                                    Send password reset link
                                 </Button>
                             </div>
                         </>
