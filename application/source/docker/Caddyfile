@@ -7,5 +7,16 @@
 :8080 {
 	root * /app/public
 	encode zstd gzip
+
+	# Requests land in `docker compose logs app` alongside Laravel's own
+	# output. /up is the container healthcheck and fires every few seconds —
+	# logging it would bury everything else.
+	log {
+		output stderr
+		format json
+	}
+	@healthcheck path /up
+	log_skip @healthcheck
+
 	php_server
 }
