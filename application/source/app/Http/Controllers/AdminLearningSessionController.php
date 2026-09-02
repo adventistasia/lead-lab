@@ -84,7 +84,7 @@ class AdminLearningSessionController
             'session_date' => ['required', 'date'],
             'description' => ['required', 'string', 'max:5000'],
             'video_url' => ['nullable', 'string', 'max:2000'],
-            'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
+            'resource' => $this->resourceValidationRules(),
         ]);
 
         try {
@@ -123,7 +123,7 @@ class AdminLearningSessionController
             'session_date' => ['required', 'date'],
             'description' => ['required', 'string', 'max:5000'],
             'video_url' => ['nullable', 'string', 'max:2000'],
-            'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
+            'resource' => $this->resourceValidationRules(),
         ]);
 
         try {
@@ -249,6 +249,24 @@ class AdminLearningSessionController
             'mime_type' => $file->getMimeType(),
             'size' => $file->getSize(),
         ]);
+    }
+
+    /**
+     * Validate the file contents and the user-visible extension together.
+     *
+     * @return array<int, string>
+     */
+    private function resourceValidationRules(): array
+    {
+        $extensions = 'pdf,doc,docx,txt,ppt,pptx,jpg,jpeg,png,webp';
+
+        return [
+            'nullable',
+            'file',
+            'max:25600',
+            'mimes:'.$extensions,
+            'extensions:'.$extensions,
+        ];
     }
 
     private function replaceResource(LearningSession $session, Request $request): void

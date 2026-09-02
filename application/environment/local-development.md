@@ -32,11 +32,11 @@
 Run these from `projects/lead-lab/application/source/`:
 
 ```text
-php artisan serve --host=127.0.0.1 --port=8000
+php -d upload_max_filesize=25M -d post_max_size=30M artisan serve --host=127.0.0.1 --port=8000
 npm run dev
 ```
 
-Use `npm run build` for a production asset build. Use `php artisan test`, `npm run lint:check`, `npm run format:check`, `npm run types:check`, and `composer run lint:check` for the local quality checks.
+The PHP overrides allow the approved 25 MB supporting-material upload limit when using the native local server. Use `npm run build` for a production asset build. Use `php artisan test`, `npm run lint:check`, `npm run format:check`, `npm run types:check`, and `composer run lint:check` for the local quality checks.
 
 ## Current Validation
 
