@@ -48,7 +48,7 @@ The PHP overrides allow the approved 25 MB supporting-material upload limit when
 - Mailpit is available for local SMTP testing through the native Homebrew service or `projects/lead-lab/application/docker-compose.yml` on ports 1025 and 8025.
 - The local `.env` uses the SMTP mailer at `127.0.0.1:1025` with the database queue for reminder delivery tests.
 - Local development currently sets `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=false` so signup and approval do not depend on email delivery. Staging and production must restore the verification gate.
-- TypeScript, ESLint, Prettier, Vite build, PHPUnit, PHPStan, and PHP Pint checks pass; the latest PHP run recorded 126 tests and 968 assertions. Native Mailpit delivery was verified previously for synthetic calendar reminder recipients and a synthetic queued new-participant registration alert; live password-reset SMTP evidence remains open because Mailpit was unavailable during the 2026-09-01 run.
+- TypeScript, ESLint, Prettier, Vite build, PHPUnit, and PHP Pint checks pass; the latest PHP run recorded 131 tests and 1,056 assertions. PHPStan currently reports one pre-existing `bootstrap/app.php` `env()` warning. Native Mailpit delivery was verified previously for synthetic calendar reminder recipients and a synthetic queued new-participant registration alert; live password-reset SMTP evidence remains open because Mailpit was unavailable during the 2026-09-01 run.
 
 ## Limitations
 
