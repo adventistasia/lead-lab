@@ -13,9 +13,9 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property string $title
- * @property string $season
- * @property Carbon $session_date
- * @property string $description
+ * @property string|null $season
+ * @property Carbon|null $session_date
+ * @property string|null $description
  * @property string|null $video_url
  * @property bool $is_published
  * @property Carbon|null $archived_at

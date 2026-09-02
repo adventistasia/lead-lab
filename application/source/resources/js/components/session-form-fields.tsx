@@ -55,6 +55,9 @@ export function SessionFormFields({
                         aria-invalid={Boolean(form.errors.season)}
                         placeholder="2026 Growth Series"
                     />
+                    <FieldDescription>
+                        Optional while drafting. Required before publication.
+                    </FieldDescription>
                     <FieldError>{form.errors.season}</FieldError>
                 </Field>
 
@@ -69,6 +72,9 @@ export function SessionFormFields({
                         }
                         aria-invalid={Boolean(form.errors.session_date)}
                     />
+                    <FieldDescription>
+                        Optional while drafting. Required before publication.
+                    </FieldDescription>
                     <FieldError>{form.errors.session_date}</FieldError>
                 </Field>
             </div>
@@ -86,7 +92,8 @@ export function SessionFormFields({
                     rows={5}
                 />
                 <FieldDescription>
-                    Keep the description practical and easy to scan.
+                    Keep the description practical and easy to scan. It is
+                    optional while drafting and required before publication.
                 </FieldDescription>
                 <FieldError>{form.errors.description}</FieldError>
             </Field>

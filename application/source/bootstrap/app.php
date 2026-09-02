@@ -25,6 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // a comma-separated CIDR list, or "*" to trust the immediate proxy —
         // safe only because compose.yaml never exposes the app port beyond a
         // trusted reverse proxy.
+        // env() is correct here and config() is not: this closure runs while the
+        // kernel is being resolved, before the config service is bound, so
+        // config() fatals with "Target class [config] does not exist" and takes
+        // the whole application down. Verified against the deployed image.
+        /** @phpstan-ignore larastan.noEnvCallsOutsideOfConfig */
         $trustedProxies = env('TRUSTED_PROXIES', '*');
 
         $middleware->trustProxies(
