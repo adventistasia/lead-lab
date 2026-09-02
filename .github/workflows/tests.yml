@@ -5,7 +5,12 @@ on:
     branches:
       - main
       - staging
+  # Only PRs INTO the two permanent branches. A bare `pull_request:` fires for a
+  # PR targeting any branch, including one feature branch onto another.
   pull_request:
+    branches:
+      - main
+      - staging
 
 permissions:
   contents: read
