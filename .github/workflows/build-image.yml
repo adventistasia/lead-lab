@@ -2,7 +2,9 @@ name: Build and publish image
 
 on:
   push:
-    branches: [main]
+    # main -> :latest (production, not yet deployed anywhere).
+    # staging -> :staging (chimera, the fleet's staging host).
+    branches: [main, staging]
     paths:
       - "application/source/**"
       - "application/deploy/**"
@@ -32,7 +34,8 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=latest
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=raw,value=staging,enable=${{ github.ref == 'refs/heads/staging' }}
             type=sha,format=short
 
       - uses: docker/build-push-action@v6
