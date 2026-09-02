@@ -18,19 +18,19 @@ This file is the project-level dashboard and configuration record.
 | Evidence refresh period | Unconfigured |
 | Last verified | 2026-09-02 |
 | Last status report | None recorded |
-| Next review trigger | Reconcile the PR #5 research conflicts, complete the overdue Gate 1 reassessment, refresh the conditional schedule before the 2026-09-04 go/no-go, and update D-05 (Is the team's server ready for the Option B application, and is a domain name available?) |
+| Next review trigger | Complete and validate the Gate 1 environment and ownership evidence, reconcile the PR #5 research and target mail or participant-data decisions, and refresh the conditional schedule before the 2026-09-04 go/no-go |
 
 ## Performance Domains
 
 | Domain | Condition | Trend | Confidence | Source |
 |---|---|---|---|---|
-| Governance | Action | | | `projects/lead-lab/CONTEXT.md` |
-| Scope | Action | | | `runs/2026-08-24-pm-14-monitor-control-scope/stages/04-validate-and-review/review-record.md` |
-| Schedule | Action | | | `projects/lead-lab/CONTEXT.md` |
-| Finance | Not assessed | | | |
-| Stakeholders | Not assessed | | | |
-| Resources | Not assessed | | | |
-| Risk | Not assessed | | | |
+| Governance | Action | | High | `runs/2026-09-02-pm-07-monitor-project-performance/stages/04-validate-and-review/review-record.md` |
+| Scope | Action | | Medium | `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
+| Schedule | Action | | High | `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
+| Finance | Insufficient evidence | | Medium | `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
+| Stakeholders | Action | | High | `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
+| Resources | Action | | High | `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
+| Risk | Action | | High | `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
 
 ## Process System
 
@@ -39,9 +39,10 @@ This file is the project-level dashboard and configuration record.
 | Process register | `process-register.md` |
 | Artifact index | `artifact-index.md` |
 | Active process run | None |
+| PM-07 performance view | Action; local implementation and automated verification are positive, but target-environment, staging, operations, email, participant-data, browser, responsive, and final-acceptance evidence remain incomplete. Source: `runs/2026-09-02-pm-07-monitor-project-performance/stages/03-perform-process/draft-output.md` |
 | Process attention | Option B acceptance evidence remains incomplete; the approved local session-lifecycle, Classroom UI, and participant self-registration increment is implemented and tested locally. CHG-07 (Add an administrator Classroom Add Session action and modal workflow), CHG-08 (Replace the administrator Classroom `Open recording` link with a status-aware session lifecycle action dropdown), CHG-09 (Make participant and administrator Classroom session titles clickable), CHG-10 (Hide the administrator `Admin` sidebar menu item that pointed to `/admin/sessions` while retaining the route and existing direct workflows), CHG-11 (Remove the participant Classroom `Open recording` button after making the session title the opening link), CHG-13 (Replace invite-only or administrator-created participant onboarding with participant self-registration and administrator approval), and CHG-14 (Temporarily bypass email verification and local verification-notification delivery in development) are recorded; ACT-15 (Implement and verify the administrator Classroom Add Session modal workflow), ACT-16 (Implement and verify the status-aware administrator Classroom session action dropdown), ACT-17 (Implement and verify clickable Classroom session titles), ACT-18 (Hide and verify the administrator `/admin/sessions` menu entry), and ACT-19 (Remove and verify the participant Classroom `Open recording` button) are Resolved. ACT-20 (Implement and verify participant self-registration with configurable email verification, administrator approval, revocation, restoration, and pending or revoked access controls) is locally implemented and remains In Progress; ACT-21 (Restore and verify email verification and real mail transport before staging or participant use) is Open. Evidence is in `projects/lead-lab/application/source/tests/Feature/Auth/RegistrationTest.php`, `projects/lead-lab/application/source/tests/Feature/LeadLabAccessTest.php`, and `projects/lead-lab/project-statrep/2026-08-21-self-registration-session/`; participant-data rules, Gate 1, staging, production readiness, and final acceptance remain open |
 | Next process trigger | Set the return-to-Gate-1 checkpoint before staging, restore target-state email verification and participant-data controls, then complete the remaining Option B acceptance evidence and rerun PM-15 (Validate Scope) |
-| Last process review | 2026-08-24; `runs/2026-08-24-pm-14-monitor-control-scope/stages/04-validate-and-review/review-record.md` |
+| Last process review | 2026-09-02; `runs/2026-09-02-pm-07-monitor-project-performance/stages/04-validate-and-review/review-record.md` |
 
 **Latest password-recovery control:** CHG-35 (Complete and harden the existing Lead Lab password-recovery flow) is approved and implemented in published commit `57783bf2` (`feat: harden forgot password flow`) on branch `feature/forgot-password`; local implementation and automated verification for ACT-53 (Implement and verify the password-recovery flow) pass. Live Mailpit, browser, staging, production-mail, monitoring, and operational ownership evidence remain open under DEP-13 (Password-recovery email delivery and operational support) and R-17 (Password-recovery emails may be unavailable, reveal account existence, or expose reset credentials or tokens).
 
@@ -83,11 +84,11 @@ This file is the project-level dashboard and configuration record.
 | Assumptions | `registers/assumption-log.md` | 2026-08-18 |
 | Issues | `registers/issues-log.md` | 2026-08-31 |
 | Dependencies | `registers/dependencies-log.md` | 2026-08-31 |
-| Actions | `registers/action-log.md` | 2026-09-01 |
+| Actions | `registers/action-log.md` | 2026-09-02 |
 | Decisions | `registers/decision-log.md` | 2026-09-01 |
 | Changes | `registers/change-log.md` | 2026-09-01 |
 | Lessons learned | `registers/lessons-learned-register.md` | 2026-08-31 |
-| Process register | `process-register.md` | 2026-08-18 |
+| Process register | `process-register.md` | 2026-09-02 |
 | Artifact index | `artifact-index.md` | 2026-08-20 |
 
 ## Project Preferences

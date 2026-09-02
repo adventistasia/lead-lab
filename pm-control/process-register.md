@@ -11,7 +11,7 @@ The process register tracks tailored use of the 40 PMI processes. It is a contro
 | PM-04 | Governance | Executing | Manage Project Execution | Not assessed | | Not assessed | | | | | |
 | PM-05 | Governance | Executing | Manage Quality Assurance | Not assessed | | Not assessed | | | | | |
 | PM-06 | Governance | Executing | Manage Project Knowledge | Not assessed | | Not assessed | | | | | |
-| PM-07 | Governance | Monitoring and Controlling | Monitor and Control Project Performance | Not assessed | | Not assessed | | | | | |
+| PM-07 | Governance | Monitoring and Controlling | Monitor and Control Project Performance | Required | Formal | Attention | `runs/2026-09-02-pm-07-monitor-project-performance` | 2026-09-02 | Review after complete Gate 1 evidence and ownership, material readiness evidence, and before the 2026-09-04 go/no-go | Generated performance view; no maintained artifact | `runs/2026-09-02-pm-07-monitor-project-performance/stages/04-validate-and-review/review-record.md` |
 | PM-08 | Governance | Monitoring and Controlling | Assess and Implement Changes | Not assessed | | Not assessed | | | | | |
 | PM-09 | Governance | Closing | Close Project or Phase | Not assessed | | Not assessed | | | | | |
 | PM-10 | Scope | Planning | Plan Scope Management | Required | Formal | Current | `runs/2026-08-19-pm-10-plan-scope-management` | 2026-08-19 | Complete PM-11 Elicit and Analyze Requirements and confirm the scope-direction change before PM-12 Define Scope | Approved scope-management approach linked to `runs/2026-08-19-pm-10-plan-scope-management/stages/03-perform-process/draft-output.md` | `runs/2026-08-19-pm-10-plan-scope-management/stages/04-validate-and-review/review-record.md` |
