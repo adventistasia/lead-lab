@@ -33,7 +33,7 @@ class AdminLearningSessionController
                 'id' => $learningSession->id,
                 'title' => $learningSession->title,
                 'season' => $learningSession->season,
-                'session_date' => $learningSession->session_date->toDateString(),
+                'session_date' => $learningSession->session_date?->toDateString(),
                 'description' => $learningSession->description,
                 'video_url' => $learningSession->video_url ?? '',
                 'resource_title' => $learningSession->resources->first()?->title,
@@ -80,9 +80,9 @@ class AdminLearningSessionController
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:160'],
-            'season' => ['required', 'string', 'max:80'],
-            'session_date' => ['required', 'date'],
-            'description' => ['required', 'string', 'max:5000'],
+            'season' => ['nullable', 'string', 'max:80'],
+            'session_date' => ['nullable', 'date'],
+            'description' => ['nullable', 'string', 'max:5000'],
             'video_url' => ['nullable', 'string', 'max:2000'],
             'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
         ]);
@@ -97,9 +97,9 @@ class AdminLearningSessionController
 
         $session = LearningSession::create([
             'title' => $validated['title'],
-            'season' => $validated['season'],
-            'session_date' => $validated['session_date'],
-            'description' => $validated['description'],
+            'season' => $validated['season'] ?? null,
+            'session_date' => $validated['session_date'] ?? null,
+            'description' => $validated['description'] ?? null,
             'video_url' => $videoUrl,
             'is_published' => false,
         ]);
@@ -119,9 +119,9 @@ class AdminLearningSessionController
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:160'],
-            'season' => ['required', 'string', 'max:80'],
-            'session_date' => ['required', 'date'],
-            'description' => ['required', 'string', 'max:5000'],
+            'season' => ['nullable', 'string', 'max:80'],
+            'session_date' => ['nullable', 'date'],
+            'description' => ['nullable', 'string', 'max:5000'],
             'video_url' => ['nullable', 'string', 'max:2000'],
             'resource' => ['nullable', 'file', 'max:10240', 'mimes:pdf,doc,docx,txt'],
         ]);
@@ -134,11 +134,24 @@ class AdminLearningSessionController
             ]);
         }
 
+        if ($learningSession->is_published) {
+            $errors = $this->publicationValidationErrors([
+                'title' => $validated['title'] ?? null,
+                'season' => $validated['season'] ?? null,
+                'session_date' => $validated['session_date'] ?? null,
+                'description' => $validated['description'] ?? null,
+            ]);
+
+            if ($errors !== []) {
+                throw ValidationException::withMessages($errors);
+            }
+        }
+
         $learningSession->update([
             'title' => $validated['title'],
-            'season' => $validated['season'],
-            'session_date' => $validated['session_date'],
-            'description' => $validated['description'],
+            'season' => $validated['season'] ?? null,
+            'session_date' => $validated['session_date'] ?? null,
+            'description' => $validated['description'] ?? null,
             'video_url' => $videoUrl,
         ]);
 
@@ -155,6 +168,18 @@ class AdminLearningSessionController
         Request $request,
         LearningSession $learningSession,
     ): RedirectResponse {
+        $errors = $this->publicationValidationErrors([
+            'title' => $learningSession->title,
+            'season' => $learningSession->season,
+            'session_date' => $learningSession->session_date,
+            'description' => $learningSession->description,
+        ]);
+
+        if ($errors !== []) {
+            $this->flashError('Complete the required session details before publishing.');
+            throw ValidationException::withMessages($errors);
+        }
+
         $learningSession->update(['is_published' => true]);
         ActivityLog::record($request->user(), 'session_published', $learningSession);
         $this->flashSuccess('Session published to the Lead Lab classroom.');
@@ -205,7 +230,7 @@ class AdminLearningSessionController
     }
 
     /**
-     * @return array<int, array{id: int, title: string, season: string, session_date: string, is_published: bool, is_archived: bool, resources_count: int, video_thumbnail_url: string|null}>
+     * @return array<int, array{id: int, title: string, season: string|null, session_date: string|null, is_published: bool, is_archived: bool, resources_count: int, video_thumbnail_url: string|null}>
      */
     private function sessionSummaries(
         string $search = '',
@@ -222,7 +247,7 @@ class AdminLearningSessionController
                 'id' => $session->id,
                 'title' => $session->title,
                 'season' => $session->season,
-                'session_date' => $session->session_date->toDateString(),
+                'session_date' => $session->session_date?->toDateString(),
                 'is_published' => $session->is_published,
                 'is_archived' => $session->archived_at !== null,
                 'resources_count' => $session->resources_count,
@@ -286,6 +311,36 @@ class AdminLearningSessionController
     {
         Inertia::flash('toast', [
             'type' => 'success',
+            'message' => $message,
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $values
+     * @return array<string, string>
+     */
+    private function publicationValidationErrors(array $values): array
+    {
+        $errors = [];
+
+        foreach ([
+            'title' => 'Title',
+            'season' => 'Season',
+            'session_date' => 'Session date',
+            'description' => 'Description',
+        ] as $field => $label) {
+            if (blank($values[$field] ?? null)) {
+                $errors[$field] = "{$label} is required before publishing.";
+            }
+        }
+
+        return $errors;
+    }
+
+    private function flashError(string $message): void
+    {
+        Inertia::flash('toast', [
+            'type' => 'error',
             'message' => $message,
         ]);
     }

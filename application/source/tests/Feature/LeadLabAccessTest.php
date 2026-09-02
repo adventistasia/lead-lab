@@ -64,6 +64,124 @@ class LeadLabAccessTest extends TestCase
         ]);
     }
 
+    public function test_admin_can_save_an_incomplete_session_as_a_draft(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Draft session in progress',
+            'session_date' => '2026-09-05',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+        ]);
+
+        $response->assertRedirect(route('admin.sessions.index'));
+        $this->assertDatabaseHas('learning_sessions', [
+            'title' => 'Draft session in progress',
+            'season' => null,
+            'description' => null,
+            'is_published' => false,
+        ]);
+    }
+
+    public function test_admin_can_update_a_draft_with_incomplete_fields(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => false]);
+
+        $this->actingAs($admin)
+            ->post(route('admin.sessions.update', $session), [
+                '_method' => 'PATCH',
+                'title' => 'Draft details to finish later',
+                'season' => '',
+                'session_date' => '',
+                'description' => '',
+                'video_url' => '',
+            ])
+            ->assertRedirect(route('admin.sessions.index'));
+
+        $this->assertDatabaseHas('learning_sessions', [
+            'id' => $session->id,
+            'title' => 'Draft details to finish later',
+            'season' => null,
+            'session_date' => null,
+            'description' => null,
+            'video_url' => null,
+            'is_published' => false,
+        ]);
+    }
+
+    public function test_admin_cannot_publish_an_incomplete_draft(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create([
+            'season' => null,
+            'session_date' => null,
+            'description' => null,
+            'is_published' => false,
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->patch(route('admin.sessions.publish', $session));
+
+        $response
+            ->assertRedirect()
+            ->assertSessionHasErrors(['season', 'session_date', 'description'])
+            ->assertSessionHas(
+                'inertia.flash_data.toast.message',
+                'Complete the required session details before publishing.',
+            );
+        $this->assertFalse($session->refresh()->is_published);
+    }
+
+    public function test_admin_cannot_clear_required_fields_on_a_published_session(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => true]);
+        $originalSeason = $session->season;
+
+        $response = $this->actingAs($admin)
+            ->post(route('admin.sessions.update', $session), [
+                '_method' => 'PATCH',
+                'title' => $session->title,
+                'season' => '',
+                'session_date' => '',
+                'description' => '',
+                'video_url' => '',
+            ]);
+
+        $response->assertSessionHasErrors(['season', 'session_date', 'description']);
+        $this->assertSame($originalSeason, $session->refresh()->season);
+        $this->assertTrue($session->is_published);
+    }
+
+    public function test_admin_can_view_an_incomplete_draft_in_the_session_library_and_editor(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create([
+            'season' => null,
+            'session_date' => null,
+            'description' => null,
+            'is_published' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.sessions.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('sessions.0.id', $session->id)
+                ->where('sessions.0.season', null)
+                ->where('sessions.0.session_date', null),
+            );
+
+        $this->actingAs($admin)
+            ->get(route('admin.sessions.edit', $session))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('session.id', $session->id)
+                ->where('session.season', null)
+                ->where('session.session_date', null)
+                ->where('session.description', null),
+            );
+    }
+
     public function test_admin_can_publish_and_unpublish_a_session(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
