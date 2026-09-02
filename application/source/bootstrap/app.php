@@ -19,6 +19,22 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
+        // Behind the deploy stack's reverse proxy (Caddy/FrankenPHP terminates
+        // TLS upstream), Laravel needs to trust X-Forwarded-* or every request
+        // looks like plain HTTP from the container network. TRUSTED_PROXIES is
+        // a comma-separated CIDR list, or "*" to trust the immediate proxy —
+        // safe only because compose.yaml never exposes the app port beyond a
+        // trusted reverse proxy.
+        $trustedProxies = env('TRUSTED_PROXIES', '*');
+
+        $middleware->trustProxies(
+            at: $trustedProxies === '*' ? '*' : array_filter(explode(',', (string) $trustedProxies)),
+            headers: Request::HEADER_X_FORWARDED_FOR
+                | Request::HEADER_X_FORWARDED_HOST
+                | Request::HEADER_X_FORWARDED_PORT
+                | Request::HEADER_X_FORWARDED_PROTO,
+        );
+
         $middleware->alias([
             'active' => EnsureActiveUser::class,
             'admin' => EnsureAdmin::class,
