@@ -25,7 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // a comma-separated CIDR list, or "*" to trust the immediate proxy —
         // safe only because compose.yaml never exposes the app port beyond a
         // trusted reverse proxy.
-        $trustedProxies = env('TRUSTED_PROXIES', '*');
+        $trustedProxies = getenv('TRUSTED_PROXIES') ?: '*';
 
         $middleware->trustProxies(
             at: $trustedProxies === '*' ? '*' : array_filter(explode(',', (string) $trustedProxies)),
