@@ -36,8 +36,8 @@ import {
 type LearningSession = {
     id: number;
     title: string;
-    season: string;
-    session_date: string;
+    season: string | null;
+    session_date: string | null;
     is_published: boolean;
     is_archived: boolean;
     resources_count: number;
@@ -46,9 +46,9 @@ type LearningSession = {
 type EditableSession = {
     id: number;
     title: string;
-    season: string;
-    session_date: string;
-    description: string;
+    season: string | null;
+    session_date: string | null;
+    description: string | null;
     video_url: string;
     resource_title: string | null;
 };
@@ -115,7 +115,7 @@ export default function AdminSessions({
         const options = {
             forceFormData: true,
             preserveScroll: true,
-            preserveState: false,
+            preserveState: 'errors' as const,
             onSuccess: () => form.reset(),
         };
 
@@ -247,8 +247,11 @@ export default function AdminSessions({
                                                 </Badge>
                                             </div>
                                             <p className="text-sm text-muted-foreground">
-                                                {session.season} ·{' '}
-                                                {session.session_date}
+                                                {session.season ??
+                                                    'Season not set'}{' '}
+                                                ·{' '}
+                                                {session.session_date ??
+                                                    'Date not set'}
                                             </p>
                                             <p className="text-xs text-muted-foreground">
                                                 {session.resources_count}{' '}
