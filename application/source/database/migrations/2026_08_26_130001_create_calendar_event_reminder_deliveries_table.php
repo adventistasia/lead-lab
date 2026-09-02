@@ -21,11 +21,15 @@ return new class extends Migration
             $table->text('last_error')->nullable();
             $table->timestamps();
 
+            // Explicit short name: the auto-generated one
+            // ("calendar_event_reminder_deliveries_calendar_event_id_user_id_offset_minutes_unique")
+            // exceeds MySQL/MariaDB's 64-character identifier limit. SQLite
+            // has no such limit, which is why this only surfaces there.
             $table->unique([
                 'calendar_event_id',
                 'user_id',
                 'offset_minutes',
-            ]);
+            ], 'reminder_deliveries_event_user_offset_unique');
         });
     }
 

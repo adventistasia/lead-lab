@@ -1,0 +1,96 @@
+name: Build and publish image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "application/source/**"
+      - "application/deploy/**"
+      - ".github/workflows/build-image.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+
+      - uses: docker/build-push-action@v6
+        id: build
+        with:
+          context: application/source
+          push: true
+          load: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # A build that succeeds and a container that boots are different
+      # claims — this is B-1/B-2/B-3 from FORGE_HANDOFF.md, run against the
+      # just-published image rather than assumed from a green build step.
+      - name: Smoke test image
+        env:
+          IMAGE: ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
+        run: |
+          set -e
+
+          echo "B-1: Wayfinder/Vite assets present in the image"
+          docker run --rm "$IMAGE" ls /app/public/build | grep -q .
+
+          echo "B-2: no .env baked into the image"
+          if docker run --rm "$IMAGE" cat /app/.env 2>/dev/null; then
+            echo "FAIL: /app/.env exists in the built image" >&2
+            exit 1
+          fi
+
+          echo "B-3: container serves /up"
+          APP_KEY="base64:$(openssl rand -base64 32)"
+          docker run -d --name smoke -p 18080:8080 \
+            -e CONTAINER_ROLE=web \
+            -e APP_KEY="$APP_KEY" \
+            -e APP_URL=http://localhost:18080 \
+            -e DB_CONNECTION=sqlite \
+            -e DB_DATABASE=/tmp/smoke.sqlite \
+            -e SESSION_DRIVER=array \
+            -e QUEUE_CONNECTION=sync \
+            -e CACHE_STORE=array \
+            -e MAIL_MAILER=array \
+            "$IMAGE"
+
+          ok=""
+          for _ in $(seq 1 30); do
+            if curl -fsS http://localhost:18080/up >/dev/null 2>&1; then
+              ok=1
+              break
+            fi
+            sleep 2
+          done
+
+          docker logs smoke || true
+          docker rm -f smoke || true
+
+          if [ -z "$ok" ]; then
+            echo "FAIL: /up never returned 200 within 60s" >&2
+            exit 1
+          fi
