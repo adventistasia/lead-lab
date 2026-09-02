@@ -4,6 +4,8 @@
 Project: Lead Lab
 
 ## Register
+Latest implementation evidence for D-61 (Should an administrator be able to save an incomplete session as a draft and complete it before publication?) on 2026-09-02: CHG-38 is implemented and published in commit `259d7381` on branch `fix/session-draft-save`; automated PHP and frontend checks pass, with one pre-existing PHPStan warning in `bootstrap/app.php`. Browser, responsive, staging, and launch acceptance remain open.
+
 Latest decision for D-61 (Should an administrator be able to save an incomplete session as a draft and complete it before publication?) on 2026-09-02: approve partial drafts with a required title, make Season, session date, and description optional while drafting, require complete details before publication, preserve form state and show validation errors on failed requests, and render missing draft values safely in administrator summaries. Implementation is authorized on published branch `fix/session-draft-save`.
 
 

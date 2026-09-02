@@ -5,6 +5,7 @@
 **Next action:** Complete authenticated browser and responsive acceptance for administrator role management under ACT-52, then continue the Gate 1 and deployment-research controls before staging or participant use.
 **Next action:** Complete authenticated browser and responsive acceptance for CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page), then continue the existing staging and launch gates.
 **Next action:** Complete and verify CHG-38 (Allow incomplete administrator session drafts while requiring complete details before publication) on the published branch `fix/session-draft-save`, then continue administrator Classroom, staging, and launch acceptance.
+**Latest delivery:** CHG-38 (Allow incomplete administrator session drafts while requiring complete details before publication) is implemented and published in commit `259d7381` (`fix: allow partial session drafts`) on branch `fix/session-draft-save`. The full PHP suite passed 134 tests with 1,060 assertions; Pint, TypeScript, ESLint, Prettier, the production build, migration status, and diff checks passed. PHPStan retains one pre-existing `bootstrap/app.php` `env()` warning. Browser, responsive, staging, and launch acceptance remain open.
 
 This file is the project-level dashboard and configuration record.
 

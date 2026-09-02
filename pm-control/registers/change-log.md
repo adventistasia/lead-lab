@@ -4,6 +4,8 @@
 Project: Lead Lab
 
 ## Register
+Latest delivery evidence for CHG-38 (Allow incomplete administrator session drafts while requiring complete details before publication) on 2026-09-02: implementation is published in commit `259d7381` (`fix: allow partial session drafts`) on branch `fix/session-draft-save`. The focused session suite passed 25 tests with 334 assertions and the full PHP suite passed 134 tests with 1,060 assertions. Pint, TypeScript, ESLint, Prettier, the production build, migration status, and `git diff --check` passed. PHPStan retains one pre-existing `bootstrap/app.php` `env()` warning. Browser, responsive, staging, and launch acceptance remain open; the approved change remains recorded as Approved pending those gates.
+
 Approved plan for CHG-38 (Allow incomplete administrator session drafts while requiring complete details before publication) on 2026-09-02: the user approved partial drafts with a required title, optional Season, session date, and description during drafting, complete-field validation before publication, preserved form state and visible validation errors, null-safe administrator summaries, and migration coverage. Branch `fix/session-draft-save` was created from `main` and published before implementation. Implementation and verification are in progress.
 
 

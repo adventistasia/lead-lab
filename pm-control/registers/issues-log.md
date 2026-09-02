@@ -4,6 +4,8 @@
 Project: Lead Lab
 
 ## Register
+Latest implementation evidence for ISS-13 (Administrator Classroom Save draft appears to do nothing for an incomplete session) on 2026-09-02: the draft persistence and publication-completeness fix is published in commit `259d7381` on branch `fix/session-draft-save`; the full PHP suite and frontend checks pass. Browser, responsive, staging migration, and launch verification remain open, so the issue remains In Progress pending those checks.
+
 
 | ID | Issue | Priority | Owner | Status | Due | Resolution plan | Related IDs | Source | Verified |
 |---|---|---|---|---|---|---|---|---|---|

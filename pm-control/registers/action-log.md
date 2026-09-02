@@ -4,6 +4,8 @@
 Project: Lead Lab
 
 ## Register
+Latest delivery evidence for ACT-58 (Implement and verify partial administrator session drafts and publication completeness) on 2026-09-02: implementation is published in commit `259d7381` (`fix: allow partial session drafts`) on branch `fix/session-draft-save`. The focused session suite passed 25 tests with 334 assertions and the full PHP suite passed 134 tests with 1,060 assertions. Pint, TypeScript, ESLint, Prettier, the production build, migration status, and `git diff --check` passed. PHPStan retains one pre-existing `bootstrap/app.php` `env()` warning. Browser, responsive, staging, and launch acceptance remain open, so ACT-58 remains In Progress.
+
 Latest delivery plan for ACT-58 (Implement and verify partial administrator session drafts and publication completeness) on 2026-09-02: the issue was confirmed in the administrator Classroom modal, the partial-draft direction was approved, and branch `fix/session-draft-save` was created from `main` and published before code work. Implementation and verification are in progress.
 
 
