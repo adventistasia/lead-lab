@@ -15,10 +15,10 @@ This file is the project-level dashboard and configuration record.
 |---|---|
 | Project outcome | Rebuild the LeadLab Portal on a new platform with the same feature scope, restricted to participants, live before 2026-09-11. |
 | Control root | `/Users/agnojf/Documents/lead-lab/pm-control/` |
-| Current phase | Option B local core-functionality build; Gate 1 reassessment scheduled for 2026-08-28; production readiness deferred |
+| Current phase | Option B staging deployment reported; Gate 1 environment and ownership evidence remains open; production readiness deferred |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured |
-| Last verified | 2026-09-02 |
+| Last verified | 2026-09-03 |
 | Last status report | None recorded |
 | Next review trigger | Complete and validate the Gate 1 environment and ownership evidence, reconcile the PR #5 research and target mail or participant-data decisions, and refresh the conditional schedule before the 2026-09-04 go/no-go |
 
