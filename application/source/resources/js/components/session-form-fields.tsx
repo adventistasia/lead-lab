@@ -125,7 +125,7 @@ export function SessionFormFields({
                 <Input
                     id="resource"
                     type="file"
-                    accept=".pdf,.doc,.docx,.txt"
+                    accept=".pdf,.doc,.docx,.txt,.ppt,.pptx,.jpg,.jpeg,.png,.webp"
                     onChange={(event) =>
                         form.setData(
                             'resource',
@@ -138,8 +138,9 @@ export function SessionFormFields({
                     {resourceTitle
                         ? `Current material: ${resourceTitle}. Upload a replacement to swap it. `
                         : ''}
-                    Stored outside the public web directory and downloaded
-                    through an authenticated route.
+                    PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, or WEBP up
+                    to 25 MB. Stored outside the public web directory and
+                    downloaded through an authenticated route.
                 </FieldDescription>
                 <FieldError>{form.errors.resource}</FieldError>
             </Field>

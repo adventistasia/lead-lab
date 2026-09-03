@@ -53,7 +53,7 @@ The application will be self-hosted and use open-source software without a Skool
 | RQ-04 | Participants must filter sessions by date or date range. | Must | Results contain only sessions within the selected date criteria. | Approved |
 | RQ-05 | Participants must search sessions and supporting-material metadata. | Must | Relevant matching sessions or material metadata are returned. | Approved |
 | RQ-06 | Participants must play supplied training videos. | Must | An authenticated participant can play the video inside the session view. | Approved |
-| RQ-07 | Participants must access or download supporting materials. | Must | The correct authenticated participant can access the material; unauthenticated access is denied. | Approved |
+| RQ-07 | Participants must access or download supporting materials. | Must | An administrator can attach one PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, or WEBP file up to 25 MB to a session; the correct authenticated participant can access or download the material; unauthenticated access is denied. | Approved |
 | RQ-08 | The application must work on desktop, tablet, and mobile devices. | Must | Core workflows remain usable at agreed breakpoints. | Approved |
 | RQ-09 | Administrators must approve, grant, revoke, and restore participant access. | Must | A registered participant can be approved for access, use the application, be revoked, and be blocked from protected content. | Approved |
 | RQ-10 | Protected routes, APIs, and files must enforce server-side access controls. | Must | Direct unauthenticated requests are denied. | Approved |

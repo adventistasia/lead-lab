@@ -42,6 +42,107 @@ class LeadLabAccessTest extends TestCase
         Storage::disk('local')->assertExists($resource->stored_path);
     }
 
+    public function test_admin_can_upload_all_supported_resource_formats(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $formats = [
+            ['guide.pdf', 'application/pdf'],
+            ['guide.doc', 'application/msword'],
+            [
+                'guide.docx',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            ],
+            ['notes.txt', 'text/plain'],
+            ['slides.ppt', 'application/vnd.ms-powerpoint'],
+            [
+                'slides.pptx',
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            ],
+            ['photo.jpg', 'image/jpeg'],
+            ['photo.jpeg', 'image/jpeg'],
+            ['diagram.png', 'image/png'],
+            ['preview.webp', 'image/webp'],
+        ];
+
+        foreach ($formats as [$filename, $mimeType]) {
+            $response = $this->actingAs($admin)->post(
+                route('admin.sessions.store'),
+                [
+                    'title' => "Session with {$filename}",
+                    'season' => 'Supporting materials',
+                    'session_date' => '2026-08-28',
+                    'description' => 'A session with an accepted supporting material.',
+                    'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+                    'resource' => UploadedFile::fake()->create(
+                        $filename,
+                        1,
+                        $mimeType,
+                    ),
+                ],
+            );
+
+            $response->assertRedirect(route('admin.sessions.index'));
+            $this->assertDatabaseHas('learning_resources', [
+                'title' => $filename,
+                'mime_type' => $mimeType,
+            ]);
+        }
+
+        $this->assertDatabaseCount('learning_resources', count($formats));
+    }
+
+    public function test_admin_cannot_upload_unsupported_disguised_or_oversized_resources(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $cases = [
+            [
+                'unsupported.svg',
+                1,
+                'image/svg+xml',
+            ],
+            [
+                'renamed.exe',
+                1,
+                'application/pdf',
+            ],
+            [
+                'malware.pdf',
+                1,
+                'application/x-msdownload',
+            ],
+            [
+                'too-large.pptx',
+                25601,
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            ],
+        ];
+
+        foreach ($cases as [$filename, $size, $mimeType]) {
+            $response = $this->actingAs($admin)->post(
+                route('admin.sessions.store'),
+                [
+                    'title' => "Rejected resource {$filename}",
+                    'season' => 'Supporting materials',
+                    'session_date' => '2026-08-28',
+                    'description' => 'A session with an invalid supporting material.',
+                    'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+                    'resource' => UploadedFile::fake()->create(
+                        $filename,
+                        $size,
+                        $mimeType,
+                    ),
+                ],
+            );
+
+            $response->assertSessionHasErrors('resource');
+        }
+
+        $this->assertDatabaseCount('learning_sessions', 0);
+        $this->assertDatabaseCount('learning_resources', 0);
+    }
+
     public function test_admin_can_save_a_session_from_classroom_and_return_to_classroom(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -317,9 +418,10 @@ class LeadLabAccessTest extends TestCase
                 'session_date' => '2026-09-01',
                 'description' => 'The updated session description.',
                 'video_url' => 'https://youtu.be/newVideo456',
-                'resource' => UploadedFile::fake()->createWithContent(
-                    'updated.txt',
-                    'Updated material',
+                'resource' => UploadedFile::fake()->create(
+                    'updated.pptx',
+                    1,
+                    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                 ),
             ],
         );
@@ -341,7 +443,7 @@ class LeadLabAccessTest extends TestCase
             'https://www.youtube.com/watch?v=newVideo456',
             $session->video_url,
         );
-        $this->assertSame('updated.txt', $resource->title);
+        $this->assertSame('updated.pptx', $resource->title);
         $this->assertNotSame($oldPath, $resource->stored_path);
         Storage::disk('local')->assertMissing($oldPath);
         Storage::disk('local')->assertExists($resource->stored_path);
