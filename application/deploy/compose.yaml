@@ -7,7 +7,10 @@ x-app-env: &app-env
   APP_LOCALE: ${APP_LOCALE:-en}
   LEAD_LAB_REQUIRE_EMAIL_VERIFICATION: ${LEAD_LAB_REQUIRE_EMAIL_VERIFICATION:-true}
   TRUSTED_PROXIES: ${TRUSTED_PROXIES:-*}
-  LOG_CHANNEL: stack
+  # stderr, not the default `stack`: storage/logs is not a volume, so a
+  # laravel.log written there dies with the container. On stderr the stack
+  # trace lands in `docker compose logs <role>` beside the access log.
+  LOG_CHANNEL: ${LOG_CHANNEL:-stderr}
   LOG_LEVEL: ${LOG_LEVEL:-warning}
   DB_CONNECTION: mysql
   DB_HOST: db

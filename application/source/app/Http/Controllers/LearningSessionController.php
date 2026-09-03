@@ -37,8 +37,8 @@ class LearningSessionController
             ->map(fn (LearningSession $session): array => [
                 'id' => $session->id,
                 'title' => $session->title,
-                'season' => $session->season,
-                'session_date' => $session->session_date->toFormattedDateString(),
+                'season' => $session->season ?? '',
+                'session_date' => $session->session_date?->toFormattedDateString() ?? '',
                 'resources_count' => $session->resources_count,
                 'video_thumbnail_url' => YouTubeVideoReference::thumbnailUrl(
                     $session->video_url,
@@ -95,9 +95,9 @@ class LearningSessionController
             'session' => [
                 'id' => $learningSession->id,
                 'title' => $learningSession->title,
-                'season' => $learningSession->season,
-                'session_date' => $learningSession->session_date->toFormattedDateString(),
-                'description' => $learningSession->description,
+                'season' => $learningSession->season ?? '',
+                'session_date' => $learningSession->session_date?->toFormattedDateString() ?? '',
+                'description' => $learningSession->description ?? '',
                 'video_embed_url' => YouTubeVideoReference::embedUrl(
                     $videoUrl,
                     $request->getSchemeAndHttpHost(),

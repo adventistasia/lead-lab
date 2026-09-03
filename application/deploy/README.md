@@ -22,6 +22,31 @@ are never enqueued; without `queue`, they're enqueued and never sent. `docker co
 show all four containers, and `/up` returning 200 does **not** prove either background container
 is healthy.
 
+## Mail
+
+Staging sends through **Postmark SMTP**. Three things are not guessable from the config:
+
+- **`MAIL_MAILER` is hardcoded to `smtp` in `compose.yaml`** and is not read from `.env`. Leave it
+  alone — Laravel's `postmark` transport requires `symfony/postmark-mailer`, which is not
+  installed, and fails at runtime.
+- **Postmark's username and password are the same value**, the Server API token.
+- **The From address must be verified on the sending Postmark server** (a Sender Signature, or a
+  DKIM-verified domain), or every send is rejected.
+
+Two behaviours worth knowing before you debug a mail problem:
+
+- **Repeated failed SMTP AUTH gets your egress IP refused by Postmark**, on every SMTP port, for
+  around half an hour. While that lasts, a *correct* configuration fails with
+  `Connection could not be established` — which reads exactly like a broken fix. Verify a
+  credential change once; do not retry a wrong one.
+- **Postmark rewrites outgoing links for click tracking** (`track.pstmrk.it`), so the verification
+  link a participant receives redirects through Postmark to whatever `APP_URL` is set to. Signed
+  URLs survive the rewrite, but if `APP_URL` is not reachable from the recipient's network, the
+  mail is deliverable while the link is not.
+
+`failed_jobs` is the real mail health signal, and it needs its counterpart: `failed_jobs = 0`
+alone also describes a queue that never ran. Check `jobs = 0` **and** `failed_jobs = 0`.
+
 ## Redeploy
 
 ```bash

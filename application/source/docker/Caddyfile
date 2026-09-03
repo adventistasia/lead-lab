@@ -7,5 +7,25 @@
 :8080 {
 	root * /app/public
 	encode zstd gzip
+
+	# Requests land in `docker compose logs app` alongside Laravel's own
+	# output. /up is the container healthcheck and fires every few seconds —
+	# logging it would bury everything else.
+	log {
+		output stderr
+		# Headers are dropped, not kept: every page carries a ~4 KB Link
+		# preload header that buries the line, and Cookie/Set-Cookie would
+		# put session tokens into the container stream.
+		format filter {
+			wrap json
+			fields {
+				request>headers delete
+				resp_headers delete
+			}
+		}
+	}
+	@healthcheck path /up
+	log_skip @healthcheck
+
 	php_server
 }

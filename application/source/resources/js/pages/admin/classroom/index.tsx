@@ -48,8 +48,8 @@ import { show as showSession } from '@/routes/sessions';
 type Recording = {
     id: number;
     title: string;
-    season: string;
-    session_date: string;
+    season: string | null;
+    session_date: string | null;
     is_published: boolean;
     is_archived: boolean;
     resources_count: number;
@@ -132,7 +132,7 @@ export default function AdminClassroom({
         form.post(store.url({ query: { return_to: 'classroom' } }), {
             forceFormData: true,
             preserveScroll: true,
-            preserveState: false,
+            preserveState: 'errors',
             onSuccess: () => {
                 resetForm();
                 setIsAddSessionOpen(false);
@@ -278,11 +278,13 @@ export default function AdminClassroom({
                                                 </div>
                                                 <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
                                                     <span>
-                                                        {session.season}
+                                                        {session.season ??
+                                                            'Season not set'}
                                                     </span>
                                                     <span className="inline-flex items-center gap-1">
                                                         <CalendarDays className="size-3.5" />
-                                                        {session.session_date}
+                                                        {session.session_date ??
+                                                            'Date not set'}
                                                     </span>
                                                     <span>
                                                         {

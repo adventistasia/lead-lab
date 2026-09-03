@@ -80,9 +80,9 @@ class DashboardController
             ->map(fn (LearningSession $session): array => [
                 'id' => $session->id,
                 'title' => $session->title,
-                'season' => $session->season,
-                'session_date' => $session->session_date->toDateString(),
-                'description' => $session->description,
+                'season' => $session->season ?? '',
+                'session_date' => $session->session_date?->toDateString() ?? '',
+                'description' => $session->description ?? '',
                 'resources_count' => $session->resources_count,
                 'video_thumbnail_url' => YouTubeVideoReference::thumbnailUrl(
                     $session->video_url,
