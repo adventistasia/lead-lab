@@ -53,6 +53,7 @@
             "Composer\\Config::disableProcessTimeout",
             "@php artisan dev"
         ],
+        "serve": "php -d upload_max_filesize=20M -d post_max_size=110M -S 127.0.0.1:8000 -t public server.php",
         "lint": [
             "pint --parallel"
         ],

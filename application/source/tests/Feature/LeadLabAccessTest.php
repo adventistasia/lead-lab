@@ -29,7 +29,12 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'A practical session for building a weekly operating rhythm.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
-            'resource' => UploadedFile::fake()->createWithContent('worksheet.txt', 'Lead Lab worksheet'),
+            'resources' => [
+                UploadedFile::fake()->createWithContent(
+                    'worksheet.txt',
+                    'Lead Lab worksheet',
+                ),
+            ],
         ]);
 
         $session = LearningSession::query()->where('title', 'Build a repeatable lead rhythm')->firstOrFail();
@@ -65,24 +70,26 @@ class LeadLabAccessTest extends TestCase
             ['preview.webp', 'image/webp'],
         ];
 
+        $resources = [];
         foreach ($formats as [$filename, $mimeType]) {
-            $response = $this->actingAs($admin)->post(
-                route('admin.sessions.store'),
-                [
-                    'title' => "Session with {$filename}",
-                    'season' => 'Supporting materials',
-                    'session_date' => '2026-08-28',
-                    'description' => 'A session with an accepted supporting material.',
-                    'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
-                    'resource' => UploadedFile::fake()->create(
-                        $filename,
-                        1,
-                        $mimeType,
-                    ),
-                ],
+            $resources[] = UploadedFile::fake()->create(
+                $filename,
+                1,
+                $mimeType,
             );
+        }
 
-            $response->assertRedirect(route('admin.sessions.index'));
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Session with supported formats',
+            'season' => 'Supporting materials',
+            'session_date' => '2026-08-28',
+            'description' => 'A session with accepted supporting materials.',
+            'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
+            'resources' => $resources,
+        ]);
+
+        $response->assertRedirect(route('admin.sessions.index'));
+        foreach ($formats as [$filename, $mimeType]) {
             $this->assertDatabaseHas('learning_resources', [
                 'title' => $filename,
                 'mime_type' => $mimeType,
@@ -114,7 +121,7 @@ class LeadLabAccessTest extends TestCase
             ],
             [
                 'too-large.pptx',
-                25601,
+                10241,
                 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             ],
         ];
@@ -128,19 +135,141 @@ class LeadLabAccessTest extends TestCase
                     'session_date' => '2026-08-28',
                     'description' => 'A session with an invalid supporting material.',
                     'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
-                    'resource' => UploadedFile::fake()->create(
+                    'resources' => [UploadedFile::fake()->create(
                         $filename,
                         $size,
                         $mimeType,
-                    ),
+                    )],
                 ],
             );
 
-            $response->assertSessionHasErrors('resource');
+            $response->assertSessionHasErrors('resources.0');
         }
 
         $this->assertDatabaseCount('learning_sessions', 0);
         $this->assertDatabaseCount('learning_resources', 0);
+    }
+
+    public function test_admin_can_batch_upload_supported_session_materials(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Batch materials session',
+            'resources' => [
+                UploadedFile::fake()->createWithContent('worksheet.txt', 'Worksheet'),
+                UploadedFile::fake()->create(
+                    'slides.pptx',
+                    1,
+                    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                ),
+                UploadedFile::fake()->create('photo.jpg', 1, 'image/jpeg'),
+            ],
+        ]);
+
+        $session = LearningSession::query()
+            ->where('title', 'Batch materials session')
+            ->firstOrFail();
+
+        $response->assertRedirect(route('admin.sessions.index'));
+        $this->assertSame(
+            ['worksheet.txt', 'slides.pptx', 'photo.jpg'],
+            $session->resources()->pluck('title')->all(),
+        );
+        $session->resources->each(
+            fn (LearningResource $resource) => Storage::disk('local')->assertExists(
+                $resource->stored_path,
+            ),
+        );
+    }
+
+    public function test_admin_cannot_batch_upload_more_than_ten_session_materials(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $resources = [];
+
+        for ($index = 1; $index <= 11; $index++) {
+            $resources[] = UploadedFile::fake()->create("material-{$index}.txt", 1, 'text/plain');
+        }
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Too many materials session',
+            'resources' => $resources,
+        ]);
+
+        $response->assertSessionHasErrors('resources');
+        $this->assertDatabaseMissing('learning_sessions', [
+            'title' => 'Too many materials session',
+        ]);
+    }
+
+    public function test_admin_receives_a_named_error_for_an_oversized_batch_file(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => 'Oversized material session',
+            'resources' => [
+                UploadedFile::fake()->create('large-handout.pdf', 10241, 'application/pdf'),
+            ],
+        ]);
+
+        $response->assertSessionHasErrors([
+            'resources.0' => 'large-handout.pdf is too big. Each file must be 10 MB or less.',
+        ]);
+        $this->assertDatabaseMissing('learning_sessions', [
+            'title' => 'Oversized material session',
+        ]);
+    }
+
+    public function test_admin_receives_a_batch_error_when_the_server_request_limit_is_exceeded(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->from(route('admin.sessions.index'))
+            ->actingAs($admin)
+            ->withServerVariables([
+                'CONTENT_LENGTH' => (string) ((8 * 1024 * 1024) + 1),
+            ])
+            ->post(route('admin.sessions.store'), [
+                'title' => 'Server-limit material session',
+            ]);
+
+        $response
+            ->assertRedirect(route('admin.sessions.index'))
+            ->assertSessionHasErrors([
+                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 10 MB limit.',
+            ]);
+        $this->assertDatabaseMissing('learning_sessions', [
+            'title' => 'Server-limit material session',
+        ]);
+    }
+
+    public function test_admin_receives_a_batch_error_when_updating_past_the_server_request_limit(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create([
+            'title' => 'Original server-limit session',
+        ]);
+
+        $response = $this->from(route('admin.sessions.edit', $session))
+            ->actingAs($admin)
+            ->withServerVariables([
+                'CONTENT_LENGTH' => (string) ((8 * 1024 * 1024) + 1),
+            ])
+            ->post(route('admin.sessions.update', $session), [
+                'title' => 'Updated server-limit session',
+            ]);
+
+        $response
+            ->assertRedirect(route('admin.sessions.edit', $session))
+            ->assertSessionHasErrors([
+                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 10 MB limit.',
+            ]);
+        $this->assertSame('Original server-limit session', $session->refresh()->title);
     }
 
     public function test_admin_can_save_a_session_from_classroom_and_return_to_classroom(): void
@@ -392,7 +521,7 @@ class LeadLabAccessTest extends TestCase
             );
     }
 
-    public function test_admin_can_edit_session_fields_and_replace_a_protected_resource(): void
+    public function test_admin_can_edit_session_fields_and_append_a_protected_resource(): void
     {
         Storage::fake('local');
         $admin = User::factory()->create(['role' => 'admin']);
@@ -418,16 +547,17 @@ class LeadLabAccessTest extends TestCase
                 'session_date' => '2026-09-01',
                 'description' => 'The updated session description.',
                 'video_url' => 'https://youtu.be/newVideo456',
-                'resource' => UploadedFile::fake()->create(
-                    'updated.pptx',
-                    1,
-                    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                ),
+                'resources' => [
+                    UploadedFile::fake()->createWithContent(
+                        'updated.txt',
+                        'Updated material',
+                    ),
+                ],
             ],
         );
 
         $session->refresh();
-        $resource = $session->resources()->firstOrFail();
+        $resource = $session->resources()->where('title', 'updated.txt')->firstOrFail();
 
         $response
             ->assertRedirect(route('admin.sessions.index'))
@@ -443,10 +573,106 @@ class LeadLabAccessTest extends TestCase
             'https://www.youtube.com/watch?v=newVideo456',
             $session->video_url,
         );
-        $this->assertSame('updated.pptx', $resource->title);
-        $this->assertNotSame($oldPath, $resource->stored_path);
-        Storage::disk('local')->assertMissing($oldPath);
+        $this->assertSame('updated.txt', $resource->title);
+        $this->assertSame(2, $session->resources()->count());
+        Storage::disk('local')->assertExists($oldPath);
         Storage::disk('local')->assertExists($resource->stored_path);
+    }
+
+    public function test_admin_cannot_append_materials_past_the_session_limit(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create([
+            'title' => 'Original batch session title',
+        ]);
+
+        for ($index = 1; $index <= 9; $index++) {
+            $path = "lead-lab/resources/existing-{$index}.txt";
+            Storage::disk('local')->put($path, "Existing material {$index}");
+            $session->resources()->create([
+                'title' => "existing-{$index}.txt",
+                'stored_path' => $path,
+                'mime_type' => 'text/plain',
+                'size' => 18,
+            ]);
+        }
+
+        $response = $this->actingAs($admin)->post(
+            route('admin.sessions.update', $session),
+            [
+                '_method' => 'PATCH',
+                'title' => 'Updated without extra materials',
+                'resources' => [
+                    UploadedFile::fake()->create('new-one.txt', 1, 'text/plain'),
+                    UploadedFile::fake()->create('new-two.txt', 1, 'text/plain'),
+                ],
+            ],
+        );
+
+        $response->assertSessionHasErrors('resources');
+        $this->assertSame(9, $session->resources()->count());
+        $this->assertSame('Original batch session title', $session->refresh()->title);
+    }
+
+    public function test_admin_can_remove_one_supporting_material(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create();
+        $removedPath = 'lead-lab/resources/remove-me.txt';
+        $keptPath = 'lead-lab/resources/keep-me.txt';
+        Storage::disk('local')->put($removedPath, 'Remove me');
+        Storage::disk('local')->put($keptPath, 'Keep me');
+        $removed = $session->resources()->create([
+            'title' => 'remove-me.txt',
+            'stored_path' => $removedPath,
+            'mime_type' => 'text/plain',
+            'size' => 9,
+        ]);
+        $kept = $session->resources()->create([
+            'title' => 'keep-me.txt',
+            'stored_path' => $keptPath,
+            'mime_type' => 'text/plain',
+            'size' => 7,
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->delete(route('admin.resources.destroy', $removed));
+
+        $response->assertRedirect(route('admin.sessions.edit', $session));
+        $this->assertDatabaseMissing('learning_resources', ['id' => $removed->id]);
+        $this->assertDatabaseHas('learning_resources', ['id' => $kept->id]);
+        Storage::disk('local')->assertMissing($removedPath);
+        Storage::disk('local')->assertExists($keptPath);
+        $this->assertDatabaseHas('activity_logs', [
+            'actor_id' => $admin->id,
+            'action' => 'resource_deleted',
+            'subject_type' => LearningSession::class,
+            'subject_id' => $session->id,
+        ]);
+    }
+
+    public function test_participants_cannot_remove_supporting_materials(): void
+    {
+        Storage::fake('local');
+        $participant = User::factory()->create();
+        $session = LearningSession::factory()->create();
+        $path = 'lead-lab/resources/protected-material.txt';
+        Storage::disk('local')->put($path, 'Protected material');
+        $resource = $session->resources()->create([
+            'title' => 'protected-material.txt',
+            'stored_path' => $path,
+            'mime_type' => 'text/plain',
+            'size' => 18,
+        ]);
+
+        $this->actingAs($participant)
+            ->delete(route('admin.resources.destroy', $resource))
+            ->assertForbidden();
+
+        $this->assertDatabaseHas('learning_resources', ['id' => $resource->id]);
+        Storage::disk('local')->assertExists($path);
     }
 
     public function test_admin_can_open_the_session_editor_from_classroom_actions(): void
@@ -457,6 +683,20 @@ class LeadLabAccessTest extends TestCase
             'description' => 'Edit this session from Classroom actions.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
         ]);
+        $session->resources()->createMany([
+            [
+                'title' => 'session-notes.txt',
+                'stored_path' => 'lead-lab/resources/session-notes.txt',
+                'mime_type' => 'text/plain',
+                'size' => 12,
+            ],
+            [
+                'title' => 'session-slides.pptx',
+                'stored_path' => 'lead-lab/resources/session-slides.pptx',
+                'mime_type' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                'size' => 24,
+            ],
+        ]);
 
         $this->actingAs($admin)
             ->get(route('admin.sessions.edit', $session))
@@ -466,7 +706,10 @@ class LeadLabAccessTest extends TestCase
                 ->where('session.id', $session->id)
                 ->where('session.title', 'Editable classroom session')
                 ->where('session.description', 'Edit this session from Classroom actions.')
-                ->where('session.video_url', 'https://www.youtube.com/watch?v=abc123XYZ01'),
+                ->where('session.video_url', 'https://www.youtube.com/watch?v=abc123XYZ01')
+                ->has('session.resources', 2)
+                ->where('session.resources.0.title', 'session-notes.txt')
+                ->where('session.resources.1.title', 'session-slides.pptx'),
             );
     }
 
@@ -603,7 +846,14 @@ class LeadLabAccessTest extends TestCase
             'mime_type' => 'text/plain',
             'size' => 12,
         ]);
+        $secondResource = $session->resources()->create([
+            'title' => 'Session slides.pptx',
+            'stored_path' => 'lead-lab/resources/session-slides.pptx',
+            'mime_type' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'size' => 24,
+        ]);
         Storage::disk('local')->put($resource->stored_path, 'Session notes');
+        Storage::disk('local')->put($secondResource->stored_path, 'Session slides');
 
         $page = $this->actingAs($participant)->get(route('sessions.show', $session));
 
@@ -614,12 +864,16 @@ class LeadLabAccessTest extends TestCase
                 'session.video_embed_url',
                 'https://www.youtube-nocookie.com/embed/abc123XYZ01?controls=0&rel=0&playsinline=1&iv_load_policy=3&enablejsapi=1&origin=http%3A%2F%2Flocalhost%3A8000',
             )
-            ->has('session.resources', 1),
+            ->has('session.resources', 2)
+            ->where('session.resources.1.title', 'Session slides.pptx'),
         );
 
         $download = $this->actingAs($participant)->get(route('resources.download', $resource));
 
         $download->assertDownload('Session notes.txt');
+        $this->actingAs($participant)
+            ->get(route('resources.download', $secondResource))
+            ->assertDownload('Session slides.pptx');
     }
 
     public function test_active_users_can_view_session_questions_and_answers(): void

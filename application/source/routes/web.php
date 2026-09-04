@@ -47,7 +47,8 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::get('sessions', [AdminLearningSessionController::class, 'index'])->name('sessions.index');
         Route::get('sessions/{learningSession}/edit', [AdminLearningSessionController::class, 'edit'])->name('sessions.edit');
         Route::post('sessions', [AdminLearningSessionController::class, 'store'])->name('sessions.store');
-        Route::patch('sessions/{learningSession}', [AdminLearningSessionController::class, 'update'])->name('sessions.update');
+        Route::match(['post', 'patch'], 'sessions/{learningSession}', [AdminLearningSessionController::class, 'update'])->name('sessions.update');
+        Route::delete('resources/{learningResource}', [AdminLearningSessionController::class, 'destroy'])->name('resources.destroy');
         Route::patch('sessions/{learningSession}/publish', [AdminLearningSessionController::class, 'publish'])->name('sessions.publish');
         Route::patch('sessions/{learningSession}/unpublish', [AdminLearningSessionController::class, 'unpublish'])->name('sessions.unpublish');
         Route::patch('sessions/{learningSession}/archive', [AdminLearningSessionController::class, 'archive'])->name('sessions.archive');
