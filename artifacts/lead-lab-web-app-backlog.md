@@ -46,7 +46,7 @@
 | LL-07 | Build courses, modules, and lessons. | WP-03 | Should | RQ-13 | LL-02, LL-04 | TBD | Not started |
 | LL-08 | Build session fields for title, season, date, description, video, and materials. | WP-03 | Must | RQ-02 | LL-02 | TBD | Implemented locally |
 | LL-09 | Implement YouTube video embedding and playback. | WP-03 | Must | RQ-06 | LL-08, video decision | TBD | Implemented locally |
-| LL-10 | Implement private material storage and authenticated downloads. | WP-03/WP-07 | Must | RQ-07, RQ-10 | LL-03, LL-01 | TBD | Implemented locally |
+| LL-10 | Implement private material storage and authenticated downloads for PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, and WEBP files up to 25 MB. | WP-03/WP-07 | Must | RQ-07, RQ-10 | LL-03, LL-01 | TBD | Implemented locally |
 | LL-11 | Build administrator-created published event records with title, optional `Location`, optional `Live broadcast link`, start and end date-times, descriptions, administrator edit/delete actions in a click-opened event popup, responsive calendar viewing, continuous multi-day event markers, and event-level email reminder settings for active administrators and participants. | WP-04 | Should | RQ-14 | LL-02, LL-04 | TBD | Implemented locally |
 | LL-12 | Implement search across session and material metadata. | WP-05 | Must | RQ-05 | LL-08, LL-10 | TBD | Implemented locally |
 | LL-13 | Implement season and date filters. | WP-05 | Must | RQ-03, RQ-04 | LL-08 | TBD | Implemented locally |
@@ -60,7 +60,7 @@
 | LL-21 | Obtain and approve the September content inventory. | WP-08 | Must | RQ-02, RQ-06, RQ-07 | Media team | TBD | Not started |
 | LL-22 | Load and quality-check required session content and materials. | WP-08 | Must | RQ-02, RQ-06, RQ-07 | LL-21, LL-08, LL-09, LL-10 | TBD | Not started |
 | LL-23 | Test authentication, roles, registration, access approval, revocation, restoration, and direct unauthorized requests. | WP-09 | Must | RQ-01, RQ-09, RQ-10, RQ-15 | LL-03, LL-04, LL-14, LL-17 | TBD | Implemented locally |
-| LL-24 | Test content, search, filters, video, downloads, community, classroom, administrator recordings navigation, calendar popup details, role-based calendar actions, event reminders, and moderation. | WP-09 | Must | RQ-02 to RQ-07, RQ-12 to RQ-16, RQ-20 | WP-02 to WP-07 | TBD | In progress |
+| LL-24 | Test content, search, filters, video, supporting-material format and size validation, downloads, community, classroom, administrator recordings navigation, calendar popup details, role-based calendar actions, event reminders, and moderation. | WP-09 | Must | RQ-02 to RQ-07, RQ-12 to RQ-16, RQ-20 | WP-02 to WP-07 | TBD | In progress |
 | LL-25 | Test desktop, tablet, and mobile workflows, including calendar event popup opening and role-specific actions. | WP-09 | Must | RQ-08 | WP-01 to WP-06 | TBD | In progress |
 | LL-26 | Run participant acceptance testing and record defects or exceptions. | WP-09 | Must | RQ-01 to RQ-16, RQ-20 | LL-22 to LL-25, LL-28 | TBD | Not started |
 | LL-27 | Obtain LeadLab Director acceptance and release or activate SharePoint fallback. | WP-09 | Must | RQ-01 to RQ-16, RQ-19, RQ-20 | LL-26, DEP-07 | TBD | Not started |
@@ -92,6 +92,7 @@ As of 2026-08-30, `Implemented locally` marks work supported by current applicat
 | CHG-29 (Add queued participant registration alerts to all active administrators) | Added RQ-22 and LL-32 for queued registration alerts to active administrators, with non-sensitive content, recipient filtering, and staging delivery acceptance. |
 | CHG-30 (Add a mobile-only fullscreen toggle to all authenticated application screens) | Added LL-33 for the mobile-only native fullscreen control, state synchronization, graceful fallback, and responsive acceptance coverage. |
 | CHG-31 (Reframe the public homepage as an organization-facing LeadLab Growth Series landing page) | Added LL-34 for the approved public value proposition and content boundary, while preserving registration, login, and workspace routes. |
+| CHG-38 (Expand protected supporting-material uploads to common document, presentation, text, and image formats) | Clarified RQ-07 and LL-10 for PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, and WEBP uploads up to 25 MB, while retaining private storage, authenticated downloads, and the existing single-material replacement behavior. Added format and size validation to LL-24 acceptance coverage. |
 
 ## Delivery Sequence
 
