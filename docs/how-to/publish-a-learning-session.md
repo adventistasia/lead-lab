@@ -7,7 +7,7 @@ Use this when you are an administrator and need to make a recorded Learning Sess
 2. Open **Admin > Sessions**.
 3. Create a session and enter the required title, category, date, and description.
 4. Add an optional YouTube video URL.
-5. Add one optional file in PDF, DOC, DOCX, or TXT format, up to 10 MB.
+5. Add one optional file in PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, or JPEG format, up to 10 MB.
 6. Save the session. It is a draft and is not visible to participants.
 7. Choose **Publish** when the content is ready.
 

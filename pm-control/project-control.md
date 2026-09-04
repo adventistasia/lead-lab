@@ -5,6 +5,8 @@
 **Next action:** Complete authenticated browser and responsive acceptance for administrator role management under ACT-52, then continue the Gate 1 and deployment-research controls before staging or participant use.
 **Next action:** Complete authenticated browser and responsive acceptance for CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page), then continue the existing staging and launch gates.
 **Next action:** Complete and verify CHG-38 (Allow incomplete administrator session drafts while requiring complete details before publication) on the published branch `fix/session-draft-save`, then continue administrator Classroom, staging, and launch acceptance.
+**Latest approved correction:** CHG-41 (Narrow the supported session-material formats and retain the 10 MB limit) was approved on 2026-09-04 and implementation is authorized under ACT-61 (Implement and verify the corrected supporting-material upload boundary). The supported set is PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, and JPEG; PNG, WEBP, and other formats remain unsupported. One optional file per session, the 10 MB maximum, private storage, authenticated downloads, and replacement behavior remain unchanged.
+**Latest local verification:** CHG-41 is implemented locally. The focused suite passes 59 tests with 644 assertions and the full PHP suite passes 136 tests with 1,097 assertions. PHPStan, Pint, TypeScript, ESLint, Prettier, the Vite production build, and `git diff --check` pass. Browser, responsive, staging, and launch acceptance remain open under ACT-61.
 **Latest delivery:** CHG-38 (Allow incomplete administrator session drafts while requiring complete details before publication) is implemented and published in commit `259d7381` (`fix: allow partial session drafts`) on branch `fix/session-draft-save`. The full PHP suite passed 134 tests with 1,060 assertions; Pint, TypeScript, ESLint, Prettier, the production build, migration status, and diff checks passed. PHPStan retains one pre-existing `bootstrap/app.php` `env()` warning. Browser, responsive, staging, and launch acceptance remain open.
 
 This file is the project-level dashboard and configuration record.
@@ -49,6 +51,8 @@ This file is the project-level dashboard and configuration record.
 **Latest password-recovery control:** CHG-35 (Complete and harden the existing Lead Lab password-recovery flow) is approved and implemented in published commit `57783bf2` (`feat: harden forgot password flow`) on branch `feature/forgot-password`; local implementation and automated verification for ACT-53 (Implement and verify the password-recovery flow) pass. Live Mailpit, browser, staging, production-mail, monitoring, and operational ownership evidence remain open under DEP-13 (Password-recovery email delivery and operational support) and R-17 (Password-recovery emails may be unavailable, reveal account existence, or expose reset credentials or tokens).
 
 ## Baseline and Change Control
+
+CHG-41 (Narrow the supported session-material formats and retain the 10 MB limit) was approved on 2026-09-04. It corrects the CHG-38 (Expand protected supporting-material uploads to common document, presentation, text, and image formats) boundary to PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, and JPEG up to 10 MB, while preserving one optional file per session, private storage, authenticated downloads, and replacement behavior. No schema, route, API, authorization, infrastructure, cost, or schedule-baseline change is planned.
 
 | Baseline area | Current version or date | Source |
 |---|---|---|
@@ -117,6 +121,10 @@ This file is the project-level dashboard and configuration record.
 - Keep the control-root path and project identity stable so the agent does not mix projects.
 
 ## Latest Approved Feature Increment
+
+CHG-41 (Narrow the supported session-material formats and retain the 10 MB limit) was approved on 2026-09-04. Implementation is authorized under ACT-61 (Implement and verify the corrected supporting-material upload boundary). The correction narrows the staging upload boundary from the prior CHG-38 set of 25 MB plus PNG and WEBP to eight formats up to 10 MB. No additional maintained artifact is currently needed.
+
+Local implementation and automated verification for CHG-41 are complete. ACT-61 remains In Progress until browser, responsive, staging, and launch acceptance are recorded.
 
 CHG-36 (Rename the session Category field to Season end to end) and CHG-37 (Add server-side member search by name or email to the administrator Members page) were approved on 2026-09-02. Season remains a free-text field with existing values preserved. Member search remains server-side and combines with status filtering and fixed pagination. Local implementation and automated verification are complete in commit `5725fe1c` (`feat: rename session categories and search members`) on published branch `feature/season-member-search`; PR #11 (feat: rename session categories and search members) was merged into `main`. Authenticated browser, responsive, staging, and launch acceptance remain open; ACT-54 (Implement and verify the end-to-end Season rename) and ACT-55 (Implement and verify administrator member search by name or email) remain In Progress. No additional maintained artifact is currently needed.
 

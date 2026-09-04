@@ -61,8 +61,6 @@ class LeadLabAccessTest extends TestCase
             ],
             ['photo.jpg', 'image/jpeg'],
             ['photo.jpeg', 'image/jpeg'],
-            ['diagram.png', 'image/png'],
-            ['preview.webp', 'image/webp'],
         ];
 
         foreach ($formats as [$filename, $mimeType]) {
@@ -97,11 +95,8 @@ class LeadLabAccessTest extends TestCase
         Storage::fake('local');
         $admin = User::factory()->create(['role' => 'admin']);
         $cases = [
-            [
-                'unsupported.svg',
-                1,
-                'image/svg+xml',
-            ],
+            ['unsupported.png', 1, 'image/png'],
+            ['unsupported.svg', 1, 'image/svg+xml'],
             [
                 'renamed.exe',
                 1,
@@ -114,7 +109,7 @@ class LeadLabAccessTest extends TestCase
             ],
             [
                 'too-large.pptx',
-                25601,
+                10241,
                 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             ],
         ];

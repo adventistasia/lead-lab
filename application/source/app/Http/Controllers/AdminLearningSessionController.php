@@ -283,12 +283,12 @@ class AdminLearningSessionController
      */
     private function resourceValidationRules(): array
     {
-        $extensions = 'pdf,doc,docx,txt,ppt,pptx,jpg,jpeg,png,webp';
+        $extensions = 'pdf,doc,docx,txt,ppt,pptx,jpg,jpeg';
 
         return [
             'nullable',
             'file',
-            'max:25600',
+            'max:10240',
             'mimes:'.$extensions,
             'extensions:'.$extensions,
         ];
