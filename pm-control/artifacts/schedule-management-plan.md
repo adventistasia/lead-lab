@@ -95,7 +95,7 @@ ART-PM-51 (Project calendars) is `Create later`. Activate it after the 2026-08-2
 | Schedule-management owner | TBD; no owner was assigned by this approval |
 | Technical owner | Unassigned in Gate 1 evidence |
 | Human primary developer | Unassigned in Gate 1 evidence |
-| IT operator | Unassigned in Gate 1 evidence |
+| IT operator | Dennis Arquillano (interim; staging and production; PM-confirmed 2026-09-03) in Gate 1 evidence |
 | PM authority | PM approves material schedule controls, committed dates, owners, dependencies, and baselines |
 | Final launch authority | LeadLab Director; final approval remains an open dependency. [Source: `projects/lead-lab/pm-control/registers/dependencies-log.md`, DEP-07] |
 
