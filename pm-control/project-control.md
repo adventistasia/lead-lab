@@ -87,11 +87,11 @@ This file is the project-level dashboard and configuration record.
 |---|---|---|
 | Risks | `registers/risk-register.md` | 2026-08-31 |
 | Assumptions | `registers/assumption-log.md` | 2026-08-18 |
-| Issues | `registers/issues-log.md` | 2026-08-31 |
+| Issues | `registers/issues-log.md` | 2026-09-07 |
 | Dependencies | `registers/dependencies-log.md` | 2026-08-31 |
-| Actions | `registers/action-log.md` | 2026-09-03 |
+| Actions | `registers/action-log.md` | 2026-09-07 |
 | Decisions | `registers/decision-log.md` | 2026-09-03 |
-| Changes | `registers/change-log.md` | 2026-09-03 |
+| Changes | `registers/change-log.md` | 2026-09-07 |
 | Lessons learned | `registers/lessons-learned-register.md` | 2026-08-31 |
 | Process register | `process-register.md` | 2026-09-02 |
 | Artifact index | `artifact-index.md` | 2026-08-20 |
