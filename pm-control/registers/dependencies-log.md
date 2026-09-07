@@ -3,6 +3,8 @@
 
 Project: Lead Lab
 
+ACT-09 reconciliation recorded on 2026-09-07: DEP-09 (Option B authentication and participant-data handling decision) now links the canonical application-managed self-registration direction and the MVP deferral of Microsoft 365 SSO. DEP-09 remains Critical and Open because D-27 (What working participant-data rules should supplement D-23?) remains Proposed, participant privacy and data-governance evidence is incomplete, and target-state staging and mail evidence remain open. No dependency state was changed.
+
 ## Register
 
 | ID | Dependency | Owner | Priority | Status | Needed by | Impact if unmet | Action | Related IDs | Source | Verified |
