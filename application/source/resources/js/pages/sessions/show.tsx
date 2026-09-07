@@ -38,7 +38,7 @@ export default function SessionShow({ session }: { session: Session }) {
     return (
         <>
             <Head title={session.title} />
-            <div className="flex flex-1 flex-col gap-8 p-4 md:p-8">
+            <div className="flex min-w-0 flex-1 flex-col gap-8 p-4 md:p-8">
                 <Button asChild variant="ghost" className="w-fit">
                     <Link href={dashboard()}>
                         <ArrowLeft data-icon="inline-start" />
@@ -59,8 +59,8 @@ export default function SessionShow({ session }: { session: Session }) {
                     </p>
                 </div>
 
-                <div className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
-                    <Card className="overflow-hidden">
+                <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
+                    <Card className="min-w-0 overflow-hidden">
                         <CardHeader>
                             <CardTitle>Session recording</CardTitle>
                             <CardDescription>
@@ -86,7 +86,7 @@ export default function SessionShow({ session }: { session: Session }) {
                         </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="min-w-0">
                         <CardHeader>
                             <CardTitle>
                                 Session resources and discussion
@@ -99,7 +99,7 @@ export default function SessionShow({ session }: { session: Session }) {
                         <CardContent>
                             <Tabs
                                 defaultValue={session.initial_tab}
-                                className="gap-4"
+                                className="min-w-0 gap-4"
                             >
                                 <TabsList className="grid w-full grid-cols-2">
                                     <TabsTrigger value="materials">
@@ -111,7 +111,7 @@ export default function SessionShow({ session }: { session: Session }) {
                                 </TabsList>
                                 <TabsContent
                                     value="materials"
-                                    className="flex flex-col gap-3"
+                                    className="flex min-w-0 flex-col gap-3"
                                 >
                                     {session.resources.length === 0 ? (
                                         <p className="text-sm text-muted-foreground">
@@ -121,7 +121,7 @@ export default function SessionShow({ session }: { session: Session }) {
                                         session.resources.map((resource) => (
                                             <div
                                                 key={resource.id}
-                                                className="flex items-center gap-3 rounded-lg border p-3"
+                                                className="flex min-w-0 items-center gap-3 rounded-lg border p-3"
                                             >
                                                 <FileText className="size-5 shrink-0 text-muted-foreground" />
                                                 <div className="flex min-w-0 flex-1 flex-col gap-1">
@@ -138,6 +138,7 @@ export default function SessionShow({ session }: { session: Session }) {
                                                     asChild
                                                     size="icon"
                                                     variant="outline"
+                                                    className="shrink-0"
                                                 >
                                                     <a
                                                         href={
@@ -152,7 +153,10 @@ export default function SessionShow({ session }: { session: Session }) {
                                         ))
                                     )}
                                 </TabsContent>
-                                <TabsContent value="q-and-a">
+                                <TabsContent
+                                    value="q-and-a"
+                                    className="min-w-0"
+                                >
                                     <SessionQna
                                         sessionId={session.id}
                                         questions={session.questions}
