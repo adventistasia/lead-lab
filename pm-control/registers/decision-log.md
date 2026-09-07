@@ -3,6 +3,8 @@
 
 Project: Lead Lab
 
+ACT-09 reconciliation recorded on 2026-09-07: D-23 (How should participants obtain access to the Option B application?) is the canonical made direction for application-managed self-registration, target-state email verification before administrator approval, participant-only self-registration, administrator approval/revocation/restoration, and Microsoft 365 SSO deferred for the MVP. D-27 (What working participant-data rules should supplement D-23?) remains Proposed because final data-governance confirmation was not inferred. RQ-18 (Microsoft 365 SSO should be used for the new application) remains deferred for the MVP in the canonical direction, with no SSO implementation authorized. ACT-09 (Reconcile the application-managed account direction, participant-data rules, and Microsoft 365 SSO in the canonical decision and dependency records) is reconciled; participant-data approval and staging evidence remain open under the related records.
+
 Latest decision for D-65 (Should the Lead Hub portal-only rename plan be documented now without starting implementation?) on 2026-09-03: record the approved Lead Hub portal-only plan, but do not execute it. CHG-42 (Rename the portal-facing brand from Lead Lab and LeadLab to Lead Hub) is approved for record-only planning; ACT-62 (Prepare and implement the portal-only Lead Hub rename only after separate PM implementation authorization) remains Proposed. LeadLab Growth Series, LeadLab Director, technical identifiers, and final asset decisions remain unchanged or deferred as recorded.
 
 ## Register
