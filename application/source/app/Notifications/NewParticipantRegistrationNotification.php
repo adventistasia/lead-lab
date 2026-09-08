@@ -27,9 +27,9 @@ class NewParticipantRegistrationNotification extends Notification implements Sho
         )->format('l, F j, Y \\a\\t g:i A T') ?? 'Unknown';
 
         return (new MailMessage)
-            ->subject('New Lead Lab participant registration')
+            ->subject('New Lead Hub participant registration')
             ->greeting('Hello '.$notifiable->name.',')
-            ->line('A new participant has registered for Lead Lab and needs access review.')
+            ->line('A new participant has registered for Lead Hub and needs access review.')
             ->line('Name: '.$this->participant->name)
             ->line('Email: '.$this->participant->email)
             ->line('Registered: '.$registeredAt)

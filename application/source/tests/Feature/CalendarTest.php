@@ -28,7 +28,7 @@ class CalendarTest extends TestCase
             'title' => 'September launch briefing',
             'starts_at' => Carbon::parse('2026-08-28 10:00:00'),
             'ends_at' => Carbon::parse('2026-08-30 11:00:00'),
-            'location' => 'Lead Lab studio',
+            'location' => 'Lead Hub studio',
             'live_broadcast_url' => 'https://example.com/lead-lab/live',
         ]);
         CalendarEvent::factory()->create([
@@ -46,7 +46,7 @@ class CalendarTest extends TestCase
                 ->where('is_admin', false)
                 ->has('events', 1)
                 ->where('events.0.id', $event->id)
-                ->where('events.0.location', 'Lead Lab studio')
+                ->where('events.0.location', 'Lead Hub studio')
                 ->where('events.0.live_broadcast_url', 'https://example.com/lead-lab/live')
                 ->where('events.0.start_date', '2026-08-28')
                 ->where('events.0.end_date', '2026-08-30'),
@@ -147,17 +147,17 @@ class CalendarTest extends TestCase
         $response = $this->actingAs($admin)->post(
             route('admin.calendar-events.store', ['return_to' => 'dashboard']),
             [
-                'title' => 'Lead Lab planning session',
+                'title' => 'Lead Hub planning session',
                 'starts_at' => '2026-08-28T10:00',
                 'ends_at' => '2026-08-28T11:30',
                 'description' => 'Align on the next program milestone.',
-                'location' => 'Lead Lab studio',
+                'location' => 'Lead Hub studio',
                 'live_broadcast_url' => 'https://example.com/lead-lab/planning',
             ],
         );
 
         $event = CalendarEvent::query()
-            ->where('title', 'Lead Lab planning session')
+            ->where('title', 'Lead Hub planning session')
             ->firstOrFail();
 
         $response
@@ -168,7 +168,7 @@ class CalendarTest extends TestCase
             );
         $this->assertSame('2026-08-28 02:00:00', $event->starts_at->format('Y-m-d H:i:s'));
         $this->assertSame('2026-08-28 03:30:00', $event->ends_at->format('Y-m-d H:i:s'));
-        $this->assertSame('Lead Lab studio', $event->location);
+        $this->assertSame('Lead Hub studio', $event->location);
         $this->assertSame('https://example.com/lead-lab/planning', $event->live_broadcast_url);
         $this->assertDatabaseHas('activity_logs', [
             'actor_id' => $admin->id,

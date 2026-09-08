@@ -100,7 +100,7 @@ export default function Register() {
 }
 
 Register.layout = {
-    title: 'Create your Lead Lab account',
+    title: 'Create your Lead Hub account',
     description:
         'Verify your email, then wait for an administrator to approve access.',
 };

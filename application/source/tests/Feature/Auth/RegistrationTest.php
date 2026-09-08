@@ -103,7 +103,7 @@ class RegistrationTest extends TestCase
     public function test_registration_notification_contains_review_details(): void
     {
         $administrator = User::factory()->create([
-            'name' => 'Lead Lab Administrator',
+            'name' => 'Lead Hub Administrator',
             'role' => 'admin',
         ]);
         $participant = User::factory()->create([
@@ -115,8 +115,8 @@ class RegistrationTest extends TestCase
         $message = (new NewParticipantRegistrationNotification($participant))
             ->toMail($administrator);
 
-        $this->assertSame('New Lead Lab participant registration', $message->subject);
-        $this->assertSame('Hello Lead Lab Administrator,', $message->greeting);
+        $this->assertSame('New Lead Hub participant registration', $message->subject);
+        $this->assertSame('Hello Lead Hub Administrator,', $message->greeting);
         $this->assertContains('Name: New Participant', $message->introLines);
         $this->assertContains('Email: new-participant@example.com', $message->introLines);
         $this->assertContains('Registered: Wednesday, August 26, 2026 at 12:00 PM UTC', $message->introLines);

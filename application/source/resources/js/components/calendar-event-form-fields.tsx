@@ -40,7 +40,7 @@ export function CalendarEventFormFields({
                         form.setData('title', event.target.value)
                     }
                     aria-invalid={Boolean(form.errors.title)}
-                    placeholder="Lead Lab planning session"
+                    placeholder="Lead Hub planning session"
                 />
                 <FieldError>{form.errors.title}</FieldError>
             </Field>
@@ -55,7 +55,7 @@ export function CalendarEventFormFields({
                             form.setData('location', event.target.value)
                         }
                         aria-invalid={Boolean(form.errors.location)}
-                        placeholder="Lead Lab studio or online"
+                        placeholder="Lead Hub studio or online"
                     />
                     <FieldError>{form.errors.location}</FieldError>
                 </Field>

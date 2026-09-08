@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(['email' => 'admin@leadlab.test'], [
-            'name' => 'Lead Lab Admin',
+            'name' => 'Lead Hub Admin',
             'password' => 'password',
             'role' => 'admin',
             'is_active' => true,
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::updateOrCreate(['email' => 'participant@leadlab.test'], [
-            'name' => 'Lead Lab Participant',
+            'name' => 'Lead Hub Participant',
             'password' => 'password',
             'role' => 'participant',
             'is_active' => true,
@@ -50,10 +50,10 @@ class DatabaseSeeder extends Seeder
         );
 
         $path = 'lead-lab/resources/lead-lab-demo-notes.txt';
-        Storage::disk('local')->put($path, "Lead Lab demo resource\n\nUse this file to validate protected downloads in the local vertical slice.\n");
+        Storage::disk('local')->put($path, "Lead Hub demo resource\n\nUse this file to validate protected downloads in the local vertical slice.\n");
 
         $session->resources()->updateOrCreate(
-            ['title' => 'Lead Lab demo notes'],
+            ['title' => 'Lead Hub demo notes'],
             [
                 'stored_path' => $path,
                 'mime_type' => 'text/plain',
@@ -64,12 +64,12 @@ class DatabaseSeeder extends Seeder
         $eventStartsAt = now()->addDays(2)->setTime(10, 0);
 
         CalendarEvent::updateOrCreate(
-            ['title' => 'Lead Lab office hours'],
+            ['title' => 'Lead Hub office hours'],
             [
                 'starts_at' => $eventStartsAt,
                 'ends_at' => $eventStartsAt->addHour(),
                 'description' => 'Bring one live question for the group.',
-                'location' => 'Lead Lab studio and online',
+                'location' => 'Lead Hub studio and online',
                 'live_broadcast_url' => 'https://example.com/lead-lab/office-hours',
             ],
         );

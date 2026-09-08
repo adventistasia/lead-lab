@@ -182,7 +182,7 @@ class AdminLearningSessionController
 
         $learningSession->update(['is_published' => true]);
         ActivityLog::record($request->user(), 'session_published', $learningSession);
-        $this->flashSuccess('Session published to the Lead Lab classroom.');
+        $this->flashSuccess('Session published to the Lead Hub classroom.');
 
         return $this->lifecycleRedirect($request);
     }
@@ -193,7 +193,7 @@ class AdminLearningSessionController
     ): RedirectResponse {
         $learningSession->update(['is_published' => false]);
         ActivityLog::record($request->user(), 'session_unpublished', $learningSession);
-        $this->flashSuccess('Session unpublished from the Lead Lab classroom.');
+        $this->flashSuccess('Session unpublished from the Lead Hub classroom.');
 
         return $this->lifecycleRedirect($request);
     }

@@ -81,7 +81,7 @@ export default function Calendar({
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2">
                         <Badge className="w-fit" variant="secondary">
-                            Lead Lab calendar
+                            Lead Hub calendar
                         </Badge>
                         <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
                             Event calendar

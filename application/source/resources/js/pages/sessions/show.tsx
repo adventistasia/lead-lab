@@ -64,7 +64,7 @@ export default function SessionShow({ session }: { session: Session }) {
                         <CardHeader>
                             <CardTitle>Session recording</CardTitle>
                             <CardDescription>
-                                Playback is available to active Lead Lab
+                                Playback is available to active Lead Hub
                                 participants.
                             </CardDescription>
                         </CardHeader>

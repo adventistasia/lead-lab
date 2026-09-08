@@ -11,7 +11,7 @@ Load that file for requirements, exclusions, unresolved decisions, dependencies,
 
 ## Workspace Rules
 
-- Build only the approved private, single-community Lead Lab MVP.
+- Build only the approved private, single-community Lead Hub MVP.
 - Treat the application as a replacement path for SharePoint, not as a general-purpose community platform.
 - Treat payments, public discovery, points, leaderboards, direct messaging, multiple communities, native mobile apps, advanced analytics, and content migration as excluded unless an approved change reopens them.
 - Treat video URL protection and Microsoft 365 SSO as unresolved decisions. Do not silently approve, reject, or implement either as a launch commitment.

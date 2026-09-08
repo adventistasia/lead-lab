@@ -89,7 +89,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 </SheetTitle>
                                 <SheetHeader className="flex justify-start text-left">
                                     <AppLogoImage
-                                        alt="Lead Lab"
+                                        alt="Lead Hub"
                                         className="h-auto w-36 rounded-md"
                                     />
                                 </SheetHeader>

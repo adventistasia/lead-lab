@@ -28,7 +28,7 @@ export default function AuthCardLayout({
                 >
                     <div className="flex h-14 w-full items-center justify-center">
                         <AppLogoImage
-                            alt="Lead Lab"
+                            alt="Lead Hub"
                             className="h-auto w-44 rounded-md"
                         />
                     </div>

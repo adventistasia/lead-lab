@@ -29,7 +29,7 @@ class LeadLabAccessTest extends TestCase
             'session_date' => '2026-08-28',
             'description' => 'A practical session for building a weekly operating rhythm.',
             'video_url' => 'https://www.youtube.com/watch?v=abc123XYZ01',
-            'resource' => UploadedFile::fake()->createWithContent('worksheet.txt', 'Lead Lab worksheet'),
+            'resource' => UploadedFile::fake()->createWithContent('worksheet.txt', 'Lead Hub worksheet'),
         ]);
 
         $session = LearningSession::query()->where('title', 'Build a repeatable lead rhythm')->firstOrFail();
@@ -293,7 +293,7 @@ class LeadLabAccessTest extends TestCase
             ->assertRedirect(route('admin.sessions.index'))
             ->assertSessionHas(
                 'inertia.flash_data.toast.message',
-                'Session published to the Lead Lab classroom.',
+                'Session published to the Lead Hub classroom.',
             );
 
         $this->assertTrue($session->refresh()->is_published);

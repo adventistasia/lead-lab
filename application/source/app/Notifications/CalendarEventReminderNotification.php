@@ -32,7 +32,7 @@ class CalendarEventReminderNotification extends Notification
         $message = (new MailMessage)
             ->subject('Reminder: '.$this->event->title)
             ->greeting('Hello '.$notifiable->name.',')
-            ->line('This is a reminder for the upcoming Lead Lab event.')
+            ->line('This is a reminder for the upcoming Lead Hub event.')
             ->line('Event: '.$this->event->title)
             ->line('Starts: '.$startsAt->format('l, F j, Y \a\t g:i A P'))
             ->line('Ends: '.$endsAt->format('l, F j, Y \a\t g:i A P'));

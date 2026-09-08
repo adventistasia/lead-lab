@@ -159,7 +159,7 @@ export default function Dashboard({
                 <section className="grid gap-6 overflow-hidden rounded-2xl border bg-card p-6 shadow-sm lg:grid-cols-[1fr_20rem] lg:p-8">
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-wrap items-center gap-2">
-                            <Badge variant="secondary">Lead Lab 2026</Badge>
+                            <Badge variant="secondary">Lead Hub 2026</Badge>
                             <Badge variant="outline">Prototype shell</Badge>
                         </div>
                         <div className="flex max-w-2xl flex-col gap-3">
