@@ -5,6 +5,7 @@ export type User = {
     role: 'admin' | 'participant';
     is_active: boolean;
     access_status: 'pending' | 'active' | 'revoked';
+    timezone: string | null;
     avatar?: string;
     email_verified_at: string | null;
     two_factor_enabled?: boolean;

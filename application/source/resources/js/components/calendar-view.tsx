@@ -53,6 +53,23 @@ const dateKey = (date: Date): string =>
         )
         .join('-');
 
+const todayDateKey = (timezone: string): string => {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        timeZone: timezone,
+    })
+        .formatToParts(new Date())
+        .reduce<Record<string, string>>((values, part) => {
+            values[part.type] = part.value;
+
+            return values;
+        }, {});
+
+    return `${parts.year}-${parts.month}-${parts.day}`;
+};
+
 const monthCells = (month: string): CalendarCell[] => {
     const [year, monthNumber] = month.split('-').map(Number);
     const firstDay = new Date(year, monthNumber - 1, 1);
@@ -127,6 +144,7 @@ export function CalendarView({
     previousMonth,
     nextMonth,
     timezone,
+    timezoneLabel,
     isAdmin,
     onEditEvent,
     onDeleteEvent,
@@ -138,6 +156,7 @@ export function CalendarView({
     previousMonth: string;
     nextMonth: string;
     timezone: string;
+    timezoneLabel: string;
     isAdmin: boolean;
     onEditEvent?: (event: CalendarEventSummary) => void;
     onDeleteEvent?: (event: CalendarEventSummary) => void;
@@ -149,7 +168,7 @@ export function CalendarView({
         cells.slice(index * 7, index * 7 + 7),
     );
     const selectedEvent = events.find((event) => event.id === selectedEventId);
-    const today = dateKey(new Date());
+    const today = todayDateKey(timezone);
 
     return (
         <div className="flex flex-col gap-6">
@@ -159,7 +178,7 @@ export function CalendarView({
                     <div>
                         <CardTitle>{monthLabel}</CardTitle>
                         <CardDescription>
-                            Times shown in {timezone}.
+                            Times shown in {timezoneLabel}.
                         </CardDescription>
                     </div>
                 </div>

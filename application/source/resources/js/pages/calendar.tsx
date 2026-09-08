@@ -23,6 +23,7 @@ export default function Calendar({
     previous_month,
     next_month,
     timezone,
+    timezone_label,
     is_admin,
 }: {
     events: CalendarEventSummary[];
@@ -31,6 +32,7 @@ export default function Calendar({
     previous_month: string;
     next_month: string;
     timezone: string;
+    timezone_label: string;
     is_admin: boolean;
 }) {
     const [isEventDialogOpen, setIsEventDialogOpen] = useState(false);
@@ -121,6 +123,7 @@ export default function Calendar({
                             previousMonth={previous_month}
                             nextMonth={next_month}
                             timezone={timezone}
+                            timezoneLabel={timezone_label}
                             isAdmin={is_admin}
                             onEditEvent={openEditDialog}
                             onDeleteEvent={deleteEvent}
@@ -136,6 +139,7 @@ export default function Calendar({
                     onOpenChange={handleEventDialogChange}
                     returnTo="calendar"
                     timezone={timezone}
+                    timezoneLabel={timezone_label}
                     event={eventToEdit}
                 />
             )}

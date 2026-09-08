@@ -25,17 +25,17 @@ class CalendarEventReminderNotification extends Notification
 
     public function toMail(User $notifiable): MailMessage
     {
-        $timezone = (string) config('app.timezone');
-        $startsAt = $this->event->starts_at->setTimezone($timezone);
-        $endsAt = $this->event->ends_at->setTimezone($timezone);
+        $timezone = $notifiable->effectiveTimezone();
+        $startsAt = $this->event->starts_at->copy()->setTimezone($timezone);
+        $endsAt = $this->event->ends_at->copy()->setTimezone($timezone);
 
         $message = (new MailMessage)
             ->subject('Reminder: '.$this->event->title)
             ->greeting('Hello '.$notifiable->name.',')
             ->line('This is a reminder for the upcoming Lead Lab event.')
             ->line('Event: '.$this->event->title)
-            ->line('Starts: '.$startsAt->format('l, F j, Y \a\t g:i A T'))
-            ->line('Ends: '.$endsAt->format('l, F j, Y \a\t g:i A T'));
+            ->line('Starts: '.$startsAt->format('l, F j, Y \a\t g:i A P'))
+            ->line('Ends: '.$endsAt->format('l, F j, Y \a\t g:i A P'));
 
         if ($this->event->location !== null && $this->event->location !== '') {
             $message->line('Location: '.$this->event->location);
@@ -51,6 +51,6 @@ class CalendarEventReminderNotification extends Notification
                 'Open calendar',
                 route('calendar', ['month' => $startsAt->format('Y-m')]),
             )
-            ->line('Times are shown in '.$timezone.'.');
+            ->line('Times are shown in '.$notifiable->effectiveTimezoneLabel($startsAt).'.');
     }
 }

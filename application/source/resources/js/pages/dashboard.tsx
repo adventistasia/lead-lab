@@ -97,7 +97,8 @@ export default function Dashboard({
     },
     sessions = [],
     upcoming_events = [],
-    timezone = 'UTC',
+    timezone = 'Asia/Manila',
+    timezone_label = 'GMT+8 (Asia/Manila)',
     community_updates = [],
     is_admin = false,
 }: {
@@ -105,6 +106,7 @@ export default function Dashboard({
     sessions?: SessionSummary[];
     upcoming_events?: CalendarEventSummary[];
     timezone?: string;
+    timezone_label?: string;
     community_updates?: CommunityUpdate[];
     is_admin?: boolean;
 }) {
@@ -457,6 +459,7 @@ export default function Dashboard({
                     onOpenChange={setIsEventDialogOpen}
                     returnTo="dashboard"
                     timezone={timezone}
+                    timezoneLabel={timezone_label}
                 />
             )}
         </>

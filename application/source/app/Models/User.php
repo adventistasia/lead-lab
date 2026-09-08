@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\ResetPasswordNotification;
+use Carbon\CarbonInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -25,6 +26,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property string $role
  * @property bool $is_active
  * @property string $access_status
+ * @property string|null $timezone
  * @property bool $must_change_password
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -35,10 +37,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password', 'role', 'is_active', 'access_status', 'must_change_password'])]
+#[Fillable(['name', 'email', 'password', 'role', 'is_active', 'access_status', 'timezone', 'must_change_password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
 {
+    public const DEFAULT_TIMEZONE = 'Asia/Manila';
+
     public const ACCESS_PENDING = 'pending';
 
     public const ACCESS_ACTIVE = 'active';
@@ -101,6 +105,33 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
     public function canAccessLeadLab(): bool
     {
         return $this->is_active && $this->access_status === self::ACCESS_ACTIVE;
+    }
+
+    public function effectiveTimezone(): string
+    {
+        $timezone = $this->timezone ?: config('app.default_timezone', self::DEFAULT_TIMEZONE);
+
+        return is_string($timezone) && in_array($timezone, timezone_identifiers_list(), true)
+            ? $timezone
+            : self::DEFAULT_TIMEZONE;
+    }
+
+    public function effectiveTimezoneLabel(?CarbonInterface $at = null): string
+    {
+        $timezone = $this->effectiveTimezone();
+        $offsetMinutes = intdiv(
+            ($at ?? Carbon::now('UTC'))->copy()->setTimezone($timezone)->getOffset(),
+            60,
+        );
+        $sign = $offsetMinutes < 0 ? '-' : '+';
+        $absoluteMinutes = abs($offsetMinutes);
+        $hours = intdiv($absoluteMinutes, 60);
+        $minutes = $absoluteMinutes % 60;
+        $offset = $minutes === 0
+            ? $sign.$hours
+            : sprintf('%s%d:%02d', $sign, $hours, $minutes);
+
+        return "GMT{$offset} ({$timezone})";
     }
 
     /** @return HasMany<SessionQuestion, $this> */

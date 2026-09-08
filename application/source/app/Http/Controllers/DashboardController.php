@@ -18,7 +18,7 @@ class DashboardController
 {
     public function __invoke(Request $request): Response
     {
-        $timezone = (string) config('app.timezone');
+        $timezone = $request->user()->effectiveTimezone();
 
         $visibleSession = static function (Builder $query): void {
             $query
@@ -156,6 +156,7 @@ class DashboardController
             'sessions' => $sessions,
             'upcoming_events' => $upcomingEvents,
             'timezone' => $timezone,
+            'timezone_label' => $request->user()->effectiveTimezoneLabel(),
             'community_updates' => $communityUpdates,
             'is_admin' => $request->user()->isAdmin(),
         ]);

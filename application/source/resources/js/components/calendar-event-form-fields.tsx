@@ -24,10 +24,10 @@ export type CalendarEventFormData = {
 
 export function CalendarEventFormFields({
     form,
-    timezone,
+    timezoneLabel,
 }: {
     form: InertiaForm<CalendarEventFormData>;
-    timezone: string;
+    timezoneLabel: string;
 }) {
     return (
         <FieldGroup>
@@ -116,7 +116,7 @@ export function CalendarEventFormFields({
             </div>
 
             <FieldDescription>
-                Event times are saved and displayed in {timezone}.
+                Event times are saved and displayed in {timezoneLabel}.
             </FieldDescription>
 
             <div className="space-y-3 rounded-lg border p-4">

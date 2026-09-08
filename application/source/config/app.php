@@ -67,6 +67,8 @@ return [
 
     'timezone' => 'UTC',
 
+    'default_timezone' => env('LEAD_LAB_DEFAULT_TIMEZONE', 'Asia/Manila'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

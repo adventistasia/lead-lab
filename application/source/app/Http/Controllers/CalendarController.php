@@ -16,8 +16,8 @@ class CalendarController
             'month' => ['nullable', 'date_format:Y-m'],
         ]);
 
-        $month = $this->parseMonth($validated['month'] ?? null);
-        $timezone = (string) config('app.timezone');
+        $timezone = $request->user()->effectiveTimezone();
+        $month = $this->parseMonth($validated['month'] ?? null, $timezone);
         $monthStart = $month->startOfMonth()->startOfDay()->utc();
         $monthEnd = $month->endOfMonth()->endOfDay()->utc();
 
@@ -37,6 +37,7 @@ class CalendarController
             'previous_month' => $month->subMonth()->format('Y-m'),
             'next_month' => $month->addMonth()->format('Y-m'),
             'timezone' => $timezone,
+            'timezone_label' => $request->user()->effectiveTimezoneLabel(),
             'is_admin' => $request->user()->isAdmin(),
         ]);
     }
@@ -63,20 +64,20 @@ class CalendarController
         ];
     }
 
-    private function parseMonth(?string $value): CarbonImmutable
+    private function parseMonth(?string $value, string $timezone): CarbonImmutable
     {
         if ($value === null) {
-            return CarbonImmutable::now()->startOfMonth();
+            return CarbonImmutable::now($timezone)->startOfMonth();
         }
 
         $month = CarbonImmutable::createFromFormat(
             '!Y-m',
             $value,
-            config('app.timezone'),
+            $timezone,
         );
 
         return $month === null
-            ? CarbonImmutable::now()->startOfMonth()
+            ? CarbonImmutable::now($timezone)->startOfMonth()
             : $month;
     }
 }
