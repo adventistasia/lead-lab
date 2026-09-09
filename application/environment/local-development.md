@@ -32,11 +32,11 @@
 Run these from `projects/lead-lab/application/source/`:
 
 ```text
-php -d upload_max_filesize=25M -d post_max_size=30M artisan serve --host=127.0.0.1 --port=8000
+composer run serve
 npm run dev
 ```
 
-The PHP overrides allow the approved 25 MB supporting-material upload limit when using the native local server. Use `npm run build` for a production asset build. Use `php artisan test`, `npm run lint:check`, `npm run format:check`, `npm run types:check`, and `composer run lint:check` for the local quality checks.
+`composer run serve` starts the native PHP server directly with `upload_max_filesize=20M` and `post_max_size=110M`. Use it instead of `php artisan serve`; Laravel starts a child PHP process for that command and does not carry command-line PHP limit overrides into the child. Stop and restart an existing server after changing this command. The PHP limits allow the batch request to carry up to ten 10 MB supporting materials plus multipart overhead, while application validation still enforces the 10 MB per-file limit. If the effective server limit is still lower, the session form returns a clear batch-size error instead of the raw `PostTooLargeException`. Use `npm run build` for a production asset build. Use `php artisan test`, `npm run lint:check`, `npm run format:check`, `npm run types:check`, and `composer run lint:check` for the local quality checks.
 
 ## Branding Configuration
 

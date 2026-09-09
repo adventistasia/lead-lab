@@ -6,6 +6,7 @@ import {
     UsersRound,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
+import { AppVersion } from '@/components/app-version';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -79,6 +80,7 @@ export function AppSidebar() {
 
             <SidebarFooter>
                 <NavUser />
+                <AppVersion />
             </SidebarFooter>
         </Sidebar>
     );

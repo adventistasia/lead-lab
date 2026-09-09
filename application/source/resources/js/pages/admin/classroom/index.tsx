@@ -5,6 +5,7 @@ import type { FormEvent } from 'react';
 import { ClassroomFilters } from '@/components/classroom-filters';
 import type { ClassroomFilterValues } from '@/components/classroom-filters';
 import { SessionFormFields } from '@/components/session-form-fields';
+import { hasSessionResourceErrors } from '@/components/session-form-fields';
 import type { SessionFormData } from '@/components/session-form-fields';
 import { SessionThumbnail } from '@/components/session-thumbnail';
 import { Badge } from '@/components/ui/badge';
@@ -101,7 +102,7 @@ export default function AdminClassroom({
         session_date: '',
         description: '',
         video_url: '',
-        resource: null,
+        resources: [],
     });
     const lifecycleForm = useForm({});
     const hasFilters =
@@ -129,6 +130,11 @@ export default function AdminClassroom({
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if (hasSessionResourceErrors(form)) {
+            return;
+        }
+
         form.post(store.url({ query: { return_to: 'classroom' } }), {
             forceFormData: true,
             preserveScroll: true,
@@ -362,7 +368,7 @@ export default function AdminClassroom({
                         </CardContent>
                     </Card>
 
-                    <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto">
+                    <DialogContent className="max-h-[90vh] max-w-3xl min-w-0 overflow-x-hidden overflow-y-auto">
                         <DialogHeader>
                             <DialogTitle>Add a classroom session</DialogTitle>
                             <DialogDescription>
@@ -372,7 +378,7 @@ export default function AdminClassroom({
                         </DialogHeader>
                         <form
                             key={formVersion}
-                            className="flex flex-col gap-6"
+                            className="flex min-w-0 flex-col gap-6"
                             onSubmit={submit}
                         >
                             <SessionFormFields form={form} />

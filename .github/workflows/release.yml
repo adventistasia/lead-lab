@@ -1,19 +1,16 @@
-name: Build and publish image
+name: Release
 
+# Versioned releases, separate from build-image.yml's per-branch publishing.
+# Push a `vX.Y.Z` tag on a commit already on `main` to cut a release: it builds
+# and publishes the image under semver tags plus a GitHub Release with
+# generated notes. Nothing here runs on branch pushes.
 on:
   push:
-    # main -> :latest (production, not yet deployed anywhere).
-    # staging -> :staging (chimera, the fleet's staging host).
-    # Versioned releases (vX.Y.Z tags) are handled separately, in release.yml.
-    branches: [main, staging]
-    paths:
-      - "application/source/**"
-      - "application/deploy/**"
-      - ".github/workflows/build-image.yml"
-  workflow_dispatch:
+    tags:
+      - "v*.*.*"
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -34,9 +31,14 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}
+          # latest=false: metadata-action's semver flavor auto-tags the
+          # highest-priority match as :latest, which would silently steal
+          # that tag from build-image.yml's main-branch build.
+          flavor: latest=false
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-            type=raw,value=staging,enable=${{ github.ref == 'refs/heads/staging' }}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
             type=sha,format=short
 
       - uses: docker/build-push-action@v6
@@ -52,9 +54,9 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # A build that succeeds and a container that boots are different
-      # claims — this is B-1/B-2/B-3 from FORGE_HANDOFF.md, run against the
-      # just-published image rather than assumed from a green build step.
+      # Same claim as build-image.yml: a build that succeeds and a container
+      # that boots are different things. Run it against the tagged image
+      # before the release goes out, not just before the tag is trusted.
       - name: Smoke test image
         env:
           IMAGE: ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
@@ -100,3 +102,8 @@ jobs:
             echo "FAIL: /up never returned 200 within 60s" >&2
             exit 1
           fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true

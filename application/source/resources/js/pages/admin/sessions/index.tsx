@@ -10,7 +10,10 @@ import {
     Upload,
 } from 'lucide-react';
 import type { FormEvent } from 'react';
+import { useState } from 'react';
 import { SessionFormFields } from '@/components/session-form-fields';
+import { hasSessionResourceErrors } from '@/components/session-form-fields';
+import type { SessionResource } from '@/components/session-form-fields';
 import type { SessionFormData } from '@/components/session-form-fields';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -22,6 +25,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { dashboard } from '@/routes';
+import { destroy as destroyResource } from '@/routes/admin/resources';
 import {
     archive,
     edit,
@@ -50,7 +54,7 @@ type EditableSession = {
     session_date: string | null;
     description: string | null;
     video_url: string;
-    resource_title: string | null;
+    resources: SessionResource[];
 };
 
 export default function AdminSessions({
@@ -66,10 +70,29 @@ export default function AdminSessions({
         session_date: session?.session_date ?? '',
         description: session?.description ?? '',
         video_url: session?.video_url ?? '',
-        resource: null,
+        resources: [],
     });
     const lifecycleForm = useForm({});
+    const [removingResourceId, setRemovingResourceId] = useState<number | null>(
+        null,
+    );
     const isEditing = session !== undefined;
+
+    const removeResource = (resource: SessionResource) => {
+        if (
+            !window.confirm(
+                `Remove "${resource.title}"? Participants will no longer be able to download it.`,
+            )
+        ) {
+            return;
+        }
+
+        setRemovingResourceId(resource.id);
+        router.delete(destroyResource.url(resource.id), {
+            preserveScroll: true,
+            onFinish: () => setRemovingResourceId(null),
+        });
+    };
 
     const changeLifecycle = (
         learningSession: LearningSession,
@@ -112,6 +135,11 @@ export default function AdminSessions({
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if (hasSessionResourceErrors(form)) {
+            return;
+        }
+
         const options = {
             forceFormData: true,
             preserveScroll: true,
@@ -150,7 +178,7 @@ export default function AdminSessions({
                     </h1>
                     <p className="max-w-2xl text-muted-foreground">
                         {isEditing
-                            ? 'Update the session details and replace its protected material when needed.'
+                            ? 'Update the session details, add a batch of protected materials, or remove an existing material.'
                             : 'Save a complete session as a draft, then publish it when the content is ready.'}
                     </p>
                 </div>
@@ -168,12 +196,14 @@ export default function AdminSessions({
                         </CardHeader>
                         <CardContent>
                             <form
-                                className="flex flex-col gap-6"
+                                className="flex min-w-0 flex-col gap-6"
                                 onSubmit={submit}
                             >
                                 <SessionFormFields
                                     form={form}
-                                    resourceTitle={session?.resource_title}
+                                    existingResources={session?.resources}
+                                    onRemoveResource={removeResource}
+                                    removingResourceId={removingResourceId}
                                 />
 
                                 <div className="flex flex-wrap gap-3">
