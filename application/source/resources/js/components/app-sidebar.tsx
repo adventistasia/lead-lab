@@ -80,7 +80,7 @@ export function AppSidebar() {
 
             <SidebarFooter>
                 <NavUser />
-                <AppVersion />
+                <AppVersion className="px-2 pb-1 group-data-[collapsible=icon]:hidden" />
             </SidebarFooter>
         </Sidebar>
     );
