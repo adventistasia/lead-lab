@@ -1278,6 +1278,33 @@ class LeadLabAccessTest extends TestCase
             ->assertForbidden();
     }
 
+    public function test_admin_can_open_the_admin_guidelines_page(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)
+            ->get(route('admin.guidelines.index'))
+            ->assertOk()
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('admin/guidelines/index')
+            );
+    }
+
+    public function test_participants_cannot_open_the_admin_guidelines_page(): void
+    {
+        $participant = User::factory()->create();
+
+        $this->actingAs($participant)
+            ->get(route('admin.guidelines.index'))
+            ->assertForbidden();
+    }
+
+    public function test_guests_are_redirected_from_the_admin_guidelines_page(): void
+    {
+        $this->get(route('admin.guidelines.index'))
+            ->assertRedirect(route('login'));
+    }
+
     public function test_admin_can_open_the_classroom_recordings_page(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
