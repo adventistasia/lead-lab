@@ -18,9 +18,11 @@ type PageProps = {
 export default function Profile({
     mustVerifyEmail,
     status,
+    timezones,
 }: {
     mustVerifyEmail: boolean;
     status?: string;
+    timezones: string[];
 }) {
     const { auth } = usePage<PageProps>().props;
 
@@ -34,7 +36,7 @@ export default function Profile({
                 <Heading
                     variant="small"
                     title="Profile"
-                    description="Update your name and email address"
+                    description="Update your name, email address, and timezone"
                 />
 
                 <Form
@@ -82,6 +84,39 @@ export default function Profile({
                                 <InputError
                                     className="mt-2"
                                     message={errors.email}
+                                />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="timezone">Timezone</Label>
+
+                                <select
+                                    id="timezone"
+                                    name="timezone"
+                                    defaultValue={auth.user.timezone ?? ''}
+                                    className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-xs ring-offset-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                >
+                                    <option value="">
+                                        Use browser timezone (Asia/Manila
+                                        fallback)
+                                    </option>
+                                    {timezones.map((timezone) => (
+                                        <option key={timezone} value={timezone}>
+                                            {timezone}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                <p className="text-sm text-muted-foreground">
+                                    Calendar dates and reminder emails use this
+                                    timezone. Leave it unset to use the browser
+                                    timezone, with Asia/Manila (GMT+8) as the
+                                    fallback.
+                                </p>
+
+                                <InputError
+                                    className="mt-2"
+                                    message={errors.timezone}
                                 />
                             </div>
 

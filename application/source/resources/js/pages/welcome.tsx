@@ -81,13 +81,13 @@ export default function Welcome() {
 
     return (
         <>
-            <Head title="LeadLab Growth Series" />
+            <Head title="Lead Hub" />
             <div className="min-h-screen bg-background">
                 <header className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-6 lg:px-8">
                     <div className="flex items-center gap-3">
                         <AppLogoImage
-                            alt="LeadLab"
-                            className="h-auto w-36 rounded-md sm:w-44"
+                            alt="Lead Hub"
+                            className="h-auto w-[320px] max-w-[calc(100vw-3rem)] rounded-md"
                         />
                     </div>
                     <Badge className="hidden sm:inline-flex" variant="outline">
@@ -107,10 +107,11 @@ export default function Welcome() {
                                     organization. Multiply your mission.
                                 </h1>
                                 <p className="max-w-xl text-base leading-8 text-muted-foreground">
-                                    LeadLab is a practical leadership
-                                    development journey that helps leaders grow
-                                    personally, lead relationally, strengthen
-                                    organizations, and multiply mission impact.
+                                    LeadLab Growth Series is a practical
+                                    leadership development journey that helps
+                                    leaders grow personally, lead relationally,
+                                    strengthen organizations, and multiply
+                                    mission impact.
                                 </p>
                             </div>
                             <div className="flex flex-wrap gap-3">
@@ -124,7 +125,9 @@ export default function Welcome() {
                                 </Button>
                                 {auth.user ? (
                                     <Button asChild size="lg" variant="outline">
-                                        <a href="#benefits">Explore LeadLab</a>
+                                        <a href="#benefits">
+                                            Explore LeadLab Growth Series
+                                        </a>
                                     </Button>
                                 ) : (
                                     <Button asChild size="lg" variant="outline">
@@ -136,7 +139,7 @@ export default function Welcome() {
                                 <ShieldCheck className="mt-0.5 size-4 shrink-0" />
                                 <span>
                                     Designed for leaders in our organization.
-                                    Access is limited to approved LeadLab
+                                    Access is limited to approved Lead Hub
                                     participants.
                                 </span>
                             </div>
@@ -197,8 +200,8 @@ export default function Welcome() {
                             <p className="text-base leading-7 text-muted-foreground">
                                 Through workshops, peer coaching, reflective
                                 learning, strategic planning, and mentoring,
-                                LeadLab helps participants turn insight into
-                                lasting impact.
+                                LeadLab Growth Series helps participants turn
+                                insight into lasting impact.
                             </p>
                         </div>
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -245,7 +248,7 @@ export default function Welcome() {
                                     practice.
                                 </h2>
                                 <p className="text-base leading-7 text-muted-foreground">
-                                    LeadLab is an immersive,
+                                    LeadLab Growth Series is an immersive,
                                     application-oriented experience designed to
                                     build consistent opportunities for
                                     reflection, accountability, peer coaching,
@@ -298,7 +301,7 @@ export default function Welcome() {
                             <p className="text-base leading-7 text-muted-foreground">
                                 Each participant designs, implements, and
                                 presents a Personal Leadership Project that
-                                applies LeadLab principles to a real leadership
+                                applies Lead Hub principles to a real leadership
                                 opportunity.
                             </p>
                         </div>

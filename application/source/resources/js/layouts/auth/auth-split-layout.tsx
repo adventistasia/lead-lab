@@ -19,7 +19,7 @@ export default function AuthSplitLayout({
                     className="relative z-20 flex items-center text-base font-medium"
                 >
                     <AppLogoImage
-                        alt={name || 'Lead Lab'}
+                        alt={name || 'Lead Hub'}
                         className="h-auto w-44 rounded-md"
                     />
                 </Link>
@@ -31,7 +31,7 @@ export default function AuthSplitLayout({
                         className="relative z-20 flex items-center justify-center lg:hidden"
                     >
                         <AppLogoImage
-                            alt={name || 'Lead Lab'}
+                            alt={name || 'Lead Hub'}
                             className="h-auto w-44 rounded-md"
                         />
                     </Link>

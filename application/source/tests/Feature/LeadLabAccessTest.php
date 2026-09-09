@@ -32,7 +32,7 @@ class LeadLabAccessTest extends TestCase
             'resources' => [
                 UploadedFile::fake()->createWithContent(
                     'worksheet.txt',
-                    'Lead Lab worksheet',
+                    'Lead Hub worksheet',
                 ),
             ],
         ]);
@@ -422,7 +422,7 @@ class LeadLabAccessTest extends TestCase
             ->assertRedirect(route('admin.sessions.index'))
             ->assertSessionHas(
                 'inertia.flash_data.toast.message',
-                'Session published to the Lead Lab classroom.',
+                'Session published to the Lead Hub classroom.',
             );
 
         $this->assertTrue($session->refresh()->is_published);

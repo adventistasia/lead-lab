@@ -180,12 +180,15 @@ class CalendarReminderTest extends TestCase
     {
         $this->travelTo(Carbon::parse('2026-08-26 10:00:00'));
 
-        $user = User::factory()->create(['name' => 'Lead Lab Admin']);
+        $user = User::factory()->create([
+            'name' => 'Lead Hub Admin',
+            'timezone' => 'Asia/Manila',
+        ]);
         $event = CalendarEvent::factory()->create([
             'title' => 'September briefing',
             'starts_at' => now()->addDays(1),
             'ends_at' => now()->addDays(1)->addHour(),
-            'location' => 'Lead Lab studio',
+            'location' => 'Lead Hub studio',
             'live_broadcast_url' => 'https://example.com/live',
             'description' => 'Bring the launch checklist.',
         ]);
@@ -196,15 +199,38 @@ class CalendarReminderTest extends TestCase
         ))->toMail($user);
 
         $this->assertSame('Reminder: September briefing', $message->subject);
-        $this->assertSame('Hello Lead Lab Admin,', $message->greeting);
+        $this->assertSame('Hello Lead Hub Admin,', $message->greeting);
         $this->assertContains('Event: September briefing', $message->introLines);
-        $this->assertContains('Location: Lead Lab studio', $message->introLines);
+        $this->assertContains('Location: Lead Hub studio', $message->introLines);
         $this->assertContains('Live broadcast: https://example.com/live', $message->introLines);
         $this->assertContains('Bring the launch checklist.', $message->introLines);
+        $this->assertContains('Starts: Thursday, August 27, 2026 at 6:00 PM +08:00', $message->introLines);
+        $this->assertContains('Ends: Thursday, August 27, 2026 at 7:00 PM +08:00', $message->introLines);
         $this->assertSame('Open calendar', $message->actionText);
         $this->assertStringContainsString('/calendar?month=', $message->actionUrl);
+        $this->assertContains('Times are shown in GMT+8 (Asia/Manila).', $message->outroLines);
 
         $this->travelBack();
+    }
+
+    public function test_reminder_notification_uses_the_event_date_timezone_offset(): void
+    {
+        $user = User::factory()->create([
+            'timezone' => 'America/New_York',
+        ]);
+        $event = CalendarEvent::factory()->create([
+            'starts_at' => Carbon::parse('2026-01-15 15:00:00', 'UTC'),
+            'ends_at' => Carbon::parse('2026-01-15 16:00:00', 'UTC'),
+        ]);
+
+        $message = (new CalendarEventReminderNotification(
+            $event,
+            CalendarEvent::REMINDER_ONE_DAY,
+        ))->toMail($user);
+
+        $this->assertContains('Starts: Thursday, January 15, 2026 at 10:00 AM -05:00', $message->introLines);
+        $this->assertContains('Ends: Thursday, January 15, 2026 at 11:00 AM -05:00', $message->introLines);
+        $this->assertContains('Times are shown in GMT-5 (America/New_York).', $message->outroLines);
     }
 
     public function test_reminder_job_releases_delivery_when_event_time_changes(): void

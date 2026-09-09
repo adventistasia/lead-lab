@@ -21,8 +21,8 @@ export default function RegistrationPending({
                         {!emailVerificationRequired
                             ? 'Your registration is waiting for administrator approval.'
                             : emailVerified
-                              ? 'Your email is verified. An administrator must approve your Lead Lab access before you can enter the workspace.'
-                              : 'Verify your email address first. An administrator can approve your Lead Lab access after verification.'}
+                              ? 'Your email is verified. An administrator must approve your Lead Hub access before you can enter the workspace.'
+                              : 'Verify your email address first. An administrator can approve your Lead Hub access after verification.'}
                     </p>
                 </div>
 

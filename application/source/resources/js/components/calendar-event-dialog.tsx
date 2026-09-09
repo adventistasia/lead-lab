@@ -56,12 +56,14 @@ export function CalendarEventDialog({
     onOpenChange,
     returnTo,
     timezone,
+    timezoneLabel,
     event,
 }: {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     returnTo: 'dashboard' | 'calendar';
     timezone: string;
+    timezoneLabel: string;
     event?: CalendarEventSummary | null;
 }) {
     const form = useForm<CalendarEventFormData>(eventFormData(event, timezone));
@@ -120,7 +122,10 @@ export function CalendarEventDialog({
                     </DialogDescription>
                 </DialogHeader>
                 <form className="flex flex-col gap-6" onSubmit={submit}>
-                    <CalendarEventFormFields form={form} timezone={timezone} />
+                    <CalendarEventFormFields
+                        form={form}
+                        timezoneLabel={timezoneLabel}
+                    />
                     <DialogFooter>
                         <DialogClose asChild>
                             <Button

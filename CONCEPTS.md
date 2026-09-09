@@ -44,11 +44,11 @@ A user with permissions to manage community content within assigned boundaries. 
 
 ## Access Status
 
-The lifecycle state of a user's ability to access Lead Lab content: pending (registered, awaiting approval), active (approved, can access), or revoked (access removed, can be restored).
+The lifecycle state of a user's ability to access Lead Hub content: pending (registered, awaiting approval), active (approved, can access), or revoked (access removed, can be restored).
 
 ## Option B
 
-The approved product direction: a private, self-hosted web application inspired by Skool, replacing SharePoint for the Lead Lab training program. Option B is the current baseline; other options are historical.
+The approved product direction: a private, self-hosted web application inspired by Skool, replacing SharePoint for the Lead Hub training program. Option B is the current baseline; other options are historical.
 
 ## ICM (Interpretable Context Methodology)
 

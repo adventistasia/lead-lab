@@ -28,7 +28,7 @@ class CalendarTest extends TestCase
             'title' => 'September launch briefing',
             'starts_at' => Carbon::parse('2026-08-28 10:00:00'),
             'ends_at' => Carbon::parse('2026-08-30 11:00:00'),
-            'location' => 'Lead Lab studio',
+            'location' => 'Lead Hub studio',
             'live_broadcast_url' => 'https://example.com/lead-lab/live',
         ]);
         CalendarEvent::factory()->create([
@@ -41,11 +41,12 @@ class CalendarTest extends TestCase
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('calendar')
                 ->where('month', '2026-08')
-                ->where('timezone', 'UTC')
+                ->where('timezone', 'Asia/Manila')
+                ->where('timezone_label', 'GMT+8 (Asia/Manila)')
                 ->where('is_admin', false)
                 ->has('events', 1)
                 ->where('events.0.id', $event->id)
-                ->where('events.0.location', 'Lead Lab studio')
+                ->where('events.0.location', 'Lead Hub studio')
                 ->where('events.0.live_broadcast_url', 'https://example.com/lead-lab/live')
                 ->where('events.0.start_date', '2026-08-28')
                 ->where('events.0.end_date', '2026-08-30'),
@@ -58,6 +59,32 @@ class CalendarTest extends TestCase
                 ->where('is_admin', true)
                 ->has('events', 1),
             );
+    }
+
+    public function test_calendar_uses_the_saved_user_timezone_for_month_boundaries(): void
+    {
+        $this->travelTo(Carbon::parse('2026-08-15 12:00:00', 'UTC'));
+        $participant = User::factory()->create(['timezone' => 'America/New_York']);
+        $event = CalendarEvent::factory()->create([
+            'starts_at' => Carbon::parse('2026-09-01 01:00:00', 'UTC'),
+            'ends_at' => Carbon::parse('2026-09-01 03:00:00', 'UTC'),
+        ]);
+
+        $this->actingAs($participant)
+            ->get(route('calendar', ['month' => '2026-08']))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('calendar')
+                ->where('timezone', 'America/New_York')
+                ->where('timezone_label', 'GMT-4 (America/New_York)')
+                ->has('events', 1)
+                ->where('events.0.id', $event->id)
+                ->where('events.0.starts_at', '2026-08-31T21:00:00-04:00')
+                ->where('events.0.ends_at', '2026-08-31T23:00:00-04:00')
+                ->where('events.0.start_date', '2026-08-31')
+                ->where('events.0.end_date', '2026-08-31'),
+            );
+
+        $this->travelBack();
     }
 
     public function test_dashboard_exposes_the_next_three_events(): void
@@ -90,6 +117,29 @@ class CalendarTest extends TestCase
             );
     }
 
+    public function test_dashboard_uses_the_saved_user_timezone_for_event_summaries(): void
+    {
+        $this->travelTo(Carbon::parse('2026-08-15 12:00:00', 'UTC'));
+        $participant = User::factory()->create(['timezone' => 'Asia/Tokyo']);
+        $event = CalendarEvent::factory()->create([
+            'starts_at' => Carbon::parse('2026-08-31 23:30:00', 'UTC'),
+            'ends_at' => Carbon::parse('2026-09-01 00:30:00', 'UTC'),
+        ]);
+
+        $this->actingAs($participant)
+            ->get(route('dashboard'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('dashboard')
+                ->where('timezone', 'Asia/Tokyo')
+                ->where('timezone_label', 'GMT+9 (Asia/Tokyo)')
+                ->where('upcoming_events.0.id', $event->id)
+                ->where('upcoming_events.0.start_date', '2026-09-01')
+                ->where('upcoming_events.0.end_date', '2026-09-01'),
+            );
+
+        $this->travelBack();
+    }
+
     public function test_admin_can_create_a_published_event_from_the_dashboard(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
@@ -97,17 +147,17 @@ class CalendarTest extends TestCase
         $response = $this->actingAs($admin)->post(
             route('admin.calendar-events.store', ['return_to' => 'dashboard']),
             [
-                'title' => 'Lead Lab planning session',
+                'title' => 'Lead Hub planning session',
                 'starts_at' => '2026-08-28T10:00',
                 'ends_at' => '2026-08-28T11:30',
                 'description' => 'Align on the next program milestone.',
-                'location' => 'Lead Lab studio',
+                'location' => 'Lead Hub studio',
                 'live_broadcast_url' => 'https://example.com/lead-lab/planning',
             ],
         );
 
         $event = CalendarEvent::query()
-            ->where('title', 'Lead Lab planning session')
+            ->where('title', 'Lead Hub planning session')
             ->firstOrFail();
 
         $response
@@ -116,9 +166,9 @@ class CalendarTest extends TestCase
                 'inertia.flash_data.toast.message',
                 'Calendar event added.',
             );
-        $this->assertSame('2026-08-28 10:00:00', $event->starts_at->format('Y-m-d H:i:s'));
-        $this->assertSame('2026-08-28 11:30:00', $event->ends_at->format('Y-m-d H:i:s'));
-        $this->assertSame('Lead Lab studio', $event->location);
+        $this->assertSame('2026-08-28 02:00:00', $event->starts_at->format('Y-m-d H:i:s'));
+        $this->assertSame('2026-08-28 03:30:00', $event->ends_at->format('Y-m-d H:i:s'));
+        $this->assertSame('Lead Hub studio', $event->location);
         $this->assertSame('https://example.com/lead-lab/planning', $event->live_broadcast_url);
         $this->assertDatabaseHas('activity_logs', [
             'actor_id' => $admin->id,
@@ -139,6 +189,28 @@ class CalendarTest extends TestCase
                 ->firstOrFail()
                 ->metadata['reminders'],
         );
+    }
+
+    public function test_admin_event_input_is_interpreted_in_the_admin_timezone(): void
+    {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+            'timezone' => 'America/New_York',
+        ]);
+
+        $this->actingAs($admin)->post(route('admin.calendar-events.store'), [
+            'title' => 'New York event',
+            'starts_at' => '2026-08-28T10:00',
+            'ends_at' => '2026-08-28T11:00',
+            'description' => 'An event entered in the administrator timezone.',
+        ])->assertRedirect();
+
+        $event = CalendarEvent::query()
+            ->where('title', 'New York event')
+            ->firstOrFail();
+
+        $this->assertSame('2026-08-28 14:00:00', $event->starts_at->format('Y-m-d H:i:s'));
+        $this->assertSame('2026-08-28 15:00:00', $event->ends_at->format('Y-m-d H:i:s'));
     }
 
     public function test_admin_can_edit_a_calendar_event(): void
@@ -171,7 +243,7 @@ class CalendarTest extends TestCase
         $response->assertRedirect(route('calendar'));
         $event->refresh();
         $this->assertSame('Updated event', $event->title);
-        $this->assertSame('2026-08-29 13:00:00', $event->starts_at->format('Y-m-d H:i:s'));
+        $this->assertSame('2026-08-29 05:00:00', $event->starts_at->format('Y-m-d H:i:s'));
         $this->assertSame('Updated event details.', $event->description);
         $this->assertSame('Online', $event->location);
         $this->assertSame('https://example.com/lead-lab/updated', $event->live_broadcast_url);

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Lead Hub'),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,6 +79,8 @@ return [
     */
 
     'timezone' => 'UTC',
+
+    'default_timezone' => env('LEAD_LAB_DEFAULT_TIMEZONE', 'Asia/Manila'),
 
     /*
     |--------------------------------------------------------------------------

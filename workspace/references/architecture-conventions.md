@@ -15,7 +15,7 @@ This is a candidate, not a final decision. If the team-supported environment dif
 
 ## Design Rules
 
-- Keep one application and one Lead Lab community.
+- Keep one application and one Lead Hub community.
 - Use Inertia React and TypeScript for the application interface.
 - Use official shadcn/ui components from the configured project registry before writing custom UI primitives.
 - Keep shadcn components in `resources/js/components/ui/` and compose them in feature components and pages.

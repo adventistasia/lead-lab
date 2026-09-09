@@ -75,10 +75,11 @@ class AdminCalendarEventController
             'remind_fifteen_minutes_before' => ['sometimes', 'boolean'],
         ]);
 
+        $timezone = $request->user()->effectiveTimezone();
         $attributes = [
             'title' => $validated['title'],
-            'starts_at' => $this->parseDateTime($validated['starts_at']),
-            'ends_at' => $this->parseDateTime($validated['ends_at']),
+            'starts_at' => $this->parseDateTime($validated['starts_at'], $timezone),
+            'ends_at' => $this->parseDateTime($validated['ends_at'], $timezone),
             'description' => $validated['description'],
             'location' => $validated['location'] ?? null,
             'live_broadcast_url' => $validated['live_broadcast_url'] ?? null,
@@ -114,12 +115,12 @@ class AdminCalendarEventController
         ]);
     }
 
-    private function parseDateTime(string $value): Carbon
+    private function parseDateTime(string $value, string $timezone): Carbon
     {
         $dateTime = Carbon::createFromFormat(
             'Y-m-d\\TH:i',
             $value,
-            config('app.timezone'),
+            $timezone,
         );
 
         if ($dateTime === null) {

@@ -6,7 +6,7 @@ import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Lead Lab';
+const appName = import.meta.env.VITE_APP_NAME || 'Lead Hub';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

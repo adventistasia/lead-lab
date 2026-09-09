@@ -314,7 +314,7 @@ export default function AdminMembers({
                     <CardHeader>
                         <div className="flex items-center justify-between gap-4">
                             <div className="flex flex-col gap-1.5">
-                                <CardTitle>Lead Lab members</CardTitle>
+                                <CardTitle>Lead Hub members</CardTitle>
                                 <CardDescription>
                                     {members.total}{' '}
                                     {members.total === 1 ? 'member' : 'members'}

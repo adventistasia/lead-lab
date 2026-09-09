@@ -141,16 +141,16 @@ class PasswordResetTest extends TestCase
     public function test_reset_password_notification_has_branded_secure_content(): void
     {
         $user = User::factory()->create([
-            'name' => 'Lead Lab Participant',
+            'name' => 'Lead Hub Participant',
             'email' => 'participant@example.com',
         ]);
 
         $message = (new ResetPasswordNotification('reset-token'))->toMail($user);
 
-        $this->assertSame('Reset your Lead Lab password', $message->subject);
-        $this->assertSame('Hello Lead Lab Participant,', $message->greeting);
+        $this->assertSame('Reset your Lead Hub password', $message->subject);
+        $this->assertSame('Hello Lead Hub Participant,', $message->greeting);
         $this->assertContains(
-            'We received a request to reset the password for your Lead Lab account.',
+            'We received a request to reset the password for your Lead Hub account.',
             $message->introLines,
         );
         $this->assertSame('Reset password', $message->actionText);
@@ -163,7 +163,7 @@ class PasswordResetTest extends TestCase
             'For your security, do not forward this email or share the reset link.',
             $message->outroLines,
         );
-        $this->assertSame('Lead Lab Support', $message->salutation);
+        $this->assertSame('Lead Hub Support', $message->salutation);
     }
 
     public function test_reset_password_screen_can_be_rendered(): void

@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "adventistasia/lead-lab",
     "type": "project",
-    "description": "The private, self-hosted Lead Lab portal.",
+    "description": "The private, self-hosted Lead Hub portal.",
     "keywords": [
         "laravel",
         "framework"

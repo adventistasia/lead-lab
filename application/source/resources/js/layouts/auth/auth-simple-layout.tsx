@@ -19,8 +19,8 @@ export default function AuthSimpleLayout({
                         >
                             <div className="mb-1 flex h-14 w-full items-center justify-center">
                                 <AppLogoImage
-                                    alt="Lead Lab"
-                                    className="h-auto w-48 max-w-full rounded-md"
+                                    alt="Lead Hub"
+                                    className="h-auto w-[320px] max-w-full translate-x-[19%] rounded-md"
                                 />
                             </div>
                             <span className="sr-only">{title}</span>

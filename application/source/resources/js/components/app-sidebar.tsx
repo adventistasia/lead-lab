@@ -67,7 +67,7 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href={dashboard()} prefetch>
-                                <AppLogo />
+                                <AppLogo imageClassName="-translate-x-[12.5%]" />
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

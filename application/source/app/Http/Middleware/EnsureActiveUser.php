@@ -21,7 +21,7 @@ class EnsureActiveUser
             $request->session()->regenerateToken();
 
             return redirect()->route('login')->withErrors([
-                'email' => 'Your Lead Lab access is inactive.',
+                'email' => 'Your Lead Hub access is inactive.',
             ]);
         }
 

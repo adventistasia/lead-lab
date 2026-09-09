@@ -24,10 +24,10 @@ export type CalendarEventFormData = {
 
 export function CalendarEventFormFields({
     form,
-    timezone,
+    timezoneLabel,
 }: {
     form: InertiaForm<CalendarEventFormData>;
-    timezone: string;
+    timezoneLabel: string;
 }) {
     return (
         <FieldGroup>
@@ -40,7 +40,7 @@ export function CalendarEventFormFields({
                         form.setData('title', event.target.value)
                     }
                     aria-invalid={Boolean(form.errors.title)}
-                    placeholder="Lead Lab planning session"
+                    placeholder="Lead Hub planning session"
                 />
                 <FieldError>{form.errors.title}</FieldError>
             </Field>
@@ -55,7 +55,7 @@ export function CalendarEventFormFields({
                             form.setData('location', event.target.value)
                         }
                         aria-invalid={Boolean(form.errors.location)}
-                        placeholder="Lead Lab studio or online"
+                        placeholder="Lead Hub studio or online"
                     />
                     <FieldError>{form.errors.location}</FieldError>
                 </Field>
@@ -116,7 +116,7 @@ export function CalendarEventFormFields({
             </div>
 
             <FieldDescription>
-                Event times are saved and displayed in {timezone}.
+                Event times are saved and displayed in {timezoneLabel}.
             </FieldDescription>
 
             <div className="space-y-3 rounded-lg border p-4">
