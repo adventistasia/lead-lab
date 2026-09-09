@@ -35,10 +35,16 @@ jobs:
           # highest-priority match as :latest, which would silently steal
           # that tag from build-image.yml's main-branch build.
           flavor: latest=false
+          # pattern=v{{version}}, not the bare {{version}} macro: the macro
+          # strips the git tag's `v` prefix, so a `v0.1.0` tag published as
+          # image tag `0.1.0` — every announcement (GitHub Release, chat,
+          # this UI's label) says `v0.1.0`, and `docker pull ...:v0.1.0`
+          # 404s. Confirmed by Castellan hitting exactly that 2026-09-09,
+          # which briefly took prod down mid-redeploy.
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=semver,pattern=v{{version}}
+            type=semver,pattern=v{{major}}.{{minor}}
+            type=semver,pattern=v{{major}}
             type=sha,format=short
 
       - uses: docker/build-push-action@v6
