@@ -56,7 +56,7 @@ const howTos = [
         },
         steps: [
             'Open Members from the sidebar.',
-            'Search by name or email, or filter by account status.',
+            'Use the account-state tabs to view active, pending email verification, pending administrator acceptance, or revoked members. Search by name or email when needed.',
             'Review the member and email status.',
             'Choose Approve access, Revoke access, or Restore access.',
             'Choose Change role when the member needs Participant or Administrator permissions. This does not change access status.',

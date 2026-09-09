@@ -36,6 +36,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { dashboard } from '@/routes';
 import {
     index as membersRoute,
@@ -43,7 +44,12 @@ import {
     status as updateMemberStatus,
 } from '@/routes/admin/members';
 
-type MemberStatus = 'pending' | 'active' | 'revoked';
+type MemberAccessStatus = 'pending' | 'active' | 'revoked';
+type MemberState =
+    | 'active'
+    | 'pending-email-verification'
+    | 'pending-admin-acceptance'
+    | 'revoked';
 type MemberRole = 'admin' | 'participant';
 
 type Member = {
@@ -52,7 +58,7 @@ type Member = {
     email: string;
     role: string;
     is_active: boolean;
-    access_status: MemberStatus;
+    access_status: MemberAccessStatus;
     email_verified_at: string | null;
     created_at: string | null;
 };
@@ -75,18 +81,33 @@ type MembersPage = {
     total: number;
 };
 
-const statusOptions: Array<{
-    value: MemberStatus | 'all';
+const accessStatusLabels: Record<MemberAccessStatus, string> = {
+    pending: 'Pending',
+    active: 'Active',
+    revoked: 'Revoked',
+};
+
+const memberStateOptions: Array<{
+    value: MemberState;
     label: string;
 }> = [
-    { value: 'all', label: 'All statuses' },
-    { value: 'pending', label: 'Pending' },
-    { value: 'active', label: 'Active' },
-    { value: 'revoked', label: 'Revoked' },
+    { value: 'active', label: 'Active Users' },
+    {
+        value: 'pending-email-verification',
+        label: 'Pending Email Verification',
+    },
+    {
+        value: 'pending-admin-acceptance',
+        label: 'Pending Admin Acceptance',
+    },
+    { value: 'revoked', label: 'Revoked Access' },
 ];
 
-const statusLabel = (status: MemberStatus): string =>
-    statusOptions.find((option) => option.value === status)?.label ?? status;
+const stateLabel = (state: MemberState): string =>
+    memberStateOptions.find((option) => option.value === state)?.label ?? state;
+
+const statusLabel = (status: MemberAccessStatus): string =>
+    accessStatusLabels[status] ?? status;
 
 const roleOptions: Array<{
     value: MemberRole;
@@ -104,20 +125,19 @@ const isManageableRole = (role: string): role is MemberRole =>
 
 export default function AdminMembers({
     members,
+    counts,
     filters,
     emailVerificationRequired,
 }: {
     members: MembersPage;
+    counts: Record<MemberState, number>;
     filters: {
         search: string;
-        status: MemberStatus | null;
+        state: MemberState;
     };
     emailVerificationRequired: boolean;
 }) {
     const [search, setSearch] = useState(filters.search);
-    const [status, setStatus] = useState<MemberStatus | 'all'>(
-        filters.status ?? 'all',
-    );
     const [selectedRoleMember, setSelectedRoleMember] = useState<Member | null>(
         null,
     );
@@ -172,17 +192,13 @@ export default function AdminMembers({
         });
     };
 
-    const applyFilters = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const params: Record<string, string> = {};
+    const changeState = (nextState: string) => {
+        const params: Record<string, string> = {
+            state: nextState,
+        };
 
         if (search.trim() !== '') {
             params.search = search.trim();
-        }
-
-        if (status !== 'all') {
-            params.status = status;
         }
 
         router.get(membersRoute.url(), params, {
@@ -191,13 +207,29 @@ export default function AdminMembers({
         });
     };
 
-    const clearFilters = () => {
+    const applyFilters = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const params: Record<string, string> = {
+            state: filters.state,
+        };
+
+        if (search.trim() !== '') {
+            params.search = search.trim();
+        }
+
+        router.get(membersRoute.url(), params, {
+            preserveScroll: true,
+            preserveState: true,
+        });
+    };
+
+    const clearSearch = () => {
         setSearch('');
-        setStatus('all');
 
         router.get(
             membersRoute.url(),
-            {},
+            { state: filters.state },
             {
                 preserveScroll: true,
                 preserveState: true,
@@ -205,8 +237,8 @@ export default function AdminMembers({
         );
     };
 
-    const hasFilters = search.trim() !== '' || status !== 'all';
-    const hasAppliedFilters = filters.search !== '' || filters.status !== null;
+    const hasFilters = search.trim() !== '';
+    const hasAppliedFilters = filters.search !== '';
 
     return (
         <>
@@ -320,10 +352,7 @@ export default function AdminMembers({
                                     {members.total === 1 ? 'member' : 'members'}
                                     {filters.search
                                         ? ` matching "${filters.search}"`
-                                        : ''}
-                                    {filters.status
-                                        ? ` with ${statusLabel(filters.status).toLowerCase()} access`
-                                        : ' in the workspace'}
+                                        : ` in ${stateLabel(filters.state).toLowerCase()}`}
                                 </CardDescription>
                             </div>
                             <ShieldCheck className="size-5 text-muted-foreground" />
@@ -340,7 +369,7 @@ export default function AdminMembers({
                                     Filter members
                                 </p>
                             </div>
-                            <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(14rem,16rem)]">
+                            <div className="flex flex-col gap-4">
                                 <div className="flex flex-col gap-2">
                                     <Label htmlFor="member-search">
                                         Search
@@ -358,36 +387,6 @@ export default function AdminMembers({
                                         />
                                     </div>
                                 </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label htmlFor="member-status">
-                                        Account status
-                                    </Label>
-                                    <Select
-                                        value={status}
-                                        onValueChange={(value) =>
-                                            setStatus(
-                                                value as MemberStatus | 'all',
-                                            )
-                                        }
-                                    >
-                                        <SelectTrigger
-                                            id="member-status"
-                                            className="w-full"
-                                        >
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {statusOptions.map((option) => (
-                                                <SelectItem
-                                                    key={option.value}
-                                                    value={option.value}
-                                                >
-                                                    {option.label}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 <Button type="submit">Apply filter</Button>
@@ -395,236 +394,275 @@ export default function AdminMembers({
                                     <Button
                                         type="button"
                                         variant="outline"
-                                        onClick={clearFilters}
+                                        onClick={clearSearch}
                                     >
-                                        Clear
+                                        Clear search
                                     </Button>
                                 ) : null}
                             </div>
                         </form>
 
-                        {members.data.length === 0 ? (
-                            <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed p-8 text-center">
-                                <p className="font-medium">
-                                    {filters.search || filters.status
-                                        ? `No members${filters.search ? ` matching "${filters.search}"` : ''}${filters.status ? ` with ${statusLabel(filters.status).toLowerCase()} access` : ''} found`
-                                        : 'No members found'}
-                                </p>
-                                <p className="text-sm text-muted-foreground">
-                                    {filters.search || filters.status
-                                        ? 'Try another name, email, or account status.'
-                                        : 'Registered accounts will appear here.'}
-                                </p>
-                            </div>
-                        ) : (
-                            <div className="flex flex-col gap-3">
-                                {members.data.map((member) => (
-                                    <div
-                                        key={member.id}
-                                        className="flex flex-wrap items-center gap-4 rounded-lg border p-4"
+                        <Tabs value={filters.state} onValueChange={changeState}>
+                            <TabsList className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-2 xl:grid-cols-4">
+                                {memberStateOptions.map((option) => (
+                                    <TabsTrigger
+                                        key={option.value}
+                                        value={option.value}
+                                        className="h-auto min-h-9 px-3 py-2 text-center whitespace-normal"
                                     >
-                                        <div className="flex min-w-0 flex-1 flex-col gap-1">
-                                            <p className="font-medium">
-                                                {member.name}
-                                            </p>
-                                            <p className="truncate text-sm text-muted-foreground">
-                                                {member.email}
-                                            </p>
-                                            <p className="text-xs text-muted-foreground">
-                                                {roleLabel(member.role)} ·
-                                                joined {member.created_at}
-                                            </p>
-                                            <p className="text-xs text-muted-foreground">
-                                                {member.email_verified_at
-                                                    ? 'Email verified'
-                                                    : 'Email not verified'}
-                                            </p>
-                                        </div>
-                                        <Badge
-                                            variant={
-                                                member.access_status ===
-                                                'revoked'
-                                                    ? 'destructive'
-                                                    : member.access_status ===
-                                                        'pending'
-                                                      ? 'outline'
-                                                      : 'secondary'
-                                            }
-                                        >
-                                            {statusLabel(member.access_status)}
-                                        </Badge>
-                                        {member.access_status === 'pending' ? (
-                                            !emailVerificationRequired ||
-                                            member.email_verified_at ? (
-                                                <Button
-                                                    variant="default"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        updateAccess(
-                                                            member,
-                                                            'active',
-                                                        )
+                                        {option.label}
+                                        {option.value ===
+                                            'pending-email-verification' ||
+                                        option.value ===
+                                            'pending-admin-acceptance'
+                                            ? ` (${counts[option.value]})`
+                                            : null}
+                                    </TabsTrigger>
+                                ))}
+                            </TabsList>
+
+                            <TabsContent value={filters.state} className="mt-2">
+                                {members.data.length === 0 ? (
+                                    <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed p-8 text-center">
+                                        <p className="font-medium">
+                                            {filters.search
+                                                ? `No members matching "${filters.search}" found in ${stateLabel(filters.state).toLowerCase()}.`
+                                                : `No members in ${stateLabel(filters.state).toLowerCase()}.`}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {filters.search
+                                                ? 'Try another name or email.'
+                                                : 'Members will appear here when they enter this state.'}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col gap-3">
+                                        {members.data.map((member) => (
+                                            <div
+                                                key={member.id}
+                                                className="flex flex-wrap items-center gap-4 rounded-lg border p-4"
+                                            >
+                                                <div className="flex min-w-0 flex-1 flex-col gap-1">
+                                                    <p className="font-medium">
+                                                        {member.name}
+                                                    </p>
+                                                    <p className="truncate text-sm text-muted-foreground">
+                                                        {member.email}
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        {roleLabel(member.role)}{' '}
+                                                        · joined{' '}
+                                                        {member.created_at}
+                                                    </p>
+                                                    <p className="text-xs text-muted-foreground">
+                                                        {member.email_verified_at
+                                                            ? 'Email verified'
+                                                            : 'Email not verified'}
+                                                    </p>
+                                                </div>
+                                                <Badge
+                                                    variant={
+                                                        member.access_status ===
+                                                        'revoked'
+                                                            ? 'destructive'
+                                                            : member.access_status ===
+                                                                'pending'
+                                                              ? 'outline'
+                                                              : 'secondary'
                                                     }
                                                 >
-                                                    Approve access
-                                                </Button>
-                                            ) : (
-                                                <span className="text-xs text-muted-foreground">
-                                                    Waiting for email
-                                                    verification
-                                                </span>
-                                            )
-                                        ) : (
-                                            <Button
-                                                variant={
-                                                    member.access_status ===
-                                                    'active'
-                                                        ? 'destructive'
-                                                        : 'outline'
-                                                }
-                                                size="sm"
-                                                onClick={() =>
-                                                    updateAccess(
-                                                        member,
-                                                        member.access_status ===
-                                                            'active'
-                                                            ? 'revoked'
-                                                            : 'active',
-                                                    )
-                                                }
-                                            >
-                                                <UserRoundX data-icon="inline-start" />
+                                                    {statusLabel(
+                                                        member.access_status,
+                                                    )}
+                                                </Badge>
                                                 {member.access_status ===
-                                                'active'
-                                                    ? 'Revoke access'
-                                                    : 'Restore access'}
-                                            </Button>
-                                        )}
-                                        {isManageableRole(member.role) ? (
-                                            <Button
-                                                type="button"
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() =>
-                                                    openRoleDialog(member)
-                                                }
-                                            >
-                                                Change role
-                                            </Button>
-                                        ) : null}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        {members.last_page > 1 ? (
-                            <nav
-                                className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:items-center sm:justify-between"
-                                aria-label="Member pagination"
-                            >
-                                <p className="text-sm text-muted-foreground">
-                                    Showing {members.from} to {members.to} of{' '}
-                                    {members.total} members
-                                </p>
-                                <div className="flex flex-wrap items-center gap-2">
-                                    {members.prev_page_url ? (
-                                        <Button
-                                            asChild
-                                            variant="outline"
-                                            size="sm"
-                                        >
-                                            <Link
-                                                href={members.prev_page_url}
-                                                preserveScroll
-                                            >
-                                                <ChevronLeft data-icon="inline-start" />
-                                                Previous
-                                            </Link>
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            size="sm"
-                                            disabled
-                                        >
-                                            <ChevronLeft data-icon="inline-start" />
-                                            Previous
-                                        </Button>
-                                    )}
-                                    <div className="flex flex-wrap items-center gap-1">
-                                        {members.links
-                                            .filter(
-                                                ({ label }) =>
-                                                    !label.includes(
-                                                        'Previous',
-                                                    ) &&
-                                                    !label.includes('Next'),
-                                            )
-                                            .map((link, index) =>
-                                                link.url ? (
-                                                    <Button
-                                                        key={`${link.label}-${index}`}
-                                                        asChild
-                                                        variant={
-                                                            link.active
-                                                                ? 'default'
-                                                                : 'outline'
-                                                        }
-                                                        size="icon"
-                                                    >
-                                                        <Link
-                                                            href={link.url}
-                                                            preserveScroll
-                                                            aria-label={`Go to page ${link.label}`}
-                                                            aria-current={
-                                                                link.active
-                                                                    ? 'page'
-                                                                    : undefined
+                                                'pending' ? (
+                                                    !emailVerificationRequired ||
+                                                    member.email_verified_at ? (
+                                                        <Button
+                                                            variant="default"
+                                                            size="sm"
+                                                            onClick={() =>
+                                                                updateAccess(
+                                                                    member,
+                                                                    'active',
+                                                                )
                                                             }
                                                         >
-                                                            {link.label}
-                                                        </Link>
-                                                    </Button>
+                                                            Approve access
+                                                        </Button>
+                                                    ) : (
+                                                        <span className="text-xs text-muted-foreground">
+                                                            Waiting for email
+                                                            verification
+                                                        </span>
+                                                    )
                                                 ) : (
-                                                    <span
-                                                        key={`${link.label}-${index}`}
-                                                        className="flex size-9 items-center justify-center text-sm text-muted-foreground"
-                                                        aria-hidden="true"
+                                                    <Button
+                                                        variant={
+                                                            member.access_status ===
+                                                            'active'
+                                                                ? 'destructive'
+                                                                : 'outline'
+                                                        }
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            updateAccess(
+                                                                member,
+                                                                member.access_status ===
+                                                                    'active'
+                                                                    ? 'revoked'
+                                                                    : 'active',
+                                                            )
+                                                        }
                                                     >
-                                                        {link.label}
-                                                    </span>
-                                                ),
-                                            )}
+                                                        <UserRoundX data-icon="inline-start" />
+                                                        {member.access_status ===
+                                                        'active'
+                                                            ? 'Revoke access'
+                                                            : 'Restore access'}
+                                                    </Button>
+                                                )}
+                                                {isManageableRole(
+                                                    member.role,
+                                                ) ? (
+                                                    <Button
+                                                        type="button"
+                                                        variant="outline"
+                                                        size="sm"
+                                                        onClick={() =>
+                                                            openRoleDialog(
+                                                                member,
+                                                            )
+                                                        }
+                                                    >
+                                                        Change role
+                                                    </Button>
+                                                ) : null}
+                                            </div>
+                                        ))}
                                     </div>
-                                    {members.next_page_url ? (
-                                        <Button
-                                            asChild
-                                            variant="outline"
-                                            size="sm"
-                                        >
-                                            <Link
-                                                href={members.next_page_url}
-                                                preserveScroll
-                                            >
-                                                Next
-                                                <ChevronRight data-icon="inline-end" />
-                                            </Link>
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            type="button"
-                                            variant="outline"
-                                            size="sm"
-                                            disabled
-                                        >
-                                            Next
-                                            <ChevronRight data-icon="inline-end" />
-                                        </Button>
-                                    )}
-                                </div>
-                            </nav>
-                        ) : null}
+                                )}
+
+                                {members.last_page > 1 ? (
+                                    <nav
+                                        className="flex flex-col gap-3 border-t pt-4 sm:flex-row sm:items-center sm:justify-between"
+                                        aria-label="Member pagination"
+                                    >
+                                        <p className="text-sm text-muted-foreground">
+                                            Showing {members.from} to{' '}
+                                            {members.to} of {members.total}{' '}
+                                            members
+                                        </p>
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            {members.prev_page_url ? (
+                                                <Button
+                                                    asChild
+                                                    variant="outline"
+                                                    size="sm"
+                                                >
+                                                    <Link
+                                                        href={
+                                                            members.prev_page_url
+                                                        }
+                                                        preserveScroll
+                                                    >
+                                                        <ChevronLeft data-icon="inline-start" />
+                                                        Previous
+                                                    </Link>
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    size="sm"
+                                                    disabled
+                                                >
+                                                    <ChevronLeft data-icon="inline-start" />
+                                                    Previous
+                                                </Button>
+                                            )}
+                                            <div className="flex flex-wrap items-center gap-1">
+                                                {members.links
+                                                    .filter(
+                                                        ({ label }) =>
+                                                            !label.includes(
+                                                                'Previous',
+                                                            ) &&
+                                                            !label.includes(
+                                                                'Next',
+                                                            ),
+                                                    )
+                                                    .map((link, index) =>
+                                                        link.url ? (
+                                                            <Button
+                                                                key={`${link.label}-${index}`}
+                                                                asChild
+                                                                variant={
+                                                                    link.active
+                                                                        ? 'default'
+                                                                        : 'outline'
+                                                                }
+                                                                size="icon"
+                                                            >
+                                                                <Link
+                                                                    href={
+                                                                        link.url
+                                                                    }
+                                                                    preserveScroll
+                                                                    aria-label={`Go to page ${link.label}`}
+                                                                    aria-current={
+                                                                        link.active
+                                                                            ? 'page'
+                                                                            : undefined
+                                                                    }
+                                                                >
+                                                                    {link.label}
+                                                                </Link>
+                                                            </Button>
+                                                        ) : (
+                                                            <span
+                                                                key={`${link.label}-${index}`}
+                                                                className="flex size-9 items-center justify-center text-sm text-muted-foreground"
+                                                                aria-hidden="true"
+                                                            >
+                                                                {link.label}
+                                                            </span>
+                                                        ),
+                                                    )}
+                                            </div>
+                                            {members.next_page_url ? (
+                                                <Button
+                                                    asChild
+                                                    variant="outline"
+                                                    size="sm"
+                                                >
+                                                    <Link
+                                                        href={
+                                                            members.next_page_url
+                                                        }
+                                                        preserveScroll
+                                                    >
+                                                        Next
+                                                        <ChevronRight data-icon="inline-end" />
+                                                    </Link>
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    size="sm"
+                                                    disabled
+                                                >
+                                                    Next
+                                                    <ChevronRight data-icon="inline-end" />
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </nav>
+                                ) : null}
+                            </TabsContent>
+                        </Tabs>
                     </CardContent>
                 </Card>
             </div>

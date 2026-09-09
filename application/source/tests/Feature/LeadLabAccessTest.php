@@ -1604,7 +1604,7 @@ class LeadLabAccessTest extends TestCase
         $this->assertFalse($participant->is_active);
     }
 
-    public function test_admin_member_page_shows_pending_access_and_email_state(): void
+    public function test_admin_member_page_shows_pending_email_verification_state(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
         $participant = User::factory()->unverified()->create([
@@ -1613,13 +1613,134 @@ class LeadLabAccessTest extends TestCase
         ]);
 
         $this->actingAs($admin)
-            ->get(route('admin.members.index'))
+            ->get(route('admin.members.index', [
+                'state' => 'pending-email-verification',
+            ]))
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('admin/members/index')
                 ->where('members.data.0.id', $participant->id)
                 ->where('members.data.0.access_status', User::ACCESS_PENDING)
                 ->where('members.data.0.email_verified_at', null)
+                ->where('filters.state', 'pending-email-verification')
+                ->where('counts.pending-email-verification', 1)
+                ->where('counts.pending-admin-acceptance', 0)
                 ->where('emailVerificationRequired', true),
+            );
+    }
+
+    public function test_admin_member_page_separates_pending_members_into_exclusive_states(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $pendingEmailVerification = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+        $pendingAdminAcceptance = User::factory()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+        $active = User::factory()->create([
+            'access_status' => User::ACCESS_ACTIVE,
+            'is_active' => true,
+        ]);
+        $revoked = User::factory()->create([
+            'access_status' => User::ACCESS_REVOKED,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index'))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('filters.state', 'active')
+                ->where('members.data.0.id', $active->id)
+                ->where('members.total', 1)
+                ->where('counts.active', 1)
+                ->where('counts.pending-email-verification', 1)
+                ->where('counts.pending-admin-acceptance', 1)
+                ->where('counts.revoked', 1),
+            );
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'state' => 'pending-email-verification',
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('members.data.0.id', $pendingEmailVerification->id)
+                ->where('members.total', 1),
+            );
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'state' => 'pending-admin-acceptance',
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('members.data.0.id', $pendingAdminAcceptance->id)
+                ->where('members.total', 1),
+            );
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'state' => 'revoked',
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('members.data.0.id', $revoked->id)
+                ->where('members.total', 1),
+            );
+    }
+
+    public function test_pending_members_use_admin_acceptance_state_when_email_verification_is_bypassed(): void
+    {
+        config(['fortify.require_email_verification' => false]);
+
+        $admin = User::factory()->create(['role' => 'admin']);
+        $pending = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'state' => 'pending-admin-acceptance',
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('members.data.0.id', $pending->id)
+                ->where('counts.pending-email-verification', 0)
+                ->where('counts.pending-admin-acceptance', 1)
+                ->where('emailVerificationRequired', false),
+            );
+    }
+
+    public function test_member_state_counts_follow_access_transitions(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $pending = User::factory()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'state' => 'pending-admin-acceptance',
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('counts.pending-admin-acceptance', 1)
+                ->where('counts.active', 0),
+            );
+
+        $this->actingAs($admin)
+            ->patch(route('admin.members.status', $pending), [
+                'status' => User::ACCESS_ACTIVE,
+            ])
+            ->assertRedirect();
+
+        $this->actingAs($admin)
+            ->get(route('admin.members.index', [
+                'state' => 'active',
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('members.data.0.id', $pending->id)
+                ->where('counts.pending-admin-acceptance', 0)
+                ->where('counts.active', 1),
             );
     }
 
@@ -1641,7 +1762,8 @@ class LeadLabAccessTest extends TestCase
                 ->where('members.per_page', 10)
                 ->where('members.total', 15)
                 ->where('members.data.0.name', 'Member 01')
-                ->where('members.data.9.name', 'Member 10'),
+                ->where('members.data.9.name', 'Member 10')
+                ->where('filters.state', 'active'),
             );
 
         $this->actingAs($admin)
@@ -1654,10 +1776,14 @@ class LeadLabAccessTest extends TestCase
             );
     }
 
-    public function test_admin_can_filter_members_by_each_access_status(): void
+    public function test_admin_can_filter_members_by_each_member_state(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
-        $pending = User::factory()->create([
+        $pendingEmailVerification = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+        $pendingAdminAcceptance = User::factory()->create([
             'access_status' => User::ACCESS_PENDING,
             'is_active' => false,
         ]);
@@ -1671,17 +1797,17 @@ class LeadLabAccessTest extends TestCase
         ]);
 
         foreach ([
-            User::ACCESS_PENDING => $pending,
-            User::ACCESS_ACTIVE => $active,
-            User::ACCESS_REVOKED => $revoked,
-        ] as $status => $member) {
+            'pending-email-verification' => $pendingEmailVerification,
+            'pending-admin-acceptance' => $pendingAdminAcceptance,
+            'active' => $active,
+            'revoked' => $revoked,
+        ] as $state => $member) {
             $this->actingAs($admin)
-                ->get(route('admin.members.index', ['status' => $status]))
+                ->get(route('admin.members.index', ['state' => $state]))
                 ->assertInertia(fn (Assert $assert) => $assert
                     ->has('members.data', 1)
                     ->where('members.data.0.id', $member->id)
-                    ->where('members.data.0.access_status', $status)
-                    ->where('filters.status', $status),
+                    ->where('filters.state', $state),
                 );
         }
     }
@@ -1708,7 +1834,7 @@ class LeadLabAccessTest extends TestCase
                 ->has('members.data', 1)
                 ->where('members.data.0.id', $nameMatch->id)
                 ->where('filters.search', 'Alicia')
-                ->where('filters.status', null),
+                ->where('filters.state', 'active'),
             );
 
         $this->actingAs($admin)
@@ -1717,11 +1843,11 @@ class LeadLabAccessTest extends TestCase
                 ->has('members.data', 1)
                 ->where('members.data.0.id', $emailMatch->id)
                 ->where('filters.search', 'brandon@leadlab')
-                ->where('filters.status', null),
+                ->where('filters.state', 'active'),
             );
     }
 
-    public function test_member_search_and_status_filter_are_preserved_during_pagination(): void
+    public function test_member_search_and_state_filter_are_preserved_during_pagination(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
 
@@ -1742,23 +1868,23 @@ class LeadLabAccessTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.members.index', [
                 'search' => 'Searchable',
-                'status' => User::ACCESS_ACTIVE,
+                'state' => 'active',
             ]))
             ->assertInertia(fn (Assert $assert) => $assert
                 ->has('members.data', 10)
                 ->where('members.total', 11)
                 ->where('filters.search', 'Searchable')
-                ->where('filters.status', User::ACCESS_ACTIVE)
+                ->where('filters.state', 'active')
                 ->where(
                     'members.next_page_url',
                     fn (?string $url): bool => $url !== null
                         && str_contains($url, 'search=Searchable')
-                        && str_contains($url, 'status=active'),
+                        && str_contains($url, 'state=active'),
                 ),
             );
     }
 
-    public function test_member_pagination_preserves_the_status_filter(): void
+    public function test_member_pagination_preserves_the_state_filter(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
         User::factory()->count(11)->create([
@@ -1772,27 +1898,27 @@ class LeadLabAccessTest extends TestCase
 
         $this->actingAs($admin)
             ->get(route('admin.members.index', [
-                'status' => User::ACCESS_ACTIVE,
+                'state' => 'active',
             ]))
             ->assertInertia(fn (Assert $assert) => $assert
                 ->has('members.data', 10)
                 ->where('members.total', 11)
-                ->where('filters.status', User::ACCESS_ACTIVE)
+                ->where('filters.state', 'active')
                 ->where(
                     'members.next_page_url',
                     fn (?string $url): bool => $url !== null
-                        && str_contains($url, 'status=active'),
+                        && str_contains($url, 'state=active'),
                 ),
             );
     }
 
-    public function test_invalid_member_status_filter_is_rejected(): void
+    public function test_invalid_member_state_filter_is_rejected(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
 
         $this->actingAs($admin)
-            ->get(route('admin.members.index', ['status' => 'unknown']))
-            ->assertSessionHasErrors('status');
+            ->get(route('admin.members.index', ['state' => 'unknown']))
+            ->assertSessionHasErrors('state');
     }
 
     public function test_invalid_member_search_is_rejected(): void
