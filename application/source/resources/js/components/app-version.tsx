@@ -1,10 +1,13 @@
 import { usePage } from '@inertiajs/react';
+import { cn } from '@/lib/utils';
 
-export function AppVersion() {
+export function AppVersion({ className }: { className?: string }) {
     const { appVersion } = usePage().props;
 
     return (
-        <div className="truncate px-2 pb-1 text-xs text-muted-foreground group-data-[collapsible=icon]:hidden">
+        <div
+            className={cn('truncate text-xs text-muted-foreground', className)}
+        >
             {appVersion}
         </div>
     );
