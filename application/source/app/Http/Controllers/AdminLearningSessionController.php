@@ -6,9 +6,12 @@ use App\Models\ActivityLog;
 use App\Models\LearningResource;
 use App\Models\LearningSession;
 use App\Support\YouTubeVideoReference;
+use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,6 +19,12 @@ use InvalidArgumentException;
 
 class AdminLearningSessionController
 {
+    private const MAX_RESOURCES_PER_SESSION = 10;
+
+    private const MAX_RESOURCE_SIZE_KB = 10240;
+
+    private const MAX_RESOURCE_SIZE_BYTES = 10 * 1024 * 1024;
+
     public function index(): Response
     {
         return Inertia::render('admin/sessions/index', [
@@ -36,7 +45,13 @@ class AdminLearningSessionController
                 'session_date' => $learningSession->session_date?->toDateString(),
                 'description' => $learningSession->description,
                 'video_url' => $learningSession->video_url ?? '',
-                'resource_title' => $learningSession->resources->first()?->title,
+                'resources' => $learningSession->resources->map(
+                    fn (LearningResource $resource): array => [
+                        'id' => $resource->id,
+                        'title' => $resource->title,
+                        'size' => $resource->size,
+                    ],
+                )->values(),
             ],
         ]);
     }
@@ -78,14 +93,7 @@ class AdminLearningSessionController
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:160'],
-            'season' => ['nullable', 'string', 'max:80'],
-            'session_date' => ['nullable', 'date'],
-            'description' => ['nullable', 'string', 'max:5000'],
-            'video_url' => ['nullable', 'string', 'max:2000'],
-            'resource' => $this->resourceValidationRules(),
-        ]);
+        $validated = $this->validateSessionRequest($request);
 
         try {
             $videoUrl = YouTubeVideoReference::normalize($validated['video_url'] ?? null);
@@ -104,7 +112,7 @@ class AdminLearningSessionController
             'is_published' => false,
         ]);
 
-        $this->storeResource($session, $request);
+        $this->storeResources($session, $request);
         ActivityLog::record($request->user(), 'session_created', $session);
         $this->flashSuccess('Session saved as a draft.');
 
@@ -117,14 +125,10 @@ class AdminLearningSessionController
 
     public function update(Request $request, LearningSession $learningSession): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:160'],
-            'season' => ['nullable', 'string', 'max:80'],
-            'session_date' => ['nullable', 'date'],
-            'description' => ['nullable', 'string', 'max:5000'],
-            'video_url' => ['nullable', 'string', 'max:2000'],
-            'resource' => $this->resourceValidationRules(),
-        ]);
+        $validated = $this->validateSessionRequest(
+            $request,
+            $learningSession->resources()->count(),
+        );
 
         try {
             $videoUrl = YouTubeVideoReference::normalize($validated['video_url'] ?? null);
@@ -155,13 +159,30 @@ class AdminLearningSessionController
             'video_url' => $videoUrl,
         ]);
 
-        $this->replaceResource($learningSession, $request);
+        $this->storeResources($learningSession, $request);
         ActivityLog::record($request->user(), 'session_updated', $learningSession, [
-            'resource_replaced' => $request->hasFile('resource'),
+            'resources_added' => count($this->resourceFiles($request)),
         ]);
         $this->flashSuccess('Session changes saved.');
 
         return to_route('admin.sessions.index');
+    }
+
+    public function destroy(
+        Request $request,
+        LearningResource $learningResource,
+    ): RedirectResponse {
+        $session = $learningResource->learningSession;
+
+        ActivityLog::record($request->user(), 'resource_deleted', $session, [
+            'resource_id' => $learningResource->id,
+            'resource_title' => $learningResource->title,
+        ]);
+        Storage::disk('local')->delete($learningResource->stored_path);
+        $learningResource->delete();
+        $this->flashSuccess('Supporting material removed.');
+
+        return to_route('admin.sessions.edit', $session);
     }
 
     public function publish(
@@ -259,70 +280,99 @@ class AdminLearningSessionController
             ->all();
     }
 
-    private function storeResource(LearningSession $session, Request $request): void
-    {
-        if (! $request->hasFile('resource')) {
-            return;
-        }
+    /** @return array<string, mixed> */
+    private function validateSessionRequest(
+        Request $request,
+        int $existingResourceCount = 0,
+    ): array {
+        $remainingResourceSlots = max(
+            0,
+            self::MAX_RESOURCES_PER_SESSION - $existingResourceCount,
+        );
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'title' => ['required', 'string', 'max:160'],
+                'season' => ['nullable', 'string', 'max:80'],
+                'session_date' => ['nullable', 'date'],
+                'description' => ['nullable', 'string', 'max:5000'],
+                'video_url' => ['nullable', 'string', 'max:2000'],
+                'resources' => ['nullable', 'array', "max:{$remainingResourceSlots}"],
+                'resources.*' => [
+                    'file',
+                    'max:'.self::MAX_RESOURCE_SIZE_KB,
+                    'mimes:pdf,doc,docx,txt,ppt,pptx,jpg,jpeg,png,webp',
+                    'extensions:pdf,doc,docx,txt,ppt,pptx,jpg,jpeg,png,webp',
+                ],
+            ],
+            [
+                'resources.max' => 'A session can have no more than 10 supporting materials. Remove an existing material before adding more files.',
+                'resources.*.max' => 'Each file must be 10 MB or less.',
+                'resources.*.mimes' => 'Each file must be PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, or WEBP.',
+            ],
+        );
+        $files = $this->resourceFiles($request);
 
-        $file = $request->file('resource');
+        $validator->after(function (ValidatorContract $validator) use ($files): void {
+            foreach ($files as $index => $file) {
+                if (! $this->resourceIsTooLarge($file)) {
+                    continue;
+                }
 
-        LearningResource::create([
-            'learning_session_id' => $session->id,
-            'title' => $file->getClientOriginalName(),
-            'stored_path' => $file->store('lead-lab/resources'),
-            'mime_type' => $file->getMimeType(),
-            'size' => $file->getSize(),
-        ]);
+                $attribute = "resources.{$index}";
+                $validator->errors()->forget($attribute);
+                $validator->errors()->add(
+                    $attribute,
+                    $this->resourceTooLargeMessage($file),
+                );
+            }
+        });
+
+        return $validator->validate();
     }
 
-    /**
-     * Validate the file contents and the user-visible extension together.
-     *
-     * @return array<int, string>
-     */
-    private function resourceValidationRules(): array
+    private function storeResources(LearningSession $session, Request $request): void
     {
-        $extensions = 'pdf,doc,docx,txt,ppt,pptx,jpg,jpeg,png,webp';
-
-        return [
-            'nullable',
-            'file',
-            'max:25600',
-            'mimes:'.$extensions,
-            'extensions:'.$extensions,
-        ];
-    }
-
-    private function replaceResource(LearningSession $session, Request $request): void
-    {
-        if (! $request->hasFile('resource')) {
-            return;
-        }
-
-        $file = $request->file('resource');
-        $resource = $session->resources()->first();
-        $storedPath = $file->store('lead-lab/resources');
-
-        if ($resource !== null) {
-            Storage::disk('local')->delete($resource->stored_path);
-            $resource->update([
+        foreach ($this->resourceFiles($request) as $file) {
+            $session->resources()->create([
                 'title' => $file->getClientOriginalName(),
-                'stored_path' => $storedPath,
+                'stored_path' => $file->store('lead-lab/resources'),
                 'mime_type' => $file->getMimeType(),
                 'size' => $file->getSize(),
             ]);
+        }
+    }
 
-            return;
+    /** @return array<int, UploadedFile> */
+    private function resourceFiles(Request $request): array
+    {
+        $files = $request->file('resources');
+
+        if ($files === null) {
+            return [];
         }
 
-        LearningResource::create([
-            'learning_session_id' => $session->id,
-            'title' => $file->getClientOriginalName(),
-            'stored_path' => $storedPath,
-            'mime_type' => $file->getMimeType(),
-            'size' => $file->getSize(),
-        ]);
+        if ($files instanceof UploadedFile) {
+            return [$files];
+        }
+
+        return array_values($files);
+    }
+
+    private function resourceIsTooLarge(UploadedFile $file): bool
+    {
+        return in_array($file->getError(), [
+            UPLOAD_ERR_INI_SIZE,
+            UPLOAD_ERR_FORM_SIZE,
+        ], true) || (int) $file->getSize() > self::MAX_RESOURCE_SIZE_BYTES;
+    }
+
+    private function resourceTooLargeMessage(UploadedFile $file): string
+    {
+        return sprintf(
+            '%s is too big. Each file must be 10 MB or less.',
+            $file->getClientOriginalName(),
+        );
     }
 
     private function flashSuccess(string $message): void
