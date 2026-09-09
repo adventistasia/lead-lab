@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Version
+    |--------------------------------------------------------------------------
+    |
+    | The git ref this build was produced from — a vX.Y.Z tag for a release,
+    | a branch name otherwise. Baked into the Docker image at build time via
+    | the APP_VERSION build arg; not meant to be set in .env.
+    |
+    */
+
+    'version' => env('APP_VERSION', 'dev'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
