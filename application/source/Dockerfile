@@ -61,6 +61,13 @@ RUN rm -f .env
 FROM dunglas/frankenphp:1-php8.4 AS runtime
 RUN install-php-extensions pdo_mysql pcntl opcache
 
+# Set by CI to the git ref that produced this image (a vX.Y.Z tag for a
+# release, a branch name otherwise) — read by config/app.php and shown as
+# a small label in the UI. `docker build` with no --build-arg leaves it
+# "dev", which is the expected value for a local build.
+ARG APP_VERSION=dev
+ENV APP_VERSION=${APP_VERSION}
+
 WORKDIR /app
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
