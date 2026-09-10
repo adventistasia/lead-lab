@@ -13,21 +13,35 @@ use Inertia\Response;
 
 class AdminMemberController
 {
+    private const STATE_ACTIVE = 'active';
+
+    private const STATE_PENDING_EMAIL_VERIFICATION = 'pending-email-verification';
+
+    private const STATE_PENDING_ADMIN_ACCEPTANCE = 'pending-admin-acceptance';
+
+    private const STATE_REVOKED = 'revoked';
+
     public function index(Request $request): Response
     {
         $filters = $request->validate([
             'search' => ['nullable', 'string', 'max:120'],
-            'status' => ['nullable', 'string', Rule::in([
-                User::ACCESS_PENDING,
-                User::ACCESS_ACTIVE,
-                User::ACCESS_REVOKED,
+            'state' => ['nullable', 'string', Rule::in([
+                self::STATE_ACTIVE,
+                self::STATE_PENDING_EMAIL_VERIFICATION,
+                self::STATE_PENDING_ADMIN_ACCEPTANCE,
+                self::STATE_REVOKED,
             ])],
         ]);
         $search = trim((string) ($filters['search'] ?? ''));
-        $status = $filters['status'] ?? null;
+        $state = $filters['state'] ?? self::STATE_ACTIVE;
+        $emailVerificationRequired = (bool) config('fortify.require_email_verification');
+        $baseQuery = User::query()->whereKeyNot($request->user()->id);
 
-        $members = User::query()
-            ->whereKeyNot($request->user()->id)
+        $members = $this->applyStateFilter(
+            clone $baseQuery,
+            $state,
+            $emailVerificationRequired,
+        )
             ->when($search !== '', function (Builder $query) use ($search): void {
                 $like = "%{$search}%";
 
@@ -37,7 +51,6 @@ class AdminMemberController
                         ->orWhere('email', 'like', $like);
                 });
             })
-            ->when($status !== null, fn ($query) => $query->where('access_status', $status))
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString()
@@ -52,14 +65,79 @@ class AdminMemberController
                 'created_at' => $user->created_at?->toFormattedDateString(),
             ]);
 
+        $counts = [
+            self::STATE_ACTIVE => $this->countMembersInState(
+                clone $baseQuery,
+                self::STATE_ACTIVE,
+                $emailVerificationRequired,
+            ),
+            self::STATE_PENDING_EMAIL_VERIFICATION => $this->countMembersInState(
+                clone $baseQuery,
+                self::STATE_PENDING_EMAIL_VERIFICATION,
+                $emailVerificationRequired,
+            ),
+            self::STATE_PENDING_ADMIN_ACCEPTANCE => $this->countMembersInState(
+                clone $baseQuery,
+                self::STATE_PENDING_ADMIN_ACCEPTANCE,
+                $emailVerificationRequired,
+            ),
+            self::STATE_REVOKED => $this->countMembersInState(
+                clone $baseQuery,
+                self::STATE_REVOKED,
+                $emailVerificationRequired,
+            ),
+        ];
+
         return Inertia::render('admin/members/index', [
             'members' => $members,
+            'counts' => $counts,
             'filters' => [
                 'search' => $search,
-                'status' => $status,
+                'state' => $state,
             ],
-            'emailVerificationRequired' => config('fortify.require_email_verification'),
+            'emailVerificationRequired' => $emailVerificationRequired,
         ]);
+    }
+
+    /**
+     * @param  Builder<User>  $query
+     */
+    private function countMembersInState(
+        Builder $query,
+        string $state,
+        bool $emailVerificationRequired,
+    ): int {
+        return $this->applyStateFilter($query, $state, $emailVerificationRequired)->count();
+    }
+
+    /**
+     * @param  Builder<User>  $query
+     * @return Builder<User>
+     */
+    private function applyStateFilter(
+        Builder $query,
+        string $state,
+        bool $emailVerificationRequired,
+    ): Builder {
+        if ($state === self::STATE_ACTIVE) {
+            return $query->where('access_status', User::ACCESS_ACTIVE);
+        }
+
+        if ($state === self::STATE_REVOKED) {
+            return $query->where('access_status', User::ACCESS_REVOKED);
+        }
+
+        $query->where('access_status', User::ACCESS_PENDING);
+
+        if ($state === self::STATE_PENDING_EMAIL_VERIFICATION) {
+            return $emailVerificationRequired
+                ? $query->whereNull('email_verified_at')
+                : $query->whereRaw('1 = 0');
+        }
+
+        return $emailVerificationRequired
+            ? $query->whereNotNull('email_verified_at')
+            : $query;
     }
 
     public function updateStatus(Request $request, User $user): RedirectResponse

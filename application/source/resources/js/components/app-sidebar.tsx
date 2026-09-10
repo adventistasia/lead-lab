@@ -2,6 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     BookOpen,
     CalendarDays,
+    ClipboardCheck,
     LayoutDashboard,
     UsersRound,
 } from 'lucide-react';
@@ -20,6 +21,7 @@ import {
 } from '@/components/ui/sidebar';
 import { calendar, dashboard } from '@/routes';
 import { index as adminClassroom } from '@/routes/admin/classroom';
+import { index as adminGuidelines } from '@/routes/admin/guidelines';
 import { index as adminMembers } from '@/routes/admin/members';
 import { index as classroom } from '@/routes/classroom';
 import type { NavItem } from '@/types';
@@ -56,6 +58,11 @@ export function AppSidebar() {
                       title: 'Members',
                       href: adminMembers(),
                       icon: UsersRound,
+                  },
+                  {
+                      title: 'Admin Guidelines V0.1',
+                      href: adminGuidelines(),
+                      icon: ClipboardCheck,
                   },
               ]
             : mainNavItems;

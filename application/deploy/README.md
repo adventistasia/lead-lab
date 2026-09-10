@@ -17,7 +17,18 @@ cp .env.example .env
 docker compose up -d
 ```
 
-For the CHG-42 staging handoff, set `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing sender address and do not place credentials in the repository.
+For a CHG-42 staging handoff, set the staging public origin in the private `.env`, then set `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing sender address and do not place credentials in the repository.
+
+For production, each host sets `APP_URL` in its private `.env`; production's value is `https://leadhub.adventist.asia`. Each host must supply its own public origin because Laravel uses it for console and queued absolute URLs. Compose stops if the value is unset or blank instead of silently using another environment's domain. Non-production deployments must set their own environment-specific public origin in the private `.env`. After deploying this branch, recreate the web, queue, and scheduler containers so each role receives the value:
+
+```bash
+docker compose up -d --force-recreate app queue scheduler
+docker compose exec app php artisan tinker --execute="echo config('app.url'), PHP_EOL;"
+docker compose exec queue printenv APP_URL
+docker compose exec scheduler printenv APP_URL
+```
+
+If verification fails, roll back to the previous known-good branch or deployment configuration and repeat the same container recreation command. Changing `APP_URL` in the private `.env` takes effect after the affected containers are recreated. This configuration change does not replace the separate proxy, DNS, TLS, firewall, or SSD-network verification owned by the resident developer.
 
 `queue` and `scheduler` are load-bearing, not optional — without `scheduler`, calendar reminders
 are never enqueued; without `queue`, they're enqueued and never sent. `docker compose ps` should

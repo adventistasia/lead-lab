@@ -3,7 +3,9 @@ x-app-env: &app-env
   APP_ENV: ${APP_ENV:-production}
   APP_KEY: ${APP_KEY}
   APP_DEBUG: ${APP_DEBUG:-false}
-  APP_URL: ${APP_URL}
+  # Each host supplies its own public origin. Unset or blank stops the
+  # stack rather than silently using another environment's domain.
+  APP_URL: ${APP_URL:?APP_URL must be set — see .env.example}
   APP_LOCALE: ${APP_LOCALE:-en}
   LEAD_LAB_REQUIRE_EMAIL_VERIFICATION: ${LEAD_LAB_REQUIRE_EMAIL_VERIFICATION:-true}
   TRUSTED_PROXIES: ${TRUSTED_PROXIES:-*}

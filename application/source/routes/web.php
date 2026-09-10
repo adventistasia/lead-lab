@@ -43,6 +43,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::post('answers/{sessionAnswer}/vote', [SessionQnaController::class, 'toggleAnswerVote'])->name('answers.vote');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::inertia('guidelines', 'admin/guidelines/index')->name('guidelines.index');
         Route::get('classroom', [AdminLearningSessionController::class, 'recordings'])->name('classroom.index');
         Route::get('sessions', [AdminLearningSessionController::class, 'index'])->name('sessions.index');
         Route::get('sessions/{learningSession}/edit', [AdminLearningSessionController::class, 'edit'])->name('sessions.edit');
