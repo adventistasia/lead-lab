@@ -83,16 +83,37 @@ export default function Welcome() {
         <>
             <Head title="Lead Hub" />
             <div className="min-h-screen bg-background">
-                <header className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-6 lg:px-8">
+                <header className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-6 lg:px-8">
                     <div className="flex items-center gap-3">
                         <AppLogoImage
                             alt="Lead Hub"
-                            className="h-auto w-[320px] max-w-[calc(100vw-3rem)] rounded-md"
+                            className="h-auto w-[150px] rounded-md sm:w-[240px] lg:w-[320px]"
                         />
                     </div>
-                    <Badge className="hidden sm:inline-flex" variant="outline">
-                        For leaders in our organization
-                    </Badge>
+                    <div className="flex items-center gap-4">
+                        <Badge
+                            className="hidden lg:inline-flex"
+                            variant="outline"
+                        >
+                            For leaders in our organization
+                        </Badge>
+                        <div className="flex flex-wrap items-center gap-2">
+                            {auth.user ? (
+                                <Button asChild size="sm">
+                                    <Link href={dashboard()}>My Dashboard</Link>
+                                </Button>
+                            ) : (
+                                <>
+                                    <Button asChild size="sm" variant="outline">
+                                        <Link href={login()}>Sign in</Link>
+                                    </Button>
+                                    <Button asChild size="sm">
+                                        <Link href={register()}>Register</Link>
+                                    </Button>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </header>
 
                 <main className="mx-auto flex w-full max-w-7xl flex-col gap-20 px-6 py-10 lg:px-8 lg:py-20">
