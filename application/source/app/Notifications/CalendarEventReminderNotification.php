@@ -28,11 +28,12 @@ class CalendarEventReminderNotification extends Notification
         $timezone = $notifiable->effectiveTimezone();
         $startsAt = $this->event->starts_at->copy()->setTimezone($timezone);
         $endsAt = $this->event->ends_at->copy()->setTimezone($timezone);
+        $brandName = (string) config('mail.brand_name', 'LEADHub');
 
         $message = (new MailMessage)
             ->subject('Reminder: '.$this->event->title)
             ->greeting('Hello '.$notifiable->name.',')
-            ->line('This is a reminder for the upcoming Lead Hub event.')
+            ->line('This is a reminder for the upcoming '.$brandName.' event.')
             ->line('Event: '.$this->event->title)
             ->line('Starts: '.$startsAt->format('l, F j, Y \a\t g:i A P'))
             ->line('Ends: '.$endsAt->format('l, F j, Y \a\t g:i A P'));
