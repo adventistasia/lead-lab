@@ -17,7 +17,7 @@ cp .env.example .env
 docker compose up -d
 ```
 
-For a CHG-42 staging handoff, set the staging public origin in the private `.env`, then set `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing sender address and do not place credentials in the repository.
+For a CHG-42 staging handoff, set the staging public origin in the private `.env`, then set `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `MAIL_BRAND_NAME=LEADHub`, `MAIL_FROM_NAME=LEADHub`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing sender address and do not place credentials in the repository.
 
 For production, each host sets `APP_URL` in its private `.env`; production's value is `https://leadhub.adventist.asia`. Each host must supply its own public origin because Laravel uses it for console and queued absolute URLs. Compose stops if the value is unset or blank instead of silently using another environment's domain. Non-production deployments must set their own environment-specific public origin in the private `.env`. After deploying this branch, recreate the web, queue, and scheduler containers so each role receives the value:
 
@@ -45,6 +45,7 @@ Staging sends through **Postmark SMTP**. Three things are not guessable from the
 - **Postmark's username and password are the same value**, the Server API token.
 - **The From address must be verified on the sending Postmark server** (a Sender Signature, or a
   DKIM-verified domain), or every send is rejected.
+- **The email display name is `LEADHub`**. Keep it separate from the portal display name `Lead Hub`.
 
 Two behaviours worth knowing before you debug a mail problem:
 

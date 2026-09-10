@@ -5,6 +5,10 @@
 
 **Next action:** Deploy this branch, recreate the web, queue, and scheduler containers, and verify `APP_URL=https://leadhub.adventist.asia`; then leave proxy, DNS, TLS, firewall, and SSD-network work with the resident developer.
 
+**Latest email branding control (2026-09-11):** CHG-49 (Correct email-facing branding and stale deployment defaults) is Approved under D-72 (Should email messages use exact `LEADHub` branding while the portal remains `Lead Hub`?). Local notification output, Laravel mail templates, source and deployment defaults, email operations guidance, and focused tests now use `LEADHub` for email-facing branding while the portal remains `Lead Hub`; the sender address and technical identifiers remain unchanged. ACT-69 (Implement and verify LEADHub email branding across notification output and runtime configuration) remains In Progress because the private deployment `.env`, live SMTP, staging, and participant-use evidence are unavailable here.
+
+**Next action:** Apply `MAIL_BRAND_NAME=LEADHub` and `MAIL_FROM_NAME=LEADHub` in the private deployment environment, recreate the web, queue, and scheduler containers, and verify all four email types in staging before participant use.
+
 **Latest approved feature increment (2026-09-10):** CHG-46 (Separate users by account state) and CHG-47 (Add a support contact to the registration pending page) are approved under D-69 (Should the administrator Members page separate users by account state?) and D-70 (Should the registration pending page provide a support contact?). Local implementation and automated verification are complete. ACT-66 (Implement and verify administrator account-state tabs and pending counts) and ACT-67 (Implement and verify the registration-pending support contact) remain In Progress pending authenticated browser, responsive, staging, and launch acceptance. No database, route boundary, authorization, infrastructure, licence-cost, or schedule-baseline change was made.
 
 **Next action:** Complete authenticated browser and responsive acceptance for the administrator account-state tabs and the registration-pending support contact before member-management, participant-use, or launch acceptance.
@@ -42,9 +46,9 @@ This file is the project-level dashboard and configuration record.
 | Current phase | Option B staging deployment reported; Gate 1 environment and ownership evidence remains open; production readiness deferred |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured |
-| Last verified | 2026-09-10 |
+| Last verified | 2026-09-11 |
 | Last status report | None recorded |
-| Next review trigger | After refreshed post-deployment Gate 1 and operational evidence, reconcile the staging mail and deployment statements, and before the next launch, participant-use, or fallback commitment |
+| Next review trigger | After refreshed post-deployment Gate 1 and email-delivery evidence, reconcile the staging mail and deployment statements, and before the next launch, participant-use, or fallback commitment |
 
 ## Performance Domains
 
@@ -71,6 +75,8 @@ This file is the project-level dashboard and configuration record.
 | Last process review | 2026-09-09; `runs/2026-09-09-pm-07-monitor-project-performance/stages/04-validate-and-review/review-record.md` |
 
 **Latest password-recovery control:** CHG-35 (Complete and harden the existing Lead Lab password-recovery flow) is approved and implemented in published commit `57783bf2` (`feat: harden forgot password flow`) on branch `feature/forgot-password`; local implementation and automated verification for ACT-53 (Implement and verify the password-recovery flow) pass. The PM confirmed live mail and verification complete on 2026-09-07, so ACT-53 is Resolved. DEP-13 (Password-recovery email delivery and operational support) and R-17 (Password-recovery emails may be unavailable, reveal account existence, or expose reset credentials or tokens) remain separate controls and were not otherwise changed.
+
+**Email branding reconciliation:** The portal display name remains `Lead Hub`; email sender display, headers, footers, fallback salutations, subjects, and notification bodies use exact `LEADHub`. `MAIL_FROM_ADDRESS=no-reply@leadlab.test`, technical identifiers, and production scope remain unchanged. Focused email coverage passed 35 tests with 178 assertions; the full PHP suite passed 159 tests with 1,322 assertions, and frontend checks passed. Local implementation and automated verification are recorded in `application/runs/2026-09-11-email-branding/`; private deployment and live-delivery verification remain open.
 
 ## Baseline and Change Control
 

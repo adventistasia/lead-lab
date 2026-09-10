@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
@@ -28,6 +29,17 @@ class EmailVerificationTest extends TestCase
         $response = $this->actingAs($user)->get(route('verification.notice'));
 
         $response->assertOk();
+    }
+
+    public function test_email_verification_notification_uses_email_branding(): void
+    {
+        $user = User::factory()->unverified()->create();
+
+        $message = (new VerifyEmail)->toMail($user);
+        $rendered = (string) $message->render();
+
+        $this->assertStringContainsString('LEADHub', $rendered);
+        $this->assertStringNotContainsString('Lead Lab', $rendered);
     }
 
     public function test_email_can_be_verified()

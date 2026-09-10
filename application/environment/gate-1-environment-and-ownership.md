@@ -22,7 +22,7 @@
 | Human primary developer | Unassigned; resident developer to confirm | Open |
 | IT operator | Dennis Arquillano (interim; staging and production; PM-confirmed 2026-09-03) | Recorded; target-environment evidence remains open |
 | AI delivery support | Alson can support build, testing, and documentation; Alson is not the accountable developer or release owner | Recorded |
-| Portal branding handoff | Lead Hub is implemented locally; Dennis Arquillano must apply and confirm the non-secret staging display values | Handoff required; no staging access details are recorded |
+| Portal and email branding handoff | Portal display is `Lead Hub` and email display is `LEADHub`; Dennis Arquillano must apply and confirm the non-secret staging display values | Handoff required; no staging access details are recorded |
 | Protected development capacity | 1-2 developers, 2-4 hours per developer per day, 5 days per week, through 2026-09-11 | Recorded; schedule risk remains |
 | Authentication | Not decided | Open |
 | Participant-data rules | Unknown | Open |

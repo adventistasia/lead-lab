@@ -115,13 +115,21 @@ class RegistrationTest extends TestCase
         $message = (new NewParticipantRegistrationNotification($participant))
             ->toMail($administrator);
 
-        $this->assertSame('New Lead Hub participant registration', $message->subject);
+        $this->assertSame('New LEADHub participant registration', $message->subject);
         $this->assertSame('Hello Lead Hub Administrator,', $message->greeting);
+        $this->assertContains(
+            'A new participant has registered for LEADHub and needs access review.',
+            $message->introLines,
+        );
         $this->assertContains('Name: New Participant', $message->introLines);
         $this->assertContains('Email: new-participant@example.com', $message->introLines);
         $this->assertContains('Registered: Wednesday, August 26, 2026 at 12:00 PM UTC', $message->introLines);
         $this->assertSame('Review registration', $message->actionText);
         $this->assertStringContainsString('/admin/members', $message->actionUrl);
+        $rendered = (string) $message->render();
+
+        $this->assertStringContainsString('LEADHub', $rendered);
+        $this->assertStringNotContainsString('Lead Lab', $rendered);
     }
 
     public function test_a_pending_participant_can_verify_their_email_before_approval(): void

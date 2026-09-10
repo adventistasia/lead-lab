@@ -44,6 +44,8 @@ npm run dev
 |---|---|---|
 | `APP_NAME` | `Lead Hub` | Portal-facing display name |
 | `VITE_APP_NAME` | `${APP_NAME}` | Browser page-title suffix |
+| `MAIL_BRAND_NAME` | `LEADHub` | Email-facing display name |
+| `MAIL_FROM_NAME` | `${MAIL_BRAND_NAME}` | Email sender display name |
 | `SESSION_COOKIE` | `lead-lab-session` | Stable technical prefix retained across the rename |
 | `CACHE_PREFIX` | `lead-lab-cache-` | Stable technical prefix retained across the rename |
 | `REDIS_PREFIX` | `lead-lab-database-` | Stable technical prefix retained across the rename |
@@ -56,6 +58,7 @@ npm run dev
 - Lead Hub dashboard shell, session publishing, protected resources, and member access controls are implemented.
 - Participant self-registration, pending access, administrator approval, revocation, restoration, and activity logging are implemented locally.
 - Password recovery is implemented locally with a branded notification, uniform account-existence responses, single-use expiry, session invalidation, and non-sensitive reset audit logging.
+- Email verification, password recovery, registration alerts, and calendar reminders use `LEADHub` for email-facing branding while the portal remains `Lead Hub`.
 - Mailpit is available for local SMTP testing through the native Homebrew service or `projects/lead-lab/application/docker-compose.yml` on ports 1025 and 8025.
 - The local `.env` uses the SMTP mailer at `127.0.0.1:1025` with the database queue for reminder delivery tests.
 - Local development currently sets `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=false` so signup and approval do not depend on email delivery. Staging and production must restore the verification gate.
