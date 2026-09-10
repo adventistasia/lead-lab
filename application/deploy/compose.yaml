@@ -3,7 +3,9 @@ x-app-env: &app-env
   APP_ENV: ${APP_ENV:-production}
   APP_KEY: ${APP_KEY}
   APP_DEBUG: ${APP_DEBUG:-false}
-  APP_URL: ${APP_URL}
+  # Keep the production public origin in the deploy definition. This prevents
+  # a stale private APP_URL from reintroducing HTTP asset URLs on redeploy.
+  APP_URL: https://leadhub.adventist.asia
   APP_LOCALE: ${APP_LOCALE:-en}
   LEAD_LAB_REQUIRE_EMAIL_VERIFICATION: ${LEAD_LAB_REQUIRE_EMAIL_VERIFICATION:-true}
   TRUSTED_PROXIES: ${TRUSTED_PROXIES:-*}

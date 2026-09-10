@@ -13,11 +13,22 @@ directory.
 ```bash
 cp .env.example .env
 # Generate APP_KEY once (see comment in .env.example), fill in DB_PASSWORD /
-# DB_ROOT_PASSWORD / MAIL_* / APP_URL, then:
+# DB_ROOT_PASSWORD / MAIL_*, then:
 docker compose up -d
 ```
 
-For the CHG-42 staging handoff, set `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing sender address and do not place credentials in the repository.
+For a CHG-42 staging handoff, use a staging-specific Compose override for the public origin, then set `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing sender address and do not place credentials in the repository.
+
+For production, `compose.yaml` sets `APP_URL=https://leadhub.adventist.asia` directly. This branch-controlled value is the canonical public origin used by Laravel for console and queued absolute URLs, and prevents a stale value in the private `.env` from surviving a redeploy. Non-production deployments must use a separate Compose override with their own HTTPS origin. After deploying this branch, recreate the web, queue, and scheduler containers so each role receives the value:
+
+```bash
+docker compose up -d --force-recreate app queue scheduler
+docker compose exec app php artisan tinker --execute="echo config('app.url'), PHP_EOL;"
+docker compose exec queue printenv APP_URL
+docker compose exec scheduler printenv APP_URL
+```
+
+If verification fails, roll back to the previous known-good branch or deployment configuration and repeat the same container recreation command. The production Compose definition owns this value, so changing `APP_URL` in the private `.env` does not roll back the production origin. This configuration change does not replace the separate proxy, DNS, TLS, firewall, or SSD-network verification owned by the resident developer.
 
 `queue` and `scheduler` are load-bearing, not optional — without `scheduler`, calendar reminders
 are never enqueued; without `queue`, they're enqueued and never sent. `docker compose ps` should
