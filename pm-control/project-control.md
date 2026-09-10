@@ -105,7 +105,7 @@ This file is the project-level dashboard and configuration record.
 
 | Register | Location | Last verified |
 |---|---|---|
-| Risks | `registers/risk-register.md` | 2026-08-31 |
+| Risks | `registers/risk-register.md` | 2026-09-10 |
 | Assumptions | `registers/assumption-log.md` | 2026-08-18 |
 | Issues | `registers/issues-log.md` | 2026-09-07 |
 | Dependencies | `registers/dependencies-log.md` | 2026-08-31 |
