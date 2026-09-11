@@ -216,4 +216,17 @@ class RegistrationTest extends TestCase
 
         $this->assertGuest();
     }
+
+    public function test_registration_rejects_an_array_email_with_validation_errors(): void
+    {
+        $this->post(route('register.store'), [
+            'name' => 'Test User',
+            'email' => ['test@example.com'],
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ])->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+        $this->assertDatabaseCount('users', 0);
+    }
 }
