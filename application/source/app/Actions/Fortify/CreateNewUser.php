@@ -10,6 +10,7 @@ use App\Notifications\NewParticipantRegistrationNotification;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
@@ -24,12 +25,23 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        $registrationKey = 'registration:'.(request()->ip() ?? 'unknown');
+        $ipAddress = request()->ip() ?? 'unknown';
+        $email = Str::lower(trim((string) ($input['email'] ?? '')));
+        $registrationLimits = [
+            'registration:ip:'.hash('sha256', $ipAddress) => 30,
+            'registration:email:'.hash('sha256', $email) => 5,
+        ];
 
-        if (! RateLimiter::attempt($registrationKey, 5, fn (): bool => true, 60)) {
-            throw ValidationException::withMessages([
-                'email' => 'Too many registration attempts. Please try again later.',
-            ]);
+        foreach ($registrationLimits as $key => $maxAttempts) {
+            if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
+                throw ValidationException::withMessages([
+                    'email' => 'Too many registration attempts. Please try again later.',
+                ]);
+            }
+        }
+
+        foreach (array_keys($registrationLimits) as $key) {
+            RateLimiter::hit($key, 60);
         }
 
         Validator::make($input, [
