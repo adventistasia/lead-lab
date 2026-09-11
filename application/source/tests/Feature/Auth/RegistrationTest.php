@@ -115,13 +115,21 @@ class RegistrationTest extends TestCase
         $message = (new NewParticipantRegistrationNotification($participant))
             ->toMail($administrator);
 
-        $this->assertSame('New Lead Hub participant registration', $message->subject);
+        $this->assertSame('New LEADHub participant registration', $message->subject);
         $this->assertSame('Hello Lead Hub Administrator,', $message->greeting);
+        $this->assertContains(
+            'A new participant has registered for LEADHub and needs access review.',
+            $message->introLines,
+        );
         $this->assertContains('Name: New Participant', $message->introLines);
         $this->assertContains('Email: new-participant@example.com', $message->introLines);
         $this->assertContains('Registered: Wednesday, August 26, 2026 at 12:00 PM UTC', $message->introLines);
         $this->assertSame('Review registration', $message->actionText);
         $this->assertStringContainsString('/admin/members', $message->actionUrl);
+        $rendered = (string) $message->render();
+
+        $this->assertStringContainsString('LEADHub', $rendered);
+        $this->assertStringNotContainsString('Lead Lab', $rendered);
     }
 
     public function test_a_pending_participant_can_verify_their_email_before_approval(): void
@@ -166,5 +174,59 @@ class RegistrationTest extends TestCase
         ]);
 
         Notification::assertNothingSent();
+    }
+
+    public function test_different_users_can_register_from_the_same_ip(): void
+    {
+        Notification::fake();
+
+        foreach (range(1, 6) as $number) {
+            $response = $this->post(route('register.store'), [
+                'name' => "Test User {$number}",
+                'email' => "test-{$number}@example.com",
+                'password' => 'password',
+                'password_confirmation' => 'password',
+            ]);
+
+            $response->assertRedirect(route('registration.pending', absolute: false));
+            auth()->logout();
+        }
+
+        $this->assertDatabaseCount('users', 6);
+    }
+
+    public function test_repeated_registration_attempts_for_one_email_are_throttled(): void
+    {
+        Notification::fake();
+
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'not-the-same-password',
+        ];
+
+        foreach (range(1, 5) as $_) {
+            $this->post(route('register.store'), $payload)
+                ->assertSessionHasErrors('password');
+        }
+
+        $this->post(route('register.store'), $payload)
+            ->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+    }
+
+    public function test_registration_rejects_an_array_email_with_validation_errors(): void
+    {
+        $this->post(route('register.store'), [
+            'name' => 'Test User',
+            'email' => ['test@example.com'],
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ])->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+        $this->assertDatabaseCount('users', 0);
     }
 }

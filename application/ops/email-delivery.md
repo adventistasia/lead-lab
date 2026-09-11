@@ -17,7 +17,7 @@
 | Item | State |
 |---|---|
 | Local mail transport | Mailpit on `127.0.0.1:1025`; inbox at `http://127.0.0.1:8025` |
-| Portal display name | `Lead Hub`; sender address remains `no-reply@leadlab.test` |
+| Portal display name | `Lead Hub`; email display name is `LEADHub`; sender address remains `no-reply@leadlab.test` |
 | Local verification gate | Disabled for synthetic development accounts only |
 | Queue | Database queue; a persistent worker is required |
 | Scheduler | Calendar reminder command is registered every minute; an external scheduler must invoke it |
@@ -55,12 +55,13 @@ Confirm the following in Mailpit and the database:
 Before staging or participant use:
 
 1. Configure a dependable SMTP or supported mail provider without storing credentials in the repository.
-2. Set `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=true`.
-3. Run a persistent queue worker with `php artisan queue:work --tries=3`.
-4. Invoke `php artisan schedule:run` every minute through the supported server scheduler.
-5. Confirm sender identity, provider delivery logs, failed-job handling, monitoring, and incident ownership.
-6. Run synthetic signup, password-reset, and reminder tests before using real participant data.
+2. Set `MAIL_BRAND_NAME=LEADHub`; Compose derives the sender display name from this value.
+3. Set `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=true`.
+4. Run a persistent queue worker with `php artisan queue:work --tries=3`.
+5. Invoke `php artisan schedule:run` every minute through the supported server scheduler.
+6. Confirm sender identity, provider delivery logs, failed-job handling, monitoring, and incident ownership.
+7. Run synthetic signup, password-reset, verification, and reminder tests before using real participant data.
 
-For the CHG-42 staging handoff, Dennis Arquillano must apply and confirm the non-secret portal display values: `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing `MAIL_FROM_ADDRESS`; do not place credentials in the repository.
+For the CHG-42 staging handoff, Dennis Arquillano must apply and confirm the non-secret display values: `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `MAIL_BRAND_NAME=LEADHub`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Deploy the matching `compose.yaml` so `MAIL_BRAND_NAME` reaches the web, queue, and scheduler containers. Keep the existing `MAIL_FROM_ADDRESS`; do not place credentials in the repository.
 
 Mailpit and the local verification bypass are not staging or production evidence.

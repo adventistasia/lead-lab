@@ -200,6 +200,7 @@ class CalendarReminderTest extends TestCase
 
         $this->assertSame('Reminder: September briefing', $message->subject);
         $this->assertSame('Hello Lead Hub Admin,', $message->greeting);
+        $this->assertContains('This is a reminder for the upcoming LEADHub event.', $message->introLines);
         $this->assertContains('Event: September briefing', $message->introLines);
         $this->assertContains('Location: Lead Hub studio', $message->introLines);
         $this->assertContains('Live broadcast: https://example.com/live', $message->introLines);
@@ -209,6 +210,10 @@ class CalendarReminderTest extends TestCase
         $this->assertSame('Open calendar', $message->actionText);
         $this->assertStringContainsString('/calendar?month=', $message->actionUrl);
         $this->assertContains('Times are shown in GMT+8 (Asia/Manila).', $message->outroLines);
+        $rendered = (string) $message->render();
+
+        $this->assertStringContainsString('LEADHub', $rendered);
+        $this->assertStringNotContainsString('Lead Lab', $rendered);
 
         $this->travelBack();
     }

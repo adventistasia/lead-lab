@@ -25,11 +25,12 @@ class NewParticipantRegistrationNotification extends Notification implements Sho
         $registeredAt = $this->participant->created_at?->setTimezone(
             (string) config('app.timezone'),
         )->format('l, F j, Y \\a\\t g:i A T') ?? 'Unknown';
+        $brandName = (string) config('mail.brand_name', 'LEADHub');
 
         return (new MailMessage)
-            ->subject('New Lead Hub participant registration')
+            ->subject('New '.$brandName.' participant registration')
             ->greeting('Hello '.$notifiable->name.',')
-            ->line('A new participant has registered for Lead Hub and needs access review.')
+            ->line('A new participant has registered for '.$brandName.' and needs access review.')
             ->line('Name: '.$this->participant->name)
             ->line('Email: '.$this->participant->email)
             ->line('Registered: '.$registeredAt)

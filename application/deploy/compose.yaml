@@ -1,5 +1,5 @@
 x-app-env: &app-env
-  APP_NAME: ${APP_NAME:-Lead Lab}
+  APP_NAME: ${APP_NAME:-Lead Hub}
   APP_ENV: ${APP_ENV:-production}
   APP_KEY: ${APP_KEY}
   APP_DEBUG: ${APP_DEBUG:-false}
@@ -31,7 +31,8 @@ x-app-env: &app-env
   MAIL_USERNAME: ${MAIL_USERNAME:-}
   MAIL_PASSWORD: ${MAIL_PASSWORD:-}
   MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS:-no-reply@leadlab.test}
-  MAIL_FROM_NAME: ${APP_NAME:-Lead Lab}
+  MAIL_BRAND_NAME: ${MAIL_BRAND_NAME:-LEADHub}
+  MAIL_FROM_NAME: ${MAIL_BRAND_NAME:-LEADHub}
 
 services:
   app:
