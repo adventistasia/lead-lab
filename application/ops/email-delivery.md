@@ -55,13 +55,13 @@ Confirm the following in Mailpit and the database:
 Before staging or participant use:
 
 1. Configure a dependable SMTP or supported mail provider without storing credentials in the repository.
-2. Set `MAIL_BRAND_NAME=LEADHub` and verify `MAIL_FROM_NAME=LEADHub`.
+2. Set `MAIL_BRAND_NAME=LEADHub`; Compose derives the sender display name from this value.
 3. Set `LEAD_LAB_REQUIRE_EMAIL_VERIFICATION=true`.
 4. Run a persistent queue worker with `php artisan queue:work --tries=3`.
 5. Invoke `php artisan schedule:run` every minute through the supported server scheduler.
 6. Confirm sender identity, provider delivery logs, failed-job handling, monitoring, and incident ownership.
 7. Run synthetic signup, password-reset, verification, and reminder tests before using real participant data.
 
-For the CHG-42 staging handoff, Dennis Arquillano must apply and confirm the non-secret display values: `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `MAIL_BRAND_NAME=LEADHub`, `MAIL_FROM_NAME=LEADHub`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Keep the existing `MAIL_FROM_ADDRESS`; do not place credentials in the repository.
+For the CHG-42 staging handoff, Dennis Arquillano must apply and confirm the non-secret display values: `APP_NAME=Lead Hub`, `VITE_APP_NAME=${APP_NAME}`, `MAIL_BRAND_NAME=LEADHub`, `SESSION_COOKIE=lead-lab-session`, `CACHE_PREFIX=lead-lab-cache-`, and `REDIS_PREFIX=lead-lab-database-`. Deploy the matching `compose.yaml` so `MAIL_BRAND_NAME` reaches the web, queue, and scheduler containers. Keep the existing `MAIL_FROM_ADDRESS`; do not place credentials in the repository.
 
 Mailpit and the local verification bypass are not staging or production evidence.

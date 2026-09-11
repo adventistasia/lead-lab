@@ -26,7 +26,9 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         $ipAddress = request()->ip() ?? 'unknown';
-        $email = Str::lower(trim((string) ($input['email'] ?? '')));
+        $email = is_string($input['email'] ?? null)
+            ? Str::lower(trim($input['email']))
+            : '';
         $registrationLimits = [
             'registration:ip:'.hash('sha256', $ipAddress) => 30,
             'registration:email:'.hash('sha256', $email) => 5,
