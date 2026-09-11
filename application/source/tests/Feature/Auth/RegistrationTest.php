@@ -175,4 +175,45 @@ class RegistrationTest extends TestCase
 
         Notification::assertNothingSent();
     }
+
+    public function test_different_users_can_register_from_the_same_ip(): void
+    {
+        Notification::fake();
+
+        foreach (range(1, 6) as $number) {
+            $response = $this->post(route('register.store'), [
+                'name' => "Test User {$number}",
+                'email' => "test-{$number}@example.com",
+                'password' => 'password',
+                'password_confirmation' => 'password',
+            ]);
+
+            $response->assertRedirect(route('registration.pending', absolute: false));
+            auth()->logout();
+        }
+
+        $this->assertDatabaseCount('users', 6);
+    }
+
+    public function test_repeated_registration_attempts_for_one_email_are_throttled(): void
+    {
+        Notification::fake();
+
+        $payload = [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'not-the-same-password',
+        ];
+
+        foreach (range(1, 5) as $_) {
+            $this->post(route('register.store'), $payload)
+                ->assertSessionHasErrors('password');
+        }
+
+        $this->post(route('register.store'), $payload)
+            ->assertSessionHasErrors('email');
+
+        $this->assertGuest();
+    }
 }
