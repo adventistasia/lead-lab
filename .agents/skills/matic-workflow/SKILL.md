@@ -35,6 +35,7 @@ Do not use this skill for a normal application build, production deployment, or 
 - Do not invent scope, authority, provider choices, participant-data rules, production approval, or irreversible decisions.
 - Do not publish unless Reconcile is complete, Measure passed, and Learn identifies publication.
 - Publish one branch and one PR to `staging`, request `dennisatssd`, and never use an issue auto-close keyword.
+- After PR creation, comment on the issue addressed to its author with a safe screenshot of the fix. Verify and record the comment before entering `Awaiting review` or `Awaiting merge`.
 - Close the issue only after the exact recorded PR is verified merged into `staging`.
 
 ## Reporting

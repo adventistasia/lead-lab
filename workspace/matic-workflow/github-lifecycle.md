@@ -29,7 +29,7 @@ Next action: keep the issue, branch, PR, reviewer, merge, and closure relationsh
 - Confirm the worktree is clean.
 - Fetch the current remote references without changing unrelated branches.
 - Create `matic/issue-<number>-<slug>` from `origin/staging`.
-- Commit only intended application, test, documentation, run, and PM Control changes for the selected issue.
+- Commit only intended application, test, documentation, run, screenshot, and PM Control changes for the selected issue.
 - Run `git diff --check` before commit.
 - Push the branch without force-push.
 
@@ -46,6 +46,30 @@ Create one PR with:
 Use a plain issue reference such as `Issue: #<number> (<human-readable title>)`. Do not use `Closes #<number>`, `Fixes #<number>`, or another auto-close keyword because this PR targets `staging`.
 
 If an open PR already exists for the issue and branch, update or inspect it instead of creating a duplicate.
+
+## Post-PR Issue Comment
+
+After the PR is created or an existing run confirms the exact PR, comment on the related issue before setting the run to `Awaiting review` or `Awaiting merge`.
+
+- Read the issue author's GitHub login from issue metadata. Address the first visible line to that login as `@<issue-author-login>`.
+- Include the PR number and human-readable PR title as a link.
+- Include one safe screenshot of the fix using synthetic or non-sensitive data. Do not post credentials, tokens, cookies, private keys, or real participant data.
+- Use a GitHub-hosted attachment URL or a repository URL anchored to the exact published head commit. Do not use a local filesystem path or a mutable branch URL.
+- When the screenshot is stored in the repository, include it in the intended run-evidence commit and use a URL such as `https://github.com/adventistasia/lead-lab/raw/<head-commit-sha>/<screenshot-path>`.
+- Include the marker `<!-- matic-pr-screenshot: issue-<issue-number>-pr-<pr-number> -->` so retries are idempotent.
+- If the marker already exists, verify the author mention, PR link, and screenshot, then update that comment when any element is stale. Do not create a duplicate.
+- Verify the resulting comment URL and body through GitHub before advancing the run.
+
+The canonical comment shape is:
+
+```markdown
+<!-- matic-pr-screenshot: issue-<issue-number>-pr-<pr-number> -->
+@<issue-author-login>, the fix is ready for review in [#<pr-number>: <pr-title>](<pr-url>).
+
+![Screenshot of the fix](<screenshot-url>)
+```
+
+Failure to resolve the issue author, provide a safe screenshot, publish an accessible screenshot URL, or verify the comment blocks publication completion and is recorded as `Blocked`.
 
 ## Review And Merge
 

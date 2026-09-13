@@ -12,6 +12,8 @@ Next action: update this file whenever a run starts, blocks, pauses, waits for r
 **Issue:** <number and human-readable title, or None for a normal cycle>
 **Branch:** <branch name or None>
 **PR:** <number and human-readable title, or None>
+**PR issue comment:** <verified comment URL or None>
+**Fix screenshot:** <run-evidence path and publishable URL, or None>
 **Status:** Running / Blocked / Paused / Awaiting review / Awaiting merge / Complete / Cancelled
 **Current stage:** <repository-relative stage path>
 **Resume stage:** <repository-relative stage path or None>

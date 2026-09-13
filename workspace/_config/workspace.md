@@ -43,6 +43,7 @@ Deliver one approved Lead Hub GitHub issue at a time through the existing Define
 - Reconciliation covers every affected carrier, including relevant PM Control records, run evidence, source documentation, tests, and deployment guidance.
 - The Measure gate must pass before commit, push, and PR creation.
 - Matic PRs target `staging`, request `dennisatssd`, and do not use issue auto-close keywords.
+- After a Matic PR is created, the related issue receives one verified comment addressed to its author with a safe screenshot of the fix. The comment uses an idempotency marker and is recorded with the PR and run evidence.
 - Issue closure occurs only after the recorded PR is verified as merged into `staging`.
 - Production deployment, production data changes, unresolved scope decisions, external-provider selection, privacy approval, and other human-only decisions remain outside label authority.
 - Credentials, private keys, tokens, cookies, and real participant data never enter the repository or run evidence.

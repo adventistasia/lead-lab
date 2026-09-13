@@ -52,6 +52,7 @@ Each stage has one job, reads only declared inputs, writes inspectable handoffs,
 - Measure is a hard gate. Do not commit, push, or create a PR from a failed or blocked quality result.
 - Create the work branch from `origin/staging`. Never force-push. Never include unrelated worktree changes.
 - Create the PR against `staging` and request review from Dennis Arquillano (`dennisatssd`). Do not use an auto-close keyword for the issue because the PR targets `staging`, not the repository default branch.
+- After PR creation, comment on the related issue before entering a waiting state. Address the comment to the issue author's GitHub login and include a safe screenshot of the fix, the exact PR number and human-readable title, and a verified GitHub comment URL. Use an idempotency marker and update an existing marked comment instead of creating a duplicate.
 - Close the relevant issue only after the exact PR recorded by the run is verified as merged into `staging`.
 - Keep `matic` on the issue for traceability. Add `acknowledged` after the plan-control stage and use `needs-manual-review` only when a human review or decision blocks progress.
 
@@ -68,6 +69,7 @@ Stop and record the exact missing input in `{{RUN_PATH}}/run-state.md` when any 
 - Release authority or production approval
 - A clear issue outcome or acceptance condition
 - A required GitHub, branch, or review permission
+- A safe screenshot of the fix and a publishable URL accessible to issue participants
 
 ## Stage Contract
 

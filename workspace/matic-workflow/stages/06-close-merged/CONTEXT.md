@@ -29,6 +29,7 @@ Publication record + current PR and issue state + run state -> verify review or 
 
 - Confirm the issue number and human-readable title match the publication record.
 - Confirm the PR number, title, head branch, and base branch match the publication record.
+- Confirm the publication record contains the verified issue comment addressed to the issue author with the fix screenshot.
 - Read current review and check state from GitHub.
 - Confirm merge state and `mergedAt` before issue closure.
 - Stop without closing when any identity, base, or merge check fails.
@@ -55,8 +56,9 @@ Publication record + current PR and issue state + run state -> verify review or 
 ## Verify
 
 - The exact PR is identified by number, title, head, and base.
+- The author-addressed screenshot comment is recorded by URL and remains traceable to the exact PR.
 - A closed issue is supported by `mergedAt` and base `staging`.
-- The issue comment names the PR and run evidence.
+- The post-merge closure comment names the PR and run evidence.
 - Review changes route to a concrete stage.
 - No issue is closed from an unmerged PR.
 - The final state is `Complete` only after closure evidence exists.
