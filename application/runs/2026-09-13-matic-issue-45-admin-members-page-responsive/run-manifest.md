@@ -65,3 +65,10 @@ Plan and Control, Define, Design, and Build are complete. Proceed to `workspace/
 - Measure passed at 97.14% with all applicable issue acceptance criteria passing.
 - `stages/04-measure/audit-findings.md` records the score, evidence, residual risks, and open project gates.
 - `stages/05-learn/what-now.md` routes the run to Publish. Issue #45 (Bug: Make admin members page responsive) remains open until the exact PR is verified merged into `staging`.
+
+## Publication Update
+
+- PR #46 (fix: make admin members page responsive) is open against `staging` from `matic/issue-45-admin-members-page-responsive`.
+- Implementation commit: `e356ca4c5588c29912f06d08c934220130d2106d`.
+- Dennis Arquillano (`dennisatssd`) is requested as reviewer.
+- CI was pending at publication time. The run is awaiting review and merge.

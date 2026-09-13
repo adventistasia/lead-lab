@@ -7,6 +7,8 @@ Issue #45 intake recorded on 2026-09-13: `ISS-17 (Administrator Members page res
 
 Issue #45 local implementation evidence recorded on 2026-09-13: `ISS-17 (Administrator Members page responsive layout defect)` has a page-scoped correction with passing focused and full automated checks and isolated authenticated responsive review at 320px, 375px, 390px, 768px, and 1280px. The local defect acceptance passed; the issue remains In Progress pending staging and launch acceptance and must not be closed before its exact PR is verified merged into `staging`.
 
+Issue #45 publication recorded on 2026-09-13: PR #46 (fix: make admin members page responsive) is open against `staging` from `matic/issue-45-admin-members-page-responsive`; Dennis Arquillano (`dennisatssd`) is requested. The issue remains open and `ISS-17 (Administrator Members page responsive layout defect)` remains In Progress pending review, merge, staging, and launch acceptance.
+
 ## Register
 Issue #34 intake recorded on 2026-09-10: ISS-16 (Live site does not fully load because HTTPS asset requests and SSD-network access remain unresolved) is In Progress. The issue screenshot shows an HTTPS page requesting HTTP CSS, JavaScript, fonts, and favicon assets. The APP_URL-only correction is approved and the branch-controlled production Compose definition now supplies the canonical HTTPS origin, but deployment and live verification are unavailable in this workspace. The resident developer owns the remaining proxy, DNS, TLS, firewall, and SSD-network work. No GitHub issue update was made.
 
