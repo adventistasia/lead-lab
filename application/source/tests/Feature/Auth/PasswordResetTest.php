@@ -109,6 +109,7 @@ class PasswordResetTest extends TestCase
 
         foreach ($states as $label => $attributes) {
             $user = User::factory()->create($attributes);
+            $resetPassword = "Reset-{$label}-Password1!";
 
             $this->from(route('password.request'))
                 ->post(route('password.email'), ['email' => $user->email])
@@ -121,13 +122,13 @@ class PasswordResetTest extends TestCase
             $this->post(route('password.update'), [
                 'token' => $notification->token,
                 'email' => $user->email,
-                'password' => "reset-{$label}-password",
-                'password_confirmation' => "reset-{$label}-password",
+                'password' => $resetPassword,
+                'password_confirmation' => $resetPassword,
             ])->assertRedirect(route('login'));
 
             $user->refresh();
 
-            $this->assertTrue(Hash::check("reset-{$label}-password", $user->password));
+            $this->assertTrue(Hash::check($resetPassword, $user->password));
             $this->assertSame($attributes['access_status'], $user->access_status);
             $this->assertSame($attributes['role'], $user->role);
             $this->assertSame($attributes['is_active'], $user->is_active);
@@ -201,15 +202,15 @@ class PasswordResetTest extends TestCase
             $response = $this->post(route('password.update'), [
                 'token' => $notification->token,
                 'email' => $user->email,
-                'password' => 'new-password',
-                'password_confirmation' => 'new-password',
+                'password' => 'New-password1!',
+                'password_confirmation' => 'New-password1!',
             ]);
 
             $response
                 ->assertSessionHasNoErrors()
                 ->assertRedirect(route('login'));
 
-            $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
+            $this->assertTrue(Hash::check('New-password1!', $user->refresh()->password));
             $this->assertNotSame($rememberToken, $user->remember_token);
             $this->assertDatabaseHas('activity_logs', [
                 'action' => 'password_reset',
@@ -228,8 +229,8 @@ class PasswordResetTest extends TestCase
         $response = $this->post(route('password.update'), [
             'token' => 'invalid-token',
             'email' => $user->email,
-            'password' => 'newpassword123',
-            'password_confirmation' => 'newpassword123',
+            'password' => 'Newpassword123!',
+            'password_confirmation' => 'Newpassword123!',
         ]);
 
         $response->assertSessionHasErrors('email');
@@ -251,8 +252,8 @@ class PasswordResetTest extends TestCase
         $response = $this->post(route('password.update'), [
             'token' => $token,
             'email' => $user->email,
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
+            'password' => 'New-password1!',
+            'password_confirmation' => 'New-password1!',
         ]);
 
         $response->assertSessionHasErrors('email');
@@ -267,19 +268,19 @@ class PasswordResetTest extends TestCase
         $this->post(route('password.update'), [
             'token' => $token,
             'email' => $user->email,
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
+            'password' => 'New-password1!',
+            'password_confirmation' => 'New-password1!',
         ])->assertRedirect(route('login'));
 
         $response = $this->post(route('password.update'), [
             'token' => $token,
             'email' => $user->email,
-            'password' => 'another-password',
-            'password_confirmation' => 'another-password',
+            'password' => 'Another-password1!',
+            'password_confirmation' => 'Another-password1!',
         ]);
 
         $response->assertSessionHasErrors('email');
-        $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
+        $this->assertTrue(Hash::check('New-password1!', $user->refresh()->password));
     }
 
     public function test_password_reset_requires_matching_password_confirmation(): void
@@ -290,8 +291,8 @@ class PasswordResetTest extends TestCase
         $response = $this->post(route('password.update'), [
             'token' => $token,
             'email' => $user->email,
-            'password' => 'new-password',
-            'password_confirmation' => 'different-password',
+            'password' => 'New-password1!',
+            'password_confirmation' => 'Different-password1!',
         ]);
 
         $response->assertSessionHasErrors('password');
@@ -319,8 +320,8 @@ class PasswordResetTest extends TestCase
         $this->post(route('password.update'), [
             'token' => $token,
             'email' => $user->email,
-            'password' => 'new-password',
-            'password_confirmation' => 'new-password',
+            'password' => 'New-password1!',
+            'password_confirmation' => 'New-password1!',
         ])->assertRedirect(route('login'));
 
         $this->assertDatabaseMissing($sessionTable, ['user_id' => $user->id]);
@@ -334,7 +335,7 @@ class PasswordResetTest extends TestCase
         $metadata = json_decode((string) $activity->metadata, true, 512, JSON_THROW_ON_ERROR);
         $this->assertSame(['source' => 'password_recovery'], $metadata);
         $this->assertStringNotContainsString($token, (string) $activity->metadata);
-        $this->assertStringNotContainsString('new-password', (string) $activity->metadata);
+        $this->assertStringNotContainsString('New-password1!', (string) $activity->metadata);
     }
 
     public function test_reset_password_link_requests_are_throttled_without_revealing_status(): void

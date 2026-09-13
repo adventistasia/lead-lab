@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Rules\PasswordCharacterTypes;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -37,14 +38,15 @@ class AppServiceProvider extends ServiceProvider
             app()->isProduction(),
         );
 
-        Password::defaults(fn (): ?Password => app()->isProduction()
-            ? Password::min(12)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols()
-                ->uncompromised()
-            : null,
-        );
+        Password::defaults(function (): Password {
+            $password = Password::min(8)
+                ->rules([new PasswordCharacterTypes]);
+
+            if (app()->isProduction()) {
+                $password->uncompromised();
+            }
+
+            return $password;
+        });
     }
 }
