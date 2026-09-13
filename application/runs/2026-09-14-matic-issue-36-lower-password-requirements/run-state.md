@@ -15,7 +15,7 @@
 
 | Field | Value |
 |---|---|
-| Status | In Progress |
+| Status | Awaiting review |
 | Current stage | `05-publish` |
 | Last completed stage | `05-learn` |
 | Next stage | `06-close-merged` |
@@ -52,7 +52,8 @@ None for local implementation. The requester authorized the proposed 8-character
 - Reconciliation output: `stages/matic/04-reconcile/reconciliation-record.md`; changed carriers agree and local Build evidence remains separate from Measure and target-environment acceptance.
 - Measure output: `stages/04-measure/audit-findings.md`; local quality gate passed at 32/35 points (91.4%), with target-environment and participant-use gates still open.
 - Learn output: `stages/05-learn/what-now.md`; the next action is controlled publication as one reviewed PR to `staging`.
+- Publication output: `stages/matic/05-publish/publication-record.md`; PR #49 (feat: lower password requirements (#36)) targets `staging`, commit `9818e998682c34fbc4d575322f89ecdbdf21cd1b`, reviewer `dennisatssd` is requested, and the verified issue comment is `https://github.com/adventistasia/lead-lab/issues/36#issuecomment-5656731840`.
 
 ## Next Action
 
-Load `workspace/matic-workflow/stages/05-publish/CONTEXT.md`, verify the intended-only diff, publish one PR to `staging`, request `dennisatssd`, and post the verified author-addressed screenshot comment for issue #36 (Security: Lower Password Requirements). Keep the run on branch `matic/issue-36-lower-password-requirements` and do not make production changes.
+Wait for CI and Dennis Arquillano's review on PR #49 (feat: lower password requirements (#36)). Resume Publish for any review feedback; after the exact PR is verified merged into `staging`, load `workspace/matic-workflow/stages/06-close-merged/CONTEXT.md`. Do not merge or close issue #36 (Security: Lower Password Requirements) from this state.

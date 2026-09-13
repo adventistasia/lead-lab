@@ -11,6 +11,8 @@ Build reconciliation recorded on 2026-09-14: ISS-18 (Password-policy change from
 
 Measure evidence recorded on 2026-09-14: ISS-18 (Password-policy change from issue #36 (Security: Lower Password Requirements)) remains In Progress after all five issue acceptance conditions passed locally and the quality gate scored 32/35 (91.4%). The related GitHub issue remains open until the reviewed PR and required later acceptance gates are complete. Audit: `application/runs/2026-09-14-matic-issue-36-lower-password-requirements/stages/04-measure/audit-findings.md`.
 
+Publication recorded on 2026-09-14: ISS-18 (Password-policy change from issue #36 (Security: Lower Password Requirements)) remains In Progress. PR #49 (feat: lower password requirements (#36)) targets `staging`, requests `dennisatssd`, and has a verified author-addressed screenshot comment; the GitHub issue remains open pending review, merge, and later acceptance. Publication record: `application/runs/2026-09-14-matic-issue-36-lower-password-requirements/stages/matic/05-publish/publication-record.md`.
+
 ## Register
 Issue #34 intake recorded on 2026-09-10: ISS-16 (Live site does not fully load because HTTPS asset requests and SSD-network access remain unresolved) is In Progress. The issue screenshot shows an HTTPS page requesting HTTP CSS, JavaScript, fonts, and favicon assets. The APP_URL-only correction is approved and the branch-controlled production Compose definition now supplies the canonical HTTPS origin, but deployment and live verification are unavailable in this workspace. The resident developer owns the remaining proxy, DNS, TLS, firewall, and SSD-network work. No GitHub issue update was made.
 

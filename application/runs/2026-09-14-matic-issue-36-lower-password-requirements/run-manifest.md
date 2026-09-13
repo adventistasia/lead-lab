@@ -13,7 +13,7 @@
 | Run path | `application/runs/2026-09-14-matic-issue-36-lower-password-requirements/` |
 | Selected date | 2026-09-14 |
 | Current stage | `workspace/matic-workflow/stages/05-publish/CONTEXT.md` |
-| Current status | Learn complete; Publish next |
+| Current status | Published; Awaiting review |
 
 ## Selected Outcome
 
@@ -50,10 +50,11 @@ Update the password policy to require at least 8 characters and at least 3 of 4 
 - Reconcile output: `stages/matic/04-reconcile/reconciliation-record.md`.
 - Measure output: `stages/04-measure/audit-findings.md`.
 - Learn output: `stages/05-learn/what-now.md`.
+- Publication output: `stages/matic/05-publish/publication-record.md`; PR #49 (feat: lower password requirements (#36)) is open against `staging`, with `dennisatssd` requested and the author-addressed screenshot comment verified.
 - Changed source: `application/source/app/Providers/AppServiceProvider.php` and `application/source/app/Rules/PasswordCharacterTypes.php`.
 - Changed tests: `application/source/tests/Feature/Auth/PasswordPolicyTest.php`, `RegistrationTest.php`, `PasswordResetTest.php`, and `Settings/SecurityTest.php`.
 - Safe screenshot: `evidence/password-policy-validation.png`; visual inspection found synthetic data only.
 
 ## Next Route
 
-`workspace/matic-workflow/stages/05-publish/CONTEXT.md`
+`workspace/matic-workflow/stages/06-close-merged/CONTEXT.md`
