@@ -21,7 +21,7 @@ Open GitHub matic issues + open PRs + active matic run states + selection criter
 
 | Interface | Declaration |
 |---|---|
-| Inputs | GitHub issue list and bodies, GitHub labels, open PR list, `application/runs/` matic run states, `workspace/workflows/matic/selection-criteria.md`, and `workspace/workflows/matic/github-lifecycle.md` |
+| Inputs | GitHub issue list and bodies, GitHub labels, open PR list, `application/runs/` matic run states, `workspace/matic-workflow/selection-criteria.md`, and `workspace/matic-workflow/github-lifecycle.md` |
 | Transform | Score every candidate, exclude blocked or already-owned issues, and select one simplest eligible issue |
 | Outputs | `issue-selection.md`, `run-manifest.md`, and `run-state.md` for the selected run |
 
@@ -57,7 +57,7 @@ Open GitHub matic issues + open PRs + active matic run states + selection criter
 - Scores use the configured dimensions.
 - The selected issue is open, labeled matic, and not already owned.
 - The run path is unique and the issue title is recorded.
-- The next stage is `workflows/matic/stages/02-plan-control/CONTEXT.md`.
+- The next stage is `matic-workflow/stages/02-plan-control/CONTEXT.md`.
 
 ## Review Gate
 

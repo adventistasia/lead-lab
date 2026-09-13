@@ -21,7 +21,7 @@ Selected issue + approved scope + current controls + project context -> define o
 
 | Interface | Declaration |
 |---|---|
-| Inputs | `{{RUN_PATH}}/stages/matic/01-select/issue-selection.md`, `{{RUN_PATH}}/run-manifest.md`, GitHub issue body and metadata, `artifacts/lead-lab-web-app-scope-and-requirements.md`, `artifacts/lead-lab-web-app-backlog.md`, `artifacts/lead-lab-web-app-delivery-plan.md`, relevant `pm-control/registers/`, `workspace/workflows/matic/pm-control-contract.md`, and `workspace/workflows/matic/github-lifecycle.md` |
+| Inputs | `{{RUN_PATH}}/stages/matic/01-select/issue-selection.md`, `{{RUN_PATH}}/run-manifest.md`, GitHub issue body and metadata, `artifacts/lead-lab-web-app-scope-and-requirements.md`, `artifacts/lead-lab-web-app-backlog.md`, `artifacts/lead-lab-web-app-delivery-plan.md`, relevant `pm-control/registers/`, `workspace/matic-workflow/pm-control-contract.md`, and `workspace/matic-workflow/github-lifecycle.md` |
 | Transform | Define the implementation boundary, stage path, tests, risks, acceptance matrix, and relevant pre-build PM Control updates |
 | Outputs | `execution-plan.md`, `acceptance-matrix.md`, `plan-control-record.md`, updated relevant `pm-control/registers/`, GitHub `acknowledged` label state, and `run-state.md` |
 

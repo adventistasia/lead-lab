@@ -7,7 +7,7 @@ Next action: resolve every failed check before routing a matic issue to implemen
 
 - [ ] `workspace/AGENTS.md` contains workspace-wide behavior and preserves the existing build pipeline.
 - [ ] `workspace/CONTEXT.md` routes normal build work and matic work.
-- [ ] `workspace/workflows/matic/CONTEXT.md` routes selection, resume, publish, review, and close operations.
+- [ ] `workspace/matic-workflow/CONTEXT.md` routes selection, resume, publish, review, and close operations.
 - [ ] `workspace/stages/01-define` through `workspace/stages/05-learn` remain present.
 - [ ] Stable rules are in `workspace/_config/` or `workspace/references/`.
 - [ ] Run artifacts are under `application/runs/`.

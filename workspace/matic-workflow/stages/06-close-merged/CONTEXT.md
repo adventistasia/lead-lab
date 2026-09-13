@@ -21,7 +21,7 @@ Publication record + current PR and issue state + run state -> verify review or 
 
 | Interface | Declaration |
 |---|---|
-| Inputs | `{{RUN_PATH}}/stages/matic/05-publish/publication-record.md`, `{{RUN_PATH}}/run-state.md`, GitHub PR details and reviews, GitHub issue details, `workspace/workflows/matic/github-lifecycle.md`, and `{{RUN_PATH}}/stages/matic/04-reconcile/reconciliation-record.md` |
+| Inputs | `{{RUN_PATH}}/stages/matic/05-publish/publication-record.md`, `{{RUN_PATH}}/run-state.md`, GitHub PR details and reviews, GitHub issue details, `workspace/matic-workflow/github-lifecycle.md`, and `{{RUN_PATH}}/stages/matic/04-reconcile/reconciliation-record.md` |
 | Transform | Determine whether review feedback, merge, or closure is valid; route changes back when needed; close the exact issue only after verified merge |
 | Outputs | `closure-record.md`, optional review-feedback route, issue comment and closed state when eligible, and updated `run-state.md` |
 

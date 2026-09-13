@@ -37,12 +37,12 @@ GitHub issue and PR state + project context + existing build stages -> select, e
 | Run next matic issue | `stages/01-select/CONTEXT.md` | Ranked candidates and one selected issue run |
 | Resume an active matic run | Recorded `{{RUN_PATH}}/run-state.md` | Continue from the recorded stage |
 | Prepare issue plan and controls | `stages/02-plan-control/CONTEXT.md` | Execution plan, acceptance matrix, and pre-build PM Control updates |
-| Define the selected issue | `../../stages/01-define/CONTEXT.md` | Existing cycle definition and handoff |
-| Design the selected issue | `../../stages/02-design/CONTEXT.md` | Existing environment gate and solution design |
-| Execute the selected issue | `../../stages/03-build/CONTEXT.md` | Existing source change and build handoff |
+| Define the selected issue | `../stages/01-define/CONTEXT.md` | Existing cycle definition and handoff |
+| Design the selected issue | `../stages/02-design/CONTEXT.md` | Existing environment gate and solution design |
+| Execute the selected issue | `../stages/03-build/CONTEXT.md` | Existing source change and build handoff |
 | Reconcile completed issue work | `stages/04-reconcile/CONTEXT.md` | Affected carriers and PM Control reconciled |
-| Measure the completed issue | `../../stages/04-measure/CONTEXT.md` | Quality score, acceptance results, and gate decision |
-| Decide what happens next | `../../stages/05-learn/CONTEXT.md` | Verified `what-now.md` and publication route |
+| Measure the completed issue | `../stages/04-measure/CONTEXT.md` | Quality score, acceptance results, and gate decision |
+| Decide what happens next | `../stages/05-learn/CONTEXT.md` | Verified `what-now.md` and publication route |
 | Publish a passed issue | `stages/05-publish/CONTEXT.md` | Commit, push, PR to `staging`, and review request |
 | Check merge or close issue | `stages/06-close-merged/CONTEXT.md` | Merge verification or explicit issue closure |
 

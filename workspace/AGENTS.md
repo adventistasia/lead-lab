@@ -45,7 +45,7 @@ Each stage has one job, reads only declared inputs, writes inspectable handoffs,
 ## Matic Rules
 
 - An open GitHub issue with the `matic` label is eligible for invocation-driven processing. The label authorizes implementation workflow actions, but it does not authorize a human-only product, privacy, provider, production, or irreversible decision.
-- When multiple eligible issues exist, rank them with `workflows/matic/selection-criteria.md` and start only the lowest-scoring simplest issue. Use the issue number only to break a tie.
+- When multiple eligible issues exist, rank them with `matic-workflow/selection-criteria.md` and start only the lowest-scoring simplest issue. Use the issue number only to break a tie.
 - Complete the matic selection and plan-control stages before Build. Update the relevant PM Control records before implementation begins.
 - Use the existing Define and Design stages for every issue unless their input gates explicitly show that a stage is not applicable. Build must never run without its declared design and environment inputs.
 - Reconcile every affected carrier after implementation. This includes relevant PM Control records, run evidence, source documentation, tests, and deployment guidance. Do not rewrite unrelated records.

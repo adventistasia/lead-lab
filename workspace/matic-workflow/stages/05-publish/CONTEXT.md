@@ -21,7 +21,7 @@ Passed Measure + verified Learn + reconciled carriers + clean intended diff -> c
 
 | Interface | Declaration |
 |---|---|
-| Inputs | `{{RUN_PATH}}/stages/04-measure/audit-findings.md`, `{{RUN_PATH}}/stages/05-learn/what-now.md`, `{{RUN_PATH}}/stages/matic/04-reconcile/reconciliation-record.md`, `{{RUN_PATH}}/run-manifest.md`, `{{RUN_PATH}}/run-state.md`, `workspace/_config/quality-policy.md`, and `workspace/workflows/matic/github-lifecycle.md` |
+| Inputs | `{{RUN_PATH}}/stages/04-measure/audit-findings.md`, `{{RUN_PATH}}/stages/05-learn/what-now.md`, `{{RUN_PATH}}/stages/matic/04-reconcile/reconciliation-record.md`, `{{RUN_PATH}}/run-manifest.md`, `{{RUN_PATH}}/run-state.md`, `workspace/_config/quality-policy.md`, and `workspace/matic-workflow/github-lifecycle.md` |
 | Transform | Verify publication readiness, commit intended files, push the matic branch, create the PR to `staging`, and request the required reviewer |
 | Outputs | `publication-record.md`, pushed branch, PR targeting `staging`, reviewer request, and updated `run-state.md` |
 
@@ -62,7 +62,7 @@ Passed Measure + verified Learn + reconciled carriers + clean intended diff -> c
 - The issue number and human-readable title are present without an auto-close keyword.
 - Dennis Arquillano (`dennisatssd`) is requested.
 - The exact PR number and title are recorded.
-- The next route is `workflows/matic/stages/06-close-merged/CONTEXT.md`.
+- The next route is `matic-workflow/stages/06-close-merged/CONTEXT.md`.
 
 ## Review Gate
 

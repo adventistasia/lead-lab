@@ -18,7 +18,7 @@ This existing `workspace/` is configured by extension, not replacement. The curr
 
 1. Confirm that the destination is the existing `workspace/` directory.
 2. Preserve the five existing build stages.
-3. Add the matic orchestration layer under `workspace/workflows/matic/`.
+3. Add the matic orchestration layer under `workspace/matic-workflow/`.
 4. Configure stable policies, setup records, paths, and GitHub lifecycle rules.
 5. Correct only stale workspace references that would prevent the existing stages from reading the current repository layout.
 6. Run `workspace/setup/validation-checklist.md`.
