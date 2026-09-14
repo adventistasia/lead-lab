@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Providers\AppServiceProvider;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +12,14 @@ use Tests\TestCase;
 class PasswordPolicyTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_browser_password_rules_describe_a_compliant_subset(): void
+    {
+        $this->assertSame(
+            'minlength: 8; required: lower; required: upper; required: digit;',
+            AppServiceProvider::PASSWORD_RULES,
+        );
+    }
 
     public function test_passwords_with_at_least_three_character_types_are_accepted(): void
     {

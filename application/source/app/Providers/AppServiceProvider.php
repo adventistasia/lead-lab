@@ -11,6 +11,8 @@ use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public const PASSWORD_RULES = 'minlength: 8; required: lower; required: upper; required: digit;';
+
     /**
      * Register any application services.
      */
