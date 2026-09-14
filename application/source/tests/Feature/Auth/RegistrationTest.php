@@ -36,8 +36,8 @@ class RegistrationTest extends TestCase
         $response = $this->post(route('register.store'), [
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ]);
 
         $this->assertAuthenticated();
@@ -73,8 +73,8 @@ class RegistrationTest extends TestCase
         $this->post(route('register.store'), [
             'name' => 'New Participant',
             'email' => 'new-participant@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ]);
 
         $participant = User::query()
@@ -139,8 +139,8 @@ class RegistrationTest extends TestCase
         $this->post(route('register.store'), [
             'name' => 'Verified User',
             'email' => 'verified@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ]);
 
         $user = User::query()->where('email', 'verified@example.com')->firstOrFail();
@@ -169,8 +169,8 @@ class RegistrationTest extends TestCase
         $this->post(route('register.store'), [
             'name' => 'Unverified User',
             'email' => 'unverified@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ]);
 
         Notification::assertNothingSent();
@@ -184,8 +184,8 @@ class RegistrationTest extends TestCase
             $response = $this->post(route('register.store'), [
                 'name' => "Test User {$number}",
                 'email' => "test-{$number}@example.com",
-                'password' => 'password',
-                'password_confirmation' => 'password',
+                'password' => 'Password1!',
+                'password_confirmation' => 'Password1!',
             ]);
 
             $response->assertRedirect(route('registration.pending', absolute: false));
@@ -202,7 +202,7 @@ class RegistrationTest extends TestCase
         $payload = [
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => 'password',
+            'password' => 'Password1!',
             'password_confirmation' => 'not-the-same-password',
         ];
 
@@ -222,8 +222,8 @@ class RegistrationTest extends TestCase
         $this->post(route('register.store'), [
             'name' => 'Test User',
             'email' => ['test@example.com'],
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'Password1!',
+            'password_confirmation' => 'Password1!',
         ])->assertSessionHasErrors('email');
 
         $this->assertGuest();
