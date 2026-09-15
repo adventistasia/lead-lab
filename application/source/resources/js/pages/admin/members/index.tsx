@@ -402,13 +402,17 @@ export default function AdminMembers({
                             </div>
                         </form>
 
-                        <Tabs value={filters.state} onValueChange={changeState}>
-                            <TabsList className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-2 xl:grid-cols-4">
+                        <Tabs
+                            className="min-w-0"
+                            value={filters.state}
+                            onValueChange={changeState}
+                        >
+                            <TabsList className="grid !h-auto min-h-9 w-full min-w-0 grid-cols-1 gap-1 sm:grid-cols-2 xl:grid-cols-4">
                                 {memberStateOptions.map((option) => (
                                     <TabsTrigger
                                         key={option.value}
                                         value={option.value}
-                                        className="h-auto min-h-9 px-3 py-2 text-center whitespace-normal"
+                                        className="h-auto min-h-9 min-w-0 px-3 py-2 text-center leading-tight break-words whitespace-normal"
                                     >
                                         {option.label}
                                         {option.value ===
@@ -421,7 +425,10 @@ export default function AdminMembers({
                                 ))}
                             </TabsList>
 
-                            <TabsContent value={filters.state} className="mt-2">
+                            <TabsContent
+                                value={filters.state}
+                                className="mt-2 min-w-0"
+                            >
                                 {members.data.length === 0 ? (
                                     <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed p-8 text-center">
                                         <p className="font-medium">
@@ -440,7 +447,7 @@ export default function AdminMembers({
                                         {members.data.map((member) => (
                                             <div
                                                 key={member.id}
-                                                className="flex flex-wrap items-center gap-4 rounded-lg border p-4"
+                                                className="flex min-w-0 flex-wrap items-center gap-4 rounded-lg border p-4"
                                             >
                                                 <div className="flex min-w-0 flex-1 flex-col gap-1">
                                                     <p className="font-medium">
@@ -460,85 +467,88 @@ export default function AdminMembers({
                                                             : 'Email not verified'}
                                                     </p>
                                                 </div>
-                                                <Badge
-                                                    variant={
-                                                        member.access_status ===
-                                                        'revoked'
-                                                            ? 'destructive'
-                                                            : member.access_status ===
-                                                                'pending'
-                                                              ? 'outline'
-                                                              : 'secondary'
-                                                    }
-                                                >
-                                                    {statusLabel(
-                                                        member.access_status,
-                                                    )}
-                                                </Badge>
-                                                {member.access_status ===
-                                                'pending' ? (
-                                                    !emailVerificationRequired ||
-                                                    member.email_verified_at ? (
+                                                <div className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
+                                                    <Badge
+                                                        variant={
+                                                            member.access_status ===
+                                                            'revoked'
+                                                                ? 'destructive'
+                                                                : member.access_status ===
+                                                                    'pending'
+                                                                  ? 'outline'
+                                                                  : 'secondary'
+                                                        }
+                                                    >
+                                                        {statusLabel(
+                                                            member.access_status,
+                                                        )}
+                                                    </Badge>
+                                                    {member.access_status ===
+                                                    'pending' ? (
+                                                        !emailVerificationRequired ||
+                                                        member.email_verified_at ? (
+                                                            <Button
+                                                                variant="default"
+                                                                size="sm"
+                                                                onClick={() =>
+                                                                    updateAccess(
+                                                                        member,
+                                                                        'active',
+                                                                    )
+                                                                }
+                                                            >
+                                                                Approve access
+                                                            </Button>
+                                                        ) : (
+                                                            <span className="text-xs text-muted-foreground">
+                                                                Waiting for
+                                                                email
+                                                                verification
+                                                            </span>
+                                                        )
+                                                    ) : (
                                                         <Button
-                                                            variant="default"
+                                                            variant={
+                                                                member.access_status ===
+                                                                'active'
+                                                                    ? 'destructive'
+                                                                    : 'outline'
+                                                            }
                                                             size="sm"
                                                             onClick={() =>
                                                                 updateAccess(
                                                                     member,
-                                                                    'active',
+                                                                    member.access_status ===
+                                                                        'active'
+                                                                        ? 'revoked'
+                                                                        : 'active',
                                                                 )
                                                             }
                                                         >
-                                                            Approve access
-                                                        </Button>
-                                                    ) : (
-                                                        <span className="text-xs text-muted-foreground">
-                                                            Waiting for email
-                                                            verification
-                                                        </span>
-                                                    )
-                                                ) : (
-                                                    <Button
-                                                        variant={
-                                                            member.access_status ===
+                                                            <UserRoundX data-icon="inline-start" />
+                                                            {member.access_status ===
                                                             'active'
-                                                                ? 'destructive'
-                                                                : 'outline'
-                                                        }
-                                                        size="sm"
-                                                        onClick={() =>
-                                                            updateAccess(
-                                                                member,
-                                                                member.access_status ===
-                                                                    'active'
-                                                                    ? 'revoked'
-                                                                    : 'active',
-                                                            )
-                                                        }
-                                                    >
-                                                        <UserRoundX data-icon="inline-start" />
-                                                        {member.access_status ===
-                                                        'active'
-                                                            ? 'Revoke access'
-                                                            : 'Restore access'}
-                                                    </Button>
-                                                )}
-                                                {isManageableRole(
-                                                    member.role,
-                                                ) ? (
-                                                    <Button
-                                                        type="button"
-                                                        variant="outline"
-                                                        size="sm"
-                                                        onClick={() =>
-                                                            openRoleDialog(
-                                                                member,
-                                                            )
-                                                        }
-                                                    >
-                                                        Change role
-                                                    </Button>
-                                                ) : null}
+                                                                ? 'Revoke access'
+                                                                : 'Restore access'}
+                                                        </Button>
+                                                    )}
+                                                    {isManageableRole(
+                                                        member.role,
+                                                    ) ? (
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline"
+                                                            size="sm"
+                                                            onClick={() =>
+                                                                openRoleDialog(
+                                                                    member,
+                                                                )
+                                                            }
+                                                        >
+                                                            Change role
+                                                        </Button>
+                                                    ) : null}
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
