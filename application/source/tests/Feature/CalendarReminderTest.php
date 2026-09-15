@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Notifications\CalendarEventReminderNotification;
 use App\Services\CalendarEventReminderService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
@@ -207,15 +208,80 @@ class CalendarReminderTest extends TestCase
         $this->assertContains('Bring the launch checklist.', $message->introLines);
         $this->assertContains('Starts: Thursday, August 27, 2026 at 6:00 PM +08:00', $message->introLines);
         $this->assertContains('Ends: Thursday, August 27, 2026 at 7:00 PM +08:00', $message->introLines);
-        $this->assertSame('Open calendar', $message->actionText);
-        $this->assertStringContainsString('/calendar?month=', $message->actionUrl);
+        $this->assertSame('Watch live broadcast', $message->actionText);
+        $this->assertSame('https://example.com/live', $message->actionUrl);
+        $this->assertSame('Open calendar', $message->viewData['secondaryActionText']);
+        $this->assertStringContainsString('/calendar?month=2026-08', $message->viewData['secondaryActionUrl']);
         $this->assertContains('Times are shown in GMT+8 (Asia/Manila).', $message->outroLines);
         $rendered = (string) $message->render();
+        $renderedText = (string) app(Markdown::class)->renderText($message->markdown, $message->data());
 
         $this->assertStringContainsString('LEADHub', $rendered);
         $this->assertStringNotContainsString('Lead Lab', $rendered);
+        $this->assertStringContainsString('href="https://example.com/live"', $rendered);
+        $this->assertStringContainsString('href="'.route('calendar', ['month' => '2026-08']).'"', $rendered);
+        $this->assertLessThan(
+            strpos($rendered, 'Open calendar'),
+            strpos($rendered, 'Watch live broadcast'),
+        );
+        $this->assertStringContainsString('Watch live broadcast: https://example.com/live', $renderedText);
+        $this->assertStringContainsString(
+            'Open calendar: '.route('calendar', ['month' => '2026-08']),
+            $renderedText,
+        );
 
         $this->travelBack();
+    }
+
+    public function test_reminder_notification_uses_only_the_calendar_action_without_a_broadcast_url(): void
+    {
+        $user = User::factory()->create();
+
+        foreach ([null, ''] as $liveBroadcastUrl) {
+            $event = CalendarEvent::factory()->create([
+                'starts_at' => Carbon::parse('2026-01-15 15:00:00', 'UTC'),
+                'ends_at' => Carbon::parse('2026-01-15 16:00:00', 'UTC'),
+                'live_broadcast_url' => $liveBroadcastUrl,
+            ]);
+
+            $message = (new CalendarEventReminderNotification(
+                $event,
+                CalendarEvent::REMINDER_ONE_DAY,
+            ))->toMail($user);
+
+            $this->assertSame('Open calendar', $message->actionText);
+            $this->assertStringContainsString('/calendar?month=2026-01', $message->actionUrl);
+            $this->assertNull($message->viewData['secondaryActionText']);
+            $this->assertNull($message->viewData['secondaryActionUrl']);
+            $this->assertStringNotContainsString('Live broadcast:', implode('\n', $message->introLines));
+            $rendered = (string) $message->render();
+            $renderedText = (string) app(Markdown::class)->renderText($message->markdown, $message->data());
+
+            $this->assertStringNotContainsString('Live broadcast:', $rendered);
+            $this->assertStringNotContainsString('Watch live broadcast', $rendered);
+            $this->assertStringNotContainsString('Live broadcast:', $renderedText);
+            $this->assertStringNotContainsString('Watch live broadcast', $renderedText);
+        }
+    }
+
+    public function test_reminder_notification_actions_work_for_each_supported_offset(): void
+    {
+        $user = User::factory()->create();
+        $event = CalendarEvent::factory()->create([
+            'live_broadcast_url' => 'https://example.com/live',
+        ]);
+
+        foreach ([
+            CalendarEvent::REMINDER_THREE_DAYS,
+            CalendarEvent::REMINDER_ONE_DAY,
+            CalendarEvent::REMINDER_FIFTEEN_MINUTES,
+        ] as $offset) {
+            $message = (new CalendarEventReminderNotification($event, $offset))->toMail($user);
+
+            $this->assertSame('Watch live broadcast', $message->actionText);
+            $this->assertSame('https://example.com/live', $message->actionUrl);
+            $this->assertSame('Open calendar', $message->viewData['secondaryActionText']);
+        }
     }
 
     public function test_reminder_notification_uses_the_event_date_timezone_offset(): void
