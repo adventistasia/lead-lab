@@ -3,6 +3,8 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+Current status reconciliation recorded on 2026-09-15: R-19 (Lowering password requirements may increase weak-password compromise risk or conflict with security acceptance), R-04 (Participant email data handling unclear; privacy rules not confirmed), R-03 (Option B authentication or access control may expose participant content), and R-15 (Calendar reminder delivery may be late, duplicated, or unavailable) are Closed by PM direction after launch and the related confirmations. R-18 (Automated bots may abuse public registration and forgot-password endpoints) is In Progress; its register lifecycle remains active until the controls and verification are complete. Detailed reconciliation: `runs/2026-09-15-session-reconciliation/reconciliation-record.md`.
+
 PM closure direction recorded on 2026-09-15: R-19 (Lowering password requirements may increase weak-password compromise risk or conflict with security acceptance) is Closed following the successful launch and PM acceptance. This closes the tracked risk record and does not change the approved password policy or unrelated controls.
 
 PM closure direction recorded on 2026-09-15: R-04 (Participant email data handling unclear; privacy rules not confirmed) is Closed. Participant-data rules and administrator-only access are approved, and staging and production email verification has been tested. R-03 (Option B authentication or access control may expose participant content) remains Closed under the prior PM confirmation. This direction does not change unrelated risk states.
