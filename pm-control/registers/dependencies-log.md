@@ -3,6 +3,10 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM closure direction recorded on 2026-09-15: DEP-09 (Option B authentication and participant-data handling decision) and DEP-13 (Password-recovery email delivery and operational support) are Closed based on approved participant-data rules, administrator-only data access, and confirmed staging and production email-verification testing. DEP-12 (Staging and production email delivery operations for registration alerts) remains Closed under the prior email-operations confirmation. This direction does not change unrelated dependency states.
+
+PM status direction recorded on 2026-09-15: Email operations are confirmed working and the related email-delivery dependencies are closed. Participant authentication and access control are confirmed done; the related dependency is closed. Calendar reminder delivery is confirmed working and the related reminder dependency is closed. This direction does not change unrelated dependency states.
+
 ACT-09 reconciliation recorded on 2026-09-07: DEP-09 (Option B authentication and participant-data handling decision) now links the canonical application-managed self-registration direction and the MVP deferral of Microsoft 365 SSO. DEP-09 remains Critical and Open because D-27 (What working participant-data rules should supplement D-23?) remains Proposed, participant privacy and data-governance evidence is incomplete, and target-state staging and mail evidence remain open. No dependency state was changed.
 
 PM direction recorded on 2026-09-09: Dennis Arquillano is assigned to the Gate 1 environment and ownership evidence and staging HTTPS evidence. This work is deferred until site deployment; DEP-10 remains Open and this direction does not approve staging or production.

@@ -3,6 +3,10 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM decision recorded on 2026-09-15: Participant-data governance and email verification are approved. The application may store participant name, email address, and access status; the client-approved participant list remains outside the application; revoked records follow the three-month retention rule; and administrators only may view or change participant data. Staging and production email verification is enabled and has been tested successfully. D-27 (What working participant-data rules should supplement D-23?) is Made with this direction.
+
+PM decision recorded on 2026-09-15: Monitoring and on-call alerts are confirmed to be received by Agno JF, Carmen, and Stephen. The alert-recipient decision is Made; alert routing, severity handling, and operational verification remain separate unless otherwise confirmed.
+
 New proposed decision recorded on 2026-09-14: D-73 (Should Lead Hub lower the password policy minimum and character-type threshold?) is Proposed. Issue #36 (Security: Lower Password Requirements) supplies the requested values, but the issue does not establish authority to lower an authentication security control. Implementation is blocked pending an authorized decision.
 
 Requester decision recorded on 2026-09-14: D-73 (Should Lead Hub lower the password policy minimum and character-type threshold?) is Made. Approve CHG-50 (Lower Password Requirements) for local implementation and a reviewed PR to `staging`: require at least 8 characters and at least 3 of 4 character types, explain unmet requirements, preserve password hashing, storage, reset, access-state, verification, rate-limit, and scheduling behavior, and make no production change.

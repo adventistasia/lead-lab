@@ -3,6 +3,10 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM closure direction recorded on 2026-09-15: ISS-04 (Participant email data handling and privacy rules not confirmed for the Option B application) is Closed. Privacy rules are approved, only administrators may view or change participant data, and staging and production email verification has been tested successfully. This direction does not change unrelated issue states.
+
+PM closure direction recorded on 2026-09-15: Following successful launch, ISS-18 (Password-policy change from issue #36 (Security: Lower Password Requirements) is being implemented under approved controls), ISS-16 (Live site does not fully load because HTTPS assets and SSD-network access remain unresolved), and ISS-14 (Session detail page is not responsive on mobile when a long uploaded session-material filename is present) are Closed. ISS-10 (Administrative activity logging is incomplete in the Option B application) remains In Progress. This direction does not change unrelated issue states.
+
 Issue #36 intake recorded on 2026-09-14: ISS-18 (Proposed security password-policy change from issue #36 (Security: Lower Password Requirements) lacks recorded authorization) is Blocked. The issue proposes lowering the minimum password length and character-type threshold, but no authorized security-policy decision is recorded. Do not implement until D-73 (Should Lead Hub lower the password policy minimum and character-type threshold?) is made and the implementation authority is confirmed.
 
 Requester authorization recorded on 2026-09-14: ISS-18 (Password-policy change from issue #36 (Security: Lower Password Requirements) is being implemented under approved controls) is In Progress. D-73 (Should Lead Hub lower the password policy minimum and character-type threshold?) is Made, CHG-50 (Lower Password Requirements) is Approved, and ACT-71 (Implement and verify the password policy change from issue #36 (Security: Lower Password Requirements)) is active. The related GitHub issue remains open until implementation and Measure evidence pass.
