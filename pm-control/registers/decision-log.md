@@ -3,6 +3,8 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM decision recorded on 2026-09-15: D-50 (Should Lead Hub use Amazon SES for production email and approve the required AWS account, region, external-processor, and data-processing arrangements?) is Made. Production uses the same Postmark SMTP provider as staging; Amazon SES is not selected. This resolves the provider choice and does not by itself resolve separate queue, monitoring, sender-verification, or operational controls.
+
 PM decision recorded on 2026-09-15: Participant-data governance and email verification are approved. The application may store participant name, email address, and access status; the client-approved participant list remains outside the application; revoked records follow the three-month retention rule; and administrators only may view or change participant data. Staging and production email verification is enabled and has been tested successfully. D-27 (What working participant-data rules should supplement D-23?) is Made with this direction.
 
 PM decision recorded on 2026-09-15: Monitoring and on-call alerts are confirmed to be received by Agno JF, Carmen, and Stephen. The alert-recipient decision is Made; alert routing, severity handling, and operational verification remain separate unless otherwise confirmed.
