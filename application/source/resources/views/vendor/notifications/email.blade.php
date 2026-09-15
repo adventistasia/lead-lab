@@ -29,6 +29,13 @@
 </x-mail::button>
 @endisset
 
+{{-- Secondary Action Button --}}
+@isset($secondaryActionText)
+<x-mail::button :url="$secondaryActionUrl" color="primary">
+{{ $secondaryActionText }}
+</x-mail::button>
+@endisset
+
 {{-- Outro Lines --}}
 @foreach ($outroLines as $line)
 {{ $line }}

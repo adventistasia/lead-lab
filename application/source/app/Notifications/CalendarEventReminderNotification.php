@@ -42,16 +42,25 @@ class CalendarEventReminderNotification extends Notification
             $message->line('Location: '.$this->event->location);
         }
 
-        if ($this->event->live_broadcast_url !== null && $this->event->live_broadcast_url !== '') {
-            $message->line('Live broadcast: '.$this->event->live_broadcast_url);
+        $liveBroadcastUrl = $this->event->live_broadcast_url;
+        $hasLiveBroadcast = $liveBroadcastUrl !== null && $liveBroadcastUrl !== '';
+
+        if ($hasLiveBroadcast) {
+            $message->line('Live broadcast: '.$liveBroadcastUrl);
         }
+
+        $calendarUrl = route('calendar', ['month' => $startsAt->format('Y-m')]);
 
         return $message
             ->line($this->event->description)
             ->action(
-                'Open calendar',
-                route('calendar', ['month' => $startsAt->format('Y-m')]),
+                $hasLiveBroadcast ? 'Watch live broadcast' : 'Open calendar',
+                $hasLiveBroadcast ? $liveBroadcastUrl : $calendarUrl,
             )
+            ->markdown('notifications::email', [
+                'secondaryActionText' => $hasLiveBroadcast ? 'Open calendar' : null,
+                'secondaryActionUrl' => $hasLiveBroadcast ? $calendarUrl : null,
+            ])
             ->line('Times are shown in '.$notifiable->effectiveTimezoneLabel($startsAt).'.');
     }
 }
