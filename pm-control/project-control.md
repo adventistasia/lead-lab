@@ -3,6 +3,8 @@
 
 **Current PM reconciliation (2026-09-15):** The PM confirms Lead Hub has launched successfully. The session closes the completed actions and issues recorded in the action and issue registers, closes the confirmed authentication, participant-data, email, reminder, and production-URL controls, records Postmark SMTP for both staging and production, and records monitoring alerts for Agno JF, Carmen, and Stephen. ACT-48 (Implement and verify the mobile fullscreen toggle across authenticated application shell variants) is closed because work will not continue, without claiming verification. ACT-70 (Implement and verify the administrator Members page responsive correction), ISS-17 (Administrator Members page responsive layout defect), ISS-10 (Administrative activity logging is incomplete in the Option B application), and R-18 (Automated bots may abuse public registration and forgot-password endpoints) remain active. PM-07 (Monitor and Control Project Performance) remains in Attention status until the remaining operational controls and proposed deployment decisions are reconciled. Detailed reconciliation: `runs/2026-09-15-session-reconciliation/reconciliation-record.md`.
 
+**Issue #39 delivery control (2026-09-15):** CHG-51 (Add a direct live broadcast button to event reminder emails) is Approved under D-74 (Should reminder emails include a direct Watch live broadcast button when an event has a live broadcast URL?). The published branch `feature/issue-39-live-broadcast-reminder` was created from `staging` before code work. ACT-72 (Implement and verify direct live-broadcast access in calendar event reminder emails) and ISS-19 (Event reminder emails do not provide direct live broadcast access) are In Progress. The change is limited to the reminder notification, shared mail template, and tests; external provider authentication and staging or live-mail evidence remain separate.
+
 **Issue #34 production URL scope (2026-09-10):** CHG-48 (Set the production `APP_URL` to the canonical HTTPS address) is Approved under D-71 (Should this work change only the production `APP_URL` while the resident developer handles the remaining site-access fix?). The branch-controlled production Compose definition now supplies `https://leadhub.adventist.asia` to the application roles, and deployment guidance records the same value. The private production `.env` and live runtime were not available in this workspace, so ACT-68 (Set and verify the production `APP_URL`) remains In Progress. ISS-16 (Live site does not fully load because HTTPS asset requests and SSD-network access remain unresolved) remains In Progress; no GitHub issue update was made.
 
 **Next action:** Deploy this branch, recreate the web, queue, and scheduler containers, and verify `APP_URL=https://leadhub.adventist.asia`; then leave proxy, DNS, TLS, firewall, and SSD-network work with the resident developer.
@@ -48,7 +50,7 @@ This file is the project-level dashboard and configuration record.
 | Current phase | Option B staging deployment reported; Gate 1 environment and ownership evidence remains open; production readiness deferred |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured |
-| Last verified | 2026-09-11 |
+| Last verified | 2026-09-15 |
 | Last status report | None recorded |
 | Next review trigger | After refreshed post-deployment Gate 1 and email-delivery evidence, reconcile the staging mail and deployment statements, and before the next launch, participant-use, or fallback commitment |
 
@@ -119,11 +121,11 @@ This file is the project-level dashboard and configuration record.
 |---|---|---|
 | Risks | `registers/risk-register.md` | 2026-09-10 |
 | Assumptions | `registers/assumption-log.md` | 2026-08-18 |
-| Issues | `registers/issues-log.md` | 2026-09-07 |
+| Issues | `registers/issues-log.md` | 2026-09-15 |
 | Dependencies | `registers/dependencies-log.md` | 2026-08-31 |
-| Actions | `registers/action-log.md` | 2026-09-10 |
-| Decisions | `registers/decision-log.md` | 2026-09-10 |
-| Changes | `registers/change-log.md` | 2026-09-10 |
+| Actions | `registers/action-log.md` | 2026-09-15 |
+| Decisions | `registers/decision-log.md` | 2026-09-15 |
+| Changes | `registers/change-log.md` | 2026-09-15 |
 | Lessons learned | `registers/lessons-learned-register.md` | 2026-08-31 |
 | Process register | `process-register.md` | 2026-09-08 |
 | Artifact index | `artifact-index.md` | 2026-09-08 |
