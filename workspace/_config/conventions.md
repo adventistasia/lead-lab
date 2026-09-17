@@ -33,6 +33,11 @@ Inputs -> One Transformation -> Outputs
 - Use `{{RUN_PATH}}/stages/01-define/`, `02-design/`, `03-build/`, `04-measure/`, and `05-learn/` for the existing build pipeline outputs.
 - Create the branch as `matic/issue-<number>-<slug>` from `origin/staging`.
 - Do not overwrite a prior run, an existing branch, or an open PR. Resume the existing run or stop with a clear reason.
+- Acquire and verify `refs/heads/matic-claims/issue-<number>` before creating the run folder or delivery branch. Follow `workspace/matic-workflow/claim-contract.md`.
+- The remote claim ref is the shared ownership source of truth. A local `run-state.md` copy does not grant ownership.
+- Use the execution ID from the verified claim for shared writes. A stale or mismatched token is a stop condition.
+- Waiting states clear the execution token. Resume, handoff, takeover, reopen, and completion must use explicit compare-and-swap claim operations.
+- Use separate clones or worktrees for concurrent issues. The claim does not protect a shared checkout.
 - Include the issue number and human-readable issue title in run manifests, plan records, reconciliation records, publication records, and user-facing reports.
 - Include the human-readable title or description whenever a PM Control ID is cited.
 

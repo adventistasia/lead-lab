@@ -46,6 +46,10 @@ Each stage has one job, reads only declared inputs, writes inspectable handoffs,
 
 - An open GitHub issue with the `matic` label is eligible for invocation-driven processing. The label authorizes implementation workflow actions, but it does not authorize a human-only product, privacy, provider, production, or irreversible decision.
 - When multiple eligible issues exist, rank them with `matic-workflow/selection-criteria.md` and start only the lowest-scoring simplest issue. Use the issue number only to break a tie.
+- Before creating a Matic run, acquire and verify the permanent GitHub claim ref defined in `workspace/matic-workflow/claim-contract.md`. A label, local run folder, branch, or comment is not an exclusive claim.
+- If another operator wins the claim, skip the issue and do not create local artifacts. If the claim ref is malformed or cannot be verified, stop as `Blocked` and do not overwrite it.
+- Verify the authenticated operator and current execution ID before every shared write. Use a separate clone or worktree for every active execution.
+- Use explicit handoff or takeover recovery after confirming the prior execution stopped. Never reclaim by timeout, delete a claim ref, or force-update its history.
 - Complete the matic selection and plan-control stages before Build. Update the relevant PM Control records before implementation begins.
 - Use the existing Define and Design stages for every issue unless their input gates explicitly show that a stage is not applicable. Build must never run without its declared design and environment inputs.
 - Reconcile every affected carrier after implementation. This includes relevant PM Control records, run evidence, source documentation, tests, and deployment guidance. Do not rewrite unrelated records.

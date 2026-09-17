@@ -21,13 +21,15 @@ Selected issue + approved scope + current controls + project context -> define o
 
 | Interface | Declaration |
 |---|---|
-| Inputs | `{{RUN_PATH}}/stages/matic/01-select/issue-selection.md`, `{{RUN_PATH}}/run-manifest.md`, GitHub issue body and metadata, `artifacts/lead-lab-web-app-scope-and-requirements.md`, `artifacts/lead-lab-web-app-backlog.md`, `artifacts/lead-lab-web-app-delivery-plan.md`, relevant `pm-control/registers/`, `workspace/matic-workflow/pm-control-contract.md`, and `workspace/matic-workflow/github-lifecycle.md` |
+| Inputs | `{{RUN_PATH}}/stages/matic/01-select/issue-selection.md`, `{{RUN_PATH}}/run-manifest.md`, `{{RUN_PATH}}/run-state.md`, the verified remote claim record and execution ID, GitHub issue body and metadata, `artifacts/lead-lab-web-app-scope-and-requirements.md`, `artifacts/lead-lab-web-app-backlog.md`, `artifacts/lead-lab-web-app-delivery-plan.md`, relevant `pm-control/registers/`, `workspace/matic-workflow/pm-control-contract.md`, `workspace/matic-workflow/claim-contract.md`, and `workspace/matic-workflow/github-lifecycle.md` |
 | Transform | Define the implementation boundary, stage path, tests, risks, acceptance matrix, and relevant pre-build PM Control updates |
-| Outputs | `execution-plan.md`, `acceptance-matrix.md`, `plan-control-record.md`, updated relevant `pm-control/registers/`, GitHub `acknowledged` label state, and `run-state.md` |
+| Outputs | `execution-plan.md`, `acceptance-matrix.md`, `plan-control-record.md`, updated relevant `pm-control/registers/`, GitHub `acknowledged` label state, the verified active claim transition, and `run-state.md` |
 
 ## Input Gate
 
 - Confirm the selected issue title, URL, and label.
+- Confirm the remote claim ref still identifies this run, operator, work branch, base SHA, and execution ID.
+- Read the claim immediately before updating PM Control or run artifacts. Stop on a stale token or contention result.
 - Confirm the issue outcome and acceptance conditions are specific enough to test.
 - Map the issue to approved scope or record the human decision required.
 - Identify the exact existing Define, Design, Build, Measure, and Learn outputs needed.
@@ -36,13 +38,14 @@ Selected issue + approved scope + current controls + project context -> define o
 
 ## Transform
 
-1. Read the selected issue and declared project context.
-2. Identify the smallest affected source, test, documentation, deployment, screenshot-evidence, and PM Control carriers.
-3. Define the issue boundary, exclusions, implementation sequence, verification commands, manual checks, rollback, and known risks.
-4. Map each issue acceptance condition to evidence and the responsible stage. For every matic publication, define a safe screenshot of the fix, its run-evidence path, and the check that will show it contains no sensitive data.
-5. Search current registers and update only relevant records using `pm-control-contract.md`.
-6. Add `acknowledged` to the issue after the plan and records pass verification. Keep `matic`.
-7. Write the plan, matrix, control record, and run state.
+1. Read the selected issue, declared project context, and current claim record.
+2. Verify the authenticated operator and execution ID before writing any plan, control, or run-state carrier.
+3. Identify the smallest affected source, test, documentation, deployment, screenshot-evidence, and PM Control carriers.
+4. Define the issue boundary, exclusions, implementation sequence, verification commands, manual checks, rollback, and known risks.
+5. Map each issue acceptance condition to evidence and the responsible stage. For every matic publication, define a safe screenshot of the fix, its run-evidence path, and the check that will show it contains no sensitive data.
+6. Search current registers and update only relevant records using `pm-control-contract.md`.
+7. Add `acknowledged` to the issue after the plan and records pass verification. Keep `matic`.
+8. Write the plan, matrix, control record, and run state, then append a verified active claim transition for the next stage.
 
 ## Outputs
 
@@ -53,16 +56,19 @@ Selected issue + approved scope + current controls + project context -> define o
 | Plan-control record | `{{RUN_PATH}}/stages/matic/02-plan-control/plan-control-record.md` | Markdown | Reconcile and audit |
 | PM Control records | Relevant files under `pm-control/registers/` | Markdown | Project control source of truth |
 | Run state | `{{RUN_PATH}}/run-state.md` | Markdown | Router and resume flow |
+| Claim state | `refs/heads/matic-claims/issue-<number>` | Git commit history with the next-stage transition | All operators and Define |
 
 ## Verify
 
 - The plan names one issue outcome and one implementation boundary.
+- The claim ref and execution token were verified before shared writes and remain recorded in the run state.
 - Every issue acceptance condition appears in the matrix.
 - The acceptance matrix names a safe screenshot of the fix and its run-evidence path, or records the exact blocker that prevents capture.
 - Every planned PM Control update has a reason and source.
 - No human-only decision is presented as made.
 - The next stage and exact required inputs are named.
 - The issue has `acknowledged` only after the pre-build work is complete.
+- The claim remains owned by the run and its next stage is recorded through a compare-and-swap update.
 
 ## Review Gate
 

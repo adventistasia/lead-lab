@@ -10,7 +10,7 @@ An issue is eligible only when all of these are true:
 - GitHub state is `OPEN`.
 - The issue has the exact `matic` label.
 - The issue is not a pull request.
-- No open matic PR or active run already owns it, unless the request is a resume or status check.
+- No open matic PR, active run, or valid remote claim already owns it, unless the request is an explicit resume, recovery, handoff, or status check.
 - The body states an outcome and a usable acceptance condition.
 - The issue is within the approved Lead Hub boundary or its plan can identify the required human decision before implementation.
 

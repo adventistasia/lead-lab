@@ -14,21 +14,35 @@ Next action: keep the issue, branch, PR, reviewer, merge, and closure relationsh
 | Work base | `origin/staging` |
 | PR base | `staging` |
 | Required reviewer | Dennis Arquillano (`dennisatssd`) |
+| Issue claim | `refs/heads/matic-claims/issue-<number>` |
 
 ## Selection And Claim
 
 - Read the issue with `gh issue view <number> --repo adventistasia/lead-lab`.
 - Confirm the issue is open and has `matic`.
-- Check open PRs and active run state for an existing owner.
+- Check open PRs, active run state, and `refs/heads/matic-claims/issue-<number>` for an existing owner.
+- Read `workspace/matic-workflow/claim-contract.md` before any claim mutation.
+- Recheck the issue and intended work branch immediately before claiming.
+- Use `python3 workspace/matic-workflow/scripts/claim.py --repo adventistasia/lead-lab claim --issue <number>` to create the claim ref.
+- Treat exit code `0` as a verified claim only after the helper read-back succeeds.
+- Treat exit code `2` as contention. Read the winner, exclude that candidate, and try the next ranked issue; do not create a local run for the loser.
+- Treat a malformed existing claim ref, permission failure, or unresolved read-back as `Blocked`.
+- Create the local run only after the claim ref and claim record are verified.
+- During rollout, use the helper's `adopt` command for an already-existing run and branch after its owner and PR are confirmed. Do not recreate or overwrite that run.
 - Do not apply `matic` automatically.
 - After plan-control succeeds, add `acknowledged` without removing `matic`.
 - If a human decision blocks progress, add `needs-manual-review` and record the reason in `run-state.md`.
+
+The claim ref is not the delivery branch. It contains only a synthetic claim record and must never be merged into `staging`.
+
+Before every shared write, run `inspect` and confirm the authenticated operator and current execution ID still match the run state. Use the compare-and-swap transition commands in `claim-contract.md`; never force-update or delete a claim ref.
 
 ## Branch And Commit
 
 - Confirm the worktree is clean.
 - Fetch the current remote references without changing unrelated branches.
-- Create `matic/issue-<number>-<slug>` from `origin/staging`.
+- Confirm the run still owns the issue claim and its execution ID before creating `matic/issue-<number>-<slug>` from `origin/staging`.
+- Use a separate clone or worktree for each active Matic execution.
 - Commit only intended application, test, documentation, run, screenshot, and PM Control changes for the selected issue.
 - Run `git diff --check` before commit.
 - Push the branch without force-push.
@@ -78,6 +92,7 @@ Failure to resolve the issue author, provide a safe screenshot, publish an acces
 - A closed PR with no `mergedAt` does not satisfy the issue closure condition.
 - A PR merged into a base other than `staging` does not satisfy the issue closure condition.
 - Record the exact PR number, title, head branch, base branch, head commit, review state, checks, and merge timestamp.
+- Record the claim ref head and execution transition that authorized each publication or review correction.
 
 ## Issue Closure
 
@@ -87,6 +102,7 @@ Close the issue only when:
 2. the exact recorded PR is merged;
 3. the PR base is `staging`;
 4. the merged commit is the published branch commit or a merge commit containing it; and
-5. the reconciliation and closure evidence are written.
+5. the reconciliation and closure evidence are written; and
+6. the claim is updated through a verified execution token.
 
 Then close the issue with a comment that names the PR number and human-readable PR title, merged base, and run evidence. If the issue is already closed, verify that its closure comment and PR relationship are traceable and record an idempotent result.
