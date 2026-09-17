@@ -63,6 +63,7 @@ DEP-10 (Gate 1 environment and ownership evidence for credible staging and produ
 
 ## Current Attention
 
+- ACT-70 (Implement and verify the administrator Members page responsive correction) and ISS-17 (Administrator Members page responsive layout defect) remain In Progress while PR #46 (fix: make admin members page responsive) is reviewed, merged, and accepted in staging.
 - ISS-10 (Administrative activity logging is incomplete in the Option B application) remains In Progress.
 - R-18 (Automated bots may abuse public registration and forgot-password endpoints) remains In Progress.
 - DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains Open.
