@@ -3,6 +3,8 @@
 
 **Post-launch schedule refresh (2026-09-17):** The PM-confirmed actual Lead Hub launch is 2026-09-15. It was 8 calendar days after the conditional 2026-09-07 target, 5 days after the proposed 2026-09-10 target, and 4 days after the fixed 2026-09-11 program start. These are historical or conditional comparisons, not baseline variance. The current working schedule now records the actual launch and proposed post-launch windows through a 2026-09-26 control review. No retrospective baseline was created.
 
+**Current PM direction (2026-09-17):** The PM confirmed ACT-70 (Implement and verify the administrator Members page responsive correction) and ACT-72 (Implement and verify direct live-broadcast access in calendar event reminder emails) complete. ISS-17 (Administrator Members page responsive layout defect), ISS-19 (Event reminder emails do not provide direct live broadcast access), CHG-46 (Separate administrator member lists by account state), and CHG-51 (Add a direct live broadcast button to event reminder emails) now reflect that closure. ISS-10 (Administrative activity logging is incomplete in the Option B application), R-18 (Automated bots may abuse public registration and forgot-password endpoints), DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning), and broader operational controls remain separate.
+
 **Current PM reconciliation (2026-09-15):** The PM confirms Lead Hub has launched successfully. The session closes the completed actions and issues recorded in the action and issue registers, closes the confirmed authentication, participant-data, email, reminder, and production-URL controls, records Postmark SMTP for both staging and production, and records monitoring alerts for Agno JF, Carmen, and Stephen. ACT-48 (Implement and verify the mobile fullscreen toggle across authenticated application shell variants) is closed because work will not continue, without claiming verification. ACT-70 (Implement and verify the administrator Members page responsive correction), ISS-17 (Administrator Members page responsive layout defect), ISS-10 (Administrative activity logging is incomplete in the Option B application), and R-18 (Automated bots may abuse public registration and forgot-password endpoints) remain active. PM-07 (Monitor and Control Project Performance) remains in Attention status until the remaining operational controls and proposed deployment decisions are reconciled. Detailed reconciliation: `runs/2026-09-15-session-reconciliation/reconciliation-record.md`.
 
 **Issue #39 delivery control (2026-09-15):** CHG-51 (Add a direct live broadcast button to event reminder emails) is Approved under D-74 (Should reminder emails include a direct Watch live broadcast button when an event has a live broadcast URL?). The published branch `feature/issue-39-live-broadcast-reminder` was created from `staging` before code work. ACT-72 (Implement and verify direct live-broadcast access in calendar event reminder emails) and ISS-19 (Event reminder emails do not provide direct live broadcast access) are In Progress. The change is limited to the reminder notification, shared mail template, and tests; external provider authentication and staging or live-mail evidence remain separate.
@@ -121,16 +123,16 @@ This file is the project-level dashboard and configuration record.
 
 | Register | Location | Last verified |
 |---|---|---|
-| Risks | `registers/risk-register.md` | 2026-09-10 |
+| Risks | `registers/risk-register.md` | 2026-09-17 |
 | Assumptions | `registers/assumption-log.md` | 2026-08-18 |
-| Issues | `registers/issues-log.md` | 2026-09-15 |
-| Dependencies | `registers/dependencies-log.md` | 2026-08-31 |
-| Actions | `registers/action-log.md` | 2026-09-15 |
+| Issues | `registers/issues-log.md` | 2026-09-17 |
+| Dependencies | `registers/dependencies-log.md` | 2026-09-17 |
+| Actions | `registers/action-log.md` | 2026-09-17 |
 | Decisions | `registers/decision-log.md` | 2026-09-15 |
-| Changes | `registers/change-log.md` | 2026-09-15 |
+| Changes | `registers/change-log.md` | 2026-09-17 |
 | Lessons learned | `registers/lessons-learned-register.md` | 2026-08-31 |
-| Process register | `process-register.md` | 2026-09-08 |
-| Artifact index | `artifact-index.md` | 2026-09-08 |
+| Process register | `process-register.md` | 2026-09-17 |
+| Artifact index | `artifact-index.md` | 2026-09-17 |
 
 ## Project Preferences
 
