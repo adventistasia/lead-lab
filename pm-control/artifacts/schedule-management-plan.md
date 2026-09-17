@@ -7,7 +7,13 @@
 | Approved | 2026-08-22, PM approval after Stage 04 of PM-16 (Plan Schedule Management) |
 | Owner | TBD |
 | Related processes | PM-16 (Plan Schedule Management), PM-17 (Develop Schedule), PM-18 (Monitor and Control Schedule) |
-| Next trigger | Complete and validate the Gate 1 evidence, then refresh PM-17 (Develop Schedule) before the 2026-09-09 client staging review and conditional go/no-go |
+| Next trigger | Review the post-launch working schedule and refreshed Gate 1 and operational evidence at the proposed 2026-09-26 post-launch control review; no future commitment or baseline is implied |
+
+## Current Post-Launch State
+
+Lead Hub's actual launch is recorded as 2026-09-15 by PM direction. The 2026-09-07 conditional launch target, 2026-09-09 client review and go/no-go, 2026-09-10 proposed launch target, and 2026-09-11 program start remain historical or conditional schedule references. This refresh records the actual milestone and a dated working plan without creating a retrospective baseline. [Source: `pm-control/runs/2026-09-15-session-reconciliation/reconciliation-record.md`, Result; current PM direction, 2026-09-17]
+
+Future dates in the post-launch working schedule are proposed planning windows. They are not committed dates, register due-date changes, owner assignments, or a schedule baseline. [Source: `pm-control/artifacts/post-launch-schedule.md`, Date Basis]
 
 ## Purpose
 
@@ -29,12 +35,12 @@ This plan defines how Lead Hub schedule information is planned, updated, measure
 | Scope and work structure | Approved scope baseline and backlog | Defines what may appear in the schedule. [Sources: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`, lines 27-69; `projects/lead-lab/artifacts/lead-lab-web-app-backlog.md`, lines 19-65] |
 | Schedule rules | This plan | Holds the approved method, cadence, measures, dependency treatment, tolerance triggers, and baseline rules. |
 | Existing source schedule | External delivery plan | Preserves the original proposed sequence and fallback conditions. This workspace does not overwrite it. [Source: `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, lines 84-97] |
-| Current forecast | PM-17 conditional forecast | Remains a run-folder view until the schedule owner and canonical schedule carrier are directed. [Source: `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/05-reconcile/reconciliation-record.md`, lines 14-18 and 20-27] |
-| Schedule and milestone carrier | Not selected | ART-PM-29 (Project schedule) and ART-PM-31 (Milestone list) remain unassigned and unlocated by PM direction. [Source: `projects/lead-lab/pm-control/artifact-index.md`, line 14] |
+| Current forecast | Post-launch working schedule | `projects/lead-lab/pm-control/artifacts/post-launch-schedule.md` is the current non-baselined working carrier for the actual launch, proposed post-launch windows, dependencies, and milestone review. [Source: `projects/lead-lab/pm-control/runs/2026-09-17-pm-18-post-launch-schedule-refresh/stages/05-reconcile/reconciliation-record.md`] |
+| Schedule and milestone carrier | Combined control-root working carrier | ART-PM-29 (Project schedule), ART-PM-31 (Milestone list), and the combined activity view are carried by `projects/lead-lab/pm-control/artifacts/post-launch-schedule.md`; the schedule owner remains TBD. [Source: `projects/lead-lab/pm-control/artifact-index.md`, Schedule and milestone records row] |
 
 ## Update Cadence And Triggers
 
-Update the schedule after a material scope, sequence, dependency, gate, or forecast change. Conduct formal reviews at the Gate 1 reassessment and before the conditional go/no-go review. A recurring weekly cadence is not recorded in the project records. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-35; `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12; `projects/lead-lab/pm-control/project-control.md`, lines 17-19]
+Update the schedule after a material scope, sequence, dependency, gate, or forecast change. Conduct formal reviews at the Gate 1 reassessment, before a conditional go/no-go review when applicable, and at the proposed post-launch control review. The pre-launch triggers below are retained as historical controls. A recurring weekly cadence is not recorded in the project records. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-35; `projects/lead-lab/pm-control/registers/change-log.md`, CHG-12; `projects/lead-lab/pm-control/project-control.md`, lines 4-10 and 57-65]
 
 | Trigger | Required action |
 |---|---|
@@ -42,8 +48,8 @@ Update the schedule after a material scope, sequence, dependency, gate, or forec
 | Failed or unverified gate | Record the evidence state, cause, consequence, forecast effect, recovery options, and fallback path. |
 | New or changed critical dependency | Show its needed-by point, impact, evidence source, action path, and forecast effect. |
 | Forecast movement | Show the revised date or window, reason, consequence, confidence, and fallback effect. |
-| Gate 1 reassessment on 2026-08-28 | Review target environment, staging, deployment, rollback, storage, HTTPS, backup, monitoring, ownership, authentication, and participant-data evidence. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-35; `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 46-91] |
-| Before the 2026-09-09 client staging review and go/no-go | Refresh PM-17 (Develop Schedule) against this plan and verify the decision entry conditions. The review and go/no-go remain conditional; no replacement launch date or schedule baseline is approved. [Source: current PM direction recorded in `projects/lead-lab/pm-control/registers/action-log.md`, ACT-25 (Schedule the client staging review and confirm the go/no-go contingency)] |
+| Historical trigger: Gate 1 reassessment on 2026-08-28 | Review target environment, staging, deployment, rollback, storage, HTTPS, backup, monitoring, ownership, authentication, and participant-data evidence. [Sources: `projects/lead-lab/pm-control/registers/decision-log.md`, D-35; `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 46-91] |
+| Historical trigger: Before the 2026-09-09 client staging review and go/no-go | Refresh PM-17 (Develop Schedule) against this plan and verify the decision entry conditions. The review and go/no-go were conditional; no replacement launch date or schedule baseline was approved. [Source: PM direction recorded in `projects/lead-lab/pm-control/registers/action-log.md`, ACT-25 (Schedule the client staging review and confirm the go/no-go contingency)] |
 
 ## Measurement Rules
 
@@ -52,6 +58,10 @@ Update the schedule after a material scope, sequence, dependency, gate, or forec
 - Show each critical dependency's status, needed-by point, impact if unmet, response path, and source.
 - Use confirmed resource calendars and assignments only.
 - Do not calculate baseline variance or earned value until a schedule baseline is explicitly approved. [Sources: `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md`, lines 18-22; `projects/lead-lab/pm-control/project-control.md`, line 49]
+
+## Post-Launch Refresh Rule
+
+When an actual launch or other material milestone is confirmed, record the actual date, compare it with historical or conditional targets, and create or update the current working schedule for hypercare and remaining controls. Keep future windows proposed until owners and calendars are confirmed. A confirmed actual milestone does not create or revise a schedule baseline. [Sources: `projects/lead-lab/pm-control/runs/2026-09-17-pm-18-post-launch-schedule-refresh/stages/02-assemble-evidence/evidence-package.md`; `projects/lead-lab/pm-control/artifacts/post-launch-schedule.md`, Date Basis]
 
 ## Dependency Treatment
 
@@ -79,14 +89,14 @@ These are review triggers, not numeric tolerance thresholds. [Sources: `projects
 
 ## Baseline And Change Rules
 
-- Treat the 2026-09-04 go/no-go and 2026-09-07 launch as historical conditional targets from CHG-12 (Move the proposed go/no-go decision to 2026-09-04 and the proposed launch target to 2026-09-07). The current working review and go/no-go is 2026-09-09; no replacement launch date or schedule baseline is approved. [Source: current PM direction recorded in `projects/lead-lab/pm-control/registers/action-log.md`, ACT-25 (Schedule the client staging review and confirm the go/no-go contingency)]
+- Treat the 2026-09-04 go/no-go, 2026-09-07 conditional launch, 2026-09-09 review and go/no-go, 2026-09-10 proposed launch, and 2026-09-11 program start as historical or conditional references. The actual launch is recorded as 2026-09-15. This refresh does not create a retrospective baseline or a new committed baseline. [Sources: `projects/lead-lab/pm-control/runs/2026-09-15-session-reconciliation/reconciliation-record.md`, Result; `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, Delivery Schedule; `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/05-reconcile/reconciliation-record.md`, lines 16-18]
 - Do not establish a schedule baseline until Gate 1, staging, participant access, production preparation, resource ownership, calendars, and final approval timing are evidenced and the PM approves the commitment. [Sources: `projects/lead-lab/pm-control/runs/2026-08-21-pm-17-develop-schedule/stages/04-validate-and-review/review-record.md`, lines 24-32; `workspaces/alson-pm-control/references/authority-rules.md`, lines 27-30]
 - Do not edit the external delivery plan from this control root. [Source: `workspaces/alson-pm-control/references/artifact-rules.md`, lines 38-42]
 - Record proposed changes to dates, sequence, gates, scope, or fallback through the change-control path before any baseline or commitment changes. [Source: `projects/lead-lab/artifacts/lead-lab-web-app-scope-and-requirements.md`, lines 117-126]
 
 ## Calendars
 
-ART-PM-51 (Project calendars) is `Create later`. Activate it after the 2026-08-28 Gate 1 reassessment, once the technical owner, human primary developer, IT operator, and working availability are evidenced, and before any schedule baseline decision. Minimum contents are working days, holidays, work hours, timezone, release blackout periods, named resource availability, capacity assumptions, and verification source. [Source: `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 20-24 and 46-67]
+ART-PM-51 (Project calendars) is `Create later`. Activate it after refreshed post-deployment Gate 1 and operational evidence, once working availability is evidenced and before any future schedule baseline or committed resource-loaded plan. Minimum contents are working days, holidays, work hours, timezone, release blackout periods, named resource availability, capacity assumptions, and verification source. [Source: `projects/lead-lab/application/environment/gate-1-environment-and-ownership.md`, lines 20-24 and 46-67]
 
 ## Authority And Ownership
 
@@ -102,7 +112,7 @@ ART-PM-51 (Project calendars) is `Create later`. Activate it after the 2026-08-2
 ## Artifact Treatment
 
 - ART-PM-26 (Schedule management plan): this control-root artifact is the approved maintained carrier for schedule-management rules.
-- ART-PM-29 (Project schedule) and ART-PM-31 (Milestone list): remain unassigned and unlocated; use the external delivery plan and PM-17 conditional forecast as source material until separately directed.
+- ART-PM-29 (Project schedule) and ART-PM-31 (Milestone list): use the combined current working carrier at `artifacts/post-launch-schedule.md`; the schedule owner remains TBD and the carrier is not a baseline.
 - ART-PM-51 (Project calendars): Create later after Gate 1 evidence and before any baseline decision.
 - ART-BA-11 (Product roadmap), ART-BA-12 (Business analysis plan), and ART-DEV-01 (Prototype Build Brief): no separate maintained artifact for PM-16; use approved scope, backlog, PM-11 evidence, application context, and Gate 1 evidence. [Sources: `projects/lead-lab/pm-control/runs/2026-08-22-pm-16-plan-schedule-management/stages/02-assemble-evidence/evidence-package.md`, lines 89-97; `projects/lead-lab/pm-control/runs/2026-08-22-pm-16-plan-schedule-management/stages/04-validate-and-review/approval-request.md`, lines 18-24]
 
