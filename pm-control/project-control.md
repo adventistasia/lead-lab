@@ -3,6 +3,8 @@
 
 **Post-launch schedule refresh (2026-09-17):** The PM-confirmed actual Lead Hub launch is 2026-09-15. It was 8 calendar days after the conditional 2026-09-07 target, 5 days after the proposed 2026-09-10 target, and 4 days after the fixed 2026-09-11 program start. These are historical or conditional comparisons, not baseline variance. The current working schedule now records the actual launch and proposed post-launch windows through a 2026-09-26 control review. No retrospective baseline was created.
 
+**PM-09 closure reconciliation (2026-09-21):** The PM approved conditional closure of the Lead Hub project after the PM-confirmed 2026-09-15 launch and LeadLab Director acceptance. Residual operational actions, issues, risks, dependencies, and proposed decisions remain active under their existing records and owners. The current closure and operations-handoff carrier is `artifacts/lead-hub-closure-report.md`.
+
 **Current PM direction (2026-09-17):** The PM confirmed ACT-70 (Implement and verify the administrator Members page responsive correction) and ACT-72 (Implement and verify direct live-broadcast access in calendar event reminder emails) complete. ISS-17 (Administrator Members page responsive layout defect), ISS-19 (Event reminder emails do not provide direct live broadcast access), CHG-46 (Separate administrator member lists by account state), and CHG-51 (Add a direct live broadcast button to event reminder emails) now reflect that closure. ISS-10 (Administrative activity logging is incomplete in the Option B application), R-18 (Automated bots may abuse public registration and forgot-password endpoints), DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning), and broader operational controls remain separate.
 
 **Current PM reconciliation (2026-09-15):** The PM confirms Lead Hub has launched successfully. The session closes the completed actions and issues recorded in the action and issue registers, closes the confirmed authentication, participant-data, email, reminder, and production-URL controls, records Postmark SMTP for both staging and production, and records monitoring alerts for Agno JF, Carmen, and Stephen. ACT-48 (Implement and verify the mobile fullscreen toggle across authenticated application shell variants) is closed because work will not continue, without claiming verification. ACT-70 (Implement and verify the administrator Members page responsive correction), ISS-17 (Administrator Members page responsive layout defect), ISS-10 (Administrative activity logging is incomplete in the Option B application), and R-18 (Automated bots may abuse public registration and forgot-password endpoints) remain active. PM-07 (Monitor and Control Project Performance) remains in Attention status until the remaining operational controls and proposed deployment decisions are reconciled. Detailed reconciliation: `runs/2026-09-15-session-reconciliation/reconciliation-record.md`.
@@ -51,12 +53,12 @@ This file is the project-level dashboard and configuration record.
 |---|---|
 | Project outcome | Rebuild the LeadLab Portal on a new platform with the same feature scope, restricted to participants, live before 2026-09-11. |
 | Control root | `/Users/agnojf/Documents/lead-lab/pm-control/` |
-| Current phase | Lead Hub launched 2026-09-15; post-launch hypercare and control reconciliation are in progress; Gate 1 and operational evidence remain open |
+| Current phase | Lead Hub project conditionally closed 2026-09-21 after the 2026-09-15 launch; residual operations controls and Gate 1 evidence remain open under their existing records |
 | Overall condition | Action |
 | Evidence refresh period | Unconfigured |
-| Last verified | 2026-09-17 |
+| Last verified | 2026-09-21 |
 | Last status report | None recorded |
-| Next review trigger | Proposed 2026-09-26 post-launch control review after initial hypercare and refreshed Gate 1 and operational evidence; no baseline decision is implied |
+| Next review trigger | Proposed 2026-09-26 operations control review after refreshed Gate 1 and operational evidence; no baseline decision is implied |
 
 ## Performance Domains
 
@@ -123,16 +125,16 @@ This file is the project-level dashboard and configuration record.
 
 | Register | Location | Last verified |
 |---|---|---|
-| Risks | `registers/risk-register.md` | 2026-09-17 |
+| Risks | `registers/risk-register.md` | 2026-09-21 |
 | Assumptions | `registers/assumption-log.md` | 2026-08-18 |
-| Issues | `registers/issues-log.md` | 2026-09-17 |
-| Dependencies | `registers/dependencies-log.md` | 2026-09-17 |
-| Actions | `registers/action-log.md` | 2026-09-17 |
+| Issues | `registers/issues-log.md` | 2026-09-21 |
+| Dependencies | `registers/dependencies-log.md` | 2026-09-21 |
+| Actions | `registers/action-log.md` | 2026-09-21 |
 | Decisions | `registers/decision-log.md` | 2026-09-15 |
 | Changes | `registers/change-log.md` | 2026-09-17 |
 | Lessons learned | `registers/lessons-learned-register.md` | 2026-08-31 |
-| Process register | `process-register.md` | 2026-09-17 |
-| Artifact index | `artifact-index.md` | 2026-09-17 |
+| Process register | `process-register.md` | 2026-09-21 |
+| Artifact index | `artifact-index.md` | 2026-09-21 |
 
 ## Project Preferences
 

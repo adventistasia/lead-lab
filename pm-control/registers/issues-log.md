@@ -3,6 +3,8 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM direction recorded on 2026-09-21: ISS-10 (Administrative activity logging is incomplete in the Option B application) may move to operations. It remains In Progress until the operational logging evidence and acceptance are recorded; this is not a project-closure blocker after the handoff is accepted.
+
 PM closure direction recorded on 2026-09-17: ISS-17 (Administrator Members page responsive layout defect) and ISS-19 (Event reminder emails do not provide direct live broadcast access) are Closed. This current PM direction supersedes the earlier pending-gate notes for these two workstreams; broader operational controls remain separate.
 
 Register alignment recorded on 2026-09-17: current issue rows now reflect the PM-confirmed closures from the 2026-09-15 session reconciliation. Historical implementation and status notes remain preserved below.

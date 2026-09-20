@@ -3,6 +3,8 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM direction recorded on 2026-09-21: R-18 (Automated bots may abuse public registration and forgot-password endpoints) may move to operations. It remains Open until its controls and verification are complete or the PM directs a residual-risk disposition; this is not a project-closure blocker after the handoff is accepted.
+
 Register alignment recorded on 2026-09-17: current risk rows now reflect the closures directed in the 2026-09-15 session reconciliation. R-18 (Automated bots may abuse public registration and forgot-password endpoints) remains Open pending completion and verification of its controls.
 
 Current status reconciliation recorded on 2026-09-15: R-19 (Lowering password requirements may increase weak-password compromise risk or conflict with security acceptance), R-04 (Participant email data handling unclear; privacy rules not confirmed), R-03 (Option B authentication or access control may expose participant content), and R-15 (Calendar reminder delivery may be late, duplicated, or unavailable) are Closed by PM direction after launch and the related confirmations. R-18 (Automated bots may abuse public registration and forgot-password endpoints) is In Progress; its register lifecycle remains active until the controls and verification are complete. Detailed reconciliation: `runs/2026-09-15-session-reconciliation/reconciliation-record.md`.
