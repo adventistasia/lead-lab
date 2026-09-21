@@ -3,6 +3,8 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+Requester authorization recorded on 2026-09-21: CHG-52 (Add an administrator-only activity-log viewer and operational logging verification record) is Approved under D-75 (Should Lead Hub add an administrator-only activity-log viewer and a maintained operational logging verification record?). The approved scope reuses the existing `activity_logs` table, adds a read-only administrator viewer at `/admin/activity-logs`, creates `application/ops/activity-logging.md`, and verifies local and staging logging evidence. No new schema, external service, production deployment, or project-closure acceptance is included. Staging implementation roles and retention treatment remain explicit acceptance inputs.
+
 PM closure direction recorded on 2026-09-17: CHG-46 (Separate administrator member lists by account state) and CHG-51 (Add a direct live broadcast button to event reminder emails) are Closed as completed change records. This direction closes only these completed changes; broader email delivery, queue, scheduler, monitoring, and Gate 1 controls remain separate.
 
 Issue #39 control capture recorded on 2026-09-15: CHG-51 (Add a direct live broadcast button to event reminder emails) is Approved under D-74 (Should reminder emails include a direct Watch live broadcast button when an event has a live broadcast URL?). The dedicated branch `feature/issue-39-live-broadcast-reminder` was created from `staging` and published before code work. ACT-72 (Implement and verify direct live-broadcast access in calendar event reminder emails) and ISS-19 (Event reminder emails do not provide direct live broadcast access) are In Progress. No additional maintained artifact is currently needed.
@@ -150,6 +152,8 @@ Implementation carriers are `application/source/app/Http/Responses/PasswordReset
 
 On 2026-09-10, CHG-46 (Separate users by account state) and CHG-47 (Add a support contact to the registration pending page) were implemented locally. The focused member and registration coverage passed 79 tests with 813 assertions; the full PHP suite passed 158 tests with 1,312 assertions; PHPStan, Pint, TypeScript, ESLint, Prettier, the production build, and `git diff --check` passed. The administrator guide's member workflow wording was aligned with the new account-state tabs. Authenticated browser, responsive, staging, and launch acceptance remain open, so ACT-66 (Implement and verify administrator account-state tabs and pending counts) and ACT-67 (Implement and verify the registration-pending support contact) remain In Progress.
 
+| CHG-52 | Add an administrator-only activity-log viewer and maintained operational logging verification record. Reuse the existing `activity_logs` table. Add a read-only `/admin/activity-logs` viewer with date and action filters, pagination, administrator-only server authorization, administrator-local timezone display, bounded fields, and no edit or delete capability. Create `application/ops/activity-logging.md` for event coverage, persistence, access, operational handling, retention, and staging verification. | Scope, quality, security, administration behavior, operations | Requester authorization | Approved | 2026-09-21 | Contained increment to the existing administrative activity logging capability. It adds a protected read-only route, controller/query handling, Inertia page, administrator navigation, tests, and an operations record. It reuses the existing database table and adds no migration, external service, production deployment, or project-closure acceptance. Local and staging verification remain required; staging implementation roles and retention treatment are not yet confirmed. | D-75 (Should Lead Hub add an administrator-only activity-log viewer and a maintained operational logging verification record?) approved CHG-52 for local implementation and staging verification. | D-75 (Should Lead Hub add an administrator-only activity-log viewer and a maintained operational logging verification record?); ACT-74 (Implement and verify the administrator activity-log viewer and operational logging handoff); ISS-10 (Administrative activity logging is incomplete in the Option B application); RQ-11 (The application must support HTTPS, backups, restore testing, monitoring, and administrative activity logging before launch); LL-16 (Record relevant administrative activity, including registration and access changes) | Current requester authorization and approved implementation plan, 2026-09-21; `pm-control/registers/issues-log.md`; `application/source/app/Models/ActivityLog.php`; `application/source/database/migrations/2026_08_21_120001_create_activity_logs_table.php`; `application/runs/2026-08-24-session-materials-q-and-a/stages/03-build/activity-log-audit.md` | 2026-09-21 |
+
 ## Status
 
 | Status | Meaning |
@@ -166,7 +170,7 @@ Generated from the register rows. Do not manually maintain these counts.
 | Metric | Count |
 |---|---|
 | Proposed | 1 |
-| Approved | 28 |
+| Approved | 29 |
 | Closed | 2 |
 | Rejected | 0 |
-| Total changes | 31 |
+| Total changes | 32 |

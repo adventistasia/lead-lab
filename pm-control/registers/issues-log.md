@@ -3,6 +3,8 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+Requester authorization recorded on 2026-09-21: D-75 (Should Lead Hub add an administrator-only activity-log viewer and a maintained operational logging verification record?) is Made, CHG-52 (Add an administrator-only activity-log viewer and operational logging verification record) is Approved, and ACT-74 (Implement and verify the administrator activity-log viewer and operational logging handoff) is In Progress. The approved implementation adds a read-only administrator viewer and an operations verification record; ISS-10 (Administrative activity logging is incomplete in the Option B application) remains In Progress until staging evidence and acceptance are recorded.
+
 PM direction recorded on 2026-09-21: ISS-10 (Administrative activity logging is incomplete in the Option B application) may move to operations. It remains In Progress until the operational logging evidence and acceptance are recorded; this is not a project-closure blocker after the handoff is accepted.
 
 PM closure direction recorded on 2026-09-17: ISS-17 (Administrator Members page responsive layout defect) and ISS-19 (Event reminder emails do not provide direct live broadcast access) are Closed. This current PM direction supersedes the earlier pending-gate notes for these two workstreams; broader operational controls remain separate.
