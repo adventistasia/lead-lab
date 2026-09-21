@@ -7,6 +7,8 @@ Requester authorization recorded on 2026-09-21: D-75 (Should Lead Hub add an adm
 
 PM direction recorded on 2026-09-21: ISS-10 (Administrative activity logging is incomplete in the Option B application) may move to operations. It remains In Progress until the operational logging evidence and acceptance are recorded; this is not a project-closure blocker after the handoff is accepted.
 
+Local implementation evidence recorded on 2026-09-21: the approved activity-log viewer and operations carrier are implemented on `feature/admin-activity-log-viewer`. The focused activity-log suite passed 6 tests with 74 assertions, the full PHP suite passed 175 tests with 1,475 assertions, and Pint, Prettier, ESLint, TypeScript, the Vite production build, and the `admin.activity-logs.index` route check passed. Staging persistence, access, complete event coverage, operational handling, retention, staging implementation roles, and acceptance remain open, so ISS-10 remains In Progress.
+
 PM closure direction recorded on 2026-09-17: ISS-17 (Administrator Members page responsive layout defect) and ISS-19 (Event reminder emails do not provide direct live broadcast access) are Closed. This current PM direction supersedes the earlier pending-gate notes for these two workstreams; broader operational controls remain separate.
 
 Register alignment recorded on 2026-09-17: current issue rows now reflect the PM-confirmed closures from the 2026-09-15 session reconciliation. Historical implementation and status notes remain preserved below.

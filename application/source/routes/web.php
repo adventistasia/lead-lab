@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminActivityLogController;
 use App\Http\Controllers\AdminCalendarEventController;
 use App\Http\Controllers\AdminLearningSessionController;
 use App\Http\Controllers\AdminMemberController;
@@ -44,6 +45,7 @@ Route::middleware(['auth', 'active'])->group(function () {
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::inertia('guidelines', 'admin/guidelines/index')->name('guidelines.index');
+        Route::get('activity-logs', [AdminActivityLogController::class, 'index'])->name('activity-logs.index');
         Route::get('classroom', [AdminLearningSessionController::class, 'recordings'])->name('classroom.index');
         Route::get('sessions', [AdminLearningSessionController::class, 'index'])->name('sessions.index');
         Route::get('sessions/{learningSession}/edit', [AdminLearningSessionController::class, 'edit'])->name('sessions.edit');

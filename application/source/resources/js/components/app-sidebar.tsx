@@ -3,6 +3,7 @@ import {
     BookOpen,
     CalendarDays,
     ClipboardCheck,
+    ClipboardList,
     LayoutDashboard,
     UsersRound,
 } from 'lucide-react';
@@ -20,6 +21,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { calendar, dashboard } from '@/routes';
+import { index as adminActivityLogs } from '@/routes/admin/activity-logs';
 import { index as adminClassroom } from '@/routes/admin/classroom';
 import { index as adminGuidelines } from '@/routes/admin/guidelines';
 import { index as adminMembers } from '@/routes/admin/members';
@@ -58,6 +60,11 @@ export function AppSidebar() {
                       title: 'Members',
                       href: adminMembers(),
                       icon: UsersRound,
+                  },
+                  {
+                      title: 'Activity Log',
+                      href: adminActivityLogs(),
+                      icon: ClipboardList,
                   },
                   {
                       title: 'Admin Guidelines V0.1',
