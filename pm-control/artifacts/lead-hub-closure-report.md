@@ -16,6 +16,10 @@
 
 Lead Hub launched on 2026-09-15 and the LeadLab Director accepted the application. The project is conditionally closed at the project level. Remaining operational controls continue as active follow-on work and are not represented as complete by this closure.
 
+## Current PM Review
+
+On 2026-09-22, the PM reported no material incident, service interruption, participant-impacting defect, approved change, or other material operational event since closure. Production is operating normally and conditional closure remains. Gate 1 evidence is unknown. The activity-logging handoff is partly complete, with production PR merge and redeploy still outstanding. Existing resilience and operational controls are reported as present, but current evidence is missing or unknown. The production email-verification bypass was unused and is superseded.
+
 ## Accepted Outcome
 
 - The production launch is recorded as an actual project milestone.
@@ -28,16 +32,16 @@ Lead Hub launched on 2026-09-15 and the LeadLab Director accepted the applicatio
 
 The following controls remain active and retain their recorded states and owners:
 
+The production email-verification contingency is no longer an active handoff item. D-28 (Should production email verification be bypassed if setup fails?) is Superseded by D-76 (Should production email verification remain enabled and the unused production bypass contingency be retired?). CHG-15 (Proposed production email-verification bypass if dependable email delivery is unavailable at launch) is Rejected as superseded, and ACT-23 (Confirm production registration rate limiting availability and whether it is required for the proposed live bypass) and ACT-24 (Set and record a maximum expiry or review date for the proposed production email-verification bypass) are Superseded.
+
 | Control | State | Owner as recorded | Remaining work |
 |---|---|---|---|
 | `DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning)` | Open | Dennis Arquillano | Complete target-environment, deployment, rollback, storage, HTTPS, backup, restore, monitoring, logging, email, queue, scheduler, and ownership evidence |
-| `ACT-23 (Confirm production registration rate limiting availability and whether it is required for the proposed live bypass)` | Open | Dennis Arquillano | Confirm rate limiting and its relation to the bypass contingency |
-| `ACT-24 (Set and record a maximum expiry or review date for the proposed production email-verification bypass)` | Open | Dennis Arquillano | Record a review or expiry date |
-| `ISS-10 (Administrative activity logging is incomplete in the Option B application)` | In Progress | Agno JF (Requester) | Provide operational logging persistence, access, retention, and handling evidence |
-| `R-18 (Automated bots may abuse public registration and forgot-password endpoints)` | Open | Dennis Arquillano | Complete controls, staging verification, telemetry, and residual-risk review |
-| `R-08 (Application or server security compromised because patches are not applied)` | Open | IT team | Record patch ownership and evidence |
+| `ISS-10 (Administrative activity logging is incomplete in the Option B application)` | In Progress | Agno JF (Requester) | Provide operational logging persistence, access, retention, and handling evidence; the PM-reported production PR merge and redeploy gap remains |
+| `R-18 (Automated bots may abuse public registration and forgot-password endpoints)` | Open | Dennis Arquillano | Complete controls, staging verification, telemetry, and residual-risk review under operations follow-up |
+| `R-08 (Application or server security compromised because patches are not applied)` | Open | IT team | Record patch-control ownership and evidence |
 | `R-09 (Backups not configured; content loss on server failure)` | Open | IT team | Record backup and tested restore evidence |
-| `R-10 (Server availability not guaranteed; portal offline)` | Open | IT team | Record monitoring and recovery evidence |
+| `R-10 (Server availability not guaranteed; portal offline)` | Open | IT team | Record monitoring, recovery, and outage-communication evidence |
 
 The project closure does not assign technical ownership, change the recorded owners, or close these controls.
 
@@ -70,6 +74,7 @@ These lessons were not added to the canonical lessons register because the appro
 
 - The PM Control records confirm Postmark for staging and production, while `application/ops/email-delivery.md` still contains an older unconfigured status. The source document remains unchanged and requires operator refresh.
 - The Gate 1 pack remains a draft and does not show a passed target-environment assessment.
+- The 2026-09-22 PM review reports that controls exist for Gate 1, patching, backup and restore, uptime and monitoring, recovery, queue and scheduler operation, and incident handling, but current evidence is missing or unknown. This does not reopen closed dependencies without separate PM direction.
 - The historical `Old artifacts/Project Closure Report.docx` describes the prior SharePoint portal and is not the current closure carrier.
 - The source index still contains a stale project-context path; this does not change the closure decision.
 
@@ -80,6 +85,7 @@ Operations should complete the residual controls through their existing action, 
 ## Traceability
 
 - `pm-control/runs/2026-09-21-pm-09-lead-hub-closure/`
+- `pm-control/runs/2026-09-22-post-launch-control-reconciliation/`
 - `pm-control/runs/2026-09-15-session-reconciliation/reconciliation-record.md`
 - `pm-control/registers/action-log.md`
 - `pm-control/registers/dependencies-log.md`
