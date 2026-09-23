@@ -4,15 +4,25 @@
 | Field | Value |
 |---|---|
 | Project | Lead Hub portal |
-| Purpose | Record the approved announcement feature and control plan before application implementation |
+| Purpose | Record the approved announcement feature, local implementation, and control evidence |
 | Requested | 2026-09-22 |
 | Control root | `/Users/agnojf/Documents/lead-lab/pm-control/` |
 | Change | CHG-53 (Add administrator-managed announcements with formatted portal content, dashboard and sidebar placement, automatic email, and user-local time display) |
 | Decision | D-77 (Should Lead Hub implement administrator-managed announcements with portal display and automatic email?) |
-| Current state | Implementation authorized; local build in progress; acceptance and release pending |
+| Current state | Local implementation and automated verification complete; browser, staging email, operations, participant-use, acceptance, and release remain pending |
 | Scope source | `artifacts/lead-lab-web-app-scope-and-requirements.md`; `artifacts/lead-lab-web-app-backlog.md` |
 | Evidence source | `application/source/`; `application/ops/email-delivery.md`; current requester authorization and approved final execution plan |
 | External source changes | None. External requirements and backlog documents remain unchanged. |
-| Next checkpoint | Complete local implementation, verification, and staging email readiness review before participant-use or release direction |
+| Next checkpoint | Complete authenticated browser and responsive review, staging email readiness and operations handoff before participant-use or release direction |
 
-The user approved the dashboard placement and timezone behavior before explicitly authorizing execution. The first release excludes comments, participant posts, attachments, scheduled publishing, and automatic expiry.
+The user approved the dashboard placement and timezone behavior before explicitly authorizing execution. The dashboard placement was revised on 2026-09-22 to use the middle column of the welcome panel and to show recent published announcements without requiring a pin; pinned announcements remain first. Archived announcements may be republished with a new publication time without resending email. The first release excludes comments, participant posts, attachments, scheduled publishing, and automatic expiry.
+
+## Local Evidence
+
+- `php artisan test tests/Feature/AnnouncementTest.php`: 13 tests, 114 assertions passed.
+- `composer test`: 182 tests, 1,515 assertions passed; Pint and PHPStan passed.
+- `npm run types:check`, `npm run lint:check`, and `npm run format:check` passed.
+- `npm run build` passed and generated the announcement page assets and Wayfinder route helpers.
+- `git diff --check` passed.
+
+These checks prove local behavior only. They do not prove staging or production email delivery, queue capacity, browser or responsive acceptance, participant use, or release approval.

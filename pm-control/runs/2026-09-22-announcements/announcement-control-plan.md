@@ -6,8 +6,10 @@
 ## Approved Direction
 
 - Administrators can save drafts, preview, publish, edit, pin, unpin, and archive announcements.
+- Administrators can republish archived announcements; republishing uses a new publication time, clears archive state, leaves the announcement unpinned, and does not send email.
 - Content includes a title, plain-text summary, and restricted formatted body with headings, bold, italic, lists, and HTTP(S) links.
-- The dashboard card sits below the welcome section and above metrics.
+- The dashboard announcement panel sits in the middle column of the welcome panel, between the welcome content and the next-live-session card.
+- The panel shows up to two published announcements automatically; pinned announcements appear first, then the most recent published announcements. Pinning is optional.
 - `Announcements` appears after `Home` in the sidebar.
 - Participants receive a paginated published list and protected detail pages.
 - First publication sends the title, summary, and protected detail link to approved, active, email-verified participants, moderators, and administrators.
@@ -21,8 +23,21 @@
 - Attachments and images
 - Scheduled publishing
 - Automatic expiry
-- Resending on edit or pin changes
+- Resending on edit, pin changes, or archived-announcement republishing
 - Full community-feed completion
+
+## Local Implementation Evidence
+
+- Added `announcements` and `announcement_email_deliveries` persistence with a unique announcement-recipient key.
+- Added administrator draft, edit, publish, pin, unpin, archive, preview, activity-log, and recipient-filtering behavior.
+- Added authenticated paginated portal list/detail views, dashboard pinned cards, and the sidebar entry.
+- Added server-side restricted Markdown validation and safe rendering for headings, emphasis, lists, and HTTP(S) links.
+- Added queued per-recipient email delivery with access rechecks, retry state, duplicate protection, and archive cancellation.
+- Added archived-announcement republishing with a fresh publication time, no email resend, and preserved cancelled delivery records.
+- Focused announcement tests passed 13 tests with 114 assertions; the full PHP suite passed 182 tests with 1,515 assertions.
+- PHPStan, Pint, TypeScript, ESLint, Prettier, the production build, and `git diff --check` passed.
+
+Browser, responsive, staging email, queue and provider capacity, operations ownership, participant-use, and release evidence remain open under ACT-76 (Verify announcement feature automated, browser, responsive, and timezone acceptance) and ACT-77 (Complete announcement staging email and operations handoff).
 
 ## Control Records
 
