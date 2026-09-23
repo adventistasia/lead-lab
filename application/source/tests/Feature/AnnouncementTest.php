@@ -401,6 +401,39 @@ class AnnouncementTest extends TestCase
             );
     }
 
+    public function test_archived_draft_can_be_published_and_sends_email(): void
+    {
+        Queue::fake();
+        $admin = User::factory()->create(['role' => 'admin']);
+        $announcement = Announcement::factory()->draft()->create([
+            'created_by' => $admin->id,
+            'updated_by' => $admin->id,
+        ]);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.announcements.archive', $announcement))
+            ->assertRedirect(route('admin.announcements.index'));
+
+        $announcement->refresh();
+        $this->assertSame(Announcement::STATUS_ARCHIVED, $announcement->status);
+        $this->assertNull($announcement->published_at);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.announcements.publish', $announcement))
+            ->assertRedirect(route('admin.announcements.index'));
+
+        $announcement->refresh();
+        $this->assertTrue($announcement->isPublished());
+        $this->assertNotNull($announcement->published_at);
+        $this->assertNull($announcement->archived_at);
+        $this->assertDatabaseHas('announcement_email_deliveries', [
+            'announcement_id' => $announcement->id,
+            'user_id' => $admin->id,
+            'status' => AnnouncementEmailDelivery::STATUS_QUEUED,
+        ]);
+        Queue::assertPushed(SendAnnouncementEmail::class, 1);
+    }
+
     public function test_archived_announcement_can_be_republished_without_resending_email(): void
     {
         Queue::fake();

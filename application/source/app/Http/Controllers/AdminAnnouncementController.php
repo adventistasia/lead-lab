@@ -77,7 +77,7 @@ class AdminAnnouncementController
             }
 
             $now = now('UTC');
-            $isRepublish = $announcement->status === Announcement::STATUS_ARCHIVED;
+            $isRepublish = $announcement->published_at !== null;
             $announcement->update([
                 'status' => Announcement::STATUS_PUBLISHED,
                 'published_at' => $isRepublish
