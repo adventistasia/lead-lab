@@ -10,6 +10,7 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -105,6 +106,26 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
     public function canAccessLeadLab(): bool
     {
         return $this->is_active && $this->access_status === self::ACCESS_ACTIVE;
+    }
+
+    public function canReceiveAnnouncements(): bool
+    {
+        return $this->canAccessLeadLab()
+            && $this->hasVerifiedEmail()
+            && in_array($this->role, ['participant', 'moderator', 'admin'], true);
+    }
+
+    /**
+     * @param  Builder<User>  $query
+     * @return Builder<User>
+     */
+    public function scopeEligibleForAnnouncements(Builder $query): Builder
+    {
+        return $query
+            ->where('is_active', true)
+            ->where('access_status', self::ACCESS_ACTIVE)
+            ->whereNotNull('email_verified_at')
+            ->whereIn('role', ['participant', 'moderator', 'admin']);
     }
 
     public function effectiveTimezone(): string

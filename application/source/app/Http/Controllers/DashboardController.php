@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use App\Models\CalendarEvent;
 use App\Models\LearningSession;
 use App\Models\SessionAnswer;
@@ -67,6 +68,26 @@ class DashboardController
                     'remind_three_days_before' => $event->remind_three_days_before,
                     'remind_one_day_before' => $event->remind_one_day_before,
                     'remind_fifteen_minutes_before' => $event->remind_fifteen_minutes_before,
+                ];
+            })
+            ->values();
+
+        $announcements = Announcement::query()
+            ->published()
+            ->orderByDesc('is_pinned')
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->limit(2)
+            ->get()
+            ->map(function (Announcement $announcement) use ($timezone): array {
+                $publishedAt = $announcement->published_at?->copy()->setTimezone($timezone);
+
+                return [
+                    'id' => $announcement->id,
+                    'title' => $announcement->title,
+                    'summary' => $announcement->summary,
+                    'published_at_label' => $publishedAt?->format('M j, Y g:i A'),
+                    'url' => route('announcements.show', $announcement),
                 ];
             })
             ->values();
@@ -155,6 +176,7 @@ class DashboardController
             'metrics' => $metrics,
             'sessions' => $sessions,
             'upcoming_events' => $upcomingEvents,
+            'announcements' => $announcements,
             'timezone' => $timezone,
             'timezone_label' => $request->user()->effectiveTimezoneLabel(),
             'community_updates' => $communityUpdates,

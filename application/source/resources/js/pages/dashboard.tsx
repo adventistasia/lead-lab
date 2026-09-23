@@ -6,6 +6,7 @@ import {
     Clock3,
     ExternalLink,
     MapPin,
+    Megaphone,
     MessageSquareText,
     Play,
     Plus,
@@ -33,6 +34,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { calendar, dashboard } from '@/routes';
 import { index as adminClassroom } from '@/routes/admin/classroom';
+import { show as showAnnouncement } from '@/routes/announcements';
 import { index as classroom } from '@/routes/classroom';
 import { show as showSession } from '@/routes/sessions';
 
@@ -71,6 +73,14 @@ type DashboardMetrics = {
     community_activity: number;
 };
 
+type PinnedAnnouncement = {
+    id: number;
+    title: string;
+    summary: string;
+    published_at_label: string | null;
+    url: string;
+};
+
 const initials = (name: string): string =>
     name
         .split(' ')
@@ -100,6 +110,7 @@ export default function Dashboard({
     timezone = 'Asia/Manila',
     timezone_label = 'GMT+8 (Asia/Manila)',
     community_updates = [],
+    announcements = [],
     is_admin = false,
 }: {
     metrics?: DashboardMetrics;
@@ -108,6 +119,7 @@ export default function Dashboard({
     timezone?: string;
     timezone_label?: string;
     community_updates?: CommunityUpdate[];
+    announcements?: PinnedAnnouncement[];
     is_admin?: boolean;
 }) {
     const { auth } = usePage().props;
@@ -123,6 +135,10 @@ export default function Dashboard({
     const classroomHref = is_admin ? adminClassroom() : classroom();
     const nextEvent = upcoming_events[0];
     const [isEventDialogOpen, setIsEventDialogOpen] = useState(false);
+    const heroGridColumns =
+        announcements.length > 0
+            ? 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_20rem]'
+            : 'lg:grid-cols-[minmax(0,1fr)_20rem]';
     const displayedStats = [
         {
             label: 'Sessions ready',
@@ -156,7 +172,9 @@ export default function Dashboard({
         <>
             <Head title="Home" />
             <div className="flex min-w-0 flex-1 flex-col gap-8 p-4 md:p-8">
-                <section className="grid gap-6 overflow-hidden rounded-2xl border bg-card p-6 shadow-sm lg:grid-cols-[1fr_20rem] lg:p-8">
+                <section
+                    className={`grid gap-6 overflow-hidden rounded-2xl border bg-card p-6 shadow-sm lg:p-8 ${heroGridColumns}`}
+                >
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-wrap items-center gap-2">
                             <Badge variant="secondary">Lead Hub 2026</Badge>
@@ -187,6 +205,41 @@ export default function Dashboard({
                             </Button>
                         </div>
                     </div>
+
+                    {announcements.length > 0 ? (
+                        <div className="flex min-w-0 flex-col gap-4 rounded-xl border border-brand-yellow/40 bg-brand-yellow/5 p-5">
+                            <div className="flex items-start justify-between gap-3">
+                                <div className="flex min-w-0 flex-col gap-1">
+                                    <p className="text-sm font-medium text-muted-foreground">
+                                        Latest updates
+                                    </p>
+                                    <h2 className="text-xl font-semibold tracking-tight">
+                                        Announcements
+                                    </h2>
+                                </div>
+                                <Megaphone className="size-5 shrink-0 text-brand-green-dark dark:text-brand-yellow" />
+                            </div>
+                            <div className="flex min-w-0 flex-col gap-2">
+                                {announcements.map((announcement) => (
+                                    <Link
+                                        key={announcement.id}
+                                        href={showAnnouncement(announcement.id)}
+                                        className="group flex min-w-0 flex-col gap-1.5 rounded-lg border bg-card p-3 transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+                                    >
+                                        <span className="line-clamp-2 text-sm font-medium group-hover:underline">
+                                            {announcement.title}
+                                        </span>
+                                        <span className="line-clamp-2 text-xs leading-5 text-muted-foreground">
+                                            {announcement.summary}
+                                        </span>
+                                        <span className="text-[11px] text-muted-foreground">
+                                            {announcement.published_at_label}
+                                        </span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    ) : null}
 
                     <div className="flex flex-col justify-between gap-8 rounded-xl bg-primary p-6 text-primary-foreground">
                         <div className="flex items-center justify-between gap-3">

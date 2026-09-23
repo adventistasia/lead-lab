@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\ActivityLog;
+use App\Models\Announcement;
 use App\Models\LearningSession;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
@@ -121,6 +123,45 @@ class AdminActivityLogTest extends TestCase
             ->assertInertia(fn (Assert $assert) => $assert
                 ->where('logs.total', 1)
                 ->where('logs.data.0.id', $localDateEntry->id),
+            );
+    }
+
+    public function test_announcement_activity_uses_the_title_and_has_filter_labels(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $announcement = Announcement::factory()->create(['title' => 'September briefing']);
+        $log = ActivityLog::create([
+            'actor_id' => $admin->id,
+            'action' => 'announcement_published',
+            'subject_type' => Announcement::class,
+            'subject_id' => $announcement->id,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.activity-logs.index', ['action' => 'announcement_published']))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('logs.data.0.id', $log->id)
+                ->where('logs.data.0.action_label', 'Announcement published')
+                ->where('logs.data.0.subject.label', 'September briefing')
+                ->where('actions', function (Collection $actions): bool {
+                    return $actions->pluck('label', 'value')->only([
+                        'announcement_created',
+                        'announcement_updated',
+                        'announcement_published',
+                        'announcement_republished',
+                        'announcement_pinned',
+                        'announcement_unpinned',
+                        'announcement_archived',
+                    ])->all() === [
+                        'announcement_created' => 'Announcement created',
+                        'announcement_updated' => 'Announcement updated',
+                        'announcement_published' => 'Announcement published',
+                        'announcement_republished' => 'Announcement republished',
+                        'announcement_pinned' => 'Announcement pinned',
+                        'announcement_unpinned' => 'Announcement unpinned',
+                        'announcement_archived' => 'Announcement archived',
+                    ];
+                }),
             );
     }
 

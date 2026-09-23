@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\Announcement;
 use App\Models\CalendarEvent;
 use App\Models\LearningSession;
 use App\Models\SessionAnswer;
@@ -37,6 +38,13 @@ class AdminActivityLogController
         'calendar_event_created' => 'Calendar event created',
         'calendar_event_updated' => 'Calendar event updated',
         'calendar_event_deleted' => 'Calendar event deleted',
+        'announcement_created' => 'Announcement created',
+        'announcement_updated' => 'Announcement updated',
+        'announcement_published' => 'Announcement published',
+        'announcement_republished' => 'Announcement republished',
+        'announcement_pinned' => 'Announcement pinned',
+        'announcement_unpinned' => 'Announcement unpinned',
+        'announcement_archived' => 'Announcement archived',
         'qna_question_updated' => 'Q&A question updated',
         'qna_question_deleted' => 'Q&A question deleted',
         'qna_answer_updated' => 'Q&A answer updated',
@@ -162,6 +170,7 @@ class AdminActivityLogController
             $subject instanceof User => $subject->name,
             $subject instanceof LearningSession => $subject->title,
             $subject instanceof CalendarEvent => $subject->title,
+            $subject instanceof Announcement => $subject->title,
             $subject instanceof SessionQuestion => 'Question #'.$log->subject_id,
             $subject instanceof SessionAnswer => 'Answer #'.$log->subject_id,
             default => ($type ?? 'Record').' #'.$log->subject_id.$unavailableSuffix,

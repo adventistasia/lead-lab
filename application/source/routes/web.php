@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminActivityLogController;
+use App\Http\Controllers\AdminAnnouncementController;
 use App\Http\Controllers\AdminCalendarEventController;
 use App\Http\Controllers\AdminLearningSessionController;
 use App\Http\Controllers\AdminMemberController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LearningResourceController;
@@ -30,6 +32,8 @@ Route::middleware('auth')->get('registration/pending', function (Request $reques
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+    Route::get('announcements/{announcement}', [AnnouncementController::class, 'show'])->name('announcements.show');
     Route::get('calendar', CalendarController::class)->name('calendar');
     Route::get('classroom', [LearningSessionController::class, 'index'])->name('classroom.index');
     Route::get('sessions/{learningSession}', [LearningSessionController::class, 'show'])->name('sessions.show');
@@ -62,6 +66,14 @@ Route::middleware(['auth', 'active'])->group(function () {
         Route::get('members', [AdminMemberController::class, 'index'])->name('members.index');
         Route::patch('members/{user}/status', [AdminMemberController::class, 'updateStatus'])->name('members.status');
         Route::patch('members/{user}/role', [AdminMemberController::class, 'updateRole'])->name('members.role');
+        Route::get('announcements', [AdminAnnouncementController::class, 'index'])->name('announcements.index');
+        Route::get('announcements/{announcement}/edit', [AdminAnnouncementController::class, 'edit'])->name('announcements.edit');
+        Route::post('announcements', [AdminAnnouncementController::class, 'store'])->name('announcements.store');
+        Route::patch('announcements/{announcement}', [AdminAnnouncementController::class, 'update'])->name('announcements.update');
+        Route::patch('announcements/{announcement}/publish', [AdminAnnouncementController::class, 'publish'])->name('announcements.publish');
+        Route::patch('announcements/{announcement}/pin', [AdminAnnouncementController::class, 'pin'])->name('announcements.pin');
+        Route::patch('announcements/{announcement}/unpin', [AdminAnnouncementController::class, 'unpin'])->name('announcements.unpin');
+        Route::patch('announcements/{announcement}/archive', [AdminAnnouncementController::class, 'archive'])->name('announcements.archive');
     });
 });
 

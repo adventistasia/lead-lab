@@ -5,6 +5,7 @@ import {
     ClipboardCheck,
     ClipboardList,
     LayoutDashboard,
+    Megaphone,
     UsersRound,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
@@ -22,9 +23,11 @@ import {
 } from '@/components/ui/sidebar';
 import { calendar, dashboard } from '@/routes';
 import { index as adminActivityLogs } from '@/routes/admin/activity-logs';
+import { index as adminAnnouncements } from '@/routes/admin/announcements';
 import { index as adminClassroom } from '@/routes/admin/classroom';
 import { index as adminGuidelines } from '@/routes/admin/guidelines';
 import { index as adminMembers } from '@/routes/admin/members';
+import { index as announcements } from '@/routes/announcements';
 import { index as classroom } from '@/routes/classroom';
 import type { NavItem } from '@/types';
 
@@ -33,6 +36,11 @@ const mainNavItems: NavItem[] = [
         title: 'Home',
         href: dashboard(),
         icon: LayoutDashboard,
+    },
+    {
+        title: 'Announcements',
+        href: announcements(),
+        icon: Megaphone,
     },
     {
         title: 'Classroom',
@@ -54,7 +62,9 @@ export function AppSidebar() {
                   ...mainNavItems.map((item) =>
                       item.title === 'Classroom'
                           ? { ...item, href: adminClassroom() }
-                          : item,
+                          : item.title === 'Announcements'
+                            ? { ...item, href: adminAnnouncements() }
+                            : item,
                   ),
                   {
                       title: 'Members',
