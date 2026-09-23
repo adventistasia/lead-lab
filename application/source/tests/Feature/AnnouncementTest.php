@@ -25,7 +25,6 @@ class AnnouncementTest extends TestCase
 
         $response = $this->actingAs($admin)->post(route('admin.announcements.store'), [
             'title' => 'September learning rhythm',
-            'summary' => 'A short update about the next learning cycle.',
             'body' => "## What is changing?\n\n**The next cycle starts soon.**",
         ]);
 
@@ -36,12 +35,24 @@ class AnnouncementTest extends TestCase
         $response->assertRedirect(route('admin.announcements.edit', $announcement));
         $this->assertSame(Announcement::STATUS_DRAFT, $announcement->status);
         $this->assertFalse($announcement->is_pinned);
+        $this->assertSame(
+            'What is changing? The next cycle starts soon.',
+            $announcement->summary,
+        );
         $this->assertDatabaseHas('activity_logs', [
             'actor_id' => $admin->id,
             'action' => 'announcement_created',
             'subject_type' => Announcement::class,
             'subject_id' => $announcement->id,
         ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.announcements.edit', $announcement))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->component('admin/announcements/index')
+                ->missing('announcement.summary')
+                ->where('announcements.data.0.summary', 'What is changing? The next cycle starts soon.'),
+            );
     }
 
     public function test_admin_cannot_save_unsupported_announcement_markup(): void
@@ -50,7 +61,6 @@ class AnnouncementTest extends TestCase
 
         $response = $this->actingAs($admin)->post(route('admin.announcements.store'), [
             'title' => 'Unsafe update',
-            'summary' => 'This should not be saved.',
             'body' => '<script>alert("xss")</script>',
         ]);
 
@@ -69,7 +79,6 @@ class AnnouncementTest extends TestCase
             $this->actingAs($admin)
                 ->post(route('admin.announcements.store'), [
                     'title' => 'Unsafe update',
-                    'summary' => 'This should not be saved.',
                     'body' => $body,
                 ])
                 ->assertSessionHasErrors('body');
@@ -151,12 +160,12 @@ class AnnouncementTest extends TestCase
         $this->actingAs($admin)
             ->patch(route('admin.announcements.update', $announcement), [
                 'title' => 'Edited published title',
-                'summary' => 'Edited summary.',
                 'body' => 'Edited body.',
             ])
             ->assertRedirect(route('admin.announcements.edit', $announcement));
 
         $this->assertDatabaseCount('announcement_email_deliveries', 0);
+        $this->assertSame('Edited body.', $announcement->refresh()->summary);
         Queue::assertNothingPushed();
         $this->assertDatabaseHas('activity_logs', [
             'actor_id' => $admin->id,
@@ -208,7 +217,8 @@ class AnnouncementTest extends TestCase
         ]);
         $announcement = Announcement::factory()->create([
             'title' => 'September briefing',
-            'summary' => 'Bring your questions to the next briefing.',
+            'summary' => 'Outdated summary should not appear.',
+            'body' => "## Update\n\nBring your questions to the next briefing.",
             'published_at' => $publishedAt,
         ]);
 
@@ -219,9 +229,10 @@ class AnnouncementTest extends TestCase
             $message->subject,
         );
         $this->assertContains(
-            'Bring your questions to the next briefing.',
+            'Update Bring your questions to the next briefing.',
             $message->introLines,
         );
+        $this->assertNotContains('Outdated summary should not appear.', $message->introLines);
         $this->assertContains(
             'Published: '.$publishedAt->copy()->setTimezone('Asia/Manila')->format('l, F j, Y \\a\\t g:i A'),
             $message->introLines,
@@ -271,7 +282,10 @@ class AnnouncementTest extends TestCase
     public function test_active_users_can_read_published_announcements_but_not_drafts_or_archived_items(): void
     {
         $participant = User::factory()->create();
-        $published = Announcement::factory()->create();
+        $published = Announcement::factory()->create([
+            'summary' => 'Outdated summary should not appear.',
+            'body' => "## Update\n\nThe body is the source.",
+        ]);
         $draft = Announcement::factory()->draft()->create();
         $archived = Announcement::factory()->archived()->create();
 
@@ -281,13 +295,15 @@ class AnnouncementTest extends TestCase
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('announcements/index')
                 ->has('announcements.data', 1)
-                ->where('announcements.data.0.id', $published->id),
+                ->where('announcements.data.0.id', $published->id)
+                ->where('announcements.data.0.summary', 'Update The body is the source.'),
             );
         $this->actingAs($participant)
             ->get(route('announcements.show', $published))
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('announcements/show')
                 ->where('announcement.id', $published->id)
+                ->where('announcement.summary', 'Update The body is the source.')
                 ->where('announcement.body_html', fn (string $body): bool => str_contains($body, '<h2>Update</h2>')),
             );
         $this->actingAs($participant)
@@ -308,6 +324,8 @@ class AnnouncementTest extends TestCase
         $pinnedNewer = Announcement::factory()->create([
             'is_pinned' => true,
             'published_at' => now()->subMinutes(3),
+            'summary' => 'Outdated summary should not appear.',
+            'body' => "## Update\n\nDashboard body preview.",
         ]);
         Announcement::factory()->create([
             'published_at' => now()->subMinute(),
@@ -321,6 +339,7 @@ class AnnouncementTest extends TestCase
             ->assertInertia(fn (Assert $assert) => $assert
                 ->has('announcements', 2)
                 ->where('announcements.0.id', $pinnedNewer->id)
+                ->where('announcements.0.summary', 'Update Dashboard body preview.')
                 ->where('announcements.1.id', $pinnedOlder->id),
             );
     }
@@ -403,7 +422,6 @@ class AnnouncementTest extends TestCase
         $this->actingAs($participant)
             ->post(route('admin.announcements.store'), [
                 'title' => 'Unauthorized',
-                'summary' => 'Unauthorized',
                 'body' => 'Unauthorized',
             ])
             ->assertForbidden();

@@ -81,6 +81,11 @@ class Announcement extends Model
         return AnnouncementContent::render($this->body);
     }
 
+    public function summaryPreview(): string
+    {
+        return AnnouncementContent::preview($this->body);
+    }
+
     /** @return BelongsTo<User, $this> */
     public function createdBy(): BelongsTo
     {

@@ -250,7 +250,6 @@ class AdminAnnouncementController
             'announcement' => $editing === null ? null : [
                 'id' => $editing->id,
                 'title' => $editing->title,
-                'summary' => $editing->summary,
                 'body' => $editing->body,
                 'status' => $editing->status,
                 'is_pinned' => $editing->is_pinned,
@@ -266,7 +265,7 @@ class AdminAnnouncementController
         return [
             'id' => $announcement->id,
             'title' => $announcement->title,
-            'summary' => $announcement->summary,
+            'summary' => $announcement->summaryPreview(),
             'status' => $announcement->status,
             'is_pinned' => $announcement->is_pinned,
             'published_at' => $publishedAt?->toIso8601String(),
@@ -280,7 +279,6 @@ class AdminAnnouncementController
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:160'],
-            'summary' => ['required', 'string', 'max:500'],
             'body' => ['required', 'string', 'max:'.AnnouncementContent::MAX_BODY_LENGTH],
         ]);
         $body = trim($validated['body']);
@@ -292,7 +290,7 @@ class AdminAnnouncementController
 
         return [
             'title' => trim($validated['title']),
-            'summary' => trim($validated['summary']),
+            'summary' => AnnouncementContent::preview($body),
             'body' => $body,
         ];
     }

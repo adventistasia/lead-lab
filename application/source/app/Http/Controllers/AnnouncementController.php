@@ -57,7 +57,7 @@ class AnnouncementController
         return [
             'id' => $announcement->id,
             'title' => $announcement->title,
-            'summary' => $announcement->summary,
+            'summary' => $announcement->summaryPreview(),
             'is_pinned' => $announcement->is_pinned,
             'published_at' => $publishedAt?->toIso8601String(),
             'published_at_label' => $publishedAt?->format('M j, Y g:i A'),

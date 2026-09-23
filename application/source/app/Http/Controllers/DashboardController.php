@@ -85,7 +85,7 @@ class DashboardController
                 return [
                     'id' => $announcement->id,
                     'title' => $announcement->title,
-                    'summary' => $announcement->summary,
+                    'summary' => $announcement->summaryPreview(),
                     'published_at_label' => $publishedAt?->format('M j, Y g:i A'),
                     'url' => route('announcements.show', $announcement),
                 ];
