@@ -20,6 +20,8 @@ Lead Hub launched on 2026-09-15 and the LeadLab Director accepted the applicatio
 
 On 2026-09-22, the PM reported no material incident, service interruption, participant-impacting defect, approved change, or other material operational event since closure. Production is operating normally and conditional closure remains. Gate 1 evidence is unknown. The activity-logging handoff is partly complete, with production PR merge and redeploy still outstanding. Existing resilience and operational controls are reported as present, but current evidence is missing or unknown. The production email-verification bypass was unused and is superseded.
 
+Merge evidence refreshed on 2026-09-23: PR #56 (`feat: add admin activity log viewer`) merged into `staging` with CI passing. GitHub reports `main` and `staging` at commit `39d34758`; no production deployment record was available. Production runtime/redeploy and the staging persistence, access, event-coverage, handling, retention, and role checks remain unverified.
+
 ## Accepted Outcome
 
 - The production launch is recorded as an actual project milestone.
@@ -32,12 +34,13 @@ On 2026-09-22, the PM reported no material incident, service interruption, parti
 
 The following controls remain active and retain their recorded states and owners:
 
+PM direction recorded 2026-09-23: ACT-74 (Implement and verify the administrator activity-log viewer and operational logging handoff) is Closed; ISS-10 (Administrative activity logging is incomplete in the Option B application) is Resolved; R-13 (Participant-generated Q&A content may require moderation or expose inappropriate or personal content) is Closed; and DEP-14 (Announcement email delivery capacity and operational ownership) is Met. DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains Open. These PM-directed status updates do not add production runtime evidence or change conditional project closure.
+
 The production email-verification contingency is no longer an active handoff item. D-28 (Should production email verification be bypassed if setup fails?) is Superseded by D-76 (Should production email verification remain enabled and the unused production bypass contingency be retired?). CHG-15 (Proposed production email-verification bypass if dependable email delivery is unavailable at launch) is Rejected as superseded, and ACT-23 (Confirm production registration rate limiting availability and whether it is required for the proposed live bypass) and ACT-24 (Set and record a maximum expiry or review date for the proposed production email-verification bypass) are Superseded.
 
 | Control | State | Owner as recorded | Remaining work |
 |---|---|---|---|
 | `DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning)` | Open | Dennis Arquillano | Complete target-environment, deployment, rollback, storage, HTTPS, backup, restore, monitoring, logging, email, queue, scheduler, and ownership evidence |
-| `ISS-10 (Administrative activity logging is incomplete in the Option B application)` | In Progress | Agno JF (Requester) | Provide operational logging persistence, access, retention, and handling evidence; the PM-reported production PR merge and redeploy gap remains |
 | `R-18 (Automated bots may abuse public registration and forgot-password endpoints)` | Open | Dennis Arquillano | Complete controls, staging verification, telemetry, and residual-risk review under operations follow-up |
 | `R-08 (Application or server security compromised because patches are not applied)` | Open | IT team | Record patch-control ownership and evidence |
 | `R-09 (Backups not configured; content loss on server failure)` | Open | IT team | Record backup and tested restore evidence |

@@ -3,6 +3,14 @@
 
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
+PM resolution direction recorded on 2026-09-23: ISS-10 (Administrative activity logging is incomplete in the Option B application) is Resolved. This PM direction supersedes the earlier In Progress disposition; no new staging or production evidence detail was supplied with this status update. ACT-74 (Implement and verify the administrator activity-log viewer and operational logging handoff) is Closed in the action log. Reconciliation: `pm-control/runs/2026-09-23-post-merge-status-reconciliation/reconciliation-record.md`.
+
+Historical PR merge reconciliation recorded on 2026-09-23 (superseded by the PM resolution direction above): PR #56 (`feat: add admin activity log viewer`) merged into `staging` with CI passing. GitHub reports `main` and `staging` at commit `39d34758`, but no production deployment record was available. ISS-10 (Administrative activity logging is incomplete in the Option B application) was In Progress at that reconciliation point; the PM later directed Resolved. No production deployment is inferred from the merge.
+
+## Current Status Override
+
+The PM's 2026-09-23 direction sets ISS-10 (Administrative activity logging is incomplete in the Option B application) to Resolved. This supersedes the earlier `In Progress` status shown in the register row below.
+
 Requester authorization recorded on 2026-09-21: D-75 (Should Lead Hub add an administrator-only activity-log viewer and a maintained operational logging verification record?) is Made, CHG-52 (Add an administrator-only activity-log viewer and operational logging verification record) is Approved, and ACT-74 (Implement and verify the administrator activity-log viewer and operational logging handoff) is In Progress. The approved implementation adds a read-only administrator viewer and an operations verification record; ISS-10 (Administrative activity logging is incomplete in the Option B application) remains In Progress until staging evidence and acceptance are recorded.
 
 PM direction recorded on 2026-09-21: ISS-10 (Administrative activity logging is incomplete in the Option B application) may move to operations. It remains In Progress until the operational logging evidence and acceptance are recorded; this is not a project-closure blocker after the handoff is accepted.
