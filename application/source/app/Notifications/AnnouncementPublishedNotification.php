@@ -31,7 +31,7 @@ class AnnouncementPublishedNotification extends Notification
             ->subject('New '.$brandName.' announcement: '.$this->announcement->title)
             ->greeting('Hello '.$notifiable->name.',')
             ->line('A new announcement is available in '.$brandName.'.')
-            ->line($this->announcement->summary)
+            ->line($this->announcement->summaryPreview())
             ->line('Published: '.($publishedAt?->format('l, F j, Y \a\t g:i A') ?? 'Unknown'))
             ->action('Read announcement', route('announcements.show', $this->announcement))
             ->line('Times are shown in '.$notifiable->effectiveTimezoneLabel($publishedAt).'.');

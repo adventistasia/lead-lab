@@ -57,7 +57,6 @@ type Announcement = {
 type EditableAnnouncement = {
     id: number;
     title: string;
-    summary: string;
     body: string;
     status: AnnouncementStatus;
     is_pinned: boolean;
@@ -82,7 +81,6 @@ type AnnouncementsPage = {
 
 type AnnouncementForm = {
     title: string;
-    summary: string;
     body: string;
 };
 
@@ -115,7 +113,6 @@ export default function AdminAnnouncements({
 }) {
     const form = useForm<AnnouncementForm>({
         title: announcement?.title ?? '',
-        summary: announcement?.summary ?? '',
         body: announcement?.body ?? '',
     });
     const bodyRef = useRef<HTMLTextAreaElement>(null);
@@ -243,29 +240,6 @@ export default function AdminAnnouncements({
                                         }
                                     />
                                     {fieldError(form.errors.title)}
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <Label htmlFor="announcement-summary">
-                                        Summary
-                                    </Label>
-                                    <Textarea
-                                        id="announcement-summary"
-                                        value={form.data.summary}
-                                        onChange={(event) =>
-                                            form.setData(
-                                                'summary',
-                                                event.target.value,
-                                            )
-                                        }
-                                        maxLength={500}
-                                        rows={3}
-                                        aria-invalid={
-                                            form.errors.summary
-                                                ? true
-                                                : undefined
-                                        }
-                                    />
-                                    {fieldError(form.errors.summary)}
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <div className="flex flex-wrap items-center justify-between gap-2">
