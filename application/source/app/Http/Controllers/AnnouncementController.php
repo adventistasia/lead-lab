@@ -39,7 +39,9 @@ class AnnouncementController
 
         return Inertia::render('announcements/show', [
             'announcement' => [
-                ...$this->summary($announcement, $request->user()),
+                'id' => $announcement->id,
+                'title' => $announcement->title,
+                'is_pinned' => $announcement->is_pinned,
                 'body_html' => $announcement->renderedBody(),
                 'published_at_label' => $publishedAt?->format('M j, Y g:i A'),
             ],

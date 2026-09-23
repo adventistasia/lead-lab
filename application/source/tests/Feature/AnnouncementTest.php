@@ -360,7 +360,7 @@ class AnnouncementTest extends TestCase
             ->assertInertia(fn (Assert $assert) => $assert
                 ->component('announcements/show')
                 ->where('announcement.id', $published->id)
-                ->where('announcement.summary', 'Update The body is the source.')
+                ->missing('announcement.summary')
                 ->where('announcement.body_html', fn (string $body): bool => str_contains($body, '<h2>Update</h2>')),
             );
         $this->actingAs($participant)

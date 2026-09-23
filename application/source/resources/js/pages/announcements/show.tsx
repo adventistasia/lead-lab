@@ -14,7 +14,6 @@ import { index as announcementsRoute } from '@/routes/announcements';
 type Announcement = {
     id: number;
     title: string;
-    summary: string;
     body_html: string;
     is_pinned: boolean;
     published_at_label: string | null;
@@ -55,9 +54,6 @@ export default function AnnouncementShow({
                         <CardDescription>
                             {announcement.published_at_label} · {timezone_label}
                         </CardDescription>
-                        <p className="max-w-3xl text-lg leading-8 text-muted-foreground">
-                            {announcement.summary}
-                        </p>
                     </CardHeader>
                     <CardContent>
                         <div
