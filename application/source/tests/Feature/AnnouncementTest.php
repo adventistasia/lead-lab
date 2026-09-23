@@ -7,6 +7,7 @@ use App\Models\Announcement;
 use App\Models\AnnouncementEmailDelivery;
 use App\Models\User;
 use App\Notifications\AnnouncementPublishedNotification;
+use App\Support\AnnouncementContent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Carbon;
@@ -53,6 +54,62 @@ class AnnouncementTest extends TestCase
                 ->missing('announcement.summary')
                 ->where('announcements.data.0.summary', 'What is changing? The next cycle starts soon.'),
             );
+    }
+
+    public function test_admin_can_save_long_body_with_preview_within_summary_column_limit(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $body = str_repeat('A', 700);
+
+        $this->actingAs($admin)
+            ->post(route('admin.announcements.store'), [
+                'title' => 'Long announcement',
+                'body' => $body,
+            ])
+            ->assertRedirect();
+
+        $announcement = Announcement::query()
+            ->where('title', 'Long announcement')
+            ->firstOrFail();
+
+        $this->assertSame(700, mb_strlen($announcement->body, 'UTF-8'));
+        $this->assertSame(500, mb_strlen($announcement->summary, 'UTF-8'));
+        $this->assertSame(str_repeat('A', 497).'...', $announcement->summary);
+    }
+
+    public function test_admin_can_edit_long_body_with_preview_within_summary_column_limit(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $announcement = Announcement::factory()->draft()->create([
+            'created_by' => $admin->id,
+            'updated_by' => $admin->id,
+        ]);
+        $body = str_repeat('B', 700);
+
+        $this->actingAs($admin)
+            ->patch(route('admin.announcements.update', $announcement), [
+                'title' => 'Edited long announcement',
+                'body' => $body,
+            ])
+            ->assertRedirect(route('admin.announcements.edit', $announcement));
+
+        $announcement->refresh();
+
+        $this->assertSame(700, mb_strlen($announcement->body, 'UTF-8'));
+        $this->assertSame(500, mb_strlen($announcement->summary, 'UTF-8'));
+        $this->assertSame(str_repeat('B', 497).'...', $announcement->summary);
+    }
+
+    public function test_preview_preserves_short_text_and_separates_markdown_table_cells(): void
+    {
+        $shortText = str_repeat('x', 500);
+        $table = "| Name | Role |\n| --- | --- |\n| Dana | Admin |";
+
+        $this->assertSame($shortText, AnnouncementContent::preview($shortText));
+        $this->assertSame(
+            'Name Role Dana Admin',
+            AnnouncementContent::preview($table),
+        );
     }
 
     public function test_admin_cannot_save_unsupported_announcement_markup(): void

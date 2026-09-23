@@ -22,13 +22,20 @@ class AnnouncementContent
     {
         $html = self::render($body);
         $html = preg_replace(
-            '/<\s*\/\s*(?:p|h[1-6]|li|blockquote|pre|div|tr)\s*>|<\s*br\s*\/?\s*>/i',
+            '/<\s*\/\s*(?:p|h[1-6]|li|blockquote|pre|div|tr|td|th)\s*>|<\s*br\s*\/?\s*>/i',
             ' ',
             $html,
         ) ?? $html;
         $text = html_entity_decode(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = Str::squish($text);
 
-        return Str::limit(Str::squish($text), self::MAX_PREVIEW_LENGTH);
+        if (mb_strlen($text, 'UTF-8') <= self::MAX_PREVIEW_LENGTH) {
+            return $text;
+        }
+
+        $contentLength = self::MAX_PREVIEW_LENGTH - mb_strlen('...', 'UTF-8');
+
+        return rtrim(mb_substr($text, 0, $contentLength, 'UTF-8')).'...';
     }
 
     public static function validationError(string $body): ?string
