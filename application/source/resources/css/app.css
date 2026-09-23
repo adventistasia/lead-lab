@@ -149,3 +149,36 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    .announcement-content,
+    .announcement-preview {
+        @apply flex flex-col gap-5 leading-8 text-foreground;
+    }
+
+    .announcement-content h2,
+    .announcement-preview h2 {
+        @apply mt-2 text-2xl font-semibold tracking-tight;
+    }
+
+    .announcement-content h3,
+    .announcement-preview h3 {
+        @apply mt-2 text-xl font-semibold tracking-tight;
+    }
+
+    .announcement-content h4,
+    .announcement-preview h4 {
+        @apply mt-2 text-lg font-semibold;
+    }
+
+    .announcement-content ul,
+    .announcement-content ol,
+    .announcement-preview ul,
+    .announcement-preview ol {
+        @apply flex flex-col gap-2 pl-6;
+    }
+
+    .announcement-content a {
+        @apply font-medium text-brand-green-dark underline underline-offset-4 dark:text-brand-yellow;
+    }
+}
