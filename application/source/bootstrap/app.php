@@ -11,6 +11,8 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Middleware\ValidatePostSize;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -60,6 +62,22 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->api(append: [HandlePostSize::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $redirectInvalidVerificationLink = static fn () => redirect()
+            ->route('verification.notice')
+            ->with('status', 'verification-link-invalid');
+
+        $exceptions->render(function (InvalidSignatureException $exception, Request $request) use ($redirectInvalidVerificationLink) {
+            return $request->routeIs('verification.verify')
+                ? $redirectInvalidVerificationLink()
+                : null;
+        });
+
+        $exceptions->render(function (AccessDeniedHttpException $exception, Request $request) use ($redirectInvalidVerificationLink) {
+            return $request->routeIs('verification.verify')
+                ? $redirectInvalidVerificationLink()
+                : null;
+        });
+
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );

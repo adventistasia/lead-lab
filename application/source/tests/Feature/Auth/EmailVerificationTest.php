@@ -6,8 +6,11 @@ use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\URL;
+use Inertia\Testing\AssertableInertia as Assert;
 use Laravel\Fortify\Features;
 use Tests\TestCase;
 
@@ -31,6 +34,28 @@ class EmailVerificationTest extends TestCase
         $response->assertOk();
     }
 
+    public function test_pending_participant_can_reach_the_resend_page(): void
+    {
+        $user = User::factory()->unverified()->create([
+            'access_status' => User::ACCESS_PENDING,
+            'is_active' => false,
+        ]);
+
+        $this->actingAs($user)
+            ->get(route('registration.pending'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('auth/registration-pending')
+                ->where('emailVerified', false)
+                ->where('emailVerificationRequired', true),
+            );
+
+        $this->get(route('verification.notice'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('auth/verify-email')
+                ->where('status', null),
+            );
+    }
+
     public function test_email_verification_notification_uses_email_branding(): void
     {
         $user = User::factory()->unverified()->create();
@@ -40,6 +65,18 @@ class EmailVerificationTest extends TestCase
 
         $this->assertStringContainsString('LEADHub', $rendered);
         $this->assertStringNotContainsString('Lead Lab', $rendered);
+    }
+
+    public function test_verification_notification_links_expire_after_72_hours(): void
+    {
+        $user = User::factory()->unverified()->create();
+
+        $this->travelTo(Carbon::parse('2026-09-24 12:00:00', 'UTC'));
+
+        $message = (new VerifyEmail)->toMail($user);
+        parse_str((string) parse_url($message->actionUrl, PHP_URL_QUERY), $query);
+
+        $this->assertSame(now()->addHours(72)->timestamp, (int) $query['expires']);
     }
 
     public function test_email_can_be_verified()
@@ -74,7 +111,63 @@ class EmailVerificationTest extends TestCase
             ['id' => $user->id, 'hash' => sha1('wrong-email')],
         );
 
-        $this->actingAs($user)->get($verificationUrl);
+        $this->actingAs($user)
+            ->get($verificationUrl)
+            ->assertRedirect(route('verification.notice'))
+            ->assertSessionHas('status', 'verification-link-invalid');
+
+        Event::assertNotDispatched(Verified::class);
+        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+    }
+
+    public function test_expired_verification_link_redirects_to_resend_page_with_recovery_message(): void
+    {
+        Notification::fake();
+
+        $user = User::factory()->unverified()->create();
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->subMinute(),
+            ['id' => $user->id, 'hash' => sha1($user->email)],
+        );
+
+        $this->actingAs($user)
+            ->get($verificationUrl)
+            ->assertRedirect(route('verification.notice'))
+            ->assertSessionHas('status', 'verification-link-invalid');
+
+        $this->get(route('verification.notice'))
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('auth/verify-email')
+                ->where('status', 'verification-link-invalid'),
+            );
+
+        $this->post(route('verification.send'))
+            ->assertRedirect(route('verification.notice'))
+            ->assertSessionHas('status', 'verification-link-sent');
+
+        Notification::assertSentTo($user, VerifyEmail::class);
+
+        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+    }
+
+    public function test_altered_verification_link_redirects_to_resend_page_with_recovery_message(): void
+    {
+        $user = User::factory()->unverified()->create();
+
+        Event::fake();
+
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addHours(72),
+            ['id' => $user->id, 'hash' => sha1($user->email)],
+        ).'&altered=1';
+
+        $this->actingAs($user)
+            ->get($verificationUrl)
+            ->assertRedirect(route('verification.notice'))
+            ->assertSessionHas('status', 'verification-link-invalid');
 
         Event::assertNotDispatched(Verified::class);
         $this->assertFalse($user->fresh()->hasVerifiedEmail());
@@ -92,7 +185,10 @@ class EmailVerificationTest extends TestCase
             ['id' => 123, 'hash' => sha1($user->email)],
         );
 
-        $this->actingAs($user)->get($verificationUrl);
+        $this->actingAs($user)
+            ->get($verificationUrl)
+            ->assertRedirect(route('verification.notice'))
+            ->assertSessionHas('status', 'verification-link-invalid');
 
         Event::assertNotDispatched(Verified::class);
         $this->assertFalse($user->fresh()->hasVerifiedEmail());
