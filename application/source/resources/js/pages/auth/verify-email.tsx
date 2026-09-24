@@ -18,6 +18,16 @@ export default function VerifyEmail({ status }: { status?: string }) {
                 </div>
             )}
 
+            {status === 'verification-link-invalid' && (
+                <div
+                    role="alert"
+                    className="mb-4 text-center text-sm font-medium text-destructive"
+                >
+                    This verification link has expired or is invalid. Request a
+                    new link below.
+                </div>
+            )}
+
             <Form {...send.form()} className="space-y-6 text-center">
                 {({ processing }) => (
                     <>
