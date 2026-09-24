@@ -13,6 +13,8 @@ Local implementation evidence recorded on 2026-09-24: new verification links exp
 
 Verification count update recorded on 2026-09-24: pending-participant resend-page coverage brings the focused verification suite to 13 tests with 73 assertions and the full PHP suite to 196 tests with 1,681 assertions. All checks continue to pass; this supersedes the test counts in the preceding implementation evidence note.
 
+Video evidence recorded on 2026-09-24: the local walkthrough `application/runs/2026-09-24-issue-55-verification-recovery/verification-recovery.webm` uses a synthetic pending participant and isolated SQLite database. It shows the pending page, the email-verification resend page, recovery after an expired signed link, and a successful resend response. The recording is local evidence only; staging/Android acceptance and confirmation of the production button request path remain open.
+
 ## Current Status Override
 
 The PM's 2026-09-23 direction sets ISS-10 (Administrative activity logging is incomplete in the Option B application) to Resolved. This supersedes the earlier `In Progress` status shown in the register row below.
