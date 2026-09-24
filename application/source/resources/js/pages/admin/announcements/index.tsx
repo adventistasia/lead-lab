@@ -529,7 +529,9 @@ export default function AdminAnnouncements({
                                                     >
                                                         <Send data-icon="inline-start" />
                                                         {item.status ===
-                                                        'archived'
+                                                            'archived' &&
+                                                        item.published_at_label !==
+                                                            null
                                                             ? 'Republish'
                                                             : 'Publish'}
                                                     </Button>
