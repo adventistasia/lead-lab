@@ -23,7 +23,7 @@ No artifact ownership or canonical location was supplied or confirmed during set
 | Resource records | PM-30 to PM-34 | | | | | |
 | Risk and RAID registers | PM-35 to PM-40 | | | | | |
 | Closure and handoff records | PM-09 | TBD | `pm-control/artifacts/lead-hub-closure-report.md` | Current | 2026-09-23 | Current Lead Hub closure and operations-handoff record. The project is conditionally closed; residual controls remain active and retain their recorded owners and states. The historical SharePoint closure report is not the current carrier. |
-| Administrative activity-logging verification | — | TBD | `application/ops/activity-logging.md` | Current | 2026-09-23 | CHG-52 (Add an administrator-only activity-log viewer and operational logging verification record). PR #56 (`feat: add admin activity log viewer`) merged into `staging`; GitHub reports `main` and `staging` at commit `39d34758`. Staging persistence, access, event coverage, operational handling, retention, staging roles, and production runtime evidence remain open. |
+| Administrative and user activity-logging verification | — | TBD | `application/ops/activity-logging.md` | Current | 2026-09-26 | CHG-52 (Add an administrator-only activity-log viewer and operational logging verification record) and CHG-54 (Extend the Activity Log to signed-in user activity) share this carrier. The expanded event map, operational volume, staging persistence, access, event coverage, handling, retention, staging roles, and production runtime evidence remain to be verified; no new maintained artifact is needed. |
 
 ## Rules
 
