@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ActivityLog;
 use App\Models\Announcement;
 use App\Models\CalendarEvent;
+use App\Models\LearningResource;
 use App\Models\LearningSession;
 use App\Models\SessionAnswer;
 use App\Models\SessionQuestion;
@@ -24,6 +25,21 @@ class AdminActivityLogController
     private const ACTION_LABELS = [
         'participant_registered' => 'Participant registered',
         'password_reset' => 'Password reset',
+        'signed_in' => 'Signed in',
+        'signed_out' => 'Signed out',
+        'profile_updated' => 'Profile updated',
+        'session_viewed' => 'Session viewed',
+        'resource_download_requested' => 'Material download requested',
+        'qna_question_created' => 'Q&A question created',
+        'qna_answer_created' => 'Q&A answer created',
+        'qna_question_vote_added' => 'Question vote added',
+        'qna_question_vote_removed' => 'Question vote removed',
+        'qna_answer_vote_added' => 'Answer vote added',
+        'qna_answer_vote_removed' => 'Answer vote removed',
+        'announcement_viewed' => 'Announcement viewed',
+        'calendar_viewed' => 'Calendar viewed',
+        'calendar_event_viewed' => 'Calendar event viewed',
+        'calendar_broadcast_clicked' => 'Live broadcast link clicked',
         'member_access_approved' => 'Member access approved',
         'member_access_restored' => 'Member access restored',
         'member_access_revoked' => 'Member access revoked',
@@ -54,6 +70,8 @@ class AdminActivityLogController
     /** @var array<string, array<int, string>> */
     private const DISPLAYABLE_METADATA = [
         'password_reset' => ['source'],
+        'profile_updated' => ['fields'],
+        'calendar_viewed' => ['month'],
         'member_access_approved' => ['access_status'],
         'member_access_restored' => ['access_status'],
         'member_access_revoked' => ['access_status'],
@@ -67,6 +85,8 @@ class AdminActivityLogController
     /** @var array<string, string> */
     private const METADATA_LABELS = [
         'source' => 'Source',
+        'fields' => 'Changed fields',
+        'month' => 'Month',
         'access_status' => 'Access status',
         'from_role' => 'Previous role',
         'to_role' => 'New role',
@@ -79,18 +99,23 @@ class AdminActivityLogController
     {
         $validated = $request->validate([
             'action' => ['nullable', 'string', 'max:120'],
+            'user' => ['nullable', 'string', 'max:120'],
             'date_from' => ['nullable', 'date_format:Y-m-d'],
             'date_to' => ['nullable', 'date_format:Y-m-d', 'after_or_equal:date_from'],
         ]);
 
         $timezone = $request->user()->effectiveTimezone();
         $action = $validated['action'] ?? null;
+        $user = $validated['user'] ?? null;
         $dateFrom = $validated['date_from'] ?? null;
         $dateTo = $validated['date_to'] ?? null;
 
         $logs = ActivityLog::query()
             ->with(['actor:id,name,email', 'subject'])
             ->when($action !== null, fn (Builder $query) => $query->where('action', $action))
+            ->when($user !== null, fn (Builder $query) => $query->whereHas('actor', fn (Builder $actors) => $actors
+                ->where('name', 'like', '%'.$user.'%')
+                ->orWhere('email', 'like', '%'.$user.'%')))
             ->when(
                 $dateFrom !== null,
                 fn (Builder $query) => $query->where(
@@ -118,6 +143,7 @@ class AdminActivityLogController
             'actions' => $this->actionOptions(),
             'filters' => [
                 'action' => $action,
+                'user' => $user,
                 'date_from' => $dateFrom,
                 'date_to' => $dateTo,
             ],
@@ -169,6 +195,7 @@ class AdminActivityLogController
         $label = match (true) {
             $subject instanceof User => $subject->name,
             $subject instanceof LearningSession => $subject->title,
+            $subject instanceof LearningResource => $subject->title,
             $subject instanceof CalendarEvent => $subject->title,
             $subject instanceof Announcement => $subject->title,
             $subject instanceof SessionQuestion => 'Question #'.$log->subject_id,
