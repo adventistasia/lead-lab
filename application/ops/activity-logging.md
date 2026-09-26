@@ -3,7 +3,7 @@
 
 ## Current State
 
-Lead Hub records administrative activity in the `activity_logs` database table. The administrator viewer is available at `/admin/activity-logs` after the approved implementation is deployed. The viewer is read-only and is not the system of record.
+Lead Hub records administrative and signed-in user activity in the `activity_logs` database table. The administrator viewer is available at `/admin/activity-logs` after the approved implementation is deployed. The viewer is read-only and is not the system of record.
 
 Local implementation evidence is available. Staging persistence, access, complete event coverage, operational handling, retention, and staging implementation roles remain to be verified.
 
@@ -15,7 +15,12 @@ Local implementation evidence is available. Staging persistence, access, complet
 | Member access and roles | `member_access_approved`, `member_access_restored`, `member_access_revoked`, `member_role_changed` |
 | Learning Sessions and materials | `session_created`, `session_updated`, `resource_deleted`, `session_published`, `session_unpublished`, `session_archived`, `session_restored` |
 | Calendar events | `calendar_event_created`, `calendar_event_updated`, `calendar_event_deleted` |
+| Announcement administration | `announcement_created`, `announcement_updated`, `announcement_published`, `announcement_republished`, `announcement_pinned`, `announcement_unpinned`, `announcement_archived` |
 | Q&A moderation | `qna_question_updated`, `qna_question_deleted`, `qna_answer_updated`, `qna_answer_deleted` |
+| Signed-in account | `signed_in`, `signed_out`, `profile_updated` (changed field names only; includes password change without its value) |
+| Learning | `session_viewed`, `resource_download_requested` (request, not confirmed completion) |
+| Participation | `qna_question_created`, `qna_answer_created`, question/answer updates and deletions by authors or administrators, `qna_question_vote_added`, `qna_question_vote_removed`, `qna_answer_vote_added`, `qna_answer_vote_removed` |
+| Content | `announcement_viewed`, `calendar_viewed` (month only), `calendar_event_viewed`, `calendar_broadcast_clicked` (click, not attendance) |
 
 ## Access And Handling
 
@@ -24,6 +29,9 @@ Local implementation evidence is available. Staging persistence, access, complet
 - The viewer shows the event time in the signed-in administrator's effective timezone.
 - The viewer does not allow activity records to be edited or deleted.
 - The viewer exposes only approved metadata fields. Tokens, passwords, and unapproved metadata are not shown.
+- Administrators can filter by actor name or email, action, and local date; deleted actors remain unavailable rather than searchable by name.
+- Session, announcement, and calendar page views exclude Inertia prefetches. Calendar event details are recorded on explicit selection. A broadcast click follows the protected application redirect to the external URL.
+- Each new activity event records the actor, action, time, and affected item. Profile changes store field names only, never values.
 
 ## Verification Checklist
 
@@ -32,7 +40,7 @@ Local implementation evidence is available. Staging persistence, access, complet
 | Local event writes | Complete locally | Existing activity-log audit and automated tests |
 | Staging persistence | Pending | Each test event remains after application restart or equivalent staging check |
 | Staging viewer access | Pending | Administrator access succeeds; participant and guest access are denied |
-| Complete event coverage | Pending | Each listed action is triggered and visible in the staging viewer |
+| Complete event coverage | Pending | Each listed action, including signed-in user actions, is triggered and visible in the staging viewer; verify prefetch and failed requests do not write false events |
 | Operational handling | Pending | Operator can locate, interpret, and investigate a recorded event |
 | Retention | Pending | Approved retention duration, archive method, and deletion authority |
 | Staging implementation roles | Pending | Named verifier, operator, and acceptance authority |
@@ -47,3 +55,4 @@ Local implementation evidence is available. Staging persistence, access, complet
 ## Open Limits
 
 No retention period is currently approved. Staging implementation roles are not recorded. Local tests do not establish staging or production persistence.
+The increase in log volume and its storage impact have not been measured. Release and operational acceptance for the expanded coverage remain separate from local verification.

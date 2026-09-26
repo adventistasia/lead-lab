@@ -87,6 +87,28 @@ class AdminActivityLogTest extends TestCase
         );
     }
 
+    public function test_admin_can_filter_by_user_name_or_email_with_action_and_date(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $member = User::factory()->create(['name' => 'Alex Member', 'email' => 'alex@example.test']);
+        $other = User::factory()->create(['name' => 'Taylor Member']);
+        ActivityLog::record($member, 'signed_in', $member);
+        ActivityLog::record($other, 'signed_in', $other);
+        ActivityLog::record($member, 'signed_out', $member);
+
+        $this->actingAs($admin)
+            ->get(route('admin.activity-logs.index', [
+                'user' => 'alex@example',
+                'action' => 'signed_in',
+                'date_from' => now($admin->effectiveTimezone())->toDateString(),
+            ]))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('logs.total', 1)
+                ->where('logs.data.0.actor.name', 'Alex Member')
+                ->where('filters.user', 'alex@example')
+                ->where('logs.data.0.action_label', 'Signed in'));
+    }
+
     public function test_local_date_filter_uses_the_administrator_timezone(): void
     {
         $admin = User::factory()->create([

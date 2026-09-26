@@ -78,12 +78,14 @@ export default function AdminActivityLogs({
     actions: ActionOption[];
     filters: {
         action: string | null;
+        user: string | null;
         date_from: string | null;
         date_to: string | null;
     };
     timezone_label: string;
 }) {
     const [action, setAction] = useState(filters.action ?? '');
+    const [user, setUser] = useState(filters.user ?? '');
     const [dateFrom, setDateFrom] = useState(filters.date_from ?? '');
     const [dateTo, setDateTo] = useState(filters.date_to ?? '');
 
@@ -94,6 +96,10 @@ export default function AdminActivityLogs({
 
         if (action !== '') {
             params.action = action;
+        }
+
+        if (user !== '') {
+            params.user = user;
         }
 
         if (dateFrom !== '') {
@@ -112,6 +118,7 @@ export default function AdminActivityLogs({
 
     const clearFilters = () => {
         setAction('');
+        setUser('');
         setDateFrom('');
         setDateTo('');
         router.get(
@@ -124,9 +131,11 @@ export default function AdminActivityLogs({
         );
     };
 
-    const hasFilters = action !== '' || dateFrom !== '' || dateTo !== '';
+    const hasFilters =
+        action !== '' || user !== '' || dateFrom !== '' || dateTo !== '';
     const hasAppliedFilters =
         filters.action !== null ||
+        filters.user !== null ||
         filters.date_from !== null ||
         filters.date_to !== null;
 
@@ -142,8 +151,8 @@ export default function AdminActivityLogs({
                         Activity log
                     </h1>
                     <p className="max-w-2xl text-muted-foreground">
-                        Review recorded administrative activity. This page is
-                        read-only and shows only approved event details.
+                        Review recorded user and administrative activity. This
+                        page is read-only and shows only approved event details.
                     </p>
                 </div>
 
@@ -151,7 +160,7 @@ export default function AdminActivityLogs({
                     <CardHeader>
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex flex-col gap-1.5">
-                                <CardTitle>Administrative activity</CardTitle>
+                                <CardTitle>Activity</CardTitle>
                                 <CardDescription>
                                     {logs.total}{' '}
                                     {logs.total === 1 ? 'entry' : 'entries'}
@@ -173,7 +182,7 @@ export default function AdminActivityLogs({
                                     Filter activity
                                 </p>
                             </div>
-                            <div className="grid gap-4 md:grid-cols-3">
+                            <div className="grid gap-4 md:grid-cols-4">
                                 <div className="flex flex-col gap-2">
                                     <Label htmlFor="activity-action">
                                         Action
@@ -206,6 +215,18 @@ export default function AdminActivityLogs({
                                             ))}
                                         </SelectContent>
                                     </Select>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="activity-user">User</Label>
+                                    <Input
+                                        id="activity-user"
+                                        type="search"
+                                        value={user}
+                                        onChange={(event) =>
+                                            setUser(event.target.value)
+                                        }
+                                        placeholder="Name or email"
+                                    />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <Label htmlFor="activity-date-from">
@@ -263,7 +284,7 @@ export default function AdminActivityLogs({
                                 <div className="hidden overflow-x-auto md:block">
                                     <table className="w-full min-w-[760px] text-left text-sm">
                                         <caption className="sr-only">
-                                            Administrative activity log
+                                            User activity log
                                         </caption>
                                         <thead>
                                             <tr className="border-b text-muted-foreground">

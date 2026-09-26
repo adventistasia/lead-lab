@@ -8,6 +8,8 @@ use App\Http\Responses\PasswordResetLinkResponse;
 use App\Http\Responses\PendingRegistrationResponse;
 use App\Models\ActivityLog;
 use App\Models\User;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -50,6 +52,7 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureViews();
         $this->configureRateLimiting();
         $this->configurePasswordResetEvents();
+        $this->configureSessionEvents();
     }
 
     /**
@@ -135,6 +138,21 @@ class FortifyServiceProvider extends ServiceProvider
             ActivityLog::record(null, 'password_reset', $event->user, [
                 'source' => 'password_recovery',
             ]);
+        });
+    }
+
+    private function configureSessionEvents(): void
+    {
+        Event::listen(Login::class, function (Login $event): void {
+            if ($event->user instanceof User) {
+                ActivityLog::record($event->user, 'signed_in', $event->user);
+            }
+        });
+
+        Event::listen(Logout::class, function (Logout $event): void {
+            if ($event->user instanceof User) {
+                ActivityLog::record($event->user, 'signed_out', $event->user);
+            }
         });
     }
 }

@@ -170,6 +170,19 @@ export function CalendarView({
     const selectedEvent = events.find((event) => event.id === selectedEventId);
     const today = todayDateKey(timezone);
 
+    const openEvent = (id: number) => {
+        setSelectedEventId(id);
+        const xsrf = document.cookie
+            .split('; ')
+            .find((cookie) => cookie.startsWith('XSRF-TOKEN='))
+            ?.slice('XSRF-TOKEN='.length);
+        void fetch(`/calendar/events/${id}/view`, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: xsrf ? { 'X-XSRF-TOKEN': decodeURIComponent(xsrf) } : {},
+        });
+    };
+
     return (
         <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -266,9 +279,7 @@ export function CalendarView({
                                                     gridRow: segment.lane + 1,
                                                 }}
                                                 onClick={() =>
-                                                    setSelectedEventId(
-                                                        segment.event.id,
-                                                    )
+                                                    openEvent(segment.event.id)
                                                 }
                                                 aria-label={`${segment.event.title}, ${formatEventTimeRange(segment.event, timezone)}`}
                                             >
@@ -296,7 +307,7 @@ export function CalendarView({
                             key={event.id}
                             type="button"
                             className="flex flex-col gap-1 rounded-xl border p-4 text-left transition-colors hover:bg-muted/50"
-                            onClick={() => setSelectedEventId(event.id)}
+                            onClick={() => openEvent(event.id)}
                         >
                             <span className="font-medium">{event.title}</span>
                             <span className="text-sm text-muted-foreground">
@@ -357,9 +368,7 @@ export function CalendarView({
                                     )}
                                     {selectedEvent.live_broadcast_url && (
                                         <a
-                                            href={
-                                                selectedEvent.live_broadcast_url
-                                            }
+                                            href={`/calendar/events/${selectedEvent.id}/broadcast`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 font-medium text-brand-green-dark hover:underline dark:text-brand-yellow"
