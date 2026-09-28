@@ -22,9 +22,9 @@ class NewParticipantRegistrationNotification extends Notification implements Sho
 
     public function toMail(User $notifiable): MailMessage
     {
-        $registeredAt = $this->participant->created_at?->setTimezone(
-            (string) config('app.timezone'),
-        )->format('l, F j, Y \\a\\t g:i A T') ?? 'Unknown';
+        $registeredAt = $this->participant->created_at?->copy()->setTimezone(
+            $notifiable->effectiveTimezone(),
+        );
         $brandName = (string) config('mail.brand_name', 'LEADHub');
 
         return (new MailMessage)
@@ -33,8 +33,9 @@ class NewParticipantRegistrationNotification extends Notification implements Sho
             ->line('A new participant has registered for '.$brandName.' and needs access review.')
             ->line('Name: '.$this->participant->name)
             ->line('Email: '.$this->participant->email)
-            ->line('Registered: '.$registeredAt)
+            ->line('Registered: '.($registeredAt?->format('l, F j, Y \\a\\t g:i A') ?? 'Unknown'))
             ->action('Review registration', route('admin.members.index'))
-            ->line('Review the participant against the approved participant list before granting access.');
+            ->line('Review the participant against the approved participant list before granting access.')
+            ->line('Times are shown in '.$notifiable->effectiveTimezoneLabel($registeredAt).'.');
     }
 }

@@ -105,10 +105,12 @@ class RegistrationTest extends TestCase
         $administrator = User::factory()->create([
             'name' => 'Lead Hub Administrator',
             'role' => 'admin',
+            'timezone' => 'Asia/Manila',
         ]);
         $participant = User::factory()->create([
             'name' => 'New Participant',
             'email' => 'new-participant@example.com',
+            'timezone' => 'Asia/Tokyo',
             'created_at' => '2026-08-26 12:00:00',
         ]);
 
@@ -123,13 +125,51 @@ class RegistrationTest extends TestCase
         );
         $this->assertContains('Name: New Participant', $message->introLines);
         $this->assertContains('Email: new-participant@example.com', $message->introLines);
-        $this->assertContains('Registered: Wednesday, August 26, 2026 at 12:00 PM UTC', $message->introLines);
+        $this->assertContains('Registered: Wednesday, August 26, 2026 at 8:00 PM', $message->introLines);
+        $this->assertContains('Times are shown in GMT+8 (Asia/Manila).', $message->outroLines);
+        $this->assertSame('2026-08-26T12:00:00+00:00', $participant->created_at->toIso8601String());
         $this->assertSame('Review registration', $message->actionText);
         $this->assertStringContainsString('/admin/members', $message->actionUrl);
         $rendered = (string) $message->render();
 
         $this->assertStringContainsString('LEADHub', $rendered);
         $this->assertStringNotContainsString('Lead Lab', $rendered);
+    }
+
+    public function test_registration_notification_uses_the_administrators_date_specific_timezone_offset(): void
+    {
+        $administrator = User::factory()->create([
+            'role' => 'admin',
+            'timezone' => 'America/New_York',
+        ]);
+
+        foreach ([
+            ['2026-03-08 04:30:00', 'Registered: Saturday, March 7, 2026 at 11:30 PM', 'GMT-5'],
+            ['2026-07-01 02:30:00', 'Registered: Tuesday, June 30, 2026 at 10:30 PM', 'GMT-4'],
+        ] as [$registeredAt, $expectedLine, $expectedOffset]) {
+            $participant = User::factory()->create(['created_at' => $registeredAt]);
+
+            $message = (new NewParticipantRegistrationNotification($participant))->toMail($administrator);
+
+            $this->assertContains($expectedLine, $message->introLines);
+            $this->assertContains("Times are shown in {$expectedOffset} (America/New_York).", $message->outroLines);
+            $this->assertSame($registeredAt, $participant->created_at->format('Y-m-d H:i:s'));
+            $this->assertSame('UTC', $participant->created_at->timezoneName);
+        }
+    }
+
+    public function test_registration_notification_falls_back_to_default_timezone_for_missing_or_invalid_admin_timezone(): void
+    {
+        $participant = User::factory()->create(['created_at' => '2026-08-26 12:00:00']);
+
+        foreach ([null, 'Invalid/Timezone'] as $timezone) {
+            $administrator = User::factory()->create(['role' => 'admin', 'timezone' => $timezone]);
+
+            $message = (new NewParticipantRegistrationNotification($participant))->toMail($administrator);
+
+            $this->assertContains('Registered: Wednesday, August 26, 2026 at 8:00 PM', $message->introLines);
+            $this->assertContains('Times are shown in GMT+8 (Asia/Manila).', $message->outroLines);
+        }
     }
 
     public function test_a_pending_participant_can_verify_their_email_before_approval(): void
