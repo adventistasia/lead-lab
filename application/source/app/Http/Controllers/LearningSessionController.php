@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\LearningSession;
 use App\Models\SessionQuestion;
 use App\Support\YouTubeVideoReference;
@@ -90,6 +91,10 @@ class LearningSessionController
         $user = $request->user();
 
         $videoUrl = $learningSession->video_url;
+
+        if (! $request->hasHeader('X-Inertia-Prefetch')) {
+            ActivityLog::record($user, 'session_viewed', $learningSession);
+        }
 
         return Inertia::render('sessions/show', [
             'session' => [

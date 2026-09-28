@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\LearningResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,6 +20,8 @@ class LearningResourceController
             404,
         );
         abort_unless(Storage::disk('local')->exists($learningResource->stored_path), 404);
+
+        ActivityLog::record($request->user(), 'resource_download_requested', $learningResource);
 
         return Storage::disk('local')->download(
             $learningResource->stored_path,

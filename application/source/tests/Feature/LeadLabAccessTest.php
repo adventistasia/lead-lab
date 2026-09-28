@@ -1060,7 +1060,8 @@ class LeadLabAccessTest extends TestCase
             ])
             ->assertRedirect();
 
-        $this->assertDatabaseMissing('activity_logs', [
+        $this->assertDatabaseHas('activity_logs', [
+            'actor_id' => $author->id,
             'action' => 'qna_question_updated',
             'subject_type' => SessionQuestion::class,
             'subject_id' => $question->id,

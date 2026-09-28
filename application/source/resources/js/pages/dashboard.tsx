@@ -486,9 +486,7 @@ export default function Dashboard({
                                             )}
                                             {event.live_broadcast_url && (
                                                 <a
-                                                    href={
-                                                        event.live_broadcast_url
-                                                    }
+                                                    href={`/calendar/events/${event.id}/broadcast`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="inline-flex items-center gap-2 text-sm font-medium text-brand-green-dark hover:underline dark:text-brand-yellow"

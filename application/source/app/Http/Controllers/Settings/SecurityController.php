@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\PasswordUpdateRequest;
 use App\Http\Requests\Settings\TwoFactorAuthenticationRequest;
+use App\Models\ActivityLog;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -58,6 +59,7 @@ class SecurityController extends Controller
         $request->user()->update([
             'password' => $request->password,
         ]);
+        ActivityLog::record($request->user(), 'profile_updated', $request->user(), ['fields' => ['password']]);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Password updated.')]);
 

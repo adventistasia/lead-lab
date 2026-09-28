@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,6 +33,10 @@ class AnnouncementController
     public function show(Request $request, Announcement $announcement): Response
     {
         abort_unless($announcement->isPublished(), 404);
+
+        if (! $request->hasHeader('X-Inertia-Prefetch')) {
+            ActivityLog::record($request->user(), 'announcement_viewed', $announcement);
+        }
 
         $publishedAt = $announcement->published_at?->copy()->setTimezone(
             $request->user()->effectiveTimezone(),

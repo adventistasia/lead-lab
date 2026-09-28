@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileDeleteRequest;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Models\ActivityLog;
 use DateTimeZone;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -39,7 +40,12 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        $fields = array_values(array_intersect(['name', 'email', 'timezone'], array_keys($request->user()->getDirty())));
         $request->user()->save();
+
+        if ($fields !== []) {
+            ActivityLog::record($request->user(), 'profile_updated', $request->user(), ['fields' => $fields]);
+        }
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Profile updated.')]);
 
@@ -59,6 +65,7 @@ class ProfileController extends Controller
             $request->user()->update([
                 'timezone' => $validated['timezone'],
             ]);
+            ActivityLog::record($request->user(), 'profile_updated', $request->user(), ['fields' => ['timezone']]);
         }
 
         return back(303);

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminCalendarEventController;
 use App\Http\Controllers\AdminLearningSessionController;
 use App\Http\Controllers\AdminMemberController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\CalendarActivityController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LearningResourceController;
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
     Route::get('announcements/{announcement}', [AnnouncementController::class, 'show'])->name('announcements.show');
     Route::get('calendar', CalendarController::class)->name('calendar');
+    Route::post('calendar/events/{calendarEvent}/view', [CalendarActivityController::class, 'show'])->name('calendar.events.view');
+    Route::get('calendar/events/{calendarEvent}/broadcast', [CalendarActivityController::class, 'broadcast'])->name('calendar.events.broadcast');
     Route::get('classroom', [LearningSessionController::class, 'index'])->name('classroom.index');
     Route::get('sessions/{learningSession}', [LearningSessionController::class, 'show'])->name('sessions.show');
     Route::get('resources/{learningResource}/download', [LearningResourceController::class, 'download'])->name('resources.download');

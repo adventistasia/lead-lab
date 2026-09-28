@@ -22,11 +22,12 @@ class SessionQnaController
             'details' => ['nullable', 'string', 'max:5000'],
         ]);
 
-        $learningSession->questions()->create([
+        $question = $learningSession->questions()->create([
             'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'details' => $validated['details'] ?? null,
         ]);
+        ActivityLog::record($request->user(), 'qna_question_created', $question);
 
         return back();
     }
@@ -49,6 +50,9 @@ class SessionQnaController
             'title' => $validated['title'],
             'details' => $validated['details'] ?? null,
         ]);
+        if (! $request->user()->isAdmin()) {
+            ActivityLog::record($request->user(), 'qna_question_updated', $sessionQuestion);
+        }
         $this->recordQuestionModeration($request, 'qna_question_updated', $sessionQuestion);
 
         return back();
@@ -63,7 +67,11 @@ class SessionQnaController
         $this->ensureSessionVisible($request, $learningSession);
         $this->ensureCanManage($request, $sessionQuestion->user_id);
 
-        $this->recordQuestionModeration($request, 'qna_question_deleted', $sessionQuestion);
+        if ($request->user()->isAdmin()) {
+            $this->recordQuestionModeration($request, 'qna_question_deleted', $sessionQuestion);
+        } else {
+            ActivityLog::record($request->user(), 'qna_question_deleted', $sessionQuestion);
+        }
         $sessionQuestion->delete();
 
         return back();
@@ -78,10 +86,11 @@ class SessionQnaController
             'body' => ['required', 'string', 'max:5000'],
         ]);
 
-        $sessionQuestion->answers()->create([
+        $answer = $sessionQuestion->answers()->create([
             'user_id' => $request->user()->id,
             'body' => $validated['body'],
         ]);
+        ActivityLog::record($request->user(), 'qna_answer_created', $answer);
 
         return back();
     }
@@ -101,6 +110,9 @@ class SessionQnaController
         ]);
 
         $sessionAnswer->update(['body' => $validated['body']]);
+        if (! $request->user()->isAdmin()) {
+            ActivityLog::record($request->user(), 'qna_answer_updated', $sessionAnswer);
+        }
         $this->recordAnswerModeration($request, 'qna_answer_updated', $sessionQuestion, $sessionAnswer);
 
         return back();
@@ -116,7 +128,11 @@ class SessionQnaController
         $this->ensureSessionVisible($request, $sessionQuestion->learningSession);
         $this->ensureCanManage($request, $sessionAnswer->user_id);
 
-        $this->recordAnswerModeration($request, 'qna_answer_deleted', $sessionQuestion, $sessionAnswer);
+        if ($request->user()->isAdmin()) {
+            $this->recordAnswerModeration($request, 'qna_answer_deleted', $sessionQuestion, $sessionAnswer);
+        } else {
+            ActivityLog::record($request->user(), 'qna_answer_deleted', $sessionAnswer);
+        }
         $sessionAnswer->delete();
 
         return back();
@@ -133,9 +149,13 @@ class SessionQnaController
 
         if ($vote instanceof SessionQuestionVote) {
             $vote->delete();
+            $action = 'qna_question_vote_removed';
         } else {
             $sessionQuestion->votes()->create(['user_id' => $request->user()->id]);
+            $action = 'qna_question_vote_added';
         }
+
+        ActivityLog::record($request->user(), $action, $sessionQuestion);
 
         return back();
     }
@@ -151,9 +171,13 @@ class SessionQnaController
 
         if ($vote instanceof SessionAnswerVote) {
             $vote->delete();
+            $action = 'qna_answer_vote_removed';
         } else {
             $sessionAnswer->votes()->create(['user_id' => $request->user()->id]);
+            $action = 'qna_answer_vote_added';
         }
+
+        ActivityLog::record($request->user(), $action, $sessionAnswer);
 
         return back();
     }

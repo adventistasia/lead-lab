@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\CalendarEvent;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
@@ -29,6 +30,12 @@ class CalendarController
             ->get()
             ->map(fn (CalendarEvent $event): array => $this->eventData($event, $timezone))
             ->values();
+
+        if (! $request->hasHeader('X-Inertia-Prefetch')) {
+            ActivityLog::record($request->user(), 'calendar_viewed', $request->user(), [
+                'month' => $month->format('Y-m'),
+            ]);
+        }
 
         return Inertia::render('calendar', [
             'events' => $events,
