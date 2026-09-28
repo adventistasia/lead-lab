@@ -55,6 +55,7 @@ Each stage has one job, reads only declared inputs, writes inspectable handoffs,
 - Reconcile every affected carrier after implementation. This includes relevant PM Control records, run evidence, source documentation, tests, and deployment guidance. Do not rewrite unrelated records.
 - Measure is a hard gate. Do not commit, push, or create a PR from a failed or blocked quality result.
 - Create the work branch from `origin/staging`. Never force-push. Never include unrelated worktree changes.
+- At Publish, after the quality gate passes and before PR creation, land all intended changes outside the top-level `application/` directory directly on `origin/staging` with a verified fast-forward commit. Keep only intended `application/` changes in the PR; stop if the staging push is blocked or the PR cannot be made application-only without force-push.
 - Create the PR against `staging` and request review from Dennis Arquillano (`dennisatssd`). Do not use an auto-close keyword for the issue because the PR targets `staging`, not the repository default branch.
 - After PR creation, comment on the related issue before entering a waiting state. Address the comment to the issue author's GitHub login and include a safe screenshot of the fix, the exact PR number and human-readable title, and a verified GitHub comment URL. Use an idempotency marker and update an existing marked comment instead of creating a duplicate.
 - Close the relevant issue only after the exact PR recorded by the run is verified as merged into `staging`.

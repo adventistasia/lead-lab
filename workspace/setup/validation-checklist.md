@@ -38,6 +38,7 @@ Next action: resolve every failed check before routing a matic issue to implemen
 - [ ] Existing Define and Design stages remain in the execution path unless their contracts prove they are not applicable.
 - [ ] Reconciliation occurs before Measure and covers affected carriers.
 - [ ] Measure is a hard gate before publication.
+- [ ] Publish verifies intended non-`application/` changes on `origin/staging` before creating an application-only PR, and stops on staging push conflicts or protection.
 - [ ] The PR targets `staging` and requests `dennisatssd`.
 - [ ] Issue closure requires verified merge of the exact recorded PR into `staging`.
 - [ ] No PR auto-close keyword is used for a PR targeting `staging`.
