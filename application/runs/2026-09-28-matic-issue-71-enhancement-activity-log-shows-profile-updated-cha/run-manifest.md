@@ -10,3 +10,4 @@ Next action: plan #71 (enhancement: activity log shows profile_updated changed f
 - Run: `application/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha/`; selection: `stages/matic/01-select/issue-selection.md`.
 - Claim: `refs/heads/matic-claims/issue-71`, initially verified at `a5f8e12024e4039b737524560616f5698cf37d51`; operator `agnojf`; execution ID `e3407830-af77-4616-940a-b03cb1ba0345`.
 - Path: Select → Plan/Control → Define → Design → Build → Reconcile → Measure → Learn → Publish → Close after verified merge.
+- Publication: [PR #72 (fix: show readable profile fields in activity log)](https://github.com/adventistasia/lead-lab/pull/72), requested reviewer `dennisatssd`, verified [author-addressed screenshot comment](https://github.com/adventistasia/lead-lab/issues/71#issuecomment-5862460837). Local gate passed at 32/35 (91.4%); review and merge pending.
