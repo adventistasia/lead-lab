@@ -109,6 +109,36 @@ class AdminActivityLogTest extends TestCase
                 ->where('logs.data.0.action_label', 'Signed in'));
     }
 
+    public function test_profile_changed_fields_are_readable_in_the_admin_viewer(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $member = User::factory()->create(['name' => 'Sample Member']);
+        $profileChange = ActivityLog::create([
+            'actor_id' => $member->id,
+            'action' => 'profile_updated',
+            'subject_type' => User::class,
+            'subject_id' => $member->id,
+            'metadata' => ['fields' => ['name', 'email', 'unknown', 'timezone'], 'token' => 'hidden'],
+        ]);
+        $passwordChange = ActivityLog::create([
+            'actor_id' => $member->id,
+            'action' => 'profile_updated',
+            'subject_type' => User::class,
+            'subject_id' => $member->id,
+            'metadata' => ['fields' => ['password']],
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.activity-logs.index', ['action' => 'profile_updated']))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('logs.total', 2)
+                ->where('logs.data.0.id', $passwordChange->id)
+                ->where('logs.data.0.details.Changed fields', 'Password')
+                ->where('logs.data.1.id', $profileChange->id)
+                ->where('logs.data.1.details.Changed fields', 'Name, Email, Timezone')
+                ->missing('logs.data.1.details.token'));
+    }
+
     public function test_local_date_filter_uses_the_administrator_timezone(): void
     {
         $admin = User::factory()->create([
