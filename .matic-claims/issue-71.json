@@ -9,11 +9,12 @@
   "issue_number": 71,
   "issue_title": "enhancement: activity log shows profile_updated changed fields as raw JSON",
   "last_transition": {
-    "at": "2026-09-28T02:37:15Z",
+    "at": "2026-09-28T02:40:17Z",
     "by": "agnojf",
-    "from_execution_id": null,
-    "from_owner_login": null,
-    "from_status": null,
+    "from_execution_id": "e3407830-af77-4616-940a-b03cb1ba0345",
+    "from_owner_login": "agnojf",
+    "from_status": "active",
+    "reason": "Plan and pre-build ISS-22 and ACT-82 records verified; acknowledged label added",
     "to_execution_id": "e3407830-af77-4616-940a-b03cb1ba0345",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -22,8 +23,8 @@
   "run_id": "2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha",
   "run_path": "application/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha",
   "schema": "matic-claim/v1",
-  "stage": "01-select",
+  "stage": "01-define",
   "status": "active",
-  "updated_at": "2026-09-28T02:37:15Z",
+  "updated_at": "2026-09-28T02:40:17Z",
   "work_branch": "matic/issue-71-enhancement-activity-log-shows-profile-updated-cha"
 }
