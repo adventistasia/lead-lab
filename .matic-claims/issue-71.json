@@ -9,12 +9,12 @@
   "issue_number": 71,
   "issue_title": "enhancement: activity log shows profile_updated changed fields as raw JSON",
   "last_transition": {
-    "at": "2026-09-28T02:52:56Z",
+    "at": "2026-09-28T02:54:08Z",
     "by": "agnojf",
     "from_execution_id": "e3407830-af77-4616-940a-b03cb1ba0345",
     "from_owner_login": "agnojf",
     "from_status": "active",
-    "reason": "Build and safe synthetic screenshot verified; proceed to carrier reconciliation",
+    "reason": "Affected source, test, evidence and PM Control carriers reconciled",
     "to_execution_id": "e3407830-af77-4616-940a-b03cb1ba0345",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -23,8 +23,8 @@
   "run_id": "2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha",
   "run_path": "application/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha",
   "schema": "matic-claim/v1",
-  "stage": "04-reconcile",
+  "stage": "04-measure",
   "status": "active",
-  "updated_at": "2026-09-28T02:52:56Z",
+  "updated_at": "2026-09-28T02:54:08Z",
   "work_branch": "matic/issue-71-enhancement-activity-log-shows-profile-updated-cha"
 }
