@@ -95,6 +95,14 @@ class AdminActivityLogController
         'reminders' => 'Reminder settings',
     ];
 
+    /** @var array<string, string> */
+    private const PROFILE_FIELD_LABELS = [
+        'name' => 'Name',
+        'email' => 'Email',
+        'timezone' => 'Timezone',
+        'password' => 'Password',
+    ];
+
     public function index(Request $request): Response
     {
         $validated = $request->validate([
@@ -229,6 +237,7 @@ class AdminActivityLogController
 
             $value = $metadata[$key];
             $details[self::METADATA_LABELS[$key]] = match (true) {
+                $log->action === 'profile_updated' && $key === 'fields' && is_array($value) => $this->profileFields($value),
                 is_bool($value) => $value ? 'Yes' : 'No',
                 is_scalar($value) || $value === null => (string) $value,
                 default => json_encode($value, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
@@ -236,6 +245,20 @@ class AdminActivityLogController
         }
 
         return $details;
+    }
+
+    /** @param array<mixed> $fields */
+    private function profileFields(array $fields): string
+    {
+        $labels = [];
+
+        foreach ($fields as $field) {
+            if (is_string($field) && isset(self::PROFILE_FIELD_LABELS[$field])) {
+                $labels[] = self::PROFILE_FIELD_LABELS[$field];
+            }
+        }
+
+        return implode(', ', $labels);
     }
 
     private function localDateBoundary(string $date, string $timezone, bool $endOfDay): CarbonImmutable
