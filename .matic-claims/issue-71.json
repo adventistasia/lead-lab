@@ -3,22 +3,21 @@
   "base_sha": "4837bdbfb608791f9b67ccceaaf2b3845fef180f",
   "claim_ref": "refs/heads/matic-claims/issue-71",
   "claimed_at": "2026-09-28T02:37:15Z",
-  "execution_active": false,
-  "execution_id": null,
+  "execution_active": true,
+  "execution_id": "43fae888-ccba-468c-b600-33b153e6d3f1",
   "generation": 1,
   "issue_number": 71,
   "issue_title": "enhancement: activity log shows profile_updated changed fields as raw JSON",
   "last_execution_id": "2f18b388-26f7-40c2-8c21-61908ef82c62",
   "last_transition": {
-    "at": "2026-09-28T03:09:40Z",
+    "at": "2026-09-29T02:11:17Z",
     "by": "agnojf",
-    "from_execution_id": "2f18b388-26f7-40c2-8c21-61908ef82c62",
+    "from_execution_id": null,
     "from_owner_login": "agnojf",
-    "from_status": "active",
-    "reason": "Requester-directed PM Control rows landed directly on staging at e22597a1; PR #72 (fix: show readable profile fields in activity log) now contains only application/ paths and awaits Dennis review",
-    "to_execution_id": null,
+    "from_status": "awaiting-review",
+    "to_execution_id": "43fae888-ccba-468c-b600-33b153e6d3f1",
     "to_owner_login": "agnojf",
-    "to_status": "awaiting-review"
+    "to_status": "active"
   },
   "owner_login": "agnojf",
   "pull_request": {
@@ -28,12 +27,12 @@
     "title": "fix: show readable profile fields in activity log",
     "url": "https://github.com/adventistasia/lead-lab/pull/72"
   },
-  "resume_count": 1,
+  "resume_count": 2,
   "run_id": "2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha",
   "run_path": "application/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha",
   "schema": "matic-claim/v1",
   "stage": "06-close-merged",
-  "status": "awaiting-review",
-  "updated_at": "2026-09-28T03:09:40Z",
+  "status": "active",
+  "updated_at": "2026-09-29T02:11:17Z",
   "work_branch": "matic/issue-71-enhancement-activity-log-shows-profile-updated-cha"
 }
