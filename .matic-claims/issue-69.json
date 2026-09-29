@@ -10,12 +10,12 @@
   "issue_title": "bug: activity-log prefetch guard checks X-Inertia-Prefetch, but Inertia sends Purpose: prefetch",
   "last_execution_id": "3aa2364d-5a44-4aae-9857-3f0f9661f05d",
   "last_transition": {
-    "at": "2026-09-29T05:55:15Z",
+    "at": "2026-09-29T06:10:19Z",
     "by": "agnojf",
     "from_execution_id": "949f09e6-ea23-4704-9c21-6d770b5860f4",
     "from_owner_login": "agnojf",
     "from_status": "active",
-    "reason": "Reconcile verified affected source, test, operations, PM Control, environment, and run evidence; Measure is next.",
+    "reason": "Measure gate passed at 34/35 (97.14%); all issue acceptance criteria passed; Learn is next.",
     "to_execution_id": "949f09e6-ea23-4704-9c21-6d770b5860f4",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -25,8 +25,8 @@
   "run_id": "2026-09-29-matic-issue-69-bug-activity-log-prefetch-guard-checks-x-inertia-p",
   "run_path": "workspace/runs/2026-09-29-matic-issue-69-bug-activity-log-prefetch-guard-checks-x-inertia-p",
   "schema": "matic-claim/v1",
-  "stage": "04-measure",
+  "stage": "05-learn",
   "status": "active",
-  "updated_at": "2026-09-29T05:55:15Z",
+  "updated_at": "2026-09-29T06:10:19Z",
   "work_branch": "matic/issue-69-bug-activity-log-prefetch-guard-checks-x-inertia-p"
 }
