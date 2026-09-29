@@ -34,7 +34,7 @@ class AnnouncementController
     {
         abort_unless($announcement->isPublished(), 404);
 
-        if (! $request->hasHeader('X-Inertia-Prefetch')) {
+        if ($request->header('Purpose') !== 'prefetch') {
             ActivityLog::record($request->user(), 'announcement_viewed', $announcement);
         }
 
