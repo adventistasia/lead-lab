@@ -4,13 +4,15 @@
 **Prepared:** 2026-08-20
 **Status:** Draft; Gate 1 is not passed. The canonical production `APP_URL` target is recorded, but the private deployment environment and broader target evidence remain open; the IT operator is assigned on an interim basis.
 
+Requester direction recorded on 2026-09-29: the intended target environment is staging; Dennis Arquillano is the technical owner; Agno JF (Requester) is the human primary developer. Other target runtime, database, storage, URL, provisioning, and access details may remain Open/TBD. This direction authorizes the bounded local correction for issue #69 (bug: activity-log prefetch guard checks X-Inertia-Prefetch, but Inertia sends Purpose: prefetch); it does not pass Gate 1 or authorize a staging deployment or production change.
+
 ## Decision Summary
 
 | Area | Current state | Gate 1 result |
 |---|---|---|
 | Local development | Verified on a local macOS machine with SQLite | Pass for local development only |
-| Target server and software | Unknown; resident developer to confirm | Blocked |
-| Staging URL | Not available; staging area is not provisioned | Blocked |
+| Target server and software | Target environment is staging per requester; target OS and runtime details remain TBD | Open; no target validation |
+| Staging URL | Staging is the target; the environment is not provisioned and URL/access are TBD | Blocked |
 | Production URL / `APP_URL` | Branch-controlled production Compose now sets `https://leadhub.adventist.asia`; the private deployment environment was not available in this workspace for runtime verification | Recorded in deploy configuration; deployment, DNS, TLS, and SSD-network reachability remain open |
 | Deployment method and path | Unknown | Blocked |
 | Rollback method | Unknown | Blocked |
@@ -18,8 +20,8 @@
 | HTTPS | Unknown | Blocked |
 | Backup and restore | Unknown | Blocked |
 | Monitoring, logs, and incidents | Unknown | Blocked |
-| Technical owner | Unassigned | Open |
-| Human primary developer | Unassigned; resident developer to confirm | Open |
+| Technical owner | Dennis Arquillano (requester direction, 2026-09-29) | Named; target operating evidence remains open |
+| Human primary developer | Agno JF (Requester; requester direction, 2026-09-29) | Named; remaining delivery-capacity details may stay TBD |
 | IT operator | Dennis Arquillano (interim; staging and production; PM-confirmed 2026-09-03) | Recorded; target-environment evidence remains open |
 | AI delivery support | Alson can support build, testing, and documentation; Alson is not the accountable developer or release owner | Recorded |
 | Portal and email branding handoff | Portal display is `Lead Hub` and email display is `LEADHub`; Dennis Arquillano must apply and confirm the non-secret staging display values | Handoff required; no staging access details are recorded |
@@ -64,8 +66,8 @@ The local environment is not staging or production. Local SQLite, the Laravel de
 
 | Role | Current state | Required confirmation |
 |---|---|---|
-| Technical owner or lead | Unassigned | Accountable for architecture, code review, integration, and release |
-| Human primary developer | Unassigned | Resident developer or named development team with protected delivery time |
+| Technical owner or lead | Dennis Arquillano (requester direction, 2026-09-29) | Accountable for architecture, code review, integration, and release |
+| Human primary developer | Agno JF (Requester; requester direction, 2026-09-29) | Primary human developer; protected delivery capacity may remain TBD |
 | IT operator | Dennis Arquillano (interim; staging and production) | Accountable for server, database, HTTPS, backups, monitoring, and incidents; target-environment evidence remains open |
 | Product or acceptance authority | Existing project role | Requester approves scope and priorities; LeadLab Director gives final launch acceptance |
 
@@ -81,16 +83,16 @@ The local environment is not staging or production. Local SQLite, the Laravel de
 
 ## Gate 1 Assessment
 
-Gate 1 remains **blocked by missing evidence**, not failed by a known technical defect. The local Laravel baseline is ready for feature development, but the project cannot yet prove that the application can be deployed, operated, secured, restored, monitored, or supported on the target environment.
+Gate 1 remains **blocked by missing evidence**, not failed by a known technical defect. The requester named staging as the target and assigned the technical owner and primary developer. Target runtime, database, storage, staging provisioning/access, and operational evidence remain open/TBD. The user direction authorizes the bounded local code correction only; it does not establish staging readiness or deployment approval.
 
-The current capacity supports approximately 10-20 developer-hours per week with one developer, or 20-40 developer-hours per week with two developers, based on 2-4 hours per developer per day for 5 days. The capacity range and remaining unassigned technical and development roles keep schedule confidence low; the IT operator is now assigned on an interim basis.
+The previous capacity estimate was approximately 10-20 developer-hours per week with one developer, or 20-40 developer-hours per week with two developers, based on 2-4 hours per developer per day for 5 days. The requester has now named Dennis Arquillano as technical owner and Agno JF (Requester) as human primary developer; protected capacity and target-environment details remain Open/TBD. The IT operator is Dennis Arquillano on an interim basis.
 
 ## Required Next Actions
 
 1. Deploy the branch-controlled production Compose change, recreate the web, queue, and scheduler containers, and retain runtime verification for `APP_URL=https://leadhub.adventist.asia`.
-2. Resident developer and IT confirm the target server and staging setup.
+2. IT confirms the staging URL, provisioning, deployment method, and target server/runtime; these details remain TBD.
 3. IT provides the HTTPS, storage, backup, restore, monitoring, log, and email-delivery evidence.
-4. The requester or PM names the technical owner and human primary developer; the IT operator is recorded as Dennis Arquillano on an interim basis.
+4. Technical owner Dennis Arquillano and human primary developer Agno JF (Requester) were named by requester direction on 2026-09-29; record any later change to those assignments.
 5. The requester or PM decides the authentication method and participant-data rules.
 6. Update this pack and reassess Gate 1 before treating the vertical slice as an authorized staging commitment.
 
@@ -103,3 +105,4 @@ Do not include passwords, private keys, tokens, cookies, or real participant dat
 - `projects/lead-lab/artifacts/lead-lab-web-app-delivery-plan.md`, lines 99-113 and 169-181.
 - User-provided Gate 1 answers in the working conversation, 2026-08-20.
 - Current PM direction assigning Dennis Arquillano as interim staging and production IT operator, 2026-09-03.
+- Current requester direction naming staging as the target and assigning Dennis Arquillano as technical owner and Agno JF (Requester) as human primary developer, 2026-09-29.
