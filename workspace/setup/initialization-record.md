@@ -36,7 +36,7 @@ Next action: use `workspace/` for normal builds and invoke `workspace/matic-work
 | Application code and tests | `application/source/` and `application/tests/` |
 | Project controls | `pm-control/registers/` |
 | Issue and PR state | GitHub repository `adventistasia/lead-lab` |
-| Per-run evidence | `application/runs/` |
+| Per-run evidence | `workspace/runs/` |
 
 ## Explicit Non-Goals
 

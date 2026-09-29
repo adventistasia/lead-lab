@@ -61,7 +61,7 @@ The JSON record must include these fields:
 | `status` | Normalized workflow state |
 | `stage` | Current or next Matic stage |
 | `run_id` | Final component of the run path |
-| `run_path` | Repository-relative durable run path |
+| `run_path` | Repository-relative durable run path; new runs use `workspace/runs/`, while existing records may preserve the original `application/runs/` path |
 | `work_branch` | Intended delivery branch |
 | `base_branch` | Delivery base, normally `staging` |
 | `base_sha` | Base commit recorded for this generation |

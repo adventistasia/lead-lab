@@ -19,6 +19,7 @@ from claim import (  # noqa: E402
     GitHubApiError,
     OwnershipError,
     issue_ref,
+    validate_new_run_path,
     validate_run_path,
 )
 
@@ -171,14 +172,20 @@ class ClaimTests(unittest.TestCase):
             execution_id_factory=iter(execution_ids).__next__,
         )
 
-    def test_run_paths_must_be_repository_relative_application_runs_paths(self):
+    def test_new_run_paths_use_workspace_and_legacy_paths_remain_readable(self):
         with self.assertRaises(ClaimError):
             validate_run_path("/tmp/other-run")
 
         self.assertEqual(
-            validate_run_path("application/runs/example/"),
-            "application/runs/example",
+            validate_new_run_path("workspace/runs/example/"),
+            "workspace/runs/example",
         )
+        self.assertEqual(
+            validate_run_path("application/runs/legacy-example/"),
+            "application/runs/legacy-example",
+        )
+        with self.assertRaises(ClaimError):
+            validate_new_run_path("application/runs/new-example/")
 
     def test_simultaneous_claims_have_one_winner(self):
         client = SimultaneousClaimGitHub()
@@ -223,6 +230,7 @@ class ClaimTests(unittest.TestCase):
 
         self.assertEqual(first_result["result"], "claimed")
         self.assertEqual(second_result["result"], "claimed")
+        self.assertTrue(first_result["claim"]["run_path"].startswith("workspace/runs/"))
         self.assertIn("heads/matic-claims/issue-7", client.refs)
         self.assertIn("heads/matic-claims/issue-8", client.refs)
 
@@ -266,7 +274,7 @@ class ClaimTests(unittest.TestCase):
 
         adopted = manager.adopt(
             7,
-            run_path="application/runs/2026-09-14-matic-issue-36-lower-password-requirements",
+            run_path="workspace/runs/2026-09-14-matic-issue-36-lower-password-requirements",
             work_branch="matic/issue-7-existing-run",
             stage="05-publish",
             status="awaiting-review",

@@ -21,7 +21,7 @@ Open GitHub matic issues + open PRs + active matic run states + remote claim ref
 
 | Interface | Declaration |
 |---|---|
-| Inputs | GitHub issue list and bodies, GitHub labels, open PR list, `application/runs/` matic run states, remote `matic-claims/issue-<number>` refs, `workspace/matic-workflow/selection-criteria.md`, `workspace/matic-workflow/claim-contract.md`, `workspace/matic-workflow/github-lifecycle.md`, and `workspace/matic-workflow/scripts/claim.py` |
+| Inputs | GitHub issue list and bodies, GitHub labels, open PR list, `workspace/runs/` matic run states, remote `matic-claims/issue-<number>` refs, `workspace/matic-workflow/selection-criteria.md`, `workspace/matic-workflow/claim-contract.md`, `workspace/matic-workflow/github-lifecycle.md`, and `workspace/matic-workflow/scripts/claim.py` |
 | Transform | Score every candidate, exclude blocked or already-owned issues, atomically claim one simplest eligible issue, verify the claim, and create no local run before that verification |
 | Outputs | `issue-selection.md`, `run-manifest.md`, and `run-state.md` for the selected run, plus the verified remote claim reference and execution ID |
 
@@ -48,7 +48,7 @@ Open GitHub matic issues + open PRs + active matic run states + remote claim ref
 5. Recheck the selected issue and intended work branch.
 6. Attempt the atomic claim before creating any local run artifact.
 7. If another operator wins, record the winner, exclude that candidate, and return to the ranked candidates. Do not retry that claim in the same selection pass.
-8. If the claim succeeds, create `application/runs/<date>-matic-issue-<number>-<slug>/` without overwriting an existing run.
+8. If the claim succeeds, create `workspace/runs/<date>-matic-issue-<number>-<slug>/` without overwriting an existing run.
 9. Write the issue title, URL, candidate scores, eligibility reasons, claim ref, claim head, execution ID, selected run path, and next route.
 
 ## Outputs

@@ -56,7 +56,7 @@ The delivery workflow methodology with five stages: Define, Design, Build, Measu
 
 ## Run
 
-A cycle-specific execution folder under `application/runs/` that contains artifacts from a single ICM cycle. Each run has a unique slug and never overwrites prior runs.
+A cycle-specific execution folder under `workspace/runs/` that contains artifacts from a single ICM cycle. Each run has a unique slug and never overwrites prior runs.
 
 ## Activity Log
 

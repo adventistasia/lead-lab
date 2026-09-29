@@ -6,7 +6,8 @@ Next action: wait for review of PR #72 (fix: show readable profile fields in act
 | Field | Value |
 |---|---|
 | Issue | #71 (enhancement: activity log shows profile_updated changed fields as raw JSON), https://github.com/adventistasia/lead-lab/issues/71 |
-| Run | `application/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha/` |
+| Run | `workspace/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha/` |
+| Original claim path | `application/runs/2026-09-28-matic-issue-71-enhancement-activity-log-shows-profile-updated-cha/` (recorded before the local move) |
 | Status | Awaiting review |
 | Last completed | 05-publish |
 | Current stage | 06-close-merged |
@@ -14,6 +15,10 @@ Next action: wait for review of PR #72 (fix: show readable profile fields in act
 | Operator/execution | `agnojf` / `e3407830-af77-4616-940a-b03cb1ba0345` |
 | Base SHA | `4837bdbfb608791f9b67ccceaaf2b3845fef180f` |
 | Work branch | `matic/issue-71-enhancement-activity-log-shows-profile-updated-cha` |
+
+## Path Migration
+
+The local run folder was moved from `application/runs/` to `workspace/runs/`. The GitHub claim was not changed; inspect the claim before resuming and use this local path for the run artifacts.
 
 Selection evidence: `stages/matic/01-select/issue-selection.md`. Plan and control: `stages/matic/02-plan-control/` and ISS-22 (Profile update fields appear as raw JSON in the administrator activity-log Details column) and ACT-82 (Render and verify readable profile change fields in the administrator activity log). GitHub `acknowledged` verified. No human-only decision for this display-only correction.
 Define: `stages/01-define/`; Design: `stages/02-design/`. Local source and test gate passes; target runtime, storage, staging deployment detail, and ownership evidence remain open for release review. The active claim token is unchanged.

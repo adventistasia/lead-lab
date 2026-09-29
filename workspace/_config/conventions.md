@@ -7,7 +7,8 @@ Next action: apply these conventions to every new run, handoff, PM Control updat
 
 - Use plain Markdown for agent-readable instructions and handoffs.
 - Use repository-relative paths such as `application/source/` and `pm-control/registers/`.
-- Separate stable rules in `workspace/` from run-specific artifacts in `application/runs/`.
+- Separate stable rules in `workspace/` from run-specific artifacts in `workspace/runs/`.
+- Resolve legacy `application/runs/<slug>/` references to `workspace/runs/<slug>/`; keep commit-pinned historical URLs unchanged.
 - Do not duplicate external issue material unless a redacted snapshot is needed for traceability.
 - Never store credentials, private keys, tokens, cookies, or real participant data.
 
@@ -28,7 +29,7 @@ Inputs -> One Transformation -> Outputs
 
 ## Matic Run Rules
 
-- Use `application/runs/<YYYY-MM-DD>-matic-issue-<number>-<slug>/` for the run root.
+- Use `workspace/runs/<YYYY-MM-DD>-matic-issue-<number>-<slug>/` for the run root.
 - Use `{{RUN_PATH}}/stages/matic/` for matic orchestration artifacts.
 - Use `{{RUN_PATH}}/stages/01-define/`, `02-design/`, `03-build/`, `04-measure/`, and `05-learn/` for the existing build pipeline outputs.
 - Create the branch as `matic/issue-<number>-<slug>` from `origin/staging`.

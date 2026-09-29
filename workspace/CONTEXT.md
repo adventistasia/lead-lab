@@ -14,6 +14,7 @@ workspace/
 ├── _config/                  stable workspace rules and quality policy
 ├── setup/                    setup contract, record, and validation checklist
 ├── references/
+├── runs/                     cycle-specific artifacts and handoffs
 ├── matic-workflow/           GitHub issue selection and release orchestration
 └── stages/
     ├── 01-define/
@@ -70,6 +71,6 @@ Select -> Plan and update PM Control -> Define -> Design -> Build -> Reconcile
 
 ## Run Rules
 
-For a normal cycle, use `application/runs/` as `{{OUTPUT_ROOT}}`. For a matic issue, use `application/runs/<date>-matic-issue-<number>-<slug>/` as `{{RUN_PATH}}`. Show the path before creating it, never overwrite a prior run, and resume from its recorded `run-state.md` when requested.
+For a normal cycle, use `workspace/runs/` as `{{OUTPUT_ROOT}}`. For a matic issue, use `workspace/runs/<date>-matic-issue-<number>-<slug>/` as `{{RUN_PATH}}`. Show the path before creating it, never overwrite a prior run, and resume from its recorded `run-state.md` when requested. Legacy `application/runs/<slug>/` references resolve to `workspace/runs/<slug>/`; keep commit-pinned historical URLs unchanged.
 
 Stage contracts define the minimal context to load. References are stable rules. Run outputs are working artifacts. Application source remains outside run folders as the canonical implementation.

@@ -10,7 +10,7 @@ Next action: resolve every failed check before routing a matic issue to implemen
 - [ ] `workspace/matic-workflow/CONTEXT.md` routes selection, resume, publish, review, and close operations.
 - [ ] `workspace/stages/01-define` through `workspace/stages/05-learn` remain present.
 - [ ] Stable rules are in `workspace/_config/` or `workspace/references/`.
-- [ ] Run artifacts are under `application/runs/`.
+- [ ] Run artifacts are under `workspace/runs/`.
 
 ## Stage Interfaces
 

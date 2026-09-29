@@ -14,7 +14,7 @@ Next action: update only the relevant PM Control records before implementation a
 | External input or prerequisite | `pm-control/registers/dependencies-log.md` |
 | Human choice required | `pm-control/registers/decision-log.md` |
 | Working assumption needed to plan | `pm-control/registers/assumption-log.md` |
-| Run evidence and process trace | `application/runs/<run-slug>/` and linked PM Control run evidence when applicable |
+| Run evidence and process trace | `workspace/runs/<run-slug>/` and linked PM Control run evidence when applicable |
 
 ## Before Build
 

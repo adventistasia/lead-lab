@@ -22,7 +22,7 @@ Deliver one approved Lead Hub GitHub issue at a time through the existing Define
 | Issue outcome and acceptance | GitHub issue in `adventistasia/lead-lab` | The issue body is the request source. Keep the issue number and title in every run reference. |
 | Application source and tests | `application/source/` and `application/tests/` | Git branch and commit history are authoritative for code. |
 | Project controls | `pm-control/registers/` | Update only relevant records. Do not duplicate register rows in run summaries. |
-| Run evidence and handoffs | `application/runs/<run-slug>/` | Working artifacts and stage state for one issue or cycle. |
+| Run evidence and handoffs | `workspace/runs/<run-slug>/` | Working artifacts and stage state for one issue or cycle. |
 | Workspace behavior | `workspace/AGENTS.md`, `workspace/CONTEXT.md`, and `workspace/_config/` | Stable routing and quality rules. |
 | Review and merge state | GitHub pull request targeting `staging` | Dennis Arquillano (`dennisatssd`) is the required reviewer for matic PRs. |
 

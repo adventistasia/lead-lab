@@ -69,7 +69,8 @@ If any gate fails, do not guess. Use the recorded run state when a run exists; o
 
 ## State And Recovery
 
-- Store matic run artifacts in `application/runs/<date>-matic-issue-<number>-<slug>/`.
+- Store new matic run artifacts in `workspace/runs/<date>-matic-issue-<number>-<slug>/`.
+- Existing claim records may retain `application/runs/` as their original run path; do not rewrite historical claim ownership data during this path migration.
 - Store the durable state in `{{RUN_PATH}}/run-state.md`.
 - Store the durable shared ownership state in `refs/heads/matic-claims/issue-<number>` as defined by `claim-contract.md`.
 - Treat the remote claim ref and its history as the ownership source of truth. Treat a copied local run state as evidence only.

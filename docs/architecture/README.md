@@ -31,7 +31,7 @@ When sources disagree, the lower source must be corrected or the disagreement re
 | User guidance | `../README.md` and its linked pages | Explains how to use the implemented portal; it does not define architecture. |
 | Product scope and launch gates | `../../artifacts/lead-lab-web-app-scope-and-requirements.md` | Authority for committed product boundary and acceptance. |
 | Workflow and technical conventions | `../../workspace/` | Authority for delivery rules and operational constraints. |
-| Cycle and project history | `../../application/runs/`, `../../pm-control/`, and `../../project-statrep/` | Link to history; do not repeat incident narratives here. |
+| Cycle and project history | `../../workspace/runs/`, `../../pm-control/`, and `../../project-statrep/` | Link to history; do not repeat incident narratives here. |
 | Vocabulary | `../../CONCEPTS.md` | Use these project terms exactly. |
 
 ## Maintenance

@@ -152,8 +152,17 @@ def validate_repository_path(value: str, field_name: str) -> str:
 
 def validate_run_path(value: str) -> str:
     path = validate_repository_path(value, "Run path")
-    if not path.startswith("application/runs/"):
-        raise ClaimError("Run path must be under application/runs/.")
+    if not path.startswith(("workspace/runs/", "application/runs/")):
+        raise ClaimError(
+            "Run path must be under workspace/runs/ or the legacy application/runs/ root."
+        )
+    return path
+
+
+def validate_new_run_path(value: str) -> str:
+    path = validate_run_path(value)
+    if not path.startswith("workspace/runs/"):
+        raise ClaimError("New run paths must be under workspace/runs/.")
     return path
 
 
@@ -517,9 +526,9 @@ class ClaimManager:
         if not base_branch or "/" in base_branch or any(character.isspace() for character in base_branch):
             raise ClaimError("Base branch must be a single branch name, such as staging.")
         slug = slugify(title)
-        selected_run_path = validate_run_path(
+        selected_run_path = validate_new_run_path(
             run_path
-            or f"application/runs/{datetime_module.datetime.now(datetime_module.timezone.utc).date().isoformat()}"
+            or f"workspace/runs/{datetime_module.datetime.now(datetime_module.timezone.utc).date().isoformat()}"
             f"-matic-issue-{issue_number}-{slug}"
         )
         self._assert_run_path_available(selected_run_path)
@@ -805,9 +814,9 @@ class ClaimManager:
         base_sha = _ref_sha(base_reference)
         generation = int(current["generation"]) + 1
         slug = slugify(title)
-        selected_run_path = validate_run_path(
+        selected_run_path = validate_new_run_path(
             run_path
-            or f"application/runs/{datetime_module.datetime.now(datetime_module.timezone.utc).date().isoformat()}"
+            or f"workspace/runs/{datetime_module.datetime.now(datetime_module.timezone.utc).date().isoformat()}"
             f"-matic-issue-{issue_number}-{slug}-g{generation}"
         )
         self._assert_run_path_available(selected_run_path)
