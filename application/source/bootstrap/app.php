@@ -5,6 +5,7 @@ use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\HandlePostSize;
+use App\Http\Middleware\SuppressRedirectedActivityViews;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -57,6 +58,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 HandleAppearance::class,
                 HandleInertiaRequests::class,
                 AddLinkHeadersForPreloadedAssets::class,
+                SuppressRedirectedActivityViews::class,
             ],
         );
         $middleware->api(append: [HandlePostSize::class]);

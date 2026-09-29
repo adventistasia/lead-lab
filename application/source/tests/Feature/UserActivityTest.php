@@ -89,18 +89,98 @@ class UserActivityTest extends TestCase
     {
         $user = User::factory()->create();
         $session = LearningSession::factory()->create(['is_published' => true]);
-        $this->actingAs($user)->post(route('sessions.questions.store', $session), ['title' => 'What next?'])->assertRedirect();
+        $sessionUrl = route('sessions.show', $session);
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('sessions.questions.store', $session), ['title' => 'What next?'])
+            ->assertOk();
         $question = SessionQuestion::query()->firstOrFail();
-        $this->actingAs($user)->post(route('questions.answers.store', $question), ['body' => 'Try this.'])->assertRedirect();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('questions.answers.store', $question), ['body' => 'Try this.'])
+            ->assertOk();
         $answer = SessionAnswer::query()->firstOrFail();
-        $this->actingAs($user)->post(route('questions.vote', $question))->assertRedirect();
-        $this->actingAs($user)->post(route('questions.vote', $question))->assertRedirect();
-        $this->actingAs($user)->post(route('answers.vote', $answer))->assertRedirect();
-        $this->actingAs($user)->post(route('answers.vote', $answer))->assertRedirect();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('questions.vote', $question))->assertOk();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('questions.vote', $question))->assertOk();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('answers.vote', $answer))->assertOk();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('answers.vote', $answer))->assertOk();
 
         foreach (['qna_question_created', 'qna_answer_created', 'qna_question_vote_added', 'qna_question_vote_removed', 'qna_answer_vote_added', 'qna_answer_vote_removed'] as $action) {
             $this->assertSame(1, ActivityLog::query()->where('action', $action)->where('actor_id', $user->id)->count());
         }
+
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(2, ActivityLog::query()->where('action', 'session_viewed')->count());
+    }
+
+    public function test_successful_qna_action_redirect_does_not_add_a_session_view(): void
+    {
+        $user = User::factory()->create();
+        $session = LearningSession::factory()->create(['is_published' => true]);
+        $sessionUrl = route('sessions.show', $session);
+
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('sessions.questions.store', $session), ['title' => 'What next?'])
+            ->assertOk();
+
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+        $this->assertSame(1, ActivityLog::query()->where('action', 'qna_question_created')->count());
+
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(2, ActivityLog::query()->where('action', 'session_viewed')->count());
+    }
+
+    public function test_failed_qna_action_redirect_does_not_add_a_session_view(): void
+    {
+        $user = User::factory()->create();
+        $session = LearningSession::factory()->create(['is_published' => true]);
+        $sessionUrl = route('sessions.show', $session);
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('sessions.questions.store', $session), ['title' => ''])
+            ->assertOk();
+
+        $this->assertSame(0, ActivityLog::query()->where('action', 'session_viewed')->count());
+        $this->assertSame(0, ActivityLog::query()->where('action', 'qna_question_created')->count());
+
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+    }
+
+    public function test_calendar_edit_redirect_does_not_add_a_calendar_view(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $event = CalendarEvent::factory()->create();
+        $calendarUrl = route('calendar');
+
+        $this->actingAs($admin)->get($calendarUrl)->assertOk();
+        $this->assertSame(1, ActivityLog::query()->where('action', 'calendar_viewed')->count());
+
+        $this->from($calendarUrl)->followingRedirects()->actingAs($admin)
+            ->patch(route('admin.calendar-events.update', [
+                'calendarEvent' => $event,
+                'return_to' => 'calendar',
+            ]), [
+                'title' => 'Updated event',
+                'starts_at' => '2026-09-30T10:00',
+                'ends_at' => '2026-09-30T11:00',
+                'description' => 'Updated details.',
+            ])
+            ->assertOk();
+
+        $this->assertSame(1, ActivityLog::query()->where('action', 'calendar_viewed')->count());
+        $this->assertSame(1, ActivityLog::query()->where('action', 'calendar_event_updated')->count());
+
+        $this->actingAs($admin)->get($calendarUrl)->assertOk();
+        $this->assertSame(2, ActivityLog::query()->where('action', 'calendar_viewed')->count());
     }
 
     public function test_participant_edits_and_deletions_are_attributed_once_and_denied_edits_are_not_logged(): void
@@ -108,19 +188,30 @@ class UserActivityTest extends TestCase
         $user = User::factory()->create();
         $other = User::factory()->create();
         $session = LearningSession::factory()->create(['is_published' => true]);
+        $sessionUrl = route('sessions.show', $session);
         $question = $session->questions()->create(['user_id' => $user->id, 'title' => 'Question']);
         $answer = $question->answers()->create(['user_id' => $user->id, 'body' => 'Answer']);
 
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
         $this->actingAs($other)->patch(route('sessions.questions.update', [$session, $question]), ['title' => 'No'])->assertForbidden();
-        $this->actingAs($user)->patch(route('sessions.questions.update', [$session, $question]), ['title' => 'Updated'])->assertRedirect();
-        $this->actingAs($user)->patch(route('questions.answers.update', [$question, $answer]), ['body' => 'Updated'])->assertRedirect();
-        $this->actingAs($user)->delete(route('questions.answers.destroy', [$question, $answer]))->assertRedirect();
-        $this->actingAs($user)->delete(route('sessions.questions.destroy', [$session, $question]))->assertRedirect();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->patch(route('sessions.questions.update', [$session, $question]), ['title' => 'Updated'])
+            ->assertOk();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->patch(route('questions.answers.update', [$question, $answer]), ['body' => 'Updated'])
+            ->assertOk();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->delete(route('questions.answers.destroy', [$question, $answer]))
+            ->assertOk();
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->delete(route('sessions.questions.destroy', [$session, $question]))
+            ->assertOk();
 
         foreach (['qna_question_updated', 'qna_answer_updated', 'qna_answer_deleted', 'qna_question_deleted'] as $action) {
             $this->assertSame(1, ActivityLog::query()->where('action', $action)->where('actor_id', $user->id)->count());
         }
         $this->assertSame(0, ActivityLog::query()->where('actor_id', $other->id)->count());
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
     }
 
     public function test_calendar_records_real_views_event_open_and_broadcast_click_only(): void
