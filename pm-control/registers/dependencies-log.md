@@ -3,6 +3,8 @@
 
 PM direction recorded on 2026-09-28: DEP-03 (Media team supplies session video links) is Closed because the PM says it is no longer a dependency. This does not assert that every link was delivered. DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains Open.
 
+Requester environment and ownership direction recorded on 2026-09-29: for issue #69 (bug: activity-log prefetch guard checks X-Inertia-Prefetch, but Inertia sends Purpose: prefetch), the target environment is staging, Dennis Arquillano is the technical owner, and Agno JF (Requester) is the human primary developer. Other target runtime, database, storage, staging provisioning/access, and deployment details may remain Open/TBD. DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains Open; this direction permits the bounded local correction only and is not staging deployment or production acceptance. Related records: ISS-23 (Activity-log prefetch guard does not recognize the Inertia client's `Purpose: prefetch` header) and ACT-83 (Implement and verify correct Inertia-prefetch exclusion for activity views).
+
 Project: Lead Hub portal (repository identity: `lead-lab`)
 
 PM completion direction recorded on 2026-09-23: DEP-14 (Announcement email delivery capacity and operational ownership) is Met. DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains Open, as the PM explicitly directed. The announcement completion direction does not satisfy or close Gate 1.
