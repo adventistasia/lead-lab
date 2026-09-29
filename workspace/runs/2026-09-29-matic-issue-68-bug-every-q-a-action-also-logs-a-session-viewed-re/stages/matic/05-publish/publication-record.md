@@ -21,6 +21,8 @@ The staging commit contains only these intended non-application carriers:
 
 The remote staging tree was verified after push. No `application/` path was included in that staging synchronization commit.
 
+A follow-up non-application publication-state commit `0caa630b4d6d011ce9f249b41f17e3694475e67e` added this publication record and the final waiting-state records; `origin/staging` is currently verified at that commit.
+
 ## Application publication
 
 - Branch: `matic/issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re`
