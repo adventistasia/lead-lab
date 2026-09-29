@@ -10,11 +10,12 @@
   "issue_title": "bug: every Q&A action also logs a session_viewed (redirect back to the session page)",
   "last_execution_id": "6d05a0b0-1785-4483-b422-86bf31ea8443",
   "last_transition": {
-    "at": "2026-09-29T21:24:21Z",
+    "at": "2026-09-29T21:54:00Z",
     "by": "agnojf",
-    "from_execution_id": null,
+    "from_execution_id": "7e7d8dec-cf76-4b46-beb4-5df6da30365a",
     "from_owner_login": "agnojf",
-    "from_status": "blocked",
+    "from_status": "active",
+    "reason": "Build evidence reviewed; requester said continue. Reconcile changed carriers before Measure.",
     "to_execution_id": "7e7d8dec-cf76-4b46-beb4-5df6da30365a",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -24,8 +25,8 @@
   "run_id": "2026-09-29-matic-issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re",
   "run_path": "workspace/runs/2026-09-29-matic-issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re",
   "schema": "matic-claim/v1",
-  "stage": "03-build",
+  "stage": "04-reconcile",
   "status": "active",
-  "updated_at": "2026-09-29T21:24:21Z",
+  "updated_at": "2026-09-29T21:54:00Z",
   "work_branch": "matic/issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re"
 }
