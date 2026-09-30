@@ -558,21 +558,21 @@ export default function AdminMembers({
                                                     </p>
                                                 </div>
                                                 <div className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
-                                                    <Badge
-                                                        variant={
-                                                            member.access_status ===
-                                                            'revoked'
-                                                                ? 'destructive'
-                                                                : member.access_status ===
-                                                                    'pending'
-                                                                  ? 'outline'
-                                                                  : 'secondary'
-                                                        }
-                                                    >
-                                                        {statusLabel(
-                                                            member.access_status,
-                                                        )}
-                                                    </Badge>
+                                                    {member.access_status !==
+                                                    'active' ? (
+                                                        <Badge
+                                                            variant={
+                                                                member.access_status ===
+                                                                'revoked'
+                                                                    ? 'destructive'
+                                                                    : 'outline'
+                                                            }
+                                                        >
+                                                            {statusLabel(
+                                                                member.access_status,
+                                                            )}
+                                                        </Badge>
+                                                    ) : null}
                                                     {member.access_status ===
                                                     'active' ? (
                                                         <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400">
