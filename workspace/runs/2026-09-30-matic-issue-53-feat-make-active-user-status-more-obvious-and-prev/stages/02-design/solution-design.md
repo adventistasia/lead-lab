@@ -20,7 +20,7 @@ Hypothesis: adding one controlled Radix dialog for active-member revocation, an 
 
 1. Keep the change in `application/source/resources/js/pages/admin/members/index.tsx`. Do not add a new component for this single page unless the implementation reveals a clear reuse seam.
 2. Add controlled state for the member selected for access revocation. Only active members open this dialog. Pending approval and revoked restoration continue to use the existing direct action paths.
-3. Render an explicit `Active access` indicator with an icon and text beside the existing `Active` badge. The indicator must remain understandable without color alone and must not change the four state views or their counts.
+3. Render one explicit `Active access` indicator with an icon and text, without a duplicate standalone `Active` badge. The indicator must remain understandable without color alone and must not change the four state views or their counts.
 4. Change the active row `Revoke access` button from `destructive` to the existing non-destructive `outline` variant. Keep the revoked row `Restore access` action as the existing single-click outline action.
 5. Use the existing `Dialog`, `DialogClose`, `DialogContent`, `DialogDescription`, `DialogFooter`, `DialogHeader`, and `DialogTitle` primitives. The dialog must show:
    - the member name;

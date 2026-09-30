@@ -15,7 +15,7 @@ The reconciled scope remains the approved correction for issue #53 (Feat: make a
 
 | Carrier | Result | Evidence or correction |
 |---|---|---|
-| Application source | Pass | Only `application/source/resources/js/pages/admin/members/index.tsx` changed in the isolated worktree. The page now has the active indicator, outline revoke action, and controlled confirmation dialog. |
+| Application source | Pass | Only `application/source/resources/js/pages/admin/members/index.tsx` changed in the isolated worktree. The page now has one active indicator without the duplicate standalone badge, the outline revoke action, and the controlled confirmation dialog. |
 | Server contract and authorization | Preserved | `application/source/routes/web.php` and `application/source/app/Http/Controllers/AdminMemberController.php` are unchanged. Existing status validation, admin middleware, self-account protection, access transitions, and activity logging remain the authority. |
 | Automated tests | Pass | `composer run ci:check` passed ESLint, Prettier, TypeScript, Pint, PHPStan with 0 errors, and 208 PHPUnit tests with 1,792 assertions. `php artisan test --filter=LeadLabAccessTest` passed 73 tests with 787 assertions. |
 | Browser and responsive evidence | Pass locally | Authenticated synthetic local browser review passed at 1440x900 and 390x844. It verified the active indicator, no request before confirmation, Escape and cancel paths, confirmed revoke, one-click restore, and no horizontal overflow. |
@@ -27,6 +27,7 @@ The reconciled scope remains the approved correction for issue #53 (Feat: make a
 ## Corrections Made
 
 - Added this Reconcile record and the Build handoff to the run evidence.
+- Recorded the requester correction that removes the duplicate standalone `Active` badge while preserving the explicit `Active access` indicator.
 - Updated the run manifest, run state, Plan-Control outputs, Define and Design handoffs, and PM Control narratives so their next route and local evidence match the completed Build.
 - Preserved ISS-25 (Active administrator member status and revocation controls are visually ambiguous), ACT-85 (Implement and verify safer administrator member revocation controls), CHG-46 (Separate administrator member lists by account state), and DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) states; no unrelated register was changed.
 

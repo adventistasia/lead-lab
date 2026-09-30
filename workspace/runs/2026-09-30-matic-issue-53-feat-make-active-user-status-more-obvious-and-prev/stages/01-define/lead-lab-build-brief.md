@@ -11,13 +11,13 @@ Correct issue #53 (Feat: make active user status more obvious and prevent accide
 
 ## Boundary
 
-Include the existing `/admin/members` presentation and revoke interaction. Show an active-state indicator beyond the current badge, use non-destructive styling for the active-user revoke control, and require a confirmation dialog that names the member, shows the member email, explains that revocation prevents workspace access, and applies the existing revoke action only after a second confirmation. Keep revoked-user restoration as a single-click action.
+Include the existing `/admin/members` presentation and revoke interaction. Show one clear `Active access` indicator without a duplicate status label, use non-destructive styling for the active-user revoke control, and require a confirmation dialog that names the member, shows the member email, explains that revocation prevents workspace access, and applies the existing revoke action only after a second confirmation. Keep revoked-user restoration as a single-click action.
 
 Preserve the four account-state views, counts, search, pagination, role behavior, endpoint contract, server-side authorization, activity logging, participant data, and all existing access transitions. Do not add a route, schema, provider, infrastructure change, production change, or deletion workflow. Issue #45 (Bug: Make admin members page responsive) is historical and separate; this issue adds a confirmation and clarity safeguard, not a responsive redesign.
 
 ## Acceptance And Evidence
 
-1. Active users have a clear indicator beyond the existing `Active` badge.
+1. Active users have one clear `Active access` indicator without a duplicate standalone `Active` badge.
 2. The active-user `Revoke access` control is not red or destructive.
 3. Selecting revoke opens confirmation and does not apply the action before confirmation.
 4. The dialog shows the member name and email and explains the access consequence.
