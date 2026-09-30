@@ -53,4 +53,4 @@ The comment's first visible line addresses `@app/rijam-dev`, includes the exact 
 - The dev-only `js-yaml` advisory remains a dependency-maintenance risk; no lockfile change was included.
 - Rollback is the issue-specific application revert; no schema or historical-log rollback is needed.
 
-The correction is authorized by `agnojf` execution `cb677771-b585-408a-a408-b096fc1f31d5` at active Publish head `131b416fa7e500370c68ddb805412c3e630104ac`. Publication evidence is complete; the final transition to `awaiting-review` follows the final metadata sync.
+The correction is authorized by `agnojf` execution `9bead89d-fd59-46fe-9a7a-9da010b867ba` at pre-idle Publish head `ceccfbf0f84766e6188389ddf8576414d35cf972`. Publication evidence is complete; the claim is transitioned to `awaiting-review` after this final metadata snapshot.
