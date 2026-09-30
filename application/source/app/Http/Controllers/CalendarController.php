@@ -31,7 +31,7 @@ class CalendarController
             ->map(fn (CalendarEvent $event): array => $this->eventData($event, $timezone))
             ->values();
 
-        if (! $request->hasHeader('X-Inertia-Prefetch')) {
+        if ($request->header('Purpose') !== 'prefetch') {
             ActivityLog::record($request->user(), 'calendar_viewed', $request->user(), [
                 'month' => $month->format('Y-m'),
             ]);
