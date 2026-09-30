@@ -3,22 +3,22 @@
   "base_sha": "321b6d681c10c14b702dcb7352b37f8ff05aeabc",
   "claim_ref": "refs/heads/matic-claims/issue-53",
   "claimed_at": "2026-09-30T00:34:32Z",
-  "execution_active": false,
-  "execution_id": null,
+  "execution_active": true,
+  "execution_id": "9bead89d-fd59-46fe-9a7a-9da010b867ba",
   "generation": 1,
   "issue_number": 53,
   "issue_title": "Feat: make active user status more obvious and prevent accidental access revocation",
   "last_execution_id": "cb677771-b585-408a-a408-b096fc1f31d5",
   "last_transition": {
-    "at": "2026-09-30T04:03:29Z",
+    "at": "2026-09-30T04:04:03Z",
     "by": "agnojf",
-    "from_execution_id": "cb677771-b585-408a-a408-b096fc1f31d5",
+    "from_execution_id": null,
     "from_owner_login": "agnojf",
-    "from_status": "active",
-    "reason": "Final publication metadata is synchronized. Follow-up PR #76 (feat: clarify active member revocation follow-up) remains application-only against current staging, CI passed at final head, reviewer dennisatssd is requested, and the author-addressed screenshot comment is verified. Keep issue #53 open until merge.",
-    "to_execution_id": null,
+    "from_status": "awaiting-review",
+    "reason": "Align the durable run snapshot with the final awaiting-review publication boundary for PR #76 (feat: clarify active member revocation follow-up), then stop the execution.",
+    "to_execution_id": "9bead89d-fd59-46fe-9a7a-9da010b867ba",
     "to_owner_login": "agnojf",
-    "to_status": "awaiting-review"
+    "to_status": "active"
   },
   "owner_login": "agnojf",
   "pull_request": {
@@ -28,13 +28,13 @@
     "title": "feat: clarify active member revocation follow-up",
     "url": "https://github.com/adventistasia/lead-lab/pull/76"
   },
-  "resume_count": 2,
+  "resume_count": 3,
   "run_id": "2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "run_path": "workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "schema": "matic-claim/v1",
   "stage": "05-publish",
-  "status": "awaiting-review",
-  "takeover_reason": "Record the final awaiting-review claim head and align run metadata after publication verification for PR #76 (feat: clarify active member revocation follow-up).",
-  "updated_at": "2026-09-30T04:03:29Z",
+  "status": "active",
+  "takeover_reason": "Align the durable run snapshot with the final awaiting-review publication boundary for PR #76 (feat: clarify active member revocation follow-up), then stop the execution.",
+  "updated_at": "2026-09-30T04:04:03Z",
   "work_branch": "matic/issue-53-feat-make-active-user-status-more-obvious-and-prev"
 }
