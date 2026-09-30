@@ -13,10 +13,10 @@ Next action: monitor follow-up PR #76 (feat: clarify active member revocation fo
 | PR | #76 (feat: clarify active member revocation follow-up), https://github.com/adventistasia/lead-lab/pull/76 |
 | PR issue comment | https://github.com/adventistasia/lead-lab/issues/53#issuecomment-5902378729 |
 | Fix screenshot | `evidence/active-revocation-confirmation.png` |
-| Claim | `refs/heads/matic-claims/issue-53` at `131b416fa7e500370c68ddb805412c3e630104ac` |
-| Execution | `agnojf` / `cb677771-b585-408a-a408-b096fc1f31d5` |
+| Claim | `refs/heads/matic-claims/issue-53` at pre-idle publication head `ceccfbf0f84766e6188389ddf8576414d35cf972` |
+| Execution | `agnojf` / `9bead89d-fd59-46fe-9a7a-9da010b867ba` |
 | Isolated worktree | `/Users/agnojf/Documents/lead-lab-worktrees/issue-53` |
-| Status | Running |
+| Status | Awaiting review |
 | Current stage | `workspace/matic-workflow/stages/05-publish/CONTEXT.md` |
 | Resume stage | `workspace/matic-workflow/stages/06-close-merged/CONTEXT.md` |
 | Last completed stage | `workspace/stages/04-measure/CONTEXT.md` |
@@ -24,7 +24,7 @@ Next action: monitor follow-up PR #76 (feat: clarify active member revocation fo
 | Quality score | 32/35 (91.4%) on Measure attempt 2 |
 | Quality gate | Passed for the bounded local correction; target environment remains blocked under DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) |
 | Governance state | Local implementation allowed; target environment blocked under DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) |
-| Updated | 2026-09-30 03:59:57 UTC |
+| Updated | 2026-09-30 04:04:03 UTC |
 
 ## Evidence
 
