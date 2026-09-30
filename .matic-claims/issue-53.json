@@ -3,22 +3,22 @@
   "base_sha": "321b6d681c10c14b702dcb7352b37f8ff05aeabc",
   "claim_ref": "refs/heads/matic-claims/issue-53",
   "claimed_at": "2026-09-30T00:34:32Z",
-  "execution_active": false,
-  "execution_id": null,
+  "execution_active": true,
+  "execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
   "generation": 1,
   "issue_number": 53,
   "issue_title": "Feat: make active user status more obvious and prevent accidental access revocation",
   "last_execution_id": "d405f13f-5ec5-4d43-83ad-5d656d23ed2f",
   "last_transition": {
-    "at": "2026-09-30T01:46:50Z",
+    "at": "2026-09-30T02:35:25Z",
     "by": "agnojf",
-    "from_execution_id": "d405f13f-5ec5-4d43-83ad-5d656d23ed2f",
+    "from_execution_id": null,
     "from_owner_login": "agnojf",
-    "from_status": "active",
-    "reason": "Published issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): non-application evidence is on origin/staging at 610934105fc5034895a1430cc4cee656dbc0a5bf, PR #75 (feat: clarify active member revocation) is application-only against staging with CI passed and dennisatssd requested, and the author-addressed safe screenshot comment is verified. Awaiting review; do not close the issue before merge.",
-    "to_execution_id": null,
+    "from_status": "awaiting-review",
+    "reason": "Requester correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): remove the duplicate Active badge while retaining the explicit Active access indicator; update PR #75 and reverify the local UI.",
+    "to_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
     "to_owner_login": "agnojf",
-    "to_status": "awaiting-review"
+    "to_status": "active"
   },
   "owner_login": "agnojf",
   "pull_request": {
@@ -28,11 +28,13 @@
     "title": "feat: clarify active member revocation",
     "url": "https://github.com/adventistasia/lead-lab/pull/75"
   },
+  "resume_count": 1,
   "run_id": "2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "run_path": "workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "schema": "matic-claim/v1",
-  "stage": "05-publish",
-  "status": "awaiting-review",
-  "updated_at": "2026-09-30T01:46:50Z",
+  "stage": "03-build",
+  "status": "active",
+  "takeover_reason": "Requester correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): remove the duplicate Active badge while retaining the explicit Active access indicator; update PR #75 and reverify the local UI.",
+  "updated_at": "2026-09-30T02:35:25Z",
   "work_branch": "matic/issue-53-feat-make-active-user-status-more-obvious-and-prev"
 }
