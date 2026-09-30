@@ -11,21 +11,21 @@ Next action: complete the corrected Measure and Learn stages, then monitor PR #7
 
 The intended non-application paths were committed and fast-forwarded to `origin/staging` at:
 
-`b381763ca9e0b8237b884a35cc2b616374ec740d`
+`8206c5345ab5a75347af6a4f855bcaafd8ba8043`
 
-The staging commit contains only these intended non-application carriers:
+The resulting staging tree contains these intended non-application carriers:
 
 - `pm-control/registers/action-log.md`
 - `pm-control/registers/change-log.md`
 - `pm-control/registers/issues-log.md`
 - `workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev/`
 
-The remote staging tree was verified after push. No `application/` path was included in that staging synchronization commit.
+The boundary repair commit `8206c5345ab5a75347af6a4f855bcaafd8ba8043` also restored the pre-issue application source after an accidental staging pointer update; that repair necessarily includes an `application/` path in its history. The resulting staging tree contains no issue #53 application change. Future staging synchronization commits remain non-application-only.
 
 ## Application Publication
 
 - Branch: `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev`
-- Application commit: `9724d6aa80c154af97c2a311ed1beac5322e2e23`
+- Application commit: `2883d572a54651bdd56f9c25089732e94bdb72a4`
 - PR: #75 (feat: clarify active member revocation), https://github.com/adventistasia/lead-lab/pull/75
 - Base: `staging`
 - PR diff: one intended `application/` path only: `application/source/resources/js/pages/admin/members/index.tsx`
@@ -37,7 +37,7 @@ The remote staging tree was verified after push. No `application/` path was incl
 
 - Issue #53 author: `app/rijam-dev`
 - Comment: https://github.com/adventistasia/lead-lab/issues/53#issuecomment-5902378729
-- Screenshot URL: `https://github.com/adventistasia/lead-lab/raw/9724d6aa80c154af97c2a311ed1beac5322e2e23/workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev/evidence/active-revocation-confirmation.png`
+- Screenshot URL: `https://github.com/adventistasia/lead-lab/raw/2883d572a54651bdd56f9c25089732e94bdb72a4/workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev/evidence/active-revocation-confirmation.png`
 - Screenshot source: `evidence/active-revocation-confirmation.png`; synthetic `.test` data only; HTTP verification returned `200 image/png`.
 - Comment marker: `<!-- matic-pr-screenshot: issue-53-pr-75 -->`
 
