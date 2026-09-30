@@ -9,12 +9,12 @@
   "issue_number": 53,
   "issue_title": "Feat: make active user status more obvious and prevent accidental access revocation",
   "last_transition": {
-    "at": "2026-09-30T00:55:57Z",
+    "at": "2026-09-30T01:18:40Z",
     "by": "agnojf",
     "from_execution_id": "d405f13f-5ec5-4d43-83ad-5d656d23ed2f",
     "from_owner_login": "agnojf",
     "from_status": "active",
-    "reason": "Design completed for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation); local design gate passed, while DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains blocked for target validation.",
+    "reason": "Reconcile completed for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation); source, PM Control, tests, browser evidence, and safe screenshot agree with scope. Measure is next; DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) remains open.",
     "to_execution_id": "d405f13f-5ec5-4d43-83ad-5d656d23ed2f",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -23,8 +23,8 @@
   "run_id": "2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "run_path": "workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "schema": "matic-claim/v1",
-  "stage": "03-build",
+  "stage": "04-measure",
   "status": "active",
-  "updated_at": "2026-09-30T00:55:57Z",
+  "updated_at": "2026-09-30T01:18:40Z",
   "work_branch": "matic/issue-53-feat-make-active-user-status-more-obvious-and-prev"
 }
