@@ -51,5 +51,5 @@ Next action: run Measure against the reconciled requester correction for issue #
 - Reconcile claim transition: verified Measure route at claim head `3322f8c37b6a50907b8aa16b871c812fc9e0d024`.
 - Previous Measure audit: `stages/04-measure/audit-findings.md` passed at 32/35 (91.4%) before the requester correction; attempt 2 is pending.
 - Previous Learn handoff selected controlled publication; Learn must be rerun after the current Measure result.
-- Previous publication record: `stages/matic/05-publish/publication-record.md`; PR #75 now points to `9724d6aa80c154af97c2a311ed1beac5322e2e23` and remains open.
+- Previous publication record: `stages/matic/05-publish/publication-record.md`; PR #75 application commit is `2883d572a54651bdd56f9c25089732e94bdb72a4` and remains open.
 - Next stage contract: `workspace/stages/04-measure/CONTEXT.md`.

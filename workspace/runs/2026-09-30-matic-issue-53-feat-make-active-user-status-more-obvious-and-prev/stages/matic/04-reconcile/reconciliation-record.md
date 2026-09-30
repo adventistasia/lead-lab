@@ -7,7 +7,7 @@ Next action: run Measure against the reconciled implementation for issue #53 (Fe
 
 ## Claim And Boundary
 
-The remote claim was inspected immediately before this reconciliation update at claim head `796177143f2a026d36370b75ad85b708c1bdb317`. It remains owned by `agnojf`, with active execution `31d47cab-067d-4b9e-9de8-1a9e58221147`. The verified Reconcile-to-Measure transition advanced the claim to `3322f8c37b6a50907b8aa16b871c812fc9e0d024`. The corrected application commit is PR #75 (feat: clarify active member revocation) at `9724d6aa80c154af97c2a311ed1beac5322e2e23`; the branch remains `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev`, based on `staging` at `321b6d681c10c14b702dcb7352b37f8ff05aeabc`.
+The remote claim was inspected immediately before this reconciliation update at claim head `796177143f2a026d36370b75ad85b708c1bdb317`. It remains owned by `agnojf`, with active execution `31d47cab-067d-4b9e-9de8-1a9e58221147`. The verified Reconcile-to-Measure transition advanced the claim to `3322f8c37b6a50907b8aa16b871c812fc9e0d024`. The corrected application commit is PR #75 (feat: clarify active member revocation) at `2883d572a54651bdd56f9c25089732e94bdb72a4`; the branch remains `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev`, based on `staging` at `321b6d681c10c14b702dcb7352b37f8ff05aeabc`.
 
 The reconciled scope remains the approved correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): make active access clear, require deliberate confirmation before revocation, preserve single-click restoration, and leave the existing server access contract unchanged.
 
