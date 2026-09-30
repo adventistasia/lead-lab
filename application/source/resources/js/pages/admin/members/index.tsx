@@ -1,6 +1,5 @@
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import {
-    CircleCheck,
     ChevronLeft,
     ChevronRight,
     Search,
@@ -142,11 +141,6 @@ export default function AdminMembers({
     const [selectedRoleMember, setSelectedRoleMember] = useState<Member | null>(
         null,
     );
-    const [selectedAccessMember, setSelectedAccessMember] =
-        useState<Member | null>(null);
-    const [revokingMemberId, setRevokingMemberId] = useState<number | null>(
-        null,
-    );
     const roleForm = useForm<{ role: MemberRole }>({
         role: 'participant',
     });
@@ -157,41 +151,6 @@ export default function AdminMembers({
             { status },
             {
                 preserveScroll: true,
-            },
-        );
-    };
-
-    const openAccessDialog = (member: Member) => {
-        if (member.access_status !== 'active') {
-            return;
-        }
-
-        setSelectedAccessMember(member);
-    };
-
-    const handleAccessDialogOpenChange = (open: boolean) => {
-        if (!open && revokingMemberId !== null) {
-            return;
-        }
-
-        if (!open) {
-            setSelectedAccessMember(null);
-        }
-    };
-
-    const confirmAccessRevocation = () => {
-        if (selectedAccessMember === null) {
-            return;
-        }
-
-        setRevokingMemberId(selectedAccessMember.id);
-        router.patch(
-            updateMemberStatus.url(selectedAccessMember.id),
-            { status: 'revoked' },
-            {
-                preserveScroll: true,
-                onSuccess: () => setSelectedAccessMember(null),
-                onFinish: () => setRevokingMemberId(null),
             },
         );
     };
@@ -368,55 +327,6 @@ export default function AdminMembers({
                     </form>
                 </DialogContent>
             </Dialog>
-            <Dialog
-                open={selectedAccessMember !== null}
-                onOpenChange={handleAccessDialogOpenChange}
-            >
-                <DialogContent className="max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Revoke member access?</DialogTitle>
-                        <DialogDescription>
-                            {selectedAccessMember
-                                ? `Revoking ${selectedAccessMember.name}'s access will prevent them from entering the workspace.`
-                                : null}
-                        </DialogDescription>
-                    </DialogHeader>
-                    {selectedAccessMember ? (
-                        <div className="rounded-lg border bg-muted/30 p-4">
-                            <p className="font-medium">
-                                {selectedAccessMember.name}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                                {selectedAccessMember.email}
-                            </p>
-                        </div>
-                    ) : null}
-                    <DialogFooter>
-                        <DialogClose asChild>
-                            <Button
-                                type="button"
-                                variant="outline"
-                                disabled={revokingMemberId !== null}
-                            >
-                                Keep access
-                            </Button>
-                        </DialogClose>
-                        <Button
-                            type="button"
-                            onClick={confirmAccessRevocation}
-                            disabled={
-                                revokingMemberId !== null ||
-                                selectedAccessMember === null
-                            }
-                        >
-                            <UserRoundX data-icon="inline-start" />
-                            {revokingMemberId !== null
-                                ? 'Revoking...'
-                                : 'Revoke access'}
-                        </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
             <div className="flex flex-1 flex-col gap-8 p-4 md:p-8">
                 <div className="flex flex-col gap-2">
                     <Badge className="w-fit" variant="secondary">
@@ -558,31 +468,21 @@ export default function AdminMembers({
                                                     </p>
                                                 </div>
                                                 <div className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:w-auto sm:shrink-0">
-                                                    {member.access_status !==
-                                                    'active' ? (
-                                                        <Badge
-                                                            variant={
-                                                                member.access_status ===
-                                                                'revoked'
-                                                                    ? 'destructive'
-                                                                    : 'outline'
-                                                            }
-                                                        >
-                                                            {statusLabel(
-                                                                member.access_status,
-                                                            )}
-                                                        </Badge>
-                                                    ) : null}
-                                                    {member.access_status ===
-                                                    'active' ? (
-                                                        <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-400">
-                                                            <CircleCheck
-                                                                aria-hidden="true"
-                                                                className="size-4"
-                                                            />
-                                                            Active access
-                                                        </span>
-                                                    ) : null}
+                                                    <Badge
+                                                        variant={
+                                                            member.access_status ===
+                                                            'revoked'
+                                                                ? 'destructive'
+                                                                : member.access_status ===
+                                                                    'pending'
+                                                                  ? 'outline'
+                                                                  : 'secondary'
+                                                        }
+                                                    >
+                                                        {statusLabel(
+                                                            member.access_status,
+                                                        )}
+                                                    </Badge>
                                                     {member.access_status ===
                                                     'pending' ? (
                                                         !emailVerificationRequired ||
@@ -608,18 +508,21 @@ export default function AdminMembers({
                                                         )
                                                     ) : (
                                                         <Button
-                                                            variant="outline"
-                                                            size="sm"
-                                                            onClick={() =>
+                                                            variant={
                                                                 member.access_status ===
                                                                 'active'
-                                                                    ? openAccessDialog(
-                                                                          member,
-                                                                      )
-                                                                    : updateAccess(
-                                                                          member,
-                                                                          'active',
-                                                                      )
+                                                                    ? 'destructive'
+                                                                    : 'outline'
+                                                            }
+                                                            size="sm"
+                                                            onClick={() =>
+                                                                updateAccess(
+                                                                    member,
+                                                                    member.access_status ===
+                                                                        'active'
+                                                                        ? 'revoked'
+                                                                        : 'active',
+                                                                )
                                                             }
                                                         >
                                                             <UserRoundX data-icon="inline-start" />

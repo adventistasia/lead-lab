@@ -7,7 +7,7 @@ Next action: run Measure against the reconciled implementation for issue #53 (Fe
 
 ## Claim And Boundary
 
-The remote claim was inspected immediately before reconciliation writes at Build head `7691151ad2e26da269297b4e60298d1d513242d7`. It remains owned by `agnojf`, with active execution `d405f13f-5ec5-4d43-83ad-5d656d23ed2f`. The verified Reconcile-to-Measure transition then advanced the claim to `4d2925be05ee06d5c6c406d14e2c84c959c6f9e6`. The work branch is `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev`, based on `staging` at `321b6d681c10c14b702dcb7352b37f8ff05aeabc`.
+The remote claim was inspected immediately before this reconciliation update at claim head `796177143f2a026d36370b75ad85b708c1bdb317`. It remains owned by `agnojf`, with active execution `31d47cab-067d-4b9e-9de8-1a9e58221147`. The verified Reconcile-to-Measure transition advanced the claim to `3322f8c37b6a50907b8aa16b871c812fc9e0d024`. The corrected application commit is PR #75 (feat: clarify active member revocation) at `9724d6aa80c154af97c2a311ed1beac5322e2e23`; the branch remains `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev`, based on `staging` at `321b6d681c10c14b702dcb7352b37f8ff05aeabc`.
 
 The reconciled scope remains the approved correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): make active access clear, require deliberate confirmation before revocation, preserve single-click restoration, and leave the existing server access contract unchanged.
 
@@ -28,7 +28,7 @@ The reconciled scope remains the approved correction for issue #53 (Feat: make a
 
 - Added this Reconcile record and the Build handoff to the run evidence.
 - Recorded the requester correction that removes the duplicate standalone `Active` badge while preserving the explicit `Active access` indicator.
-- Updated the run manifest, run state, Plan-Control outputs, Define and Design handoffs, and PM Control narratives so their next route and local evidence match the completed Build.
+- Updated the run manifest, run state, Plan-Control outputs, Define and Design handoffs, and PM Control narratives so their next route and local evidence match the completed correction and Measure route.
 - Preserved ISS-25 (Active administrator member status and revocation controls are visually ambiguous), ACT-85 (Implement and verify safer administrator member revocation controls), CHG-46 (Separate administrator member lists by account state), and DEP-10 (Gate 1 environment and ownership evidence for credible staging and production planning) states; no unrelated register was changed.
 
 ## Verification
