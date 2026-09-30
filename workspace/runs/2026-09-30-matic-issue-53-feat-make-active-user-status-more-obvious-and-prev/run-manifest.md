@@ -8,8 +8,8 @@ Next action: monitor follow-up PR #76 (feat: clarify active member revocation fo
 | Repository | `adventistasia/lead-lab` |
 | Issue | #53 (Feat: make active user status more obvious and prevent accidental access revocation), https://github.com/adventistasia/lead-lab/issues/53 |
 | Run | `workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev/` |
-| Claim | `refs/heads/matic-claims/issue-53` (claim for issue #53: Feat: make active user status more obvious and prevent accidental access revocation) at active head `57d36f9ff12d029493907e9333a154ba2f2a313c` |
-| Owner / execution | `agnojf` / `31d47cab-067d-4b9e-9de8-1a9e58221147` |
+| Claim | `refs/heads/matic-claims/issue-53` (claim for issue #53: Feat: make active user status more obvious and prevent accidental access revocation) at active head `131b416fa7e500370c68ddb805412c3e630104ac` |
+| Owner / execution | `agnojf` / `cb677771-b585-408a-a408-b096fc1f31d5` |
 | Base | `staging` at `321b6d681c10c14b702dcb7352b37f8ff05aeabc` |
 | Work branch | `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev` |
 | Isolated worktree | `/Users/agnojf/Documents/lead-lab-worktrees/issue-53` |
