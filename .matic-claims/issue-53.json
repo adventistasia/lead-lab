@@ -3,22 +3,22 @@
   "base_sha": "321b6d681c10c14b702dcb7352b37f8ff05aeabc",
   "claim_ref": "refs/heads/matic-claims/issue-53",
   "claimed_at": "2026-09-30T00:34:32Z",
-  "execution_active": false,
-  "execution_id": null,
+  "execution_active": true,
+  "execution_id": "cb677771-b585-408a-a408-b096fc1f31d5",
   "generation": 1,
   "issue_number": 53,
   "issue_title": "Feat: make active user status more obvious and prevent accidental access revocation",
   "last_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
   "last_transition": {
-    "at": "2026-09-30T03:59:27Z",
+    "at": "2026-09-30T03:59:57Z",
     "by": "agnojf",
-    "from_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
+    "from_execution_id": null,
     "from_owner_login": "agnojf",
-    "from_status": "active",
-    "reason": "Publication verified for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): follow-up PR #76 (feat: clarify active member revocation follow-up) is application-only against current staging, CI passed, reviewer dennisatssd is requested, and the existing author-addressed screenshot comment was updated and verified. Keep the issue open until PR #76 is merged.",
-    "to_execution_id": null,
+    "from_status": "awaiting-review",
+    "reason": "Record the final awaiting-review claim head and align run metadata after publication verification for PR #76 (feat: clarify active member revocation follow-up).",
+    "to_execution_id": "cb677771-b585-408a-a408-b096fc1f31d5",
     "to_owner_login": "agnojf",
-    "to_status": "awaiting-review"
+    "to_status": "active"
   },
   "owner_login": "agnojf",
   "pull_request": {
@@ -28,13 +28,13 @@
     "title": "feat: clarify active member revocation follow-up",
     "url": "https://github.com/adventistasia/lead-lab/pull/76"
   },
-  "resume_count": 1,
+  "resume_count": 2,
   "run_id": "2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "run_path": "workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "schema": "matic-claim/v1",
   "stage": "05-publish",
-  "status": "awaiting-review",
-  "takeover_reason": "Requester correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): remove the duplicate Active badge while retaining the explicit Active access indicator; update PR #75 and reverify the local UI.",
-  "updated_at": "2026-09-30T03:59:27Z",
+  "status": "active",
+  "takeover_reason": "Record the final awaiting-review claim head and align run metadata after publication verification for PR #76 (feat: clarify active member revocation follow-up).",
+  "updated_at": "2026-09-30T03:59:57Z",
   "work_branch": "matic/issue-53-feat-make-active-user-status-more-obvious-and-prev"
 }
