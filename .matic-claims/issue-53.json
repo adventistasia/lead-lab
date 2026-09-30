@@ -10,12 +10,12 @@
   "issue_title": "Feat: make active user status more obvious and prevent accidental access revocation",
   "last_execution_id": "d405f13f-5ec5-4d43-83ad-5d656d23ed2f",
   "last_transition": {
-    "at": "2026-09-30T03:38:14Z",
+    "at": "2026-09-30T03:44:22Z",
     "by": "agnojf",
     "from_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
     "from_owner_login": "agnojf",
     "from_status": "active",
-    "reason": "PR #75 (feat: clarify active member revocation) now includes the synchronized publication metadata commit; keep Measure active with the final remote PR head recorded.",
+    "reason": "Measure attempt 2 passed for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation) at 32/35 (91.4%). PR #75 (feat: clarify active member revocation) merged before the staging boundary repair, so Learn routes to a follow-up application-only publication while keeping issue #53 open.",
     "to_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -23,7 +23,7 @@
   "owner_login": "agnojf",
   "pull_request": {
     "base": "staging",
-    "head": "c3c5b8cc",
+    "head": "9724d6aa80c154af97c2a311ed1beac5322e2e23",
     "number": 75,
     "title": "feat: clarify active member revocation",
     "url": "https://github.com/adventistasia/lead-lab/pull/75"
@@ -32,9 +32,9 @@
   "run_id": "2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "run_path": "workspace/runs/2026-09-30-matic-issue-53-feat-make-active-user-status-more-obvious-and-prev",
   "schema": "matic-claim/v1",
-  "stage": "04-measure",
+  "stage": "05-learn",
   "status": "active",
   "takeover_reason": "Requester correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): remove the duplicate Active badge while retaining the explicit Active access indicator; update PR #75 and reverify the local UI.",
-  "updated_at": "2026-09-30T03:38:14Z",
+  "updated_at": "2026-09-30T03:44:22Z",
   "work_branch": "matic/issue-53-feat-make-active-user-status-more-obvious-and-prev"
 }
