@@ -10,12 +10,12 @@
   "issue_title": "Feat: make active user status more obvious and prevent accidental access revocation",
   "last_execution_id": "d405f13f-5ec5-4d43-83ad-5d656d23ed2f",
   "last_transition": {
-    "at": "2026-09-30T03:21:16Z",
+    "at": "2026-09-30T03:37:32Z",
     "by": "agnojf",
     "from_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
     "from_owner_login": "agnojf",
     "from_status": "active",
-    "reason": "Reconcile complete for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): affected source, acceptance evidence, run records, PM Control narratives, deployment boundary, and safe screenshot now agree on the duplicate Active badge correction. Route to Measure for the final quality gate.",
+    "reason": "PR #75 (feat: clarify active member revocation) was rebuilt fast-forward-only on the repaired staging tree; record the corrected application commit and continue the current Measure gate.",
     "to_execution_id": "31d47cab-067d-4b9e-9de8-1a9e58221147",
     "to_owner_login": "agnojf",
     "to_status": "active"
@@ -23,7 +23,7 @@
   "owner_login": "agnojf",
   "pull_request": {
     "base": "staging",
-    "head": "13d56432c1b505015f87009d8c88fded26e96846",
+    "head": "2883d572a54651bdd56f9c25089732e94bdb72a4",
     "number": 75,
     "title": "feat: clarify active member revocation",
     "url": "https://github.com/adventistasia/lead-lab/pull/75"
@@ -35,6 +35,6 @@
   "stage": "04-measure",
   "status": "active",
   "takeover_reason": "Requester correction for issue #53 (Feat: make active user status more obvious and prevent accidental access revocation): remove the duplicate Active badge while retaining the explicit Active access indicator; update PR #75 and reverify the local UI.",
-  "updated_at": "2026-09-30T03:21:16Z",
+  "updated_at": "2026-09-30T03:37:32Z",
   "work_branch": "matic/issue-53-feat-make-active-user-status-more-obvious-and-prev"
 }
