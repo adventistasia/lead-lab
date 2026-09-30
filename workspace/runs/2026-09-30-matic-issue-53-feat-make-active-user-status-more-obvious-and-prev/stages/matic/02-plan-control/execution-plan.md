@@ -15,7 +15,7 @@ The work must not change account-state classification, the revocation or restora
 
 1. Define the bounded outcome, acceptance conditions, and human Continue checkpoint.
 2. Design: inspect the current active and revoked member-row actions, available dialog primitives, server action contract, local runtime, and existing feature or frontend test carriers. Confirm whether any target-environment or ownership input blocks local implementation.
-3. Build the smallest UI correction: a clear active-state indicator, non-destructive active-user revoke styling, a confirmation dialog with synthetic member name and email plus the access consequence, and a second-click confirmation that calls the existing action. Preserve cancel, escape, focus, and restore behavior.
+3. Build the smallest UI correction: one clear active-state indicator without a duplicate status label, non-destructive active-user revoke styling, a confirmation dialog with synthetic member name and email plus the access consequence, and a second-click confirmation that calls the existing action. Preserve cancel, escape, focus, and restore behavior.
 4. Add focused regression coverage for active and revoked states, confirmation content, no action before confirmation, confirmed revocation, restoration, authorization, and responsive presentation as supported by the repository test setup.
 5. Capture `evidence/active-revocation-confirmation.png` from local synthetic `.test` data. Check the image for real participant data, credentials, cookies, tokens, private URLs, and other sensitive content before publication.
 6. Reconcile source, tests, run evidence, PM Control records, and deployment guidance if affected. Measure all acceptance conditions and the quality rubric before Learn or Publish.

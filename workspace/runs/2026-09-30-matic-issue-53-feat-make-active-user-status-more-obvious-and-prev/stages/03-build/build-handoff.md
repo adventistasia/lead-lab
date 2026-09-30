@@ -9,7 +9,7 @@ Next action: reconcile the changed source, run evidence, and PM Control carriers
 - Branch: `matic/issue-53-feat-make-active-user-status-more-obvious-and-prev`, based on `origin/staging` at `321b6d681c10c14b702dcb7352b37f8ff05aeabc`.
 - Application source: `application/source/resources/js/pages/admin/members/index.tsx`.
 - Added a controlled active-member revocation dialog using the existing Radix dialog primitives.
-- Added explicit `Active access` text and icon beside the existing active badge.
+- Added one explicit `Active access` text-and-icon indicator and removed the duplicate standalone active badge.
 - Changed the active revoke row action to the existing outline variant.
 - Preserved the existing status PATCH route, payload, server authorization, activity logging, and single-click revoked-member restoration.
 - No server, route, schema, infrastructure, production, or automated test source was changed.
@@ -34,7 +34,7 @@ The fresh worktree initially lacked generated Wayfinder route files and an appli
 
 | ID | Build evidence | Preliminary result |
 |---|---|---|
-| A1 | `Active access` text and `CircleCheck` icon render beside the active badge. | Observed pass locally; Measure remains final. |
+| A1 | One `Active access` text-and-icon indicator renders without a duplicate standalone `Active` badge. | Observed pass locally; Measure remains final. |
 | A2 | Active row action uses `variant="outline"`; no active revoke action uses the destructive variant. | Observed pass locally; Measure remains final. |
 | A3 | Browser check opened the dialog and confirmed no PATCH request before confirmation; Escape and `Keep access` closed it without a request. | Observed pass locally; Measure remains final. |
 | A4 | Dialog showed `Lead Hub Participant`, `participant@leadlab.test`, and the workspace-access consequence. | Observed pass locally; Measure remains final. |

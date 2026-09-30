@@ -5,7 +5,7 @@ Next action: verify each condition in Measure for issue #53 (Feat: make active u
 
 | ID | Condition | Evidence | Stage |
 |---|---|---|---|
-| A1 | Active users have a clear visual indicator beyond the existing `Active` badge. | Focused render or browser evidence and `evidence/active-revocation-confirmation.png` using synthetic `.test` data. | Design / Build / Measure |
+| A1 | Active users have one clear `Active access` indicator without a duplicate standalone `Active` badge. | Focused render or browser evidence and `evidence/active-revocation-confirmation.png` using synthetic `.test` data. | Design / Build / Measure |
 | A2 | The active-user `Revoke access` control is no longer red or destructive. | Focused UI evidence and source review of the active row action variant. | Build / Measure |
 | A3 | Selecting active-user revoke opens a confirmation dialog and does not apply the action before confirmation. | Focused interaction or browser evidence that checks the dialog, cancel path, and unchanged state before confirmation. | Build / Measure |
 | A4 | The confirmation dialog shows the member name and email and explains that revocation prevents workspace access. | Focused interaction or browser evidence with synthetic member data and screenshot inspection. | Build / Measure |

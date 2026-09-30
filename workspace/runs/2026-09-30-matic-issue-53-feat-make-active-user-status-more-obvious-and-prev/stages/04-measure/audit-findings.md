@@ -9,7 +9,7 @@ Next action: run Learn for issue #53 (Feat: make active user status more obvious
 
 | Criterion | Result | Evidence |
 |---|---|---|
-| A1 — active users have a clear indicator beyond the existing badge | Pass | `application/source/resources/js/pages/admin/members/index.tsx` renders `Active access` with `CircleCheck`; the safe screenshot shows it beside the active member state. |
+| A1 — active users have one clear indicator without a duplicate badge | Pass | `application/source/resources/js/pages/admin/members/index.tsx` renders only `Active access` with `CircleCheck` for active members; the refreshed safe screenshot shows no standalone `Active` badge. |
 | A2 — active revoke is not destructive or red | Pass | The active row action uses `variant="outline"`; source review found no destructive active revoke action. |
 | A3 — active revoke requires confirmation and does not act before confirmation | Pass | Local authenticated browser verification recorded no PATCH before confirmation; Escape and `Keep access` closed the dialog without a request. |
 | A4 — confirmation identifies the member and consequence | Pass | Browser verification and `evidence/active-revocation-confirmation.png` show `Lead Hub Participant`, `participant@leadlab.test`, and the workspace-access consequence. |
