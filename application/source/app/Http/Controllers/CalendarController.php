@@ -33,7 +33,7 @@ class CalendarController
             ->values();
 
         if (
-            ! $request->hasHeader('X-Inertia-Prefetch')
+            $request->header('Purpose') !== 'prefetch'
             && ! $request->attributes->get(SuppressRedirectedActivityViews::REQUEST_ATTRIBUTE, false)
         ) {
             ActivityLog::record($request->user(), 'calendar_viewed', $request->user(), [

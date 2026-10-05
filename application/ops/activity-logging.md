@@ -30,7 +30,7 @@ Local implementation evidence is available. Staging persistence, access, complet
 - The viewer does not allow activity records to be edited or deleted.
 - The viewer exposes only approved metadata fields. Tokens, passwords, and unapproved metadata are not shown.
 - Administrators can filter by actor name or email, action, and local date; deleted actors remain unavailable rather than searchable by name.
-- Session, announcement, and calendar page views exclude Inertia prefetches. A session or calendar GET reached by redirect after a Q&A action or calendar mutation is excluded once; direct and later page visits remain logged. Calendar event details are recorded on explicit selection. A broadcast click follows the protected application redirect to the external URL.
+- Session, announcement, and calendar page views exclude requests marked with `Purpose: prefetch` by the shipped Inertia client. A session or calendar GET reached by redirect after a Q&A action or calendar mutation is excluded once; direct and later page visits remain logged. Calendar event details are recorded on explicit selection. A broadcast click follows the protected application redirect to the external URL.
 - Each new activity event records the actor, action, time, and affected item. Profile changes store field names only, never values.
 
 ## Verification Checklist

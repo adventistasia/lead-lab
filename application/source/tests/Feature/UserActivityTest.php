@@ -53,16 +53,21 @@ class UserActivityTest extends TestCase
         $draft = LearningSession::factory()->create(['is_published' => false]);
         $announcement = Announcement::factory()->create(['status' => Announcement::STATUS_PUBLISHED, 'published_at' => now()]);
 
-        $this->actingAs($user)->withHeader('X-Inertia-Prefetch', 'true')
+        $this->actingAs($user)->withHeader('Purpose', 'prefetch')
             ->get(route('sessions.show', $session))->assertOk();
-        $this->assertDatabaseMissing('activity_logs', ['action' => 'session_viewed']);
-        $this->withoutHeader('X-Inertia-Prefetch');
+        $this->assertDatabaseMissing('activity_logs', ['actor_id' => $user->id, 'action' => 'session_viewed']);
+        $this->withoutHeader('Purpose');
         $this->actingAs($user)->get(route('sessions.show', $draft))->assertNotFound();
         $this->actingAs($user)->get(route('sessions.show', $session))->assertOk();
+
+        $this->actingAs($user)->withHeader('Purpose', 'prefetch')
+            ->get(route('announcements.show', $announcement))->assertOk();
+        $this->assertDatabaseMissing('activity_logs', ['actor_id' => $user->id, 'action' => 'announcement_viewed']);
+        $this->withoutHeader('Purpose');
         $this->actingAs($user)->get(route('announcements.show', $announcement))->assertOk();
 
-        $this->assertDatabaseHas('activity_logs', ['actor_id' => $user->id, 'action' => 'session_viewed', 'subject_id' => $session->id]);
-        $this->assertDatabaseHas('activity_logs', ['actor_id' => $user->id, 'action' => 'announcement_viewed', 'subject_id' => $announcement->id]);
+        $this->assertSame(1, ActivityLog::query()->where('actor_id', $user->id)->where('action', 'session_viewed')->where('subject_id', $session->id)->count());
+        $this->assertSame(1, ActivityLog::query()->where('actor_id', $user->id)->where('action', 'announcement_viewed')->where('subject_id', $announcement->id)->count());
     }
 
     public function test_material_request_is_logged_only_after_access_and_file_checks(): void
@@ -218,13 +223,13 @@ class UserActivityTest extends TestCase
     {
         $user = User::factory()->create();
         $event = CalendarEvent::factory()->create(['live_broadcast_url' => 'https://example.com/live']);
-        $this->actingAs($user)->withHeader('X-Inertia-Prefetch', 'true')->get(route('calendar'))->assertOk();
-        $this->assertDatabaseMissing('activity_logs', ['action' => 'calendar_viewed']);
-        $this->withoutHeader('X-Inertia-Prefetch');
+        $this->actingAs($user)->withHeader('Purpose', 'prefetch')->get(route('calendar'))->assertOk();
+        $this->assertDatabaseMissing('activity_logs', ['actor_id' => $user->id, 'action' => 'calendar_viewed']);
+        $this->withoutHeader('Purpose');
         $this->actingAs($user)->get(route('calendar', ['month' => '2026-09']))->assertOk();
         $this->actingAs($user)->post(route('calendar.events.view', $event))->assertNoContent();
         $this->actingAs($user)->get(route('calendar.events.broadcast', $event))->assertRedirect('https://example.com/live');
-        $this->assertDatabaseHas('activity_logs', ['actor_id' => $user->id, 'action' => 'calendar_viewed']);
+        $this->assertSame(1, ActivityLog::query()->where('actor_id', $user->id)->where('action', 'calendar_viewed')->count());
         $this->assertDatabaseHas('activity_logs', ['actor_id' => $user->id, 'action' => 'calendar_event_viewed', 'subject_id' => $event->id]);
         $this->assertDatabaseHas('activity_logs', ['actor_id' => $user->id, 'action' => 'calendar_broadcast_clicked', 'subject_id' => $event->id]);
         $this->get(route('calendar.events.broadcast', 999999))->assertNotFound();
