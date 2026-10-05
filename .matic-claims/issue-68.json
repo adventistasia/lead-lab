@@ -3,26 +3,27 @@
   "base_sha": "f67b13ef2a6226bf9e0e535dcc89585afb795223",
   "claim_ref": "refs/heads/matic-claims/issue-68",
   "claimed_at": "2026-09-29T21:07:45Z",
-  "execution_active": true,
-  "execution_id": "d43b9412-32ae-4eea-8963-ef9cac786511",
+  "execution_active": false,
+  "execution_id": null,
   "generation": 1,
   "issue_number": 68,
   "issue_title": "bug: every Q&A action also logs a session_viewed (redirect back to the session page)",
-  "last_execution_id": "a30e1bf6-9221-4a57-8b28-e88082b2c82f",
+  "last_execution_id": "d43b9412-32ae-4eea-8963-ef9cac786511",
   "last_transition": {
-    "at": "2026-10-05T02:46:22Z",
+    "at": "2026-10-05T03:08:30Z",
     "by": "agnojf",
-    "from_execution_id": null,
+    "from_execution_id": "d43b9412-32ae-4eea-8963-ef9cac786511",
     "from_owner_login": "agnojf",
-    "from_status": "awaiting-review",
-    "to_execution_id": "d43b9412-32ae-4eea-8963-ef9cac786511",
+    "from_status": "active",
+    "reason": "Resolved review conflict with PR #73 (fix: honor Inertia prefetch header for activity views); PR #74 (fix: suppress redirect-generated activity views (#68)) now retains Purpose: prefetch and one-use redirect suppression, focused and full validation passed, GitHub CI passed, and the PR is mergeable. Awaiting human review.",
+    "to_execution_id": null,
     "to_owner_login": "agnojf",
-    "to_status": "active"
+    "to_status": "awaiting-review"
   },
   "owner_login": "agnojf",
   "pull_request": {
     "base": "staging",
-    "head": "caad5293af11e895ae84389723a40e718e4de186",
+    "head": "2b11452ab720d3fe2ed8f363df7be38ea6d1c13c",
     "number": 74,
     "title": "fix: suppress redirect-generated activity views (#68)",
     "url": "https://github.com/adventistasia/lead-lab/pull/74"
@@ -31,8 +32,8 @@
   "run_id": "2026-09-29-matic-issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re",
   "run_path": "workspace/runs/2026-09-29-matic-issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re",
   "schema": "matic-claim/v1",
-  "stage": "03-build",
-  "status": "active",
-  "updated_at": "2026-10-05T02:46:22Z",
+  "stage": "06-close-merged",
+  "status": "awaiting-review",
+  "updated_at": "2026-10-05T03:08:30Z",
   "work_branch": "matic/issue-68-bug-every-q-a-action-also-logs-a-session-viewed-re"
 }
