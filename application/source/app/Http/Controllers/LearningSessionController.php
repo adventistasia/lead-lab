@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\SuppressRedirectedActivityViews;
 use App\Models\ActivityLog;
 use App\Models\LearningSession;
 use App\Models\SessionQuestion;
@@ -92,7 +93,10 @@ class LearningSessionController
 
         $videoUrl = $learningSession->video_url;
 
-        if ($request->header('Purpose') !== 'prefetch') {
+        if (
+            $request->header('Purpose') !== 'prefetch'
+            && ! $request->attributes->get(SuppressRedirectedActivityViews::REQUEST_ATTRIBUTE, false)
+        ) {
             ActivityLog::record($user, 'session_viewed', $learningSession);
         }
 

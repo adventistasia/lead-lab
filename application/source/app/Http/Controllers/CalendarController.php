@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\SuppressRedirectedActivityViews;
 use App\Models\ActivityLog;
 use App\Models\CalendarEvent;
 use Carbon\CarbonImmutable;
@@ -31,7 +32,10 @@ class CalendarController
             ->map(fn (CalendarEvent $event): array => $this->eventData($event, $timezone))
             ->values();
 
-        if ($request->header('Purpose') !== 'prefetch') {
+        if (
+            $request->header('Purpose') !== 'prefetch'
+            && ! $request->attributes->get(SuppressRedirectedActivityViews::REQUEST_ATTRIBUTE, false)
+        ) {
             ActivityLog::record($request->user(), 'calendar_viewed', $request->user(), [
                 'month' => $month->format('Y-m'),
             ]);

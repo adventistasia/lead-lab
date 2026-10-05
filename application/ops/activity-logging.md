@@ -30,7 +30,7 @@ Local implementation evidence is available. Staging persistence, access, complet
 - The viewer does not allow activity records to be edited or deleted.
 - The viewer exposes only approved metadata fields. Tokens, passwords, and unapproved metadata are not shown.
 - Administrators can filter by actor name or email, action, and local date; deleted actors remain unavailable rather than searchable by name.
-- Session, announcement, and calendar page views exclude requests marked with `Purpose: prefetch` by the shipped Inertia client. Ordinary page navigation continues to be logged. Calendar event details are recorded on explicit selection. A broadcast click follows the protected application redirect to the external URL.
+- Session, announcement, and calendar page views exclude requests marked with `Purpose: prefetch` by the shipped Inertia client. A session or calendar GET reached by redirect after a Q&A action or calendar mutation is excluded once; direct and later page visits remain logged. Calendar event details are recorded on explicit selection. A broadcast click follows the protected application redirect to the external URL.
 - Each new activity event records the actor, action, time, and affected item. Profile changes store field names only, never values.
 
 ## Verification Checklist
@@ -40,7 +40,7 @@ Local implementation evidence is available. Staging persistence, access, complet
 | Local event writes | Complete locally | Existing activity-log audit and automated tests |
 | Staging persistence | Pending | Each test event remains after application restart or equivalent staging check |
 | Staging viewer access | Pending | Administrator access succeeds; participant and guest access are denied |
-| Complete event coverage | Pending | Each listed action, including signed-in user actions, is triggered and visible in the staging viewer; verify prefetch and failed requests do not write false events |
+| Complete event coverage | Pending | Each listed action, including signed-in user actions, is triggered and visible in the staging viewer; verify prefetch, action redirects, and failed requests do not write false events |
 | Operational handling | Pending | Operator can locate, interpret, and investigate a recorded event |
 | Retention | Pending | Approved retention duration, archive method, and deletion authority |
 | Staging implementation roles | Pending | Named verifier, operator, and acceptance authority |
