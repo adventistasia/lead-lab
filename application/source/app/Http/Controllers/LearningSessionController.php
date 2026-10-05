@@ -92,7 +92,7 @@ class LearningSessionController
 
         $videoUrl = $learningSession->video_url;
 
-        if (! $request->hasHeader('X-Inertia-Prefetch')) {
+        if ($request->header('Purpose') !== 'prefetch') {
             ActivityLog::record($user, 'session_viewed', $learningSession);
         }
 
