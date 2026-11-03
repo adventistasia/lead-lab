@@ -17,7 +17,7 @@ class HandlePostSize
 
         if ($this->isAdminSessionUpload($request)) {
             return back()->withErrors([
-                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 10 MB limit.',
+                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 50 MB limit.',
             ]);
         }
 

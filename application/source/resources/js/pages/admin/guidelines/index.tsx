@@ -73,7 +73,7 @@ const howTos = [
         steps: [
             'Open Classroom from the sidebar.',
             'Choose Add Session or an action for an existing session.',
-            'Save a draft while details are missing. Add the title, Season, date, description, video, and supporting materials when ready. You can add up to 10 files per session, with each file up to 10 MB.',
+            'Save a draft while details are missing. Add the title, Season, date, description, video, and supporting materials when ready. You can add up to 10 files per session, with each file up to 50 MB.',
             'Choose Publish only after the required details are complete.',
             'Use Unpublish, Archive, or Restore to change a session later.',
         ],

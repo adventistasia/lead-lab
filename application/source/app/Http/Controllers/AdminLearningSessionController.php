@@ -21,9 +21,9 @@ class AdminLearningSessionController
 {
     private const MAX_RESOURCES_PER_SESSION = 10;
 
-    private const MAX_RESOURCE_SIZE_KB = 10240;
+    private const MAX_RESOURCE_SIZE_KB = 51200;
 
-    private const MAX_RESOURCE_SIZE_BYTES = 10 * 1024 * 1024;
+    private const MAX_RESOURCE_SIZE_BYTES = 50 * 1024 * 1024;
 
     public function index(): Response
     {
@@ -307,7 +307,7 @@ class AdminLearningSessionController
             ],
             [
                 'resources.max' => 'A session can have no more than 10 supporting materials. Remove an existing material before adding more files.',
-                'resources.*.max' => 'Each file must be 10 MB or less.',
+                'resources.*.max' => 'Each file must be 50 MB or less.',
                 'resources.*.mimes' => 'Each file must be PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, or WEBP.',
             ],
         );
@@ -370,7 +370,7 @@ class AdminLearningSessionController
     private function resourceTooLargeMessage(UploadedFile $file): string
     {
         return sprintf(
-            '%s is too big. Each file must be 10 MB or less.',
+            '%s is too big. Each file must be 50 MB or less.',
             $file->getClientOriginalName(),
         );
     }

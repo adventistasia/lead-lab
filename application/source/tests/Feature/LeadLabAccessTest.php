@@ -121,7 +121,7 @@ class LeadLabAccessTest extends TestCase
             ],
             [
                 'too-large.pptx',
-                10241,
+                51201,
                 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             ],
         ];
@@ -184,6 +184,25 @@ class LeadLabAccessTest extends TestCase
         );
     }
 
+    public function test_admin_can_upload_a_50_mb_resource_when_creating_a_session(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
+            'title' => '50 MB material session',
+            'resources' => [
+                UploadedFile::fake()->create('boundary.pdf', 51200, 'application/pdf'),
+            ],
+        ]);
+
+        $response->assertRedirect(route('admin.sessions.index'));
+        $this->assertDatabaseHas('learning_resources', [
+            'title' => 'boundary.pdf',
+            'size' => 50 * 1024 * 1024,
+        ]);
+    }
+
     public function test_admin_cannot_batch_upload_more_than_ten_session_materials(): void
     {
         Storage::fake('local');
@@ -213,12 +232,12 @@ class LeadLabAccessTest extends TestCase
         $response = $this->actingAs($admin)->post(route('admin.sessions.store'), [
             'title' => 'Oversized material session',
             'resources' => [
-                UploadedFile::fake()->create('large-handout.pdf', 10241, 'application/pdf'),
+                UploadedFile::fake()->create('large-handout.pdf', 51201, 'application/pdf'),
             ],
         ]);
 
         $response->assertSessionHasErrors([
-            'resources.0' => 'large-handout.pdf is too big. Each file must be 10 MB or less.',
+            'resources.0' => 'large-handout.pdf is too big. Each file must be 50 MB or less.',
         ]);
         $this->assertDatabaseMissing('learning_sessions', [
             'title' => 'Oversized material session',
@@ -241,7 +260,7 @@ class LeadLabAccessTest extends TestCase
         $response
             ->assertRedirect(route('admin.sessions.index'))
             ->assertSessionHasErrors([
-                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 10 MB limit.',
+                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 50 MB limit.',
             ]);
         $this->assertDatabaseMissing('learning_sessions', [
             'title' => 'Server-limit material session',
@@ -267,7 +286,7 @@ class LeadLabAccessTest extends TestCase
         $response
             ->assertRedirect(route('admin.sessions.edit', $session))
             ->assertSessionHasErrors([
-                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 10 MB limit.',
+                'resources' => 'The batch is too large for one request. Select fewer files and try again, even if each file is within the 50 MB limit.',
             ]);
         $this->assertSame('Original server-limit session', $session->refresh()->title);
     }
@@ -577,6 +596,54 @@ class LeadLabAccessTest extends TestCase
         $this->assertSame(2, $session->resources()->count());
         Storage::disk('local')->assertExists($oldPath);
         Storage::disk('local')->assertExists($resource->stored_path);
+    }
+
+    public function test_admin_can_append_a_50_mb_resource_when_editing_a_session(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => false]);
+
+        $response = $this->actingAs($admin)->post(
+            route('admin.sessions.update', $session),
+            [
+                '_method' => 'PATCH',
+                'title' => $session->title,
+                'resources' => [
+                    UploadedFile::fake()->create('boundary.pdf', 51200, 'application/pdf'),
+                ],
+            ],
+        );
+
+        $response->assertRedirect(route('admin.sessions.index'));
+        $this->assertDatabaseHas('learning_resources', [
+            'learning_session_id' => $session->id,
+            'title' => 'boundary.pdf',
+            'size' => 50 * 1024 * 1024,
+        ]);
+    }
+
+    public function test_admin_cannot_append_a_resource_over_50_mb_when_editing_a_session(): void
+    {
+        Storage::fake('local');
+        $admin = User::factory()->create(['role' => 'admin']);
+        $session = LearningSession::factory()->create(['is_published' => false]);
+
+        $response = $this->actingAs($admin)->post(
+            route('admin.sessions.update', $session),
+            [
+                '_method' => 'PATCH',
+                'title' => $session->title,
+                'resources' => [
+                    UploadedFile::fake()->create('large-handout.pdf', 51201, 'application/pdf'),
+                ],
+            ],
+        );
+
+        $response->assertSessionHasErrors([
+            'resources.0' => 'large-handout.pdf is too big. Each file must be 50 MB or less.',
+        ]);
+        $this->assertDatabaseCount('learning_resources', 0);
     }
 
     public function test_admin_cannot_append_materials_past_the_session_limit(): void

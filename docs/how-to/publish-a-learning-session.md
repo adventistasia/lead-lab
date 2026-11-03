@@ -7,11 +7,11 @@ Use this when you are an administrator and need to make a recorded Learning Sess
 2. Open **Classroom** from the sidebar.
 3. Choose **Add Session** and enter the title, Season, date, and description when they are ready.
 4. Add an optional YouTube video URL.
-5. Use **Batch upload supporting materials** to select up to 10 files. Each file can be up to 10 MB and must be PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, or WEBP.
+5. Use **Batch upload supporting materials** to select up to 10 files. Each file can be up to 50 MB and must be PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, or WEBP.
 6. Choose **Save draft** while the session is still being prepared. It is not visible to participants.
 7. Choose **Publish** when the content is ready.
 
-When editing a session, a new batch is added to the current materials. To remove one, choose **Remove** beside that material and confirm. If a selected file exceeds 10 MB, the form names the file and explains the limit before it can be saved.
+When editing a session, a new batch is added to the current materials. To remove one, choose **Remove** beside that material and confirm. If a selected file exceeds 50 MB, the form names the file and explains the limit before it can be saved.
 
 Published, non-archived sessions appear in Classroom. To update a session, choose **Edit session** from the Classroom action menu. To hide a session without deleting it, use **Unpublish**. To remove it from normal use while retaining the record, use **Archive**. Restoring an archived session removes its archived status; review its publish status before expecting participants to see it.
 
