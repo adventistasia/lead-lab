@@ -33,6 +33,8 @@ class AdminActivityLogTest extends TestCase
 
     public function test_admins_can_filter_activity_by_action_and_local_date(): void
     {
+        $this->travelTo(CarbonImmutable::parse('2026-09-01 12:00:00', 'UTC'));
+
         $admin = User::factory()->create([
             'role' => 'admin',
             'timezone' => 'America/New_York',
