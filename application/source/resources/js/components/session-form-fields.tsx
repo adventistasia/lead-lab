@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 export const MAX_SESSION_RESOURCES = 10;
-export const MAX_RESOURCE_SIZE_BYTES = 10 * 1024 * 1024;
+export const MAX_RESOURCE_SIZE_BYTES = 50 * 1024 * 1024;
 
 export type SessionFormData = {
     title: string;
@@ -85,7 +85,7 @@ export function SessionFormFields({
         if (oversizedResource) {
             form.setError(
                 'resources',
-                `${oversizedResource.name} is too big. Each file must be 10 MB or less.`,
+                `${oversizedResource.name} is too big. Each file must be 50 MB or less.`,
             );
 
             return;
@@ -214,7 +214,7 @@ export function SessionFormFields({
                         0,
                         MAX_SESSION_RESOURCES - existingResources.length,
                     )}{' '}
-                    files for this batch. Each file can be up to 10 MB. Accepted
+                    files for this batch. Each file can be up to 50 MB. Accepted
                     formats: PDF, DOC, DOCX, TXT, PPT, PPTX, JPG, JPEG, PNG, and
                     WEBP. Stored outside the public web directory and downloaded
                     through an authenticated route.
