@@ -310,6 +310,10 @@ Verified 2026-08-31 from PR #5 commit `393d8bd8` and the deployment-research sou
 
 Local implementation and automated verification completed on 2026-11-12. The focused Reflection tests passed 8 tests; the full PHP suite passed 222 tests with 1,892 assertions; Pint, PHPStan, TypeScript, ESLint, Prettier, the Vite build, route listing, migration, and `git diff --check` passed. An authenticated desktop browser review confirmed the tab, required form, audience notice, empty state, and controls. Narrow responsive, staging, participant-use, and launch acceptance remain open, so ACT-87 stays In Progress.
 
+### ACT-87 Publication Update
+
+PR #80 (`feat: add session reflections`) is open against `staging` from `codex/session-reflection-app` and contains only `application/` changes. Dennis Arquillano (`dennisatssd`) is requested as reviewer. The approved BDD, requirements, backlog, guidance, and PM Control/run records were committed directly to `staging` at `46818b25`; ACT-87 remains In Progress pending review, merge, narrow responsive, staging, participant-use, and launch acceptance.
+
 ## State
 
 | State | Meaning |

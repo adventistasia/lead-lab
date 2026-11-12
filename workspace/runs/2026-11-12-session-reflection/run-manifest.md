@@ -5,9 +5,11 @@
 |---|---|
 | Run path | `workspace/runs/2026-11-12-session-reflection/` |
 | Request | Add a Reflection tab to each Learning Session and execute the approved BDD |
-| Branch | `codex/session-reflection` |
+| Branch | `codex/session-reflection-app` (application PR) |
 | Branch source | `origin/staging` |
 | Branch published | 2026-11-12, before implementation |
+| Direct staging documentation commit | `46818b25` |
+| Pull request | PR #80 (`feat: add session reflections`) targeting `staging`; reviewer `dennisatssd` requested |
 | Product source | `artifacts/session-reflection-bdd.md` |
 | PM Control | CHG-55 (Add a shared per-session Reflection tab), D-79 (Approve the session Reflection tab and behavior), ACT-87 (Implement and verify the session reflection feature) |
 | Canonical baseline | RQ-23 (Each session detail view should provide a shared Reflection tab for participant learning reflections), LL-36 (Build the session Reflection tab) |
@@ -15,4 +17,4 @@
 
 ## Status
 
-Local build, automated verification, and an authenticated desktop browser review are complete on `codex/session-reflection`. Narrow responsive review, staging verification, participant-use acceptance, and release acceptance remain separate open gates. The frontend TypeScript check passed after route generation.
+Local build, automated verification, and an authenticated desktop browser review are complete on `codex/session-reflection-app`. PR #80 is open for the application changes. Narrow responsive review, staging verification, participant-use acceptance, and release acceptance remain separate open gates. The frontend TypeScript check passed after route generation.

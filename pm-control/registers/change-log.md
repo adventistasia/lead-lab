@@ -177,6 +177,10 @@ On 2026-09-10, CHG-46 (Separate users by account state) and CHG-47 (Add a suppor
 
 Local implementation and automated verification completed on 2026-11-12. An authenticated desktop browser review passed for the Reflection tab and form. Narrow responsive, staging, participant-use, and launch evidence remain open. The frontend TypeScript check passed after route generation.
 
+### CHG-55 Publication Update
+
+PR #80 (`feat: add session reflections`) is open against `staging` from `codex/session-reflection-app` with only `application/` changes; Dennis Arquillano (`dennisatssd`) is requested as reviewer. The feature documentation, approved BDD, participant guidance, and PM Control/run records were committed directly to `staging` at `46818b25`. Review, merge, staging, participant-use, and launch acceptance remain open.
+
 ## Status
 
 | Status | Meaning |
