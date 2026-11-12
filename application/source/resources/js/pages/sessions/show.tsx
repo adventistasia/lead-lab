@@ -2,6 +2,8 @@ import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Download, FileText, Play } from 'lucide-react';
 import { SessionQna } from '@/components/session-q-and-a';
 import type { SessionQuestion } from '@/components/session-q-and-a';
+import { SessionReflection } from '@/components/session-reflection';
+import type { SessionReflectionEntry } from '@/components/session-reflection';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -32,6 +34,7 @@ type Session = {
     initial_tab: 'materials' | 'q-and-a';
     resources: SessionResource[];
     questions: SessionQuestion[];
+    reflections: SessionReflectionEntry[];
 };
 
 export default function SessionShow({ session }: { session: Session }) {
@@ -101,12 +104,15 @@ export default function SessionShow({ session }: { session: Session }) {
                                 defaultValue={session.initial_tab}
                                 className="min-w-0 gap-4"
                             >
-                                <TabsList className="grid w-full grid-cols-2">
+                                <TabsList className="grid w-full grid-cols-3">
                                     <TabsTrigger value="materials">
                                         Session Materials
                                     </TabsTrigger>
                                     <TabsTrigger value="q-and-a">
                                         Q&amp;A
+                                    </TabsTrigger>
+                                    <TabsTrigger value="reflection">
+                                        Reflection
                                     </TabsTrigger>
                                 </TabsList>
                                 <TabsContent
@@ -160,6 +166,15 @@ export default function SessionShow({ session }: { session: Session }) {
                                     <SessionQna
                                         sessionId={session.id}
                                         questions={session.questions}
+                                    />
+                                </TabsContent>
+                                <TabsContent
+                                    value="reflection"
+                                    className="min-w-0"
+                                >
+                                    <SessionReflection
+                                        sessionId={session.id}
+                                        reflections={session.reflections}
                                     />
                                 </TabsContent>
                             </Tabs>

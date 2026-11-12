@@ -166,4 +166,10 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
     {
         return $this->hasMany(SessionAnswer::class);
     }
+
+    /** @return HasMany<SessionReflection, $this> */
+    public function sessionReflections(): HasMany
+    {
+        return $this->hasMany(SessionReflection::class);
+    }
 }

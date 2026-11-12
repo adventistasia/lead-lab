@@ -91,4 +91,10 @@ class LearningSession extends Model
     {
         return $this->hasMany(SessionQuestion::class);
     }
+
+    /** @return HasMany<SessionReflection, $this> */
+    public function reflections(): HasMany
+    {
+        return $this->hasMany(SessionReflection::class);
+    }
 }

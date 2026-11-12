@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\ActivityLog;
 use App\Models\Announcement;
 use App\Models\LearningSession;
+use App\Models\SessionReflection;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -214,6 +215,64 @@ class AdminActivityLogTest extends TestCase
                         'announcement_pinned' => 'Announcement pinned',
                         'announcement_unpinned' => 'Announcement unpinned',
                         'announcement_archived' => 'Announcement archived',
+                    ];
+                }),
+            );
+    }
+
+    public function test_reflection_activity_is_filterable_and_deleted_metadata_is_displayed(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $owner = User::factory()->create(['name' => 'Reflection Owner']);
+        $session = LearningSession::factory()->create(['title' => 'Reflection session']);
+        $reflection = $session->reflections()->create([
+            'user_id' => $owner->id,
+            'body' => 'Private participant words',
+        ]);
+
+        ActivityLog::create([
+            'actor_id' => $owner->id,
+            'action' => 'reflection_created',
+            'subject_type' => SessionReflection::class,
+            'subject_id' => $reflection->id,
+        ]);
+        ActivityLog::create([
+            'actor_id' => $owner->id,
+            'action' => 'reflection_updated',
+            'subject_type' => SessionReflection::class,
+            'subject_id' => $reflection->id,
+        ]);
+        $deleted = ActivityLog::create([
+            'actor_id' => $admin->id,
+            'action' => 'reflection_deleted',
+            'subject_type' => SessionReflection::class,
+            'subject_id' => $reflection->id,
+            'metadata' => [
+                'learning_session_id' => $session->id,
+                'content_owner_id' => $owner->id,
+                'body' => $reflection->body,
+            ],
+        ]);
+        $reflection->delete();
+
+        $this->actingAs($admin)
+            ->get(route('admin.activity-logs.index', ['action' => 'reflection_deleted']))
+            ->assertInertia(fn (Assert $assert) => $assert
+                ->where('logs.total', 1)
+                ->where('logs.data.0.id', $deleted->id)
+                ->where('logs.data.0.action_label', 'Reflection deleted')
+                ->where('logs.data.0.details.Learning session ID', (string) $session->id)
+                ->where('logs.data.0.details.Content owner ID', (string) $owner->id)
+                ->missing('logs.data.0.details.body')
+                ->where('actions', function (Collection $actions): bool {
+                    return $actions->pluck('label', 'value')->only([
+                        'reflection_created',
+                        'reflection_updated',
+                        'reflection_deleted',
+                    ])->all() === [
+                        'reflection_created' => 'Reflection created',
+                        'reflection_updated' => 'Reflection updated',
+                        'reflection_deleted' => 'Reflection deleted',
                     ];
                 }),
             );

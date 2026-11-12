@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LearningResourceController;
 use App\Http\Controllers\LearningSessionController;
 use App\Http\Controllers\SessionQnaController;
+use App\Http\Controllers\SessionReflectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,6 +50,9 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::delete('questions/{sessionQuestion}/answers/{sessionAnswer}', [SessionQnaController::class, 'destroyAnswer'])->name('questions.answers.destroy');
     Route::post('questions/{sessionQuestion}/vote', [SessionQnaController::class, 'toggleQuestionVote'])->name('questions.vote');
     Route::post('answers/{sessionAnswer}/vote', [SessionQnaController::class, 'toggleAnswerVote'])->name('answers.vote');
+    Route::post('sessions/{learningSession}/reflections', [SessionReflectionController::class, 'store'])->name('sessions.reflections.store');
+    Route::patch('sessions/{learningSession}/reflections/{sessionReflection}', [SessionReflectionController::class, 'update'])->name('sessions.reflections.update');
+    Route::delete('sessions/{learningSession}/reflections/{sessionReflection}', [SessionReflectionController::class, 'destroy'])->name('sessions.reflections.destroy');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::inertia('guidelines', 'admin/guidelines/index')->name('guidelines.index');
