@@ -18,20 +18,22 @@
 |---|---|
 | Dashboard | Shows current portal summaries, upcoming events, and recent activity. |
 | Classroom | Lists published, non-archived Learning Sessions. Search, Season, and date filters are available. |
-| Learning Session | Shows a video when present, Session Materials, and Q&A. |
+| Learning Session | Shows a video when present, Session Materials, Q&A, and Reflection. |
 | Session Materials | Provides authenticated downloads for the session's attached resources. |
 | Q&A | Lets active users create questions and answers, vote, and manage their own content. |
+| Reflection | Lets active users read shared session reflections and create, edit, or delete their own reflection. An administrator can delete a reflection but cannot edit another participant's words. |
 | Calendar | Shows scheduled Calendar Events and their details. |
 
 ## Administrator features
 
 | Feature | Behavior |
 |---|---|
-| Admin Guidelines V0.1 | Gives administrators plain-language guidance for member access, roles, Classroom, Calendar Events, reminders, and Q&A moderation. |
+| Admin Guidelines V0.1 | Gives administrators plain-language guidance for member access, roles, Classroom, Calendar Events, reminders, Q&A moderation, and session reflections. |
 | Members | Approve pending participants, revoke access, restore access, or change another member between Participant and Administrator. Role changes do not change access status. An administrator cannot disable their own account. |
 | Classroom | Create, edit, save drafts, publish, unpublish, archive, restore, and batch-upload up to 10 supporting materials per Learning Session. Each file can be up to 10 MB; administrators can append batches and remove individual materials. The administrator entry point is Classroom. |
 | Calendar Events | Create, edit, and delete events. Each event can enable or disable 3-day, 1-day, and 15-minute reminders. Event dates and times use the administrator's effective timezone. |
 | Q&A moderation | Administrators can edit or delete questions and answers in any Learning Session. |
+| Reflection moderation | Administrators can delete reflections in any visible Learning Session but cannot edit another participant's words. |
 
 ## Technical operations
 
