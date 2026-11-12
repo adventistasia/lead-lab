@@ -65,6 +65,9 @@ class AdminActivityLogController
         'qna_question_deleted' => 'Q&A question deleted',
         'qna_answer_updated' => 'Q&A answer updated',
         'qna_answer_deleted' => 'Q&A answer deleted',
+        'reflection_created' => 'Reflection created',
+        'reflection_updated' => 'Reflection updated',
+        'reflection_deleted' => 'Reflection deleted',
     ];
 
     /** @var array<string, array<int, string>> */
@@ -80,6 +83,7 @@ class AdminActivityLogController
         'resource_deleted' => ['resource_title'],
         'calendar_event_created' => ['reminders'],
         'calendar_event_updated' => ['reminders'],
+        'reflection_deleted' => ['learning_session_id', 'content_owner_id'],
     ];
 
     /** @var array<string, string> */
@@ -93,6 +97,8 @@ class AdminActivityLogController
         'resources_added' => 'Materials added',
         'resource_title' => 'Material',
         'reminders' => 'Reminder settings',
+        'learning_session_id' => 'Learning session ID',
+        'content_owner_id' => 'Content owner ID',
     ];
 
     /** @var array<string, string> */

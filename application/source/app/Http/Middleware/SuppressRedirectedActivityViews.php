@@ -54,7 +54,7 @@ class SuppressRedirectedActivityViews
             return null;
         }
 
-        if ($request->routeIs('sessions.questions.*')) {
+        if ($request->routeIs('sessions.questions.*', 'sessions.reflections.*')) {
             $sessionId = $this->routeKey($request->route('learningSession'));
             $sessionUrl = $sessionId === null
                 ? null

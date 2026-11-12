@@ -160,6 +160,53 @@ class UserActivityTest extends TestCase
         $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
     }
 
+    public function test_reflection_action_redirects_do_not_add_a_session_view(): void
+    {
+        $user = User::factory()->create();
+        $session = LearningSession::factory()->create(['is_published' => true]);
+        $sessionUrl = route('sessions.show', $session);
+
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('sessions.reflections.store', $session), ['body' => 'A useful reflection.'])
+            ->assertOk();
+
+        $reflection = $session->reflections()->where('user_id', $user->id)->firstOrFail();
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->patch(route('sessions.reflections.update', [$session, $reflection]), [
+                'body' => 'An updated reflection.',
+            ])
+            ->assertOk();
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->delete(route('sessions.reflections.destroy', [$session, $reflection]))
+            ->assertOk();
+
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(2, ActivityLog::query()->where('action', 'session_viewed')->count());
+    }
+
+    public function test_failed_reflection_action_redirect_does_not_add_a_session_view(): void
+    {
+        $user = User::factory()->create();
+        $session = LearningSession::factory()->create(['is_published' => true]);
+        $sessionUrl = route('sessions.show', $session);
+
+        $this->from($sessionUrl)->followingRedirects()->actingAs($user)
+            ->post(route('sessions.reflections.store', $session), ['body' => ''])
+            ->assertOk();
+
+        $this->assertSame(0, ActivityLog::query()->where('action', 'session_viewed')->count());
+
+        $this->actingAs($user)->get($sessionUrl)->assertOk();
+        $this->assertSame(1, ActivityLog::query()->where('action', 'session_viewed')->count());
+    }
+
     public function test_calendar_edit_redirect_does_not_add_a_calendar_view(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);

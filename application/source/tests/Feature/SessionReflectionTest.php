@@ -179,6 +179,14 @@ class SessionReflectionTest extends TestCase
             ->assertRedirect();
 
         $this->assertDatabaseMissing('session_reflections', ['id' => $reflection->id]);
+        $deletionLog = ActivityLog::query()
+            ->where('actor_id', $admin->id)
+            ->where('action', 'reflection_deleted')
+            ->where('subject_id', $reflection->id)
+            ->firstOrFail();
+
+        $this->assertSame($session->id, $deletionLog->metadata['learning_session_id']);
+        $this->assertSame($owner->id, $deletionLog->metadata['content_owner_id']);
         $this->assertDatabaseHas('activity_logs', [
             'actor_id' => $admin->id,
             'action' => 'reflection_deleted',
