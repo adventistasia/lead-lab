@@ -6,6 +6,7 @@ use App\Http\Middleware\SuppressRedirectedActivityViews;
 use App\Models\ActivityLog;
 use App\Models\LearningSession;
 use App\Models\SessionQuestion;
+use App\Models\SessionReflection;
 use App\Support\YouTubeVideoReference;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -76,7 +77,7 @@ class LearningSessionController
             404,
         );
 
-        $learningSession->load('resources');
+        $learningSession->load(['resources', 'reflections.user']);
 
         $questions = $learningSession->questions()
             ->with([
@@ -90,6 +91,16 @@ class LearningSessionController
             ->get();
 
         $user = $request->user();
+
+        $reflections = $learningSession->reflections->sortByDesc('created_at')->values();
+        $currentReflection = $reflections->firstWhere('user_id', $user->id);
+        $otherReflections = $reflections->reject(
+            fn (SessionReflection $reflection): bool => $reflection->user_id === $user->id,
+        );
+        $orderedReflections = collect([$currentReflection])
+            ->filter()
+            ->concat($otherReflections)
+            ->values();
 
         $videoUrl = $learningSession->video_url;
 
@@ -149,6 +160,19 @@ class LearningSessionController
                         'can_delete' => $user->isAdmin() || $answer->user_id === $user->id,
                     ])->values()->all(),
                 ])->values()->all(),
+                'reflections' => $orderedReflections->map(fn (SessionReflection $reflection): array => [
+                    'id' => $reflection->id,
+                    'body' => $reflection->body,
+                    'created_at' => $reflection->created_at->toIso8601String(),
+                    'is_edited' => $reflection->edited_at !== null,
+                    'author' => [
+                        'id' => $reflection->user->id,
+                        'name' => $reflection->user->name,
+                        'role' => $reflection->user->role,
+                    ],
+                    'can_edit' => $reflection->user_id === $user->id,
+                    'can_delete' => $user->isAdmin() || $reflection->user_id === $user->id,
+                ])->all(),
             ],
         ]);
     }
