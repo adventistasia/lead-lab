@@ -238,7 +238,7 @@ export function SessionReflection({
                     </p>
                 </div>
             ) : (
-                <div className="flex min-w-0 flex-col gap-4">
+                <div className="flex max-h-[32rem] min-h-0 min-w-0 flex-col gap-4 overflow-y-auto overscroll-contain pr-2">
                     {reflections.map((reflection) => (
                         <article
                             key={reflection.id}
